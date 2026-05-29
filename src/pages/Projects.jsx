@@ -55,7 +55,7 @@ export default function Projects() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filtered.map((p, i) => (
               <Reveal key={p.slug} delay={(i % 6) * 0.08}>
-                <Link to="/contact" className="block card-glass group overflow-hidden h-full">
+                <Link to={`/projects/${p.slug}`} className="block card-glass group overflow-hidden h-full">
                   <div className="img-zoom aspect-[4/3] relative">
                     <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                     <div className="absolute top-4 left-4 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
@@ -77,7 +77,7 @@ export default function Projects() {
                     </div>
                     <p className="text-fg-soft text-sm mt-4 leading-relaxed line-clamp-2">{p.short}</p>
                     <div className="mt-5 inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
-                      Enquire Now <ArrowRight className="w-3 h-3" />
+                      View Details <ArrowRight className="w-3 h-3" />
                     </div>
                   </div>
                 </Link>

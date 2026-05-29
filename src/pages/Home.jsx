@@ -403,7 +403,7 @@ export default function Home() {
 
 function ProjectCard({ project }) {
   return (
-    <Link to="/projects" className="block card-glass group overflow-hidden">
+    <Link to={`/projects/${project.slug}`} className="block card-glass group overflow-hidden">
       <div className="img-zoom aspect-[4/3] relative">
         <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
         <div className="absolute top-4 left-4 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">

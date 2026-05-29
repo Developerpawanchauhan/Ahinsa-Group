@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
+import ProjectDetail from './pages/ProjectDetail'
 import Media from './pages/Media'
 import Contact from './pages/Contact'
 
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/media" element={<Media />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Home />} />
