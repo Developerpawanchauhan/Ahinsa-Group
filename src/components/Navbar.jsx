@@ -1,13 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, Sun, Moon } from 'lucide-react'
+import { Menu, X, Phone, Sun, Moon, ChevronDown, ChevronRight, Building2 } from 'lucide-react'
 import Logo from './Logo'
 import { useTheme } from '../hooks/useTheme'
+import { PROJECTS } from '../data/site'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
-  { to: '/projects', label: 'Our Projects' },
+  {
+    to: '/projects',
+    label: 'Our Projects',
+    children: PROJECTS.map((p) => ({
+      to: `/projects/${p.slug}`,
+      label: p.name,
+      meta: `${p.type} · ${p.location}`,
+      status: p.status,
+      image: p.image,
+    })),
+  },
   { to: '/media', label: 'Media' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -34,6 +45,170 @@ function ThemeToggle({ className = '' }) {
         />
       </span>
     </button>
+  )
+}
+
+/* Desktop dropdown for "Our Projects" */
+function DesktopDropdown({ link }) {
+  const [open, setOpen] = useState(false)
+  const closeTimer = useRef(null)
+  const location = useLocation()
+
+  const isActive =
+    location.pathname === link.to || location.pathname.startsWith(link.to + '/')
+
+  const handleEnter = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setOpen(true)
+  }
+  const handleLeave = () => {
+    closeTimer.current = setTimeout(() => setOpen(false), 150)
+  }
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
+      <Link
+        to={link.to}
+        className={`flex items-center gap-1.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer ${
+          isActive
+            ? 'text-gold-700 dark:text-gold-500'
+            : 'text-ink-800 dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500'
+        }`}
+      >
+        {link.label}
+        <ChevronDown
+          className={`w-3.5 h-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+        />
+      </Link>
+
+      {/* MEGA DROPDOWN */}
+      <div
+        className={`absolute left-1/2 -translate-x-1/2 top-full pt-5 transition-all duration-300 ${
+          open
+            ? 'opacity-100 visible translate-y-0'
+            : 'opacity-0 invisible -translate-y-2 pointer-events-none'
+        }`}
+      >
+        <div className="w-[680px] bg-cream/98 dark:bg-ink-900/98 backdrop-blur-xl border border-gold-500/25 dark:border-gold-500/20 shadow-2xl">
+          {/* gold accent line */}
+          <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
+
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <p className="text-gold-700 dark:text-gold-500 uppercase tracking-[0.3em] text-[10px] font-medium">
+                  Our Portfolio
+                </p>
+                <h3 className="font-serif text-fg text-xl mt-1">Signature Projects</h3>
+              </div>
+              <Link
+                to={link.to}
+                className="inline-flex items-center gap-1.5 text-gold-700 dark:text-gold-500 text-[11px] uppercase tracking-[0.2em] hover:underline"
+              >
+                View All <ChevronRight className="w-3 h-3" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              {link.children.map((child) => (
+                <Link
+                  key={child.to}
+                  to={child.to}
+                  className="flex items-start gap-3 p-3 group hover:bg-gold-500/10 transition rounded-sm"
+                >
+                  <div className="img-zoom relative w-16 h-16 flex-shrink-0 overflow-hidden">
+                    <img src={child.image} alt={child.label} className="w-full h-full object-cover" />
+                    <span className="absolute top-1 left-1 bg-gold-500 text-ink-900 text-[7px] uppercase tracking-wider px-1 py-0.5 leading-none">
+                      {child.status}
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-serif text-fg text-sm leading-tight group-hover:text-gold-700 dark:group-hover:text-gold-500 transition truncate">
+                      {child.label}
+                    </h4>
+                    <p className="text-fg-soft text-[10px] uppercase tracking-[0.15em] mt-1 truncate">
+                      {child.meta}
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-widest mt-1.5 opacity-0 group-hover:opacity-100 transition">
+                      Discover <ChevronRight className="w-2.5 h-2.5" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* Mobile accordion entry for parent items with children */
+function MobileAccordion({ link, onItemClick }) {
+  const [open, setOpen] = useState(false)
+  const location = useLocation()
+  const isActive = location.pathname.startsWith(link.to)
+
+  return (
+    <div className="border-b border-gold-500/10">
+      <div className="flex items-center">
+        <NavLink
+          to={link.to}
+          end={link.to === '/'}
+          onClick={onItemClick}
+          className={({ isActive: a }) =>
+            `flex-1 py-3 px-2 text-sm uppercase tracking-[0.2em] ${
+              a || isActive ? 'text-gold-700 dark:text-gold-500' : 'text-ink-800 dark:text-cream/80'
+            }`
+          }
+        >
+          {link.label}
+        </NavLink>
+        <button
+          onClick={() => setOpen(!open)}
+          className="px-3 py-3 text-gold-700 dark:text-gold-500"
+          aria-label="Toggle submenu"
+        >
+          <ChevronDown
+            className={`w-4 h-4 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          />
+        </button>
+      </div>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          open ? 'max-h-[800px] pb-3' : 'max-h-0'
+        }`}
+      >
+        <div className="pl-4 space-y-1">
+          {link.children.map((child) => (
+            <NavLink
+              key={child.to}
+              to={child.to}
+              onClick={onItemClick}
+              className={({ isActive: a }) =>
+                `flex items-center gap-3 py-2.5 px-2 border-l-2 transition ${
+                  a
+                    ? 'border-gold-500 text-gold-700 dark:text-gold-500'
+                    : 'border-gold-500/15 text-ink-700 dark:text-cream/70'
+                }`
+              }
+            >
+              <Building2 className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-xs font-medium leading-tight">{child.label}</div>
+                <div className="text-[10px] text-fg-faint uppercase tracking-widest mt-0.5 truncate">
+                  {child.meta}
+                </div>
+              </div>
+            </NavLink>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -87,22 +262,26 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-9">
-            {NAV_LINKS.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer ${
-                    isActive
-                      ? 'text-gold-700 dark:text-gold-500'
-                      : 'text-ink-800 dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500'
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.children ? (
+                <DesktopDropdown key={link.to} link={link} />
+              ) : (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.to === '/'}
+                  className={({ isActive }) =>
+                    `text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer ${
+                      isActive
+                        ? 'text-gold-700 dark:text-gold-500'
+                        : 'text-ink-800 dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500'
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              )
+            )}
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
@@ -128,28 +307,37 @@ export default function Navbar() {
         {/* Mobile menu */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ${
-            open ? 'max-h-[600px] mt-4' : 'max-h-0'
+            open ? 'max-h-[1200px] mt-4' : 'max-h-0'
           }`}
         >
-          <div className="container-x py-6 bg-cream/98 dark:bg-ink-900/98 backdrop-blur-md border-t border-gold-500/15">
-            <nav className="flex flex-col gap-1">
-              {NAV_LINKS.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  end={link.to === '/'}
-                  className={({ isActive }) =>
-                    `py-3 px-2 text-sm uppercase tracking-[0.2em] border-b border-gold-500/10 ${
-                      isActive
-                        ? 'text-gold-700 dark:text-gold-500'
-                        : 'text-ink-800 dark:text-cream/80'
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-              <Link to="/contact" className="btn-gold mt-6 justify-center">
+          <div className="container-x py-4 bg-cream/98 dark:bg-ink-900/98 backdrop-blur-md border-t border-gold-500/15">
+            <nav className="flex flex-col">
+              {NAV_LINKS.map((link) =>
+                link.children ? (
+                  <MobileAccordion
+                    key={link.to}
+                    link={link}
+                    onItemClick={() => setOpen(false)}
+                  />
+                ) : (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end={link.to === '/'}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `py-3 px-2 text-sm uppercase tracking-[0.2em] border-b border-gold-500/10 ${
+                        isActive
+                          ? 'text-gold-700 dark:text-gold-500'
+                          : 'text-ink-800 dark:text-cream/80'
+                      }`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                )
+              )}
+              <Link to="/contact" onClick={() => setOpen(false)} className="btn-gold mt-6 justify-center">
                 Enquire Now
               </Link>
             </nav>
