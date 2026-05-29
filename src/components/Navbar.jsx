@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, X, Phone, Sun, Moon } from 'lucide-react'
 import Logo from './Logo'
+import { useTheme } from '../hooks/useTheme'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -10,6 +11,31 @@ const NAV_LINKS = [
   { to: '/media', label: 'Media' },
   { to: '/contact', label: 'Contact' },
 ]
+
+function ThemeToggle({ className = '' }) {
+  const { theme, toggleTheme } = useTheme()
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      className={`theme-toggle ${className}`}
+    >
+      <span className="relative w-5 h-5 block">
+        <Sun
+          className={`absolute inset-0 w-5 h-5 transition-all duration-500 ${
+            theme === 'dark' ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'
+          }`}
+        />
+        <Moon
+          className={`absolute inset-0 w-5 h-5 transition-all duration-500 ${
+            theme === 'dark' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'
+          }`}
+        />
+      </span>
+    </button>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -27,10 +53,10 @@ export default function Navbar() {
     setOpen(false)
   }, [location.pathname])
 
-  // Top announcement bar
   return (
     <>
-      <div className="hidden md:block bg-ink-900 text-ink-200 text-xs border-b border-gold-500/10">
+      {/* Top announcement bar */}
+      <div className="hidden md:block bg-ink-900 text-ink-200 text-xs border-b border-gold-500/15">
         <div className="container-x flex justify-between items-center h-9">
           <div className="flex items-center gap-6">
             <span className="text-ink-300">Crafting iconic landmarks since 2003</span>
@@ -50,7 +76,7 @@ export default function Navbar() {
       <header
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'top-0 bg-ink-900/95 backdrop-blur-md border-b border-gold-500/15 py-2'
+            ? 'top-0 bg-cream/95 dark:bg-ink-900/95 backdrop-blur-md border-b border-gold-500/15 py-2'
             : 'top-0 md:top-9 bg-transparent py-4'
         }`}
       >
@@ -68,7 +94,9 @@ export default function Navbar() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   `text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer ${
-                    isActive ? 'text-gold-500' : 'text-cream/90 hover:text-gold-500'
+                    isActive
+                      ? 'text-gold-700 dark:text-gold-500'
+                      : 'text-ink-800 dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500'
                   }`
                 }
               >
@@ -77,20 +105,24 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-4">
+            <ThemeToggle />
             <Link to="/contact" className="btn-gold text-xs">
               Enquire Now
             </Link>
           </div>
 
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="lg:hidden text-gold-500 p-2"
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-          </button>
+          {/* Mobile actions */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setOpen(!open)}
+              className="text-gold-700 dark:text-gold-500 p-2"
+              aria-label="Toggle menu"
+            >
+              {open ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -99,7 +131,7 @@ export default function Navbar() {
             open ? 'max-h-[600px] mt-4' : 'max-h-0'
           }`}
         >
-          <div className="container-x py-6 bg-ink-900/98 backdrop-blur-md border-t border-gold-500/15">
+          <div className="container-x py-6 bg-cream/98 dark:bg-ink-900/98 backdrop-blur-md border-t border-gold-500/15">
             <nav className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <NavLink
@@ -108,7 +140,9 @@ export default function Navbar() {
                   end={link.to === '/'}
                   className={({ isActive }) =>
                     `py-3 px-2 text-sm uppercase tracking-[0.2em] border-b border-gold-500/10 ${
-                      isActive ? 'text-gold-500' : 'text-cream/80'
+                      isActive
+                        ? 'text-gold-700 dark:text-gold-500'
+                        : 'text-ink-800 dark:text-cream/80'
                     }`
                   }
                 >

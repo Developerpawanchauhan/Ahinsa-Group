@@ -5,7 +5,6 @@
 :root {
   --gold: #C9A227;
   --gold-light: #E4C656;
-  --ink: #0B0B08;
 }
 
 * {
@@ -17,20 +16,28 @@ html {
   scroll-behavior: smooth;
 }
 
+/* DEFAULT (LIGHT) */
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #0B0B08;
-  color: #F7F2E7;
+  background-color: #FAF8F2;
+  color: #161612;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Custom scrollbar */
+/* DARK */
+html.dark body {
+  background-color: #0B0B08;
+  color: #F7F2E7;
+}
+
+/* Custom scrollbar — LIGHT */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0B08;
+  background: #F0EBDC;
 }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #C9A227, #876818);
@@ -38,6 +45,11 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #E4C656;
+}
+
+/* Custom scrollbar — DARK */
+html.dark ::-webkit-scrollbar-track {
+  background: #0B0B08;
 }
 
 /* Selection */
@@ -57,6 +69,12 @@ body {
   }
 
   .gold-text {
+    background: linear-gradient(135deg, #B8901E 0%, #C9A227 50%, #876818 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .dark .gold-text {
     background: linear-gradient(135deg, #E4C656 0%, #C9A227 50%, #876818 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -65,12 +83,14 @@ body {
 
   .btn-gold {
     @apply inline-flex items-center gap-2 px-7 py-3.5 bg-gold-500 text-ink-900 font-medium tracking-wide
-           uppercase text-sm transition-all duration-300 hover:bg-gold-400 hover:shadow-[0_10px_30px_-10px_rgba(201,162,39,0.5)];
+           uppercase text-sm transition-all duration-300 hover:bg-gold-400
+           hover:shadow-[0_10px_30px_-10px_rgba(201,162,39,0.5)];
   }
 
   .btn-outline-gold {
-    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-gold-500 text-gold-500 font-medium
-           tracking-wide uppercase text-sm transition-all duration-300 hover:bg-gold-500 hover:text-ink-900;
+    @apply inline-flex items-center gap-2 px-7 py-3.5 border border-gold-500 text-gold-700
+           dark:text-gold-500 font-medium tracking-wide uppercase text-sm transition-all duration-300
+           hover:bg-gold-500 hover:text-ink-900;
   }
 
   .section-pad {
@@ -78,22 +98,55 @@ body {
   }
 
   .eyebrow {
-    @apply inline-flex items-center gap-3 text-gold-500 uppercase tracking-[0.3em] text-xs font-medium;
+    @apply inline-flex items-center gap-3 text-gold-700 dark:text-gold-500 uppercase
+           tracking-[0.3em] text-xs font-medium;
   }
 
   .eyebrow::before,
   .eyebrow::after {
     content: '';
-    @apply block w-8 h-px bg-gold-500/50;
+    @apply block w-8 h-px bg-gold-700/50 dark:bg-gold-500/50;
   }
 
   .gold-divider {
     @apply mx-auto w-16 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent my-6;
   }
 
+  /* Theme-aware semantic surfaces */
+  .bg-page {
+    @apply bg-cream dark:bg-ink-900;
+  }
+  .bg-page-alt {
+    @apply bg-[#F0EBDC] dark:bg-ink-800;
+  }
+  .bg-page-soft {
+    @apply bg-[#F4EFE0] dark:bg-ink-800/50;
+  }
+  .text-fg {
+    @apply text-ink-900 dark:text-cream;
+  }
+  .text-fg-muted {
+    @apply text-ink-700 dark:text-ink-200;
+  }
+  .text-fg-soft {
+    @apply text-ink-600 dark:text-ink-300;
+  }
+  .text-fg-faint {
+    @apply text-ink-500 dark:text-ink-400;
+  }
+  .border-soft {
+    @apply border-gold-500/25 dark:border-gold-500/15;
+  }
+  .border-faint {
+    @apply border-gold-500/15 dark:border-gold-500/10;
+  }
+
   .card-glass {
-    @apply bg-ink-800/60 backdrop-blur-sm border border-gold-500/10 transition-all duration-500
-           hover:border-gold-500/40 hover:bg-ink-800/80;
+    @apply bg-white/80 dark:bg-ink-800/60 backdrop-blur-sm border border-gold-500/20
+           dark:border-gold-500/10 transition-all duration-500
+           hover:border-gold-500/50 dark:hover:border-gold-500/40
+           hover:bg-white dark:hover:bg-ink-800/80
+           shadow-sm dark:shadow-none;
   }
 
   .text-balance {
@@ -103,12 +156,15 @@ body {
 
 /* Swiper customizations */
 .swiper-pagination-bullet {
-  background: rgba(247, 242, 231, 0.4) !important;
+  background: rgba(11, 11, 8, 0.35) !important;
   opacity: 1 !important;
   width: 30px !important;
   height: 2px !important;
   border-radius: 0 !important;
   transition: all 0.3s !important;
+}
+.dark .swiper-pagination-bullet {
+  background: rgba(247, 242, 231, 0.4) !important;
 }
 
 .swiper-pagination-bullet-active {
@@ -166,4 +222,15 @@ body {
 }
 .link-shimmer:hover::after {
   width: 100%;
+}
+
+/* Theme toggle button visual */
+.theme-toggle {
+  @apply relative w-10 h-10 flex items-center justify-center
+         border border-gold-500/40 text-gold-700 dark:text-gold-400
+         hover:border-gold-500 hover:text-gold-500
+         transition-all duration-300 rounded-full;
+}
+.theme-toggle:hover {
+  box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.08);
 }

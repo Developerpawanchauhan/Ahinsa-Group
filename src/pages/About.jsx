@@ -16,7 +16,7 @@ export default function About() {
       />
 
       {/* INTRO */}
-      <section className="section-pad bg-ink-900">
+      <section className="section-pad bg-page">
         <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
           <Reveal>
             <div className="img-zoom aspect-[4/5] overflow-hidden">
@@ -33,7 +33,7 @@ export default function About() {
               title={<>Built on <span className="gold-text">trust</span>, designed for <span className="gold-text">generations</span></>}
             />
             <Reveal delay={0.2}>
-              <div className="text-ink-200 leading-relaxed mt-7 space-y-5">
+              <div className="text-fg-muted leading-relaxed mt-7 space-y-5">
                 <p>
                   Founded in {COMPANY.founded}, Ahinsa Group began with a simple belief &mdash; that homes
                   and workspaces shape lives. Over two decades, that belief has translated into more than
@@ -55,13 +55,13 @@ export default function About() {
       </section>
 
       {/* STATS */}
-      <section className="bg-ink-800 border-y border-gold-500/15 py-16">
+      <section className="bg-page-alt border-y border-soft py-16">
         <div className="container-x grid grid-cols-2 lg:grid-cols-4 gap-8">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.1}>
               <div className="text-center">
                 <div className="font-serif text-5xl md:text-6xl gold-text">{s.value}</div>
-                <div className="text-ink-200 mt-3 text-sm uppercase tracking-[0.2em]">{s.label}</div>
+                <div className="text-fg-muted mt-3 text-sm uppercase tracking-[0.2em]">{s.label}</div>
               </div>
             </Reveal>
           ))}
@@ -69,7 +69,7 @@ export default function About() {
       </section>
 
       {/* VISION & MISSION */}
-      <section className="section-pad bg-ink-900">
+      <section className="section-pad bg-page">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <SectionHeading
@@ -83,10 +83,10 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-7">
             <Reveal>
               <div className="card-glass p-10 h-full relative overflow-hidden">
-                <Eye className="w-12 h-12 text-gold-500" />
-                <h3 className="heading-serif text-3xl text-cream mt-6">Our Vision</h3>
+                <Eye className="w-12 h-12 text-gold-700 dark:text-gold-500" />
+                <h3 className="heading-serif text-3xl text-fg mt-6">Our Vision</h3>
                 <div className="gold-divider mx-0 my-5" />
-                <p className="text-ink-200 leading-relaxed">
+                <p className="text-fg-muted leading-relaxed">
                   To be the most trusted real estate brand in North India by creating spaces that elevate
                   lifestyles, empower businesses and stand as enduring symbols of design excellence.
                 </p>
@@ -95,10 +95,10 @@ export default function About() {
             </Reveal>
             <Reveal delay={0.15}>
               <div className="card-glass p-10 h-full relative overflow-hidden">
-                <Target className="w-12 h-12 text-gold-500" />
-                <h3 className="heading-serif text-3xl text-cream mt-6">Our Mission</h3>
+                <Target className="w-12 h-12 text-gold-700 dark:text-gold-500" />
+                <h3 className="heading-serif text-3xl text-fg mt-6">Our Mission</h3>
                 <div className="gold-divider mx-0 my-5" />
-                <p className="text-ink-200 leading-relaxed">
+                <p className="text-fg-muted leading-relaxed">
                   To deliver thoughtfully designed, sustainably built and meticulously executed real estate
                   &mdash; where every project enhances the lives of those who live, work or invest in it.
                 </p>
@@ -117,9 +117,9 @@ export default function About() {
             ].map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08}>
                 <div className="border-t-2 border-gold-500/40 pt-6">
-                  <v.icon className="w-7 h-7 text-gold-500" />
-                  <h4 className="font-serif text-xl text-cream mt-4">{v.title}</h4>
-                  <p className="text-ink-300 text-sm mt-2 leading-relaxed">{v.text}</p>
+                  <v.icon className="w-7 h-7 text-gold-700 dark:text-gold-500" />
+                  <h4 className="font-serif text-xl text-fg mt-4">{v.title}</h4>
+                  <p className="text-fg-soft text-sm mt-2 leading-relaxed">{v.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -128,7 +128,7 @@ export default function About() {
       </section>
 
       {/* LEADERSHIP */}
-      <section className="section-pad bg-ink-800/50">
+      <section className="section-pad bg-page-soft">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <SectionHeading
@@ -147,9 +147,9 @@ export default function About() {
                     <img src={m.image} alt={m.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" />
                   </div>
                   <div className="pt-5">
-                    <h3 className="font-serif text-xl text-cream">{m.name}</h3>
-                    <p className="text-gold-500 text-xs uppercase tracking-[0.2em] mt-1">{m.role}</p>
-                    <p className="text-ink-300 text-sm leading-relaxed mt-3">{m.bio}</p>
+                    <h3 className="font-serif text-xl text-fg">{m.name}</h3>
+                    <p className="text-gold-700 dark:text-gold-500 text-xs uppercase tracking-[0.2em] mt-1">{m.role}</p>
+                    <p className="text-fg-soft text-sm leading-relaxed mt-3">{m.bio}</p>
                   </div>
                 </div>
               </Reveal>
@@ -159,7 +159,7 @@ export default function About() {
       </section>
 
       {/* MILESTONES */}
-      <section className="section-pad bg-ink-900 relative overflow-hidden">
+      <section className="section-pad bg-page relative overflow-hidden">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <SectionHeading
@@ -178,15 +178,15 @@ export default function About() {
                   <div className={`flex items-start gap-6 md:gap-12 ${i % 2 ? 'md:flex-row-reverse' : ''}`}>
                     <div className="hidden md:block flex-1" />
                     <div className="absolute md:relative left-0 md:left-auto -translate-x-1/2 md:translate-x-0 md:flex-shrink-0">
-                      <div className="w-9 h-9 rounded-full bg-gold-500 flex items-center justify-center text-ink-900 font-serif font-bold text-xs ring-4 ring-ink-900">
+                      <div className="w-9 h-9 rounded-full bg-gold-500 flex items-center justify-center text-ink-900 font-serif font-bold text-xs ring-4 ring-cream dark:ring-ink-900">
                         <span>{i + 1}</span>
                       </div>
                     </div>
                     <div className="flex-1 pl-12 md:pl-0">
                       <div className="card-glass p-7">
                         <div className="font-serif text-3xl gold-text">{m.year}</div>
-                        <h3 className="text-cream font-medium text-lg mt-2">{m.title}</h3>
-                        <p className="text-ink-300 text-sm mt-3 leading-relaxed">{m.text}</p>
+                        <h3 className="text-fg font-medium text-lg mt-2">{m.title}</h3>
+                        <p className="text-fg-soft text-sm mt-3 leading-relaxed">{m.text}</p>
                       </div>
                     </div>
                   </div>
@@ -198,10 +198,10 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="bg-ink-800 border-t border-gold-500/15">
+      <section className="bg-page-alt border-t border-soft">
         <div className="container-x py-20 text-center max-w-3xl mx-auto">
           <Reveal>
-            <h2 className="heading-serif text-cream text-4xl md:text-5xl">
+            <h2 className="heading-serif text-fg text-4xl md:text-5xl">
               Build your <span className="gold-text">next chapter</span> with us
             </h2>
           </Reveal>

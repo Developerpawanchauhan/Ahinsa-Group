@@ -127,7 +127,12 @@ export default function Footer() {
               <span className="text-gold-500">By Appointment</span>
             </li>
           </ul>
-          <Link to="/contact" className="btn-outline-gold text-xs mt-6 w-full justify-center">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 px-7 py-3.5 border border-gold-500 text-gold-500
+                       font-medium tracking-wide uppercase text-xs transition-all duration-300
+                       hover:bg-gold-500 hover:text-ink-900 mt-6 w-full justify-center"
+          >
             Schedule a Visit
           </Link>
         </div>

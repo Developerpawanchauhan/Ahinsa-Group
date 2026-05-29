@@ -25,10 +25,10 @@ export default function Projects() {
       />
 
       {/* Filter bar */}
-      <section className="bg-ink-800 border-b border-gold-500/15 sticky top-[72px] z-30 backdrop-blur-md">
+      <section className="bg-page-alt border-b border-soft sticky top-[72px] z-30 backdrop-blur-md">
         <div className="container-x py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-ink-300 text-sm">
-            <Filter className="w-4 h-4 text-gold-500" />
+          <div className="flex items-center gap-3 text-fg-soft text-sm">
+            <Filter className="w-4 h-4 text-gold-700 dark:text-gold-500" />
             <span className="uppercase tracking-[0.2em] text-xs">Filter by status</span>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -39,7 +39,7 @@ export default function Projects() {
                 className={`px-5 py-2 text-xs uppercase tracking-[0.2em] border transition-all duration-300 ${
                   filter === s
                     ? 'bg-gold-500 text-ink-900 border-gold-500'
-                    : 'bg-transparent text-ink-200 border-gold-500/25 hover:border-gold-500'
+                    : 'bg-transparent text-fg-muted border-gold-500/25 hover:border-gold-500'
                 }`}
               >
                 {s}
@@ -50,7 +50,7 @@ export default function Projects() {
       </section>
 
       {/* Projects grid */}
-      <section className="section-pad bg-ink-900">
+      <section className="section-pad bg-page">
         <div className="container-x">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filtered.map((p, i) => (
@@ -64,19 +64,19 @@ export default function Projects() {
                     <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-transparent to-transparent" />
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center gap-2 text-xs text-gold-500 uppercase tracking-[0.2em]">
+                    <div className="flex items-center gap-2 text-xs text-gold-700 dark:text-gold-500 uppercase tracking-[0.2em]">
                       <Building2 className="w-3.5 h-3.5" />
                       {p.type}
                     </div>
-                    <h3 className="font-serif text-2xl text-cream mt-3 group-hover:text-gold-500 transition">
+                    <h3 className="font-serif text-2xl text-fg mt-3 group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
                       {p.name}
                     </h3>
-                    <div className="flex items-center gap-2 text-ink-300 text-sm mt-2">
+                    <div className="flex items-center gap-2 text-fg-soft text-sm mt-2">
                       <MapPin className="w-3.5 h-3.5 text-gold-500" />
                       {p.location}
                     </div>
-                    <p className="text-ink-300 text-sm mt-4 leading-relaxed line-clamp-2">{p.short}</p>
-                    <div className="mt-5 inline-flex items-center gap-2 text-gold-500 text-xs uppercase tracking-widest">
+                    <p className="text-fg-soft text-sm mt-4 leading-relaxed line-clamp-2">{p.short}</p>
+                    <div className="mt-5 inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
                       Enquire Now <ArrowRight className="w-3 h-3" />
                     </div>
                   </div>
@@ -86,7 +86,7 @@ export default function Projects() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center text-ink-300 py-20">
+            <div className="text-center text-fg-soft py-20">
               No projects match the selected filter.
             </div>
           )}
@@ -94,15 +94,15 @@ export default function Projects() {
       </section>
 
       {/* CTA */}
-      <section className="bg-ink-800 border-t border-gold-500/15">
+      <section className="bg-page-alt border-t border-soft">
         <div className="container-x py-20 grid lg:grid-cols-2 gap-10 items-center">
           <Reveal>
-            <h2 className="heading-serif text-cream text-4xl md:text-5xl">
+            <h2 className="heading-serif text-fg text-4xl md:text-5xl">
               Looking for a project that fits your <span className="gold-text">specific needs</span>?
             </h2>
           </Reveal>
           <Reveal delay={0.15} className="lg:text-right">
-            <p className="text-ink-300 mb-8">
+            <p className="text-fg-soft mb-8">
               Our advisors can help you shortlist the right address based on lifestyle, budget and investment goals.
             </p>
             <Link to="/contact" className="btn-gold">

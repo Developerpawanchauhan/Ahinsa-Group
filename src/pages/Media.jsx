@@ -18,7 +18,7 @@ export default function Media() {
       />
 
       {/* Featured story */}
-      <section className="section-pad bg-ink-900">
+      <section className="section-pad bg-page">
         <div className="container-x">
           <SectionHeading
             eyebrow="Featured Story"
@@ -31,20 +31,20 @@ export default function Media() {
               </div>
               <div>
                 <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em]">
-                  <span className="text-gold-500 flex items-center gap-2">
+                  <span className="text-gold-700 dark:text-gold-500 flex items-center gap-2">
                     <Tag className="w-3 h-3" />
                     {featured.category}
                   </span>
-                  <span className="text-ink-400">&bull;</span>
-                  <span className="text-ink-300 flex items-center gap-2">
+                  <span className="text-fg-faint">&bull;</span>
+                  <span className="text-fg-soft flex items-center gap-2">
                     <Calendar className="w-3 h-3" />
                     {featured.date}
                   </span>
                 </div>
-                <h2 className="heading-serif text-cream text-3xl md:text-5xl mt-6">{featured.title}</h2>
+                <h2 className="heading-serif text-fg text-3xl md:text-5xl mt-6">{featured.title}</h2>
                 <div className="gold-divider mx-0 mt-6" />
-                <p className="text-ink-200 mt-6 leading-relaxed">{featured.excerpt}</p>
-                <p className="text-ink-300 mt-4 leading-relaxed text-sm">
+                <p className="text-fg-muted mt-6 leading-relaxed">{featured.excerpt}</p>
+                <p className="text-fg-soft mt-4 leading-relaxed text-sm">
                   Stay tuned to this page as we continue to share moments that define our journey.
                 </p>
                 <button className="btn-gold mt-8">
@@ -57,7 +57,7 @@ export default function Media() {
       </section>
 
       {/* News grid */}
-      <section className="section-pad bg-ink-800/50 border-y border-gold-500/15">
+      <section className="section-pad bg-page-soft border-y border-soft">
         <div className="container-x">
           <SectionHeading
             eyebrow="Latest Updates"
@@ -73,15 +73,15 @@ export default function Media() {
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em]">
-                      <span className="text-gold-500">{n.category}</span>
-                      <span className="text-ink-400">&bull;</span>
-                      <span className="text-ink-300">{n.date}</span>
+                      <span className="text-gold-700 dark:text-gold-500">{n.category}</span>
+                      <span className="text-fg-faint">&bull;</span>
+                      <span className="text-fg-soft">{n.date}</span>
                     </div>
-                    <h3 className="font-serif text-xl text-cream mt-4 group-hover:text-gold-500 transition">
+                    <h3 className="font-serif text-xl text-fg mt-4 group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
                       {n.title}
                     </h3>
-                    <p className="text-ink-300 text-sm mt-3 leading-relaxed line-clamp-3">{n.excerpt}</p>
-                    <div className="mt-5 pt-5 border-t border-gold-500/10 inline-flex items-center gap-2 text-gold-500 text-xs uppercase tracking-widest">
+                    <p className="text-fg-soft text-sm mt-3 leading-relaxed line-clamp-3">{n.excerpt}</p>
+                    <div className="mt-5 pt-5 border-t border-faint inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
                       Read More <ArrowRight className="w-3 h-3" />
                     </div>
                   </div>
@@ -92,7 +92,7 @@ export default function Media() {
         </div>
       </section>
 
-      {/* Video / brand film */}
+      {/* Video / brand film (always dark for cinematic feel) */}
       <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=1920&q=85&auto=format&fit=crop"
@@ -107,7 +107,7 @@ export default function Media() {
             </button>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="eyebrow mt-8 justify-center">Brand Film</p>
+            <p className="eyebrow !text-gold-400 mt-8 justify-center">Brand Film</p>
           </Reveal>
           <Reveal delay={0.2}>
             <h2 className="heading-serif text-cream text-3xl md:text-5xl mt-5">
@@ -118,7 +118,7 @@ export default function Media() {
       </section>
 
       {/* Gallery */}
-      <section className="section-pad bg-ink-900">
+      <section className="section-pad bg-page">
         <div className="container-x">
           <SectionHeading
             eyebrow="In Pictures"
@@ -139,15 +139,15 @@ export default function Media() {
       </section>
 
       {/* CTA */}
-      <section className="bg-ink-800 border-t border-gold-500/15">
+      <section className="bg-page-alt border-t border-soft">
         <div className="container-x py-20 text-center max-w-3xl mx-auto">
           <Reveal>
-            <h2 className="heading-serif text-cream text-4xl md:text-5xl">
+            <h2 className="heading-serif text-fg text-4xl md:text-5xl">
               Press <span className="gold-text">enquiries</span> & media kits
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="text-ink-300 mt-6">
+            <p className="text-fg-soft mt-6">
               For interviews, press materials or partnership opportunities, please get in touch with our communications team.
             </p>
           </Reveal>
