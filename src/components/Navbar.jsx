@@ -129,7 +129,7 @@ function DesktopDropdown({ link }) {
 
 function MegaPanel({ link }) {
   return (
-    <div className="w-[680px] bg-cream/98 dark:bg-ink-900/98 backdrop-blur-xl border border-gold-500/25 dark:border-gold-500/20 shadow-2xl">
+    <div className="w-[680px] bg-cream dark:bg-ink-900 border border-gold-500/30 dark:border-gold-500/25 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)]">
       <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
       <div className="p-6">
         <div className="flex items-center justify-between mb-5">
@@ -180,7 +180,7 @@ function MegaPanel({ link }) {
 
 function SimplePanel({ link }) {
   return (
-    <div className="w-[320px] bg-cream/98 dark:bg-ink-900/98 backdrop-blur-xl border border-gold-500/25 dark:border-gold-500/20 shadow-2xl">
+    <div className="w-[320px] bg-cream dark:bg-ink-900 border border-gold-500/30 dark:border-gold-500/25 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)]">
       <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
       <div className="py-3">
         {link.children.map((child) => (
@@ -370,7 +370,7 @@ export default function Navbar() {
             open ? 'max-h-[1400px] mt-4' : 'max-h-0'
           }`}
         >
-          <div className="container-x py-4 bg-cream/98 dark:bg-ink-900/98 backdrop-blur-md border-t border-gold-500/15">
+          <div className="container-x py-4 bg-cream dark:bg-ink-900 border-t border-gold-500/25">
             <nav className="flex flex-col">
               {NAV_LINKS.map((link) =>
                 link.children ? (

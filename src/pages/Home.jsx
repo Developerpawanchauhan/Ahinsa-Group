@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules'
+import { Autoplay, EffectFade, Pagination, Navigation, FreeMode } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import 'swiper/css/free-mode'
 
 import {
   ArrowRight,
@@ -101,6 +102,68 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
+      </section>
+
+      {/* AWARDS MARQUEE — continuous right-to-left auto-scroll */}
+      <section className="bg-page-alt border-b border-soft py-14 md:py-20 overflow-hidden">
+        <div className="container-x mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">Awards & Recognition</p>
+              <h2 className="heading-serif text-fg text-3xl md:text-5xl mt-4">
+                Industry honours that mark <span className="gold-text">our journey</span>
+              </h2>
+            </div>
+            <Link
+              to="/media/awards"
+              className="text-gold-700 dark:text-gold-500 text-xs uppercase tracking-[0.25em] hover:underline whitespace-nowrap inline-flex items-center gap-2"
+            >
+              View All Awards <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+
+        <Swiper
+          modules={[Autoplay, FreeMode]}
+          slidesPerView="auto"
+          spaceBetween={20}
+          loop={true}
+          freeMode={{ enabled: true, momentum: false }}
+          allowTouchMove={true}
+          speed={6000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          className="awards-marquee !overflow-visible"
+        >
+          {AWARDS.concat(AWARDS).map((a, i) => (
+            <SwiperSlide key={`${a.title}-${i}`} className="!w-[280px] sm:!w-[320px] md:!w-[360px]">
+              <div className="card-glass overflow-hidden group h-full">
+                <div className="img-zoom aspect-[4/3] relative">
+                  <img src={a.image} alt={a.title} className="w-full h-full object-cover" />
+                  <div className="absolute top-3 right-3 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
+                    {a.year}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent" />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.25em]">
+                    <Trophy className="w-3 h-3" />
+                    {a.category}
+                  </div>
+                  <h3 className="font-serif text-base md:text-lg text-fg mt-2 leading-tight line-clamp-2 group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
+                    {a.title}
+                  </h3>
+                  <p className="text-fg-soft text-[11px] uppercase tracking-[0.2em] mt-2 truncate">
+                    {a.awardedBy}
+                  </p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
       {/* ABOUT PREVIEW */}
