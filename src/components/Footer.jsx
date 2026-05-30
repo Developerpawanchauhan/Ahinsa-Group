@@ -72,11 +72,16 @@ export default function Footer() {
             {[
               { to: '/', label: 'Home' },
               { to: '/about', label: 'About Us' },
+              { to: '/about/management', label: 'Management' },
+              { to: '/about/team', label: 'Team' },
               { to: '/projects', label: 'Our Projects' },
-              { to: '/media', label: 'Media & News' },
+              { to: '/media', label: 'Media Centre' },
+              { to: '/media/awards', label: 'Awards' },
+              { to: '/media/events', label: 'Events' },
+              { to: '/media/news', label: 'News' },
               { to: '/contact', label: 'Contact' },
             ].map((l) => (
-              <li key={l.to}>
+              <li key={l.to + l.label}>
                 <Link to={l.to} className="text-ink-300 hover:text-gold-500 transition link-shimmer">
                   {l.label}
                 </Link>

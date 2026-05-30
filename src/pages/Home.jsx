@@ -16,11 +16,12 @@ import {
   Quote,
   MapPin,
   Building2,
+  Trophy,
 } from 'lucide-react'
 
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
-import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, MEDIA_NEWS, COMPANY } from '../data/site'
+import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, MEDIA_NEWS, AWARDS, COMPANY } from '../data/site'
 
 const ICON_MAP = { Compass, Award, Clock, HeartHandshake }
 
@@ -244,6 +245,76 @@ export default function Home() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      {/* AWARDS SECTION */}
+      <section className="section-pad bg-page border-t border-soft relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(201,162,39,0.08),transparent_60%)] pointer-events-none" />
+        <div className="container-x relative">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+            <SectionHeading
+              eyebrow="Awards & Recognition"
+              title={<>Recognized for the <span className="gold-text">work we love</span></>}
+              subtitle="A glimpse of the honours that mark our two decades of crafting iconic landmarks."
+            />
+            <Link to="/media/awards" className="btn-outline-gold self-start lg:self-end whitespace-nowrap">
+              View All Awards <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {AWARDS.slice(0, 3).map((a, i) => (
+              <Reveal key={a.title} delay={i * 0.1}>
+                <article className="card-glass overflow-hidden group h-full flex flex-col">
+                  <div className="img-zoom aspect-[16/10]">
+                    <img src={a.image} alt={a.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-start gap-3">
+                      <div className="w-11 h-11 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500 flex-shrink-0">
+                        <Trophy className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.25em]">
+                          {a.category} &middot; {a.year}
+                        </p>
+                        <h3 className="font-serif text-lg text-fg mt-1 leading-tight group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
+                          {a.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <p className="text-fg-soft text-xs uppercase tracking-[0.2em] mt-4">
+                      {a.awardedBy}
+                    </p>
+                    <p className="text-fg-soft text-sm mt-3 leading-relaxed line-clamp-3 flex-1">
+                      {a.description}
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Award strip / count badge */}
+          <Reveal delay={0.3}>
+            <div className="mt-14 flex flex-col md:flex-row items-center justify-between gap-6 p-7 border border-soft bg-page-soft">
+              <div className="flex items-center gap-4">
+                <Award className="w-10 h-10 text-gold-700 dark:text-gold-500" />
+                <div>
+                  <p className="text-gold-700 dark:text-gold-500 uppercase tracking-[0.3em] text-[10px]">
+                    Industry Recognition
+                  </p>
+                  <p className="font-serif text-fg text-2xl mt-1">
+                    {AWARDS.length}+ awards across two decades of work
+                  </p>
+                </div>
+              </div>
+              <Link to="/media/awards" className="btn-gold whitespace-nowrap">
+                Explore Honours <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 

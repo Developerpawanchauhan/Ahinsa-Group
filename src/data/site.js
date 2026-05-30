@@ -846,3 +846,316 @@ export const MILESTONES = [
   { year: '2022', title: 'Sustainability Pledge', text: 'Committed to green-certified construction across all upcoming projects.' },
   { year: '2026', title: 'Building Tomorrow', text: 'Multi-city expansion with the launch of Ahinsa Mall Firozabad and new residential addresses.' },
 ]
+
+
+// =============================================================
+// MANAGEMENT — Board / Senior Leadership (deep profiles)
+// =============================================================
+export const MANAGEMENT = [
+  {
+    name: 'Mr. Rakesh Jain',
+    role: 'Chairman & Managing Director',
+    image:
+      'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=85&auto=format&fit=crop',
+    short:
+      'A visionary leader with three decades of experience steering Ahinsa Group toward architectural excellence and sustained growth.',
+    bio: [
+      'Mr. Rakesh Jain founded Ahinsa Group with a single-minded belief that real estate, done right, has the power to transform the way a city lives. Over the last two decades, that belief has translated into one of the most respected names in Agra real estate.',
+      'His emphasis on transparent dealings, on-time delivery and customer trust shapes every decision the company takes \u2014 from land acquisition to handover.',
+      'Today, under his leadership, the group continues to expand thoughtfully across residential, commercial and lifestyle segments, while staying true to the core values it was founded on.',
+    ],
+    achievements: [
+      'Founder, Ahinsa Group',
+      '30+ years in real estate',
+      'Multiple industry recognitions for design and trust',
+    ],
+  },
+  {
+    name: 'Mrs. Anita Jain',
+    role: 'Executive Director',
+    image:
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=85&auto=format&fit=crop',
+    short:
+      'Drives strategic vision and customer experience initiatives across all verticals of the group.',
+    bio: [
+      'Mrs. Anita Jain plays a central role in shaping the group\u2019s long-term direction, with a particular focus on customer experience, brand and people.',
+      'Her insistence on detail and craftsmanship is reflected in everything from the lobbies of our towers to the way our concierge teams welcome every visitor.',
+      'She is widely credited for the empathetic, family-first culture that defines life at Ahinsa.',
+    ],
+    achievements: [
+      'Executive Director',
+      'Lead, Customer Experience & Brand',
+      'Patron, in-house design philosophy',
+    ],
+  },
+  {
+    name: 'Mr. Aarav Jain',
+    role: 'Director, Projects',
+    image:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85&auto=format&fit=crop',
+    short:
+      'Leads project execution, ensuring quality and timely delivery across the portfolio.',
+    bio: [
+      'Mr. Aarav Jain is the driving force behind on-ground execution at Ahinsa, working closely with consultants, contractors and site teams to ensure every project hits its quality, safety and timeline targets.',
+      'A firm believer in process discipline, he has championed the adoption of modern construction methods, digital tracking and stringent third-party audits across our sites.',
+      'His leadership ensures that the promise made at the time of booking is the experience delivered at handover.',
+    ],
+    achievements: [
+      'Director, Projects',
+      'Lead, Site Execution & Quality',
+      'Champion, Construction Technology adoption',
+    ],
+  },
+  {
+    name: 'Mr. Vikram Sethi',
+    role: 'Chief Financial Officer',
+    image:
+      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=85&auto=format&fit=crop',
+    short:
+      "Architects the financial backbone enabling the group's ambitious roadmap.",
+    bio: [
+      'Mr. Vikram Sethi oversees the financial strategy, capital allocation and compliance landscape of the group.',
+      'Under his stewardship, Ahinsa has built a strong, conservative financial base that allows for ambitious growth without compromising on the trust customers and partners place in the group.',
+      'He works closely with banking and capital-markets partners to ensure long-term financial resilience.',
+    ],
+    achievements: [
+      'Chief Financial Officer',
+      'Lead, Capital Strategy & Compliance',
+      'Architect, Long-term Financial Roadmap',
+    ],
+  },
+]
+
+// =============================================================
+// TEAM MEMBERS — Operating leadership across functions
+// =============================================================
+export const TEAM_MEMBERS = [
+  {
+    name: 'Mr. Sandeep Verma',
+    role: 'Head, Sales & Marketing',
+    department: 'Sales & Marketing',
+    image:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=85&auto=format&fit=crop',
+    bio: 'Leads pre-sales, channel partnerships and brand campaigns across all active projects.',
+  },
+  {
+    name: 'Mrs. Pooja Saxena',
+    role: 'Head, Customer Experience',
+    department: 'Customer Experience',
+    image:
+      'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=85&auto=format&fit=crop',
+    bio: 'Anchors the post-booking journey, ensuring every customer feels heard and supported.',
+  },
+  {
+    name: 'Mr. Anil Chauhan',
+    role: 'Head, Construction',
+    department: 'Construction',
+    image:
+      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=600&q=85&auto=format&fit=crop',
+    bio: 'Oversees site execution, contractor coordination and on-site quality control.',
+  },
+  {
+    name: 'Ar. Megha Tiwari',
+    role: 'Principal Architect',
+    department: 'Design',
+    image:
+      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=85&auto=format&fit=crop',
+    bio: 'Drives the architectural language and design ethos across the portfolio.',
+  },
+  {
+    name: 'Mr. Devansh Gupta',
+    role: 'Head, Engineering',
+    department: 'Engineering',
+    image:
+      'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=600&q=85&auto=format&fit=crop',
+    bio: 'Ensures structural integrity, MEP coordination and technical excellence on every site.',
+  },
+  {
+    name: 'Mrs. Ritika Sharma',
+    role: 'Head, Legal & Compliance',
+    department: 'Legal',
+    image:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=85&auto=format&fit=crop',
+    bio: 'Leads regulatory compliance, RERA filings and contract negotiations group-wide.',
+  },
+  {
+    name: 'Mr. Karan Malhotra',
+    role: 'Head, Finance & Accounts',
+    department: 'Finance',
+    image:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages financial planning, audits and treasury operations across the group.',
+  },
+  {
+    name: 'Ms. Nidhi Bansal',
+    role: 'Head, Human Resources',
+    department: 'Human Resources',
+    image:
+      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=85&auto=format&fit=crop',
+    bio: 'Builds the people and culture practice that holds the group together.',
+  },
+  {
+    name: 'Mr. Imran Khan',
+    role: 'Head, Procurement',
+    department: 'Procurement',
+    image:
+      'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=85&auto=format&fit=crop',
+    bio: 'Sources materials and partners that meet our uncompromising quality standards.',
+  },
+  {
+    name: 'Ms. Aditi Rao',
+    role: 'Head, Brand & Communications',
+    department: 'Brand',
+    image:
+      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=85&auto=format&fit=crop',
+    bio: 'Crafts the Ahinsa brand voice across digital, print and on-ground channels.',
+  },
+  {
+    name: 'Mr. Rohan Kapoor',
+    role: 'Head, Information Technology',
+    department: 'Technology',
+    image:
+      'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&q=85&auto=format&fit=crop',
+    bio: 'Drives the digital backbone \u2014 from CRM to construction tech \u2014 across the group.',
+  },
+  {
+    name: 'Mr. Yash Tomar',
+    role: 'Head, Strategic Partnerships',
+    department: 'Partnerships',
+    image:
+      'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&q=85&auto=format&fit=crop',
+    bio: 'Forges relationships with brands, anchors and institutional partners.',
+  },
+]
+
+// =============================================================
+// AWARDS & RECOGNITION
+// =============================================================
+export const AWARDS = [
+  {
+    year: '2026',
+    title: 'Excellence in Architectural Design',
+    awardedBy: 'Real Estate Excellence Awards',
+    category: 'Design Excellence',
+    image:
+      'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=1200&q=85&auto=format&fit=crop',
+    description:
+      'Recognized for two decades of architectural innovation and an unwavering commitment to design integrity across the portfolio.',
+  },
+  {
+    year: '2025',
+    title: 'Best Integrated Township in North India',
+    awardedBy: 'India Realty Awards',
+    category: 'Township',
+    image:
+      'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=85&auto=format&fit=crop',
+    description:
+      'Honoured for the Green Valley Township, celebrated as a benchmark of planned, gated community living in the region.',
+  },
+  {
+    year: '2025',
+    title: 'Most Trusted Builder \u2014 Agra',
+    awardedBy: 'Times Real Estate Conclave',
+    category: 'Customer Trust',
+    image:
+      'https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?w=1200&q=85&auto=format&fit=crop',
+    description:
+      'Awarded for sustained customer trust, on-time delivery and transparent practices over multiple project cycles.',
+  },
+  {
+    year: '2024',
+    title: 'Iconic Commercial Project of the Year',
+    awardedBy: 'NCR Real Estate Excellence Awards',
+    category: 'Commercial',
+    image:
+      'https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1200&q=85&auto=format&fit=crop',
+    description:
+      'Recognized for the Ahinsa Complex \u2014 a fully ready, fully occupied commercial landmark in the heart of the city.',
+  },
+  {
+    year: '2024',
+    title: 'Sustainability Champion',
+    awardedBy: 'Green Building Council India',
+    category: 'Sustainability',
+    image:
+      'https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1200&q=85&auto=format&fit=crop',
+    description:
+      'Acknowledged for the early adoption of green building practices and sustainable construction techniques.',
+  },
+  {
+    year: '2023',
+    title: 'Emerging Developer of the Year',
+    awardedBy: 'Tier-2 Cities Realty Summit',
+    category: 'Developer of the Year',
+    image:
+      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=85&auto=format&fit=crop',
+    description:
+      'Felicitated for category-leading work in tier-2 cities and a portfolio that combines scale with refinement.',
+  },
+]
+
+// =============================================================
+// EVENTS — launches, ground-breakings, customer events
+// =============================================================
+export const EVENTS = [
+  {
+    date: 'May 25, 2026',
+    title: 'Grand Launch \u2014 Ahinsa Mall Firozabad',
+    location: 'Firozabad, UP',
+    type: 'Project Launch',
+    image:
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=85&auto=format&fit=crop',
+    excerpt:
+      'A red-carpet launch event introducing the city\u2019s first integrated retail and entertainment destination, attended by industry leaders and dignitaries.',
+  },
+  {
+    date: 'April 12, 2026',
+    title: 'Sales Gallery Opening \u2014 The Grand Green Valley',
+    location: 'Fatehabad Road, Agra',
+    type: 'Sales Gallery',
+    image:
+      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&q=85&auto=format&fit=crop',
+    excerpt:
+      'A walkthrough experience of the project with full-scale show apartments, material library and immersive 3D walkthroughs.',
+  },
+  {
+    date: 'March 02, 2026',
+    title: 'Ground-Breaking \u2014 Green Valley Empire',
+    location: 'Agra',
+    type: 'Bhoomi Pujan',
+    image:
+      'https://images.unsplash.com/photo-1581094488379-bf7a25ab2c3a?w=1200&q=85&auto=format&fit=crop',
+    excerpt:
+      'A traditional Bhoomi Pujan ceremony marking the start of construction at our flagship luxury residential address.',
+  },
+  {
+    date: 'February 09, 2026',
+    title: 'Customer Meet \u2014 Diwali Celebrations',
+    location: 'Ahinsa Complex, Agra',
+    type: 'Community',
+    image:
+      'https://images.unsplash.com/photo-1481653125770-b78c206c59d4?w=1200&q=85&auto=format&fit=crop',
+    excerpt:
+      'A festive evening with our resident families, featuring cultural performances, dinner and recognition of long-standing customers.',
+  },
+  {
+    date: 'January 18, 2026',
+    title: 'Channel Partner Conclave 2026',
+    location: 'Agra',
+    type: 'Partnerships',
+    image:
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=85&auto=format&fit=crop',
+    excerpt:
+      'Bringing together our wider channel partner network for a day of strategy, recognition and project previews.',
+  },
+  {
+    date: 'November 30, 2025',
+    title: 'Architectural Symposium \u2014 Designing for Tier-2',
+    location: 'Ahinsa Tower, Agra',
+    type: 'Industry Event',
+    image:
+      'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=85&auto=format&fit=crop',
+    excerpt:
+      'A panel discussion exploring how design and planning need to evolve for fast-growing tier-2 cities.',
+  },
+]
