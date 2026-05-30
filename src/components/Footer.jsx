@@ -150,9 +150,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Ahinsa Group Agra. All Rights Reserved.
           </p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-gold-500 transition">Privacy Policy</a>
-            <a href="#" className="hover:text-gold-500 transition">Terms of Service</a>
-            <a href="#" className="hover:text-gold-500 transition">Disclaimer</a>
+            <Link to="/privacy" className="hover:text-gold-500 transition">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-gold-500 transition">Terms &amp; Conditions</Link>
+            <Link to="/sitemap" className="hover:text-gold-500 transition">Sitemap</Link>
           </div>
         </div>
       </div>

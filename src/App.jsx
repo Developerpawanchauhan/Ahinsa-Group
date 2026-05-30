@@ -14,6 +14,9 @@ import Awards from './pages/Awards'
 import Events from './pages/Events'
 import News from './pages/News'
 import Contact from './pages/Contact'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
+import Sitemap from './pages/Sitemap'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -48,6 +51,12 @@ export default function App() {
           <Route path="/media/news" element={<News />} />
 
           <Route path="/contact" element={<Contact />} />
+
+          {/* Legal pages — linked only from footer */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/sitemap" element={<Sitemap />} />
+
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
