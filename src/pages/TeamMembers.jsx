@@ -24,7 +24,7 @@ export default function TeamMembers() {
         title="Team"
         subtitle="The operating leadership across every function that powers Ahinsa Group."
         breadcrumb="About / Team"
-        image="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&q=85&auto=format&fit=crop"
+        image="/images/emploi/team.jpg?w=1920&q=85&auto=format&fit=crop"
       />
 
       <section className="section-pad bg-page">
