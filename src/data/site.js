@@ -887,7 +887,7 @@ export const TEAM_MEMBERS = [
     role: 'Head, Accountant',
     department: 'Accounts',
     image:
-      '/public/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Oversees site execution, contractor coordination and on-site quality control.',
   },
   {
@@ -895,7 +895,7 @@ export const TEAM_MEMBERS = [
     role: 'Purchase Manager',
     department: 'Purchase',
     image:
-      '/public/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Drives the architectural language and design ethos across the portfolio.',
   },
   {
@@ -903,7 +903,7 @@ export const TEAM_MEMBERS = [
     role: 'Head, Engineering',
     department: 'Engineering',
     image:
-      '/public/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Ensures structural integrity, MEP coordination and technical excellence on every site.',
   },
   {
@@ -911,7 +911,7 @@ export const TEAM_MEMBERS = [
     role: 'Head, Tally',
     department: 'Accounts',
     image:
-      '/public/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads regulatory compliance, RERA filings and contract negotiations group-wide.',
   },
   {
@@ -919,7 +919,7 @@ export const TEAM_MEMBERS = [
     role: 'Social Media Maanger',
     department: 'Digital',
     image:
-      '/public/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages financial planning, audits and treasury operations across the group.',
   },
   {
@@ -927,7 +927,7 @@ export const TEAM_MEMBERS = [
     role: 'Sales manager',
     department: 'Sales',
     image:
-      '/public/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Builds the people and culture practice that holds the group together.',
   },
   
