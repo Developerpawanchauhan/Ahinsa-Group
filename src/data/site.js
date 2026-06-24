@@ -869,99 +869,68 @@ export const TEAM_MEMBERS = [
   {
     name: 'Mr. Himanshu Saxena',
     role: 'Head, Senior Accounts',
-    department: 'Senior Accountant',
+    department: 'Accounts',
     image:
-      '/images/emploi/himanshu-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads pre-sales, channel partnerships and brand campaigns across all active projects.',
   },
   {
-    name: 'Mrs. Pooja Saxena',
-    role: 'Head, Customer Experience',
-    department: 'Customer Experience',
+    name: 'Mr Akash Bansal',
+    role: 'Legal and Professional Conssultant',
+    department: 'CBI',
     image:
-      'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=85&auto=format&fit=crop',
+      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Anchors the post-booking journey, ensuring every customer feels heard and supported.',
   },
   {
-    name: 'Mr. Anil Chauhan',
-    role: 'Head, Construction',
-    department: 'Construction',
+    name: 'Mr. Rajesh Saxena',
+    role: 'Head, Accountant',
+    department: 'Accounts',
     image:
-      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?w=600&q=85&auto=format&fit=crop',
+      '/public/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Oversees site execution, contractor coordination and on-site quality control.',
   },
   {
-    name: 'Ar. Megha Tiwari',
-    role: 'Principal Architect',
-    department: 'Design',
+    name: 'Mr Alok Sharma',
+    role: 'Purchase Manager',
+    department: 'Purchase',
     image:
-      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=85&auto=format&fit=crop',
+      '/public/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Drives the architectural language and design ethos across the portfolio.',
   },
   {
-    name: 'Mr. Devansh Gupta',
+    name: 'Mr. Mohit parashar',
     role: 'Head, Engineering',
     department: 'Engineering',
     image:
-      'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=600&q=85&auto=format&fit=crop',
+      '/public/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Ensures structural integrity, MEP coordination and technical excellence on every site.',
   },
   {
-    name: 'Mrs. Ritika Sharma',
-    role: 'Head, Legal & Compliance',
-    department: 'Legal',
+    name: 'Mr Anupam Chitoria',
+    role: 'Head, Tally',
+    department: 'Accounts',
     image:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=85&auto=format&fit=crop',
+      '/public/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads regulatory compliance, RERA filings and contract negotiations group-wide.',
   },
   {
-    name: 'Mr. Karan Malhotra',
-    role: 'Head, Finance & Accounts',
-    department: 'Finance',
+    name: 'Mr. Pawan Chauhan',
+    role: 'Social Media Maanger',
+    department: 'Digital',
     image:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=85&auto=format&fit=crop',
+      '/public/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages financial planning, audits and treasury operations across the group.',
   },
   {
-    name: 'Ms. Nidhi Bansal',
-    role: 'Head, Human Resources',
-    department: 'Human Resources',
+    name: 'Mr. Santosh Sharma',
+    role: 'Sales manager',
+    department: 'Sales',
     image:
-      'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&q=85&auto=format&fit=crop',
+      '/public/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Builds the people and culture practice that holds the group together.',
   },
-  {
-    name: 'Mr. Imran Khan',
-    role: 'Head, Procurement',
-    department: 'Procurement',
-    image:
-      'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&q=85&auto=format&fit=crop',
-    bio: 'Sources materials and partners that meet our uncompromising quality standards.',
-  },
-  {
-    name: 'Ms. Aditi Rao',
-    role: 'Head, Brand & Communications',
-    department: 'Brand',
-    image:
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=85&auto=format&fit=crop',
-    bio: 'Crafts the Ahinsa brand voice across digital, print and on-ground channels.',
-  },
-  {
-    name: 'Mr. Rohan Kapoor',
-    role: 'Head, Information Technology',
-    department: 'Technology',
-    image:
-      'https://images.unsplash.com/photo-1463453091185-61582044d556?w=600&q=85&auto=format&fit=crop',
-    bio: 'Drives the digital backbone \u2014 from CRM to construction tech \u2014 across the group.',
-  },
-  {
-    name: 'Mr. Yash Tomar',
-    role: 'Head, Strategic Partnerships',
-    department: 'Partnerships',
-    image:
-      'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&q=85&auto=format&fit=crop',
-    bio: 'Forges relationships with brands, anchors and institutional partners.',
-  },
+  
 ]
 
 // =============================================================
