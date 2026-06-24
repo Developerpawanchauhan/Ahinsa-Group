@@ -30,7 +30,7 @@ const NAV_LINKS = [
     })),
   },
   {
-    to: '/brochure',
+    to: '/media/awards',
     label: 'Gallery',
     submenuKind: 'simple',
     children: [
