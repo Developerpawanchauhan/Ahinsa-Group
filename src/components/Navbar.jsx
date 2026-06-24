@@ -14,7 +14,7 @@ const NAV_LINKS = [
     children: [
       { to: '/about', label: 'About Us', meta: 'Our story, vision & values' },
       { to: '/about/management', label: 'Management', meta: 'Board & senior leadership' },
-      //team page notepad
+      { to: '/about/team', label: 'Team', meta: 'Operating leadership across functions' },
     ],
   },
   {
