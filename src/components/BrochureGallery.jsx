@@ -31,13 +31,7 @@ const BROCHURE_PROJECTS = [
     folder: 'ahinsa-empire',
     images: range(36),
   },
-  {
-    id: 'orchid',
-    label: 'Ahinsa Green Valley Orchid',
-    shortLabel: 'GV Orchid',
-    folder: 'ahinsa-orchid',
-    images: range(5),
-  },
+
   {
     id: 'firozabad',
     label: 'Ahinsa Mall Firozabad',
