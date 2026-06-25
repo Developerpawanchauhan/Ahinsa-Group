@@ -875,6 +875,22 @@ export const TEAM_MEMBERS = [
     bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
   },
   {
+    name: 'Mr. Munna Chaudhary',
+    role: 'Administrator',
+    department: 'Accounts',
+    image:
+      '/images/emploi/munna.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+  },
+  {
+    name: 'Mr. Akshat Jain',
+    role: 'Administrator',
+    department: 'Accounts',
+    image:
+      '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+  },
+  {
     name: 'Mr. Akash Bansal',
     role: 'Legal and Professional Conssultant',
     department: 'Legal',
@@ -905,6 +921,14 @@ export const TEAM_MEMBERS = [
     image:
       '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
+  },
+  {
+    name: 'Mr. Laxmi Narayan',
+    role: 'Legal',
+    department: 'Administrator',
+    image:
+      '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
   {
     name: 'Mr. Anupam Chittoriya',
