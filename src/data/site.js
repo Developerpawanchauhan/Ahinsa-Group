@@ -917,7 +917,7 @@ export const TEAM_MEMBERS = [
   {
     name: 'Mr. Mohit parashar',
     role: 'Project Engineer',
-    department: 'Engineering',
+    department: 'Engineer',
     image:
       '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
