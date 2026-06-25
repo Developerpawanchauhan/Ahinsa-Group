@@ -883,14 +883,6 @@ export const TEAM_MEMBERS = [
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
   {
-    name: 'Mr. Anupam Chittoriya',
-    role: 'Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
-  },
-  {
     name: 'Mr. Akash Bansal',
     role: 'Legal and Professional Conssultant',
     department: 'Legal',
@@ -899,12 +891,28 @@ export const TEAM_MEMBERS = [
     bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
   },
   {
+    name: 'Mr. Anupam Chittoriya',
+    role: 'Accountant',
+    department: 'Accounts',
+    image:
+      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
+  },
+  {
     name: 'Mr. Akshat Jain',
     role: 'Office Managment',
     department: 'Administration',
     image:
       '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+  },
+  {
+    name: 'Mr. Pawan Chauhan',
+    role: 'Social Media Maanger',
+    department: 'Digital',
+    image:
+      '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
   },
   {
     name: 'Mr. Rajesh Saxena',
@@ -937,14 +945,6 @@ export const TEAM_MEMBERS = [
     image:
       '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
-  },
-  {
-    name: 'Mr. Pawan Chauhan',
-    role: 'Social Media Maanger',
-    department: 'Digital',
-    image:
-      '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
   },
   {
     name: 'Mr. Santosh Sharma',
