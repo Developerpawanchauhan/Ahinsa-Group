@@ -941,7 +941,7 @@ export const TEAM_MEMBERS = [
   {
     name: 'Mr. Laxmi Narayan',
     role: 'Legal',
-    department: 'Administrator',
+    department: 'Administration',
     image:
       '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
