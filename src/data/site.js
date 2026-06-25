@@ -868,14 +868,14 @@ export const MANAGEMENT = [
 export const TEAM_MEMBERS = [
   {
     name: 'Mr. Himanshu Saxena',
-    role: 'Head, Senior Accounts',
+    role: 'Head, Senior Accountant',
     department: 'Accounts',
     image:
       '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
   },
   {
-    name: 'Mr Akash Bansal',
+    name: 'Mr. Akash Bansal',
     role: 'Legal and Professional Conssultant',
     department: 'Legal',
     image:
@@ -884,14 +884,14 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Rajesh Saxena',
-    role: 'Leagal Cum Accountant',
+    role: 'Legal Cum Accountant',
     department: 'Accounts',
     image:
       '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads day-to-day accounting operations — ensures accurate ledger management, financial reporting and reconciliation across the group.',
   },
   {
-    name: 'Mr Alok Sharma',
+    name: 'Mr. Alok Sharma',
     role: 'Purchase Manager',
     department: 'Purchase',
     image:
@@ -907,7 +907,7 @@ export const TEAM_MEMBERS = [
     bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
   },
   {
-    name: 'Mr Anupam Chittoria',
+    name: 'Mr. Anupam Chittoriya',
     role: 'Accountant',
     department: 'Accounts',
     image:
