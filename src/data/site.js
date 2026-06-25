@@ -876,19 +876,19 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Munna Chaudhary',
-    role: 'Transaction Coordinator',
+    role: 'Coordinator',
     department: 'Administration',
     image:
       '/images/emploi/munna.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
   {
-    name: 'Mr. Akshat Jain',
-    role: 'Office Managment',
-    department: 'Administration',
+    name: 'Mr. Anupam Chittoriya',
+    role: 'Accountant',
+    department: 'Accounts',
     image:
-      '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
   },
   {
     name: 'Mr. Akash Bansal',
@@ -897,6 +897,14 @@ export const TEAM_MEMBERS = [
     image:
       '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
+  },
+  {
+    name: 'Mr. Akshat Jain',
+    role: 'Office Managment',
+    department: 'Administration',
+    image:
+      '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
   {
     name: 'Mr. Rajesh Saxena',
@@ -929,14 +937,6 @@ export const TEAM_MEMBERS = [
     image:
       '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
-  },
-  {
-    name: 'Mr. Anupam Chittoriya',
-    role: 'Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
   },
   {
     name: 'Mr. Pawan Chauhan',
