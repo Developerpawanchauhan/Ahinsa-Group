@@ -867,36 +867,12 @@ export const MANAGEMENT = [
 // =============================================================
 export const TEAM_MEMBERS = [
   {
-    name: 'Mr. Himanshu Saxena',
-    role: 'Head, Senior Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
-  },
-  {
     name: 'Mr. Munna Chaudhary',
     role: 'Coordinator',
     department: 'Administration',
     image:
       '/images/emploi/munna.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
-  },
-  {
-    name: 'Mr. Akash Bansal',
-    role: 'Legal and Professional Conssultant',
-    department: 'Legal',
-    image:
-      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
-  },
-  {
-    name: 'Mr. Anupam Chittoriya',
-    role: 'Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
   },
   {
     name: 'Mr. Akshat Jain',
@@ -915,14 +891,6 @@ export const TEAM_MEMBERS = [
     bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
   },
   {
-    name: 'Mr. Rajesh Saxena',
-    role: 'Legal Cum Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads day-to-day accounting operations — ensures accurate ledger management, financial reporting and reconciliation across the group.',
-  },
-  {
     name: 'Mr. Alok Sharma',
     role: 'Purchase Manager',
     department: 'Purchase',
@@ -931,12 +899,36 @@ export const TEAM_MEMBERS = [
     bio: 'Manages procurement and vendor relationships — ensures timely sourcing of materials, cost control and smooth supplier coordination.',
   },
   {
-    name: 'Mr. Mohit parashar',
-    role: 'Project Engineer',
-    department: 'Engineer',
+    name: 'Mr. Akash Bansal',
+    role: 'Legal and Professional Conssultant',
+    department: 'Legal',
     image:
-      '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
+      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
+  },
+  {
+    name: 'Mr. Himanshu Saxena',
+    role: 'Head, Senior Accountant',
+    department: 'Accounts',
+    image:
+      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
+  },
+  {
+    name: 'Mr. Anupam Chittoriya',
+    role: 'Accountant',
+    department: 'Accounts',
+    image:
+      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
+  },
+  {
+    name: 'Mr. Rajesh Saxena',
+    role: 'Legal Cum Accountant',
+    department: 'Accounts',
+    image:
+      '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Leads day-to-day accounting operations — ensures accurate ledger management, financial reporting and reconciliation across the group.',
   },
   {
     name: 'Mr. Laxmi Narayan',
@@ -946,6 +938,15 @@ export const TEAM_MEMBERS = [
       '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
+  {
+    name: 'Mr. Mohit parashar',
+    role: 'Project Engineer',
+    department: 'Engineer',
+    image:
+      '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
+  },
+  
   {
     name: 'Mr. Santosh Sharma',
     role: 'Sales manager',
