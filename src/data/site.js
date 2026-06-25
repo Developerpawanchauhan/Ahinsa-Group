@@ -872,23 +872,23 @@ export const TEAM_MEMBERS = [
     department: 'Accounts',
     image:
       '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads pre-sales, channel partnerships and brand campaigns across all active projects.',
+    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
   },
   {
     name: 'Mr Akash Bansal',
     role: 'Legal and Professional Conssultant',
-    department: 'CBI',
+    department: 'Legal',
     image:
       '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Anchors the post-booking journey, ensuring every customer feels heard and supported.',
+    bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
   },
   {
     name: 'Mr. Rajesh Saxena',
-    role: 'Head, Accountant',
+    role: 'Leagal Cum Accountant',
     department: 'Accounts',
     image:
       '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Oversees site execution, contractor coordination and on-site quality control.',
+    bio: 'Leads day-to-day accounting operations — ensures accurate ledger management, financial reporting and reconciliation across the group.',
   },
   {
     name: 'Mr Alok Sharma',
@@ -896,23 +896,23 @@ export const TEAM_MEMBERS = [
     department: 'Purchase',
     image:
       '/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Drives the architectural language and design ethos across the portfolio.',
+    bio: 'Manages procurement and vendor relationships — ensures timely sourcing of materials, cost control and smooth supplier coordination.',
   },
   {
     name: 'Mr. Mohit parashar',
-    role: 'Head, Engineering',
+    role: 'Project Engineer',
     department: 'Engineering',
     image:
       '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Ensures structural integrity, MEP coordination and technical excellence on every site.',
+    bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
   },
   {
-    name: 'Mr Anupam Chitoria',
-    role: 'Head, Tally',
+    name: 'Mr Anupam Chittoria',
+    role: 'Accountant',
     department: 'Accounts',
     image:
       '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads regulatory compliance, RERA filings and contract negotiations group-wide.',
+    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
   },
   {
     name: 'Mr. Pawan Chauhan',
@@ -920,7 +920,7 @@ export const TEAM_MEMBERS = [
     department: 'Digital',
     image:
       '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages financial planning, audits and treasury operations across the group.',
+    bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
   },
   {
     name: 'Mr. Santosh Sharma',
@@ -928,7 +928,7 @@ export const TEAM_MEMBERS = [
     department: 'Sales',
     image:
       '/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Builds the people and culture practice that holds the group together.',
+    bio: ' Leads the sales team — drives client acquisition, achieves sales targets and executes effective sales strategies across the group.',
   },
   
 ]
