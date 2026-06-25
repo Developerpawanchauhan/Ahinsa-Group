@@ -876,16 +876,16 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Munna Chaudhary',
-    role: 'Administrator',
-    department: 'Accounts',
+    role: 'Transaction Coordinator',
+    department: 'Administration',
     image:
       '/images/emploi/munna.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
   {
     name: 'Mr. Akshat Jain',
-    role: 'Administrator',
-    department: 'Accounts',
+    role: 'Office Managment',
+    department: 'Administration',
     image:
       '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
