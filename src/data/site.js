@@ -781,36 +781,6 @@ export const GALLERY = [
   'https://images.unsplash.com/photo-1448630360428-65456885c650?w=900&q=85&auto=format&fit=crop',
 ]
 
-export const LEADERSHIP = [
-  {
-    name: 'Mr. Rakesh Jain',
-    role: 'Chairman & Managing Director',
-    image:
-      'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=85&auto=format&fit=crop',
-    bio: 'A visionary leader with three decades of experience steering Ahinsa Group toward architectural excellence and sustained growth.',
-  },
-  {
-    name: 'Mrs. Anita Jain',
-    role: 'Executive Director',
-    image:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=85&auto=format&fit=crop',
-    bio: 'Drives strategic vision and customer experience initiatives across all verticals of the group.',
-  },
-  {
-    name: 'Mr. Aarav Jain',
-    role: 'Director, Projects',
-    image:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads project execution, ensuring quality and timely delivery across the portfolio.',
-  },
-  {
-    name: 'Mr. Vikram Sethi',
-    role: 'Chief Financial Officer',
-    image:
-      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=85&auto=format&fit=crop',
-    bio: "Architects the financial backbone enabling the group's ambitious roadmap.",
-  },
-]
 
 export const MILESTONES = [
   { year: '2023', title: 'Ahinsa Green Valley Township', text: 'Launched our flagship integrated township at Kuberpur, Agra — offering premium Residential & Commercial Plots across a well-planned, green-centric community with wide roads and modern infrastructure.' },
@@ -867,93 +837,68 @@ export const MANAGEMENT = [
 // =============================================================
 export const TEAM_MEMBERS = [
   {
-    name: 'Mr. Munna Chaudhary',
-    role: 'Coordinator',
-    department: 'Administration',
+    name: 'Mr. Himanshu Saxena',
+    role: 'Head, Senior Accounts',
+    department: 'Accounts',
     image:
-      '/images/emploi/munna.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Leads pre-sales, channel partnerships and brand campaigns across all active projects.',
   },
   {
-    name: 'Mr. Akshat Jain',
-    role: 'Office Managment',
-    department: 'Administration',
+    name: 'Mr Akash Bansal',
+    role: 'Legal and Professional Conssultant',
+    department: 'CBI',
     image:
-      '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Anchors the post-booking journey, ensuring every customer feels heard and supported.',
+  },
+  {
+    name: 'Mr. Rajesh Saxena',
+    role: 'Head, Accountant',
+    department: 'Accounts',
+    image:
+      '/public/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Oversees site execution, contractor coordination and on-site quality control.',
+  },
+  {
+    name: 'Mr Alok Sharma',
+    role: 'Purchase Manager',
+    department: 'Purchase',
+    image:
+      '/public/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Drives the architectural language and design ethos across the portfolio.',
+  },
+  {
+    name: 'Mr. Mohit parashar',
+    role: 'Head, Engineering',
+    department: 'Engineering',
+    image:
+      '/public/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Ensures structural integrity, MEP coordination and technical excellence on every site.',
+  },
+  {
+    name: 'Mr Anupam Chitoria',
+    role: 'Head, Tally',
+    department: 'Accounts',
+    image:
+      '/public/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Leads regulatory compliance, RERA filings and contract negotiations group-wide.',
   },
   {
     name: 'Mr. Pawan Chauhan',
     role: 'Social Media Maanger',
     department: 'Digital',
     image:
-      '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
+      '/public/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Manages financial planning, audits and treasury operations across the group.',
   },
-  {
-    name: 'Mr. Alok Sharma',
-    role: 'Purchase Manager',
-    department: 'Purchase',
-    image:
-      '/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages procurement and vendor relationships — ensures timely sourcing of materials, cost control and smooth supplier coordination.',
-  },
-  {
-    name: 'Mr. Akash Bansal',
-    role: 'Legal and Professional Conssultant',
-    department: 'Legal',
-    image:
-      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
-  },
-  {
-    name: 'Mr. Himanshu Saxena',
-    role: 'Head, Senior Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
-  },
-  {
-    name: 'Mr. Anupam Chittoriya',
-    role: 'Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
-  },
-  {
-    name: 'Mr. Rajesh Saxena',
-    role: 'Legal Cum Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads day-to-day accounting operations — ensures accurate ledger management, financial reporting and reconciliation across the group.',
-  },
-  {
-    name: 'Mr. Laxmi Narayan',
-    role: 'Land Coordinator',
-    department: 'Legal',
-    image:
-      '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
-  },
-  {
-    name: 'Mr. Mohit parashar',
-    role: 'Project Engineer',
-    department: 'Engineer',
-    image:
-      '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
-  },
-  
   {
     name: 'Mr. Santosh Sharma',
     role: 'Sales manager',
     department: 'Sales',
     image:
-      '/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: ' Leads the sales team — drives client acquisition, achieves sales targets and executes effective sales strategies across the group.',
+      '/public/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Builds the people and culture practice that holds the group together.',
   },
   
 ]
@@ -1113,62 +1058,80 @@ export const AWARDS = [
 // =============================================================
 export const EVENTS = [
   {
-    date: 'May 25, 2026',
-    title: 'Grand Launch \u2014 Ahinsa Mall Firozabad',
-    location: 'Firozabad, UP',
-    type: 'Project Launch',
-    image:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1200&q=85&auto=format&fit=crop',
-    excerpt:
-      'A red-carpet launch event introducing the city\u2019s first integrated retail and entertainment destination, attended by industry leaders and dignitaries.',
-  },
-  {
-    date: 'April 12, 2026',
-    title: 'Sales Gallery Opening \u2014 The Grand Green Valley',
+    date: 'Jan 26, 2025',
+    title: 'Grand Launch \u2014 Ahinsa The Grand Green Valley',
     location: 'Fatehabad Road, Agra',
-    type: 'Sales Gallery',
-    image:
-      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&q=85&auto=format&fit=crop',
+    type: 'Project Launch',
+    images: [
+      '/public/images/Events/grand-valley-launch/26Jan2025-TGGV1.jpg',
+      '/public/images/Events/grand-valley-launch/26Jan2025-TGGV2.jpg',
+      '/public/images/Events/grand-valley-launch/26Jan2025-TGGV3.jpg',
+    ],
     excerpt:
-      'A walkthrough experience of the project with full-scale show apartments, material library and immersive 3D walkthroughs.',
+      'Ahinsa The Grand Green Valley brings serene green living and modern luxury together, offering a peaceful, nature-inspired lifestyle for you.',
   },
   {
-    date: 'March 02, 2026',
-    title: 'Ground-Breaking \u2014 Green Valley Empire',
+    date: 'July 10, 2025',
+    title: 'Opening Corporate Office \u2014 Ahinsa Complex',
+    location: 'Ram Bagh, Agra',
+    type: 'Pujan Gallery',
+    images: [
+      '/public/images/Events/ahinsa-complex/10July2025-AhinsaComplex2.jpg',
+      '/public/images/Events/ahinsa-complex/10July2025-AhinsaComplex3.jpg',
+      '/public/images/Events/ahinsa-complex/10July2025-AhinsaComplex1.jpg',
+    ],
+    excerpt:
+      'We are pleased to announce the opening of our new corporate office, marking a milestone in our journey toward growth, innovation, and excellence.',
+  },
+  {
+    date: 'Augest 15, 2025',
+    title: 'Flag Hoisting \u2014 On All Our Project',
     location: 'Agra',
-    type: 'Bhoomi Pujan',
-    image:
-      'https://images.unsplash.com/photo-1581094488379-bf7a25ab2c3a?w=1200&q=85&auto=format&fit=crop',
+    type: 'Independence Day',
+    images: [
+      '/public/images/Events/Independence-day/15-Aug-20251.jpg',
+      '/public/images/Events/Independence-day/15-Aug-20252.jpg',
+      '/public/images/Events/Independence-day/15-Aug-20254.jpg',
+    ],
     excerpt:
-      'A traditional Bhoomi Pujan ceremony marking the start of construction at our flagship luxury residential address.',
+      'We proudly celebrated Independence Day with great enthusiasm, honoring the spirit of freedom, unity, and the brave hearts who made it possible."',
   },
   {
-    date: 'February 09, 2026',
-    title: 'Customer Meet \u2014 Diwali Celebrations',
-    location: 'Ahinsa Complex, Agra',
-    type: 'Community',
-    image:
-      'https://images.unsplash.com/photo-1481653125770-b78c206c59d4?w=1200&q=85&auto=format&fit=crop',
+    date: 'October 27, 2025',
+    title: 'Launching New Office \u2014 RRR InfraZone PVT LTD',
+    location: 'Ahinsa Green Valley Empire, Agra',
+    type: 'pujan',
+    images: [
+      '/public/images/Events/empire-office/Empire-Office-Poojan4.jpg',
+      '/public/images/Events/empire-office/Empire-Office-Poojan3.jpg',
+      '/public/images/Events/empire-office/Empire-Office-Poojan1.jpg',
+    ],
     excerpt:
       'A festive evening with our resident families, featuring cultural performances, dinner and recognition of long-standing customers.',
   },
   {
-    date: 'January 18, 2026',
-    title: 'Channel Partner Conclave 2026',
-    location: 'Agra',
-    type: 'Partnerships',
-    image:
-      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=85&auto=format&fit=crop',
+    date: 'March 20, 2026',
+    title: 'Launching Rich Villa \u2014 with blessing of Guru Vijay Kaushal Ji',
+    location: 'Ahinsa Green Valley Empire, Agra',
+    type: 'Lauching',
+    images: [
+      '/public/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-1.jpg',
+      '/public/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-2.jpg',
+      '/public/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-3.jpg',
+    ],
     excerpt:
       'Bringing together our wider channel partner network for a day of strategy, recognition and project previews.',
   },
   {
-    date: 'November 30, 2025',
-    title: 'Architectural Symposium \u2014 Designing for Tier-2',
-    location: 'Ahinsa Tower, Agra',
-    type: 'Industry Event',
-    image:
-      'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=85&auto=format&fit=crop',
+    date: 'May 05, 2026',
+    title: 'Developed for Saint \u2014 Vihasant Bhawan',
+    location: 'Ahinsa The Grand Green Valley, Agra',
+    type: 'Taking Blessings',
+    images: [
+      '/public/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan4.jpg',
+      '/public/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan1.jpg',
+      '/public/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan3.jpg',
+    ],
     excerpt:
       'A panel discussion exploring how design and planning need to evolve for fast-growing tier-2 cities.',
   },
