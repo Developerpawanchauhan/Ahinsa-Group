@@ -1088,9 +1088,9 @@ export const EVENTS = [
     location: 'Fatehabad Road, Agra',
     type: 'Project Launch',
     images: [
-      '/public/images/Events/grand-valley-launch/26Jan2025-TGGV1.jpg',
-      '/public/images/Events/grand-valley-launch/26Jan2025-TGGV2.jpg',
-      '/public/images/Events/grand-valley-launch/26Jan2025-TGGV3.jpg',
+      '/images/Events/grand-valley-launch/26Jan2025-TGGV1.jpg',
+      '/images/Events/grand-valley-launch/26Jan2025-TGGV2.jpg',
+      '/images/Events/grand-valley-launch/26Jan2025-TGGV3.jpg',
     ],
     excerpt:
       'Ahinsa The Grand Green Valley brings serene green living and modern luxury together, offering a peaceful, nature-inspired lifestyle for you.',
@@ -1101,9 +1101,9 @@ export const EVENTS = [
     location: 'Ram Bagh, Agra',
     type: 'Pujan Gallery',
     images: [
-      '/public/images/Events/ahinsa-complex/10July2025-AhinsaComplex2.jpg',
-      '/public/images/Events/ahinsa-complex/10July2025-AhinsaComplex3.jpg',
-      '/public/images/Events/ahinsa-complex/10July2025-AhinsaComplex1.jpg',
+      '/images/Events/ahinsa-complex/10July2025-AhinsaComplex2.jpg',
+      '/images/Events/ahinsa-complex/10July2025-AhinsaComplex3.jpg',
+      '/images/Events/ahinsa-complex/10July2025-AhinsaComplex1.jpg',
     ],
     excerpt:
       'We are pleased to announce the opening of our new corporate office, marking a milestone in our journey toward growth, innovation, and excellence.',
@@ -1114,9 +1114,9 @@ export const EVENTS = [
     location: 'Agra',
     type: 'Independence Day',
     images: [
-      '/public/images/Events/Independence-day/15-Aug-20251.jpg',
-      '/public/images/Events/Independence-day/15-Aug-20252.jpg',
-      '/public/images/Events/Independence-day/15-Aug-20254.jpg',
+      '/images/Events/Independence-day/15-Aug-20251.jpg',
+      '/images/Events/Independence-day/15-Aug-20252.jpg',
+      '/images/Events/Independence-day/15-Aug-20254.jpg',
     ],
     excerpt:
       'We proudly celebrated Independence Day with great enthusiasm, honoring the spirit of freedom, unity, and the brave hearts who made it possible."',
@@ -1127,9 +1127,9 @@ export const EVENTS = [
     location: 'Ahinsa Green Valley Empire, Agra',
     type: 'pujan',
     images: [
-      '/public/images/Events/empire-office/Empire-Office-Poojan4.jpg',
-      '/public/images/Events/empire-office/Empire-Office-Poojan3.jpg',
-      '/public/images/Events/empire-office/Empire-Office-Poojan1.jpg',
+      '/images/Events/empire-office/Empire-Office-Poojan4.jpg',
+      '/images/Events/empire-office/Empire-Office-Poojan3.jpg',
+      '/images/Events/empire-office/Empire-Office-Poojan1.jpg',
     ],
     excerpt:
       'A festive evening with our resident families, featuring cultural performances, dinner and recognition of long-standing customers.',
@@ -1140,9 +1140,9 @@ export const EVENTS = [
     location: 'Ahinsa Green Valley Empire, Agra',
     type: 'Lauching',
     images: [
-      '/public/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-1.jpg',
-      '/public/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-2.jpg',
-      '/public/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-3.jpg',
+      '/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-1.jpg',
+      '/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-2.jpg',
+      '/images/Events/rich-villa/20-03-2026-Vijay-Kaushal-Ji-3.jpg',
     ],
     excerpt:
       'Bringing together our wider channel partner network for a day of strategy, recognition and project previews.',
@@ -1153,9 +1153,9 @@ export const EVENTS = [
     location: 'Ahinsa The Grand Green Valley, Agra',
     type: 'Taking Blessings',
     images: [
-      '/public/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan4.jpg',
-      '/public/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan1.jpg',
-      '/public/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan3.jpg',
+      '/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan4.jpg',
+      '/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan1.jpg',
+      '/images/Events/vihasant-bhawan/05-05-2026-Vihasant-Bhawan3.jpg',
     ],
     excerpt:
       'A panel discussion exploring how design and planning need to evolve for fast-growing tier-2 cities.',
