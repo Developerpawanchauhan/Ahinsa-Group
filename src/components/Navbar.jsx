@@ -37,7 +37,7 @@ const NAV_LINKS = [
       { to: '/brochure', label: 'Brochure', meta: 'Project brochures & visual gallery' },
       //media section page
       { to: '/media/awards', label: 'Award Recognition', meta: 'Recognition & honours' },
-      //events section page
+      { to: '/media/events', label: 'Events', meta: 'Launches, openings & meetups' },
     ],
   },
   { to: '/contact', label: 'Contact' },
