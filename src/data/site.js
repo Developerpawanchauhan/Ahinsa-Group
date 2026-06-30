@@ -854,7 +854,7 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Pawan Chauhan',
-    role: 'Social Media Maanger',
+    role: 'Social Media Manager',
     department: 'Digital',
     image:
       '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
