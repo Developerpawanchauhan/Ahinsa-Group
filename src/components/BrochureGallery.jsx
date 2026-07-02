@@ -20,14 +20,14 @@ const BROCHURE_PROJECTS = [
   {
     id: 'township',
     label: 'Ahinsa Green Valley Township',
-    shortLabel: 'GV Township',
+    shortLabel: 'Green Valley Township',
     folder: 'ahinsa-green-valley',
     images: range(25),
   },
   {
     id: 'empire',
     label: 'Ahinsa Green Valley Empire',
-    shortLabel: 'GV Empire',
+    shortLabel: 'Green Valley Empire',
     folder: 'ahinsa-empire',
     images: range(36),
   },
