@@ -49,7 +49,7 @@ export const HERO_SLIDES = [
     subtitle: 'Premium homes thoughtfully designed for discerning families.',
   },
   {
-    image: '/images/home/hero/slide-3.jpg',
+    image: '/images/home/hero/slide-3.png',
     eyebrow: 'Commercial Excellence',
     title: 'Spaces that elevate\nbusiness ambitions',
     subtitle: 'Workspaces and retail destinations engineered for tomorrow.',
