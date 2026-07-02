@@ -49,12 +49,17 @@ const BROCHURE_PROJECTS = [
 
 // ─── Component ──────────────────────────────────────────────────────────────
 
-export default function BrochureGallery({ defaultId = 'grand' }) {
+export default function BrochureGallery({ defaultId = 'grand', single = false }) {
   const [activeId, setActiveId]       = useState(defaultId)
   const [lightboxIdx, setLightboxIdx] = useState(null)
   const trackRef                      = useRef(null)
 
   const project = BROCHURE_PROJECTS.find(p => p.id === activeId)
+
+  // In single mode we only ever show the project this page belongs to —
+  // if there's no matching brochure, render nothing rather than crash.
+  if (!project) return null
+
   const imgSrc  = (file) => `/images/brochure/${project.folder}/${file}`
 
   // Carousel scroll
@@ -108,28 +113,34 @@ export default function BrochureGallery({ defaultId = 'grand' }) {
             center
             eyebrow="Project Brochures"
             title={<>Browse our <span className="gold-text">project galleries</span></>}
-            subtitle="Select a project to explore its full brochure — layouts, amenities and master plan in one place."
+            subtitle={
+              single
+                ? 'Explore the full brochure — layouts, amenities and master plan in one place.'
+                : 'Select a project to explore its full brochure — layouts, amenities and master plan in one place.'
+            }
           />
         </div>
 
-        {/* ── Project selector tabs ── */}
-        <Reveal>
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {BROCHURE_PROJECTS.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => switchProject(p.id)}
-                className={`px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300 border ${
-                  activeId === p.id
-                    ? 'bg-ink-900 text-gold-400 border-gold-500 shadow-lg shadow-gold-500/10'
-                    : 'bg-transparent text-fg-muted border-soft hover:border-gold-500/60 hover:text-gold-500'
-                }`}
-              >
-                {p.shortLabel}
-              </button>
-            ))}
-          </div>
-        </Reveal>
+        {/* ── Project selector tabs (hidden in single-project mode) ── */}
+        {!single && (
+          <Reveal>
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {BROCHURE_PROJECTS.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => switchProject(p.id)}
+                  className={`px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300 border ${
+                    activeId === p.id
+                      ? 'bg-ink-900 text-gold-400 border-gold-500 shadow-lg shadow-gold-500/10'
+                      : 'bg-transparent text-fg-muted border-soft hover:border-gold-500/60 hover:text-gold-500'
+                  }`}
+                >
+                  {p.shortLabel}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+        )}
 
         {/* ── Active project label + count ── */}
         <Reveal delay={0.05}>
