@@ -154,6 +154,22 @@ html.dark ::-webkit-scrollbar-track {
   }
 }
 
+/* Navbar dropdown / mega-menu panel — solid, readable surface above page content */
+.nav-dropdown-panel {
+  position: relative;
+  z-index: 60;
+  background-color: rgba(247, 242, 231, 0.50);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+.dark .nav-dropdown-panel {
+  background-color: rgba(10, 10, 10, 0.50);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
 /* Swiper customizations */
 .swiper-pagination-bullet {
   background: rgba(11, 11, 8, 0.35) !important;
