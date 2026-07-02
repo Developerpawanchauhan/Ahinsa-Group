@@ -113,27 +113,27 @@ function DesktopDropdown({ link, onOpen, onClose }) {
 
       {/* DROPDOWN */}
       <div
-        className={`absolute ${
-          isMega ? 'left-1/2 -translate-x-1/2' : 'left-0'
-        } top-full pt-5 transition-all duration-300 ${
-          open
-            ? 'opacity-100 visible translate-y-0'
-            : 'opacity-0 invisible -translate-y-2 pointer-events-none'
-        }`}
+        className={`absolute z-[60] ${isMega ? 'left-1/2' : 'left-0'} top-full pt-5`}
       >
         {isMega ? (
-          <MegaPanel link={link} />
+          <MegaPanel link={link} open={open} />
         ) : (
-          <SimplePanel link={link} />
+          <SimplePanel link={link} open={open} />
         )}
       </div>
     </div>
   )
 }
 
-function MegaPanel({ link }) {
+function MegaPanel({ link, open }) {
   return (
-    <div className="w-[680px] bg-cream/98 dark:bg-ink-900/98 backdrop-blur-xl border border-gold-500/25 dark:border-gold-500/20 shadow-2xl">
+    <div
+      className={`nav-dropdown-panel w-[680px] ml-[-340px] transition-opacity duration-300 ${
+        open
+          ? 'opacity-100 visible'
+          : 'opacity-0 invisible pointer-events-none'
+      }`}
+    >
       <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
       <div className="p-6">
         <div className="flex items-center justify-between mb-5">
@@ -182,9 +182,15 @@ function MegaPanel({ link }) {
   )
 }
 
-function SimplePanel({ link }) {
+function SimplePanel({ link, open }) {
   return (
-    <div className="w-[320px] bg-cream/98 dark:bg-ink-900/98 backdrop-blur-xl border border-gold-500/25 dark:border-gold-500/20 shadow-2xl">
+    <div
+      className={`nav-dropdown-panel w-[320px] transition-opacity duration-300 ${
+        open
+          ? 'opacity-100 visible'
+          : 'opacity-0 invisible pointer-events-none'
+      }`}
+    >
       <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
       <div className="py-3">
         {link.children.map((child) => (
@@ -331,12 +337,21 @@ export default function Navbar() {
 
       <header
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled || menuOpen
-            ? 'top-0 bg-cream/95 dark:bg-ink-900/95 backdrop-blur-md border-b border-gold-500/15 h-16'
-            : 'top-0 md:top-9 bg-transparent h-20'
+          scrolled || menuOpen ? 'top-0 h-16' : 'top-0 md:top-9 h-20'
         }`}
       >
-        <div className="container-x flex items-center justify-between h-full">
+        {/* Frosted navbar background — kept as its own layer (not on <header>)
+            so it doesn't become a backdrop-root that would disable the
+            dropdown's own backdrop blur. */}
+        <div
+          className={`absolute inset-0 transition-all duration-500 ${
+            scrolled || menuOpen
+              ? 'bg-cream/70 dark:bg-ink-900/70 backdrop-blur-lg border-b border-gold-500/15'
+              : 'bg-transparent'
+          }`}
+        />
+
+        <div className="container-x relative z-10 flex items-center justify-between h-full">
           <Link to="/" className="flex-shrink-0">
             <Logo size={scrolled ? 'md' : 'lg'} />
           </Link>
@@ -389,7 +404,7 @@ export default function Navbar() {
         </div>
 
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-500 ${
+          className={`lg:hidden relative z-10 overflow-hidden transition-all duration-500 ${
             open ? 'max-h-[1400px] mt-4' : 'max-h-0'
           }`}
         >
