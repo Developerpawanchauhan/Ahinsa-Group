@@ -51,8 +51,15 @@ function sendOtp(data) {
       payload: { route: 'otp', variables_values: otp, numbers: phone },
       muteHttpExceptions: true,
     })
-    if (res.getResponseCode() !== 200) {
-      return { ok: false, error: 'Could not send SMS — please try again.' }
+    var parsed = null
+    try { parsed = JSON.parse(res.getContentText()) } catch (err) {}
+    // Fast2SMS returns { return: true, ... } on success; anything else is a
+    // failure — surface their message so the real cause is visible on-site.
+    if (!parsed || parsed.return !== true) {
+      var reason = parsed && parsed.message
+        ? (Array.isArray(parsed.message) ? parsed.message.join(' ') : String(parsed.message))
+        : 'Unknown SMS gateway error'
+      return { ok: false, error: 'SMS failed: ' + reason }
     }
     return { ok: true }
   }
