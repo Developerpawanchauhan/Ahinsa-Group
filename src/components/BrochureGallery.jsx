@@ -9,11 +9,11 @@ function range(n) {
   return Array.from({ length: n }, (_, i) => `${i + 1}.png`)
 }
 
-const BROCHURE_PROJECTS = [
+export const BROCHURE_PROJECTS = [
   {
     id: 'grand',
     label: 'Ahinsa The Grand Green Valley',
-    shortLabel: 'Grand Green Valley',
+    shortLabel: 'The Grand Green Valley',
     folder: 'ahinsa-the grand',
     images: range(42),
   },
