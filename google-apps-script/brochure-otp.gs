@@ -17,7 +17,7 @@
 // Fast2SMS (https://www.fast2sms.com) API key for real SMS delivery.
 // Leave '' while testing — the OTP is then returned to the site and
 // shown on screen instead of being sent by SMS.
-var FAST2SMS_KEY = ''
+var FAST2SMS_KEY = 'JUKZpYPqmitN1zGehExIMR0uQy9TW2f3Dkd4FoarLglwCV7c6SSxZp5IwNeXbvrhu3QGAmn8fd0KPM14'
 
 var OTP_TTL_SECONDS = 300 // OTP validity: 5 minutes
 // ──────────────────────────────────────────────────────────────────────────
