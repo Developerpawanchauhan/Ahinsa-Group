@@ -16,6 +16,16 @@
 // =============================================================
 export const WEB3FORMS_KEY = '0ffd5aef-9d9a-4efe-8ee5-7a1838acd016'
 
+// =============================================================
+// BROCHURE DOWNLOAD — SMS OTP endpoint
+// Lead details are emailed to info@ahinsagroup.in via Web3Forms
+// (key above). This endpoint is ONLY for sending/verifying the
+// OTP by SMS: deploy  google-apps-script/brochure-otp.gs  as a
+// Web App (see google-apps-script/SETUP.md) and paste its /exec
+// URL here. While '', the popup shows the OTP on screen (demo).
+// =============================================================
+export const BROCHURE_LEADS_ENDPOINT = ''
+
 export const COMPANY = {
   name: 'Ahinsa Group',
   city: 'Agra',
