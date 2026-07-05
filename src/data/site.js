@@ -14,7 +14,7 @@
 //   3. Check your inbox and verify the email
 //   4. Copy the access key and paste it below (replacing the current value)
 // =============================================================
-export const WEB3FORMS_KEY = '0ffd5aef-9d9a-4efe-8ee5-7a1838acd016'
+export const WEB3FORMS_KEY = '90107475-46e6-485e-9d9d-33ec56c8d376'
 
 // =============================================================
 // BROCHURE DOWNLOAD — SMS OTP endpoint
@@ -24,7 +24,7 @@ export const WEB3FORMS_KEY = '0ffd5aef-9d9a-4efe-8ee5-7a1838acd016'
 // Web App (see google-apps-script/SETUP.md) and paste its /exec
 // URL here. While '', the popup shows the OTP on screen (demo).
 // =============================================================
-export const BROCHURE_LEADS_ENDPOINT = ''
+export const BROCHURE_LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxEOeOzvH0aZL4ZplPJ5dSNPp7MJyyiJEA4zbwrxd3Zl87g75RDoYsAQhZN02laz4pN/exec'
 
 export const COMPANY = {
   name: 'Ahinsa Group',
