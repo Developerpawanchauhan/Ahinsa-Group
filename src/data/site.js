@@ -116,7 +116,7 @@ export const PROJECTS = [
     location: 'Agra',
     type: 'Head Office',
     status: 'Completed',
-    image: '/images/projects/ahinsa-complex/card.jpg',
+    image: '/images/projects/ahinsa-complex/office3.jpeg',
     short:
       'A landmark commercial complex blending retail, offices and services under one address.',
   },
@@ -591,7 +591,7 @@ export const PROJECT_DETAILS = {
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
     gallery: [
-      '/images/projects/ahinsa-complex/card.jpg',
+      '/images/projects/ahinsa-complex/office1.jpeg',
       '/images/projects/ahinsa-complex/office1.jpeg',
       '/images/projects/ahinsa-complex/office2.jpeg',
       '/images/projects/ahinsa-complex/office3.jpeg',
