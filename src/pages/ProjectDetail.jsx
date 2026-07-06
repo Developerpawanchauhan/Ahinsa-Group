@@ -31,11 +31,12 @@ export default function ProjectDetail() {
   const project = PROJECT_DETAILS[slug]
 
   // Map project slug → brochure tab id
+  // Only slugs that actually have a matching brochure appear here — each
+  // project page shows its own brochure only (no orchid brochure exists).
   const SLUG_TO_BROCHURE = {
     'grand-green-valley':     'grand',
     'green-valley-empire':    'empire',
     'green-valley-township':  'township',
-    'green-valley-orchid':    'orchid',
     'ahinsa-mall-firozabad':  'firozabad',
   }
   const brochureId = SLUG_TO_BROCHURE[slug]
@@ -252,8 +253,8 @@ export default function ProjectDetail() {
         </section>
       )}
 
-      {/* BROCHURE GALLERY */}
-      {brochureId && <BrochureGallery defaultId={brochureId} />}
+      {/* BROCHURE GALLERY — only this project's own brochure */}
+      {brochureId && <BrochureGallery defaultId={brochureId} single />}
 
       {/* LOCATION ADVANTAGES */}
       <section className="section-pad bg-page">
