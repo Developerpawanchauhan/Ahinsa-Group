@@ -116,7 +116,7 @@ export const PROJECTS = [
     location: 'Agra',
     type: 'Head Office',
     status: 'Completed',
-    image: '/images/projects/ahinsa-complex/office3.jpeg',
+    image: '/images/projects/ahinsa-complex/office1.jpeg',
     short:
       'A landmark commercial complex blending retail, offices and services under one address.',
   },
