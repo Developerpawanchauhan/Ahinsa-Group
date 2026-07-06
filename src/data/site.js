@@ -506,11 +506,11 @@ export const PROJECT_DETAILS = {
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
     gallery: [
       '/images/projects/ahinsa-complex/card.jpg',
-      '/images/projects/ahinsa-complex/office1.jpeg',
-      '/images/projects/ahinsa-complex/office2.jpeg',
-      '/images/projects/ahinsa-complex/office3.jpeg',
-      '/images/projects/ahinsa-complex/office4.jpeg',
-      '/images/projects/ahinsa-complex/office5.jpeg',
+      '/images/projects/ahinsa-complex/office6.jpeg',
+      '/images/projects/ahinsa-complex/office8.jpeg',
+      '/images/projects/ahinsa-complex/office9.jpeg',
+      '/images/projects/ahinsa-complex/office10.jpeg',
+      '/images/projects/ahinsa-complex/office11.jpeg',
     ],
     overview: [
       'Ahinsa Complex is one of our most established commercial addresses \u2014 a fully ready, fully active mixed-use destination home to brands, professional services and a steady footfall of regular visitors.',
@@ -591,7 +591,7 @@ export const PROJECT_DETAILS = {
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
     gallery: [
-      '/images/projects/ahinsa-complex/office1.jpeg',
+      '/images/projects/ahinsa-complex/office12.jpeg',
       '/images/projects/ahinsa-complex/office1.jpeg',
       '/images/projects/ahinsa-complex/office2.jpeg',
       '/images/projects/ahinsa-complex/office3.jpeg',
