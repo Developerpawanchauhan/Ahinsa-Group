@@ -16,16 +16,16 @@ export default function Brochure() {
         image="/images/home/hero/silde-1.jpg"
       />
 
-      {/* Download CTA */}
-      <section className="bg-page-alt pt-16 -mb-10 md:-mb-14">
+      <BrochureGallery />
+
+      {/* Download CTA — below the brochure gallery */}
+      <section className="bg-page-alt pb-16 -mt-10 md:-mt-14">
         <div className="container-x flex justify-center">
           <button onClick={() => setDownloadOpen(true)} className="btn-gold">
             <Download className="w-4 h-4" /> Download Brochure
           </button>
         </div>
       </section>
-
-      <BrochureGallery />
 
       <BrochureDownloadModal
         open={downloadOpen}
