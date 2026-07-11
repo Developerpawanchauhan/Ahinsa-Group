@@ -1,7 +1,7 @@
 // Floating WhatsApp chat-support button — sticky at the bottom-right on
 // every page. Tapping it opens a WhatsApp chat with the support number.
 
-const WHATSAPP_NUMBER = '919808188568' // +91 98081 88568 (intl format, no +/spaces)
+const WHATSAPP_NUMBER = '916398730582' // +91 98081 88568 (intl format, no +/spaces)
 const WHATSAPP_MESSAGE = 'Hello Ahinsa Group, I would like to know more about your projects.'
 
 export default function WhatsAppButton() {
