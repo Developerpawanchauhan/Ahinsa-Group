@@ -112,16 +112,16 @@ export default function Home() {
             <div className="relative">
               <div className="img-zoom aspect-[4/5] overflow-hidden">
                 <img
-                  src="/images/home/about/AhinsaComplex.jpg"
-                  alt="Ahinsa Group flagship project"
+                  src="/images/home/about/Office.jpg"
+                  alt="Ahinsa Group office"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-8 -right-8 w-48 h-48 hidden md:block">
                 <div className="img-zoom aspect-square overflow-hidden border-8 border-cream dark:border-ink-900">
                   <img
-                    src="/images/home/about/Office.jpg"
-                    alt=""
+                    src="/images/home/about/AhinsaComplex.jpg"
+                    alt="Ahinsa Complex"
                     className="w-full h-full object-cover"
                   />
                 </div>

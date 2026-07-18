@@ -3,6 +3,7 @@ import { ArrowRight, Eye, Target, Sparkles, Leaf, Mail } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
+import CountUp from '../components/CountUp'
 import { COMPANY, STATS, MANAGEMENT, MILESTONES } from '../data/site'
 
 export default function About() {
@@ -79,7 +80,9 @@ export default function About() {
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.1}>
               <div className="text-center">
-                <div className="font-serif text-5xl md:text-6xl gold-text">{s.value}</div>
+                <div className="font-serif text-5xl md:text-6xl gold-text">
+                  <CountUp value={s.value} />
+                </div>
                 <div className="text-fg-muted mt-3 text-sm uppercase tracking-[0.2em]">{s.label}</div>
               </div>
             </Reveal>
