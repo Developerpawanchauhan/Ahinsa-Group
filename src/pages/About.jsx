@@ -12,8 +12,10 @@ export default function About() {
     <>
       <div className="about-page-hero">
         <style>{`
+          /* Frame the crop on the face band of the group photo (faces sit in the
+             upper-middle of the image; 'bottom' cropped the heads off). */
           .about-page-hero .hero-img {
-            object-position: bottom !important;
+            object-position: 50% 35% !important;
           }
         `}</style>
         <PageHero

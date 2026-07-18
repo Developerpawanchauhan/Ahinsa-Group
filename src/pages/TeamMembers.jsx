@@ -20,12 +20,21 @@ export default function TeamMembers() {
 
   return (
     <>
-      <PageHero
-        title="Team"
-        subtitle="The operating leadership across every function that powers Ahinsa Group."
-        breadcrumb="About / Team"
-        image="/images/emploi/team.jpg?w=1920&q=85&auto=format&fit=crop"
-      />
+      <div className="team-page-hero">
+        <style>{`
+          /* Faces sit in the top half of this photo (one member standing near
+             the top edge) — bias the crop upward so no one's head is cut. */
+          .team-page-hero .hero-img {
+            object-position: 50% 20% !important;
+          }
+        `}</style>
+        <PageHero
+          title="Team"
+          subtitle="The operating leadership across every function that powers Ahinsa Group."
+          breadcrumb="About / Team"
+          image="/images/emploi/team.jpg?w=1920&q=85&auto=format&fit=crop"
+        />
+      </div>
 
       <section className="section-pad bg-page">
         <div className="container-x text-center max-w-3xl mx-auto mb-14">
