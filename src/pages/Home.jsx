@@ -203,7 +203,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {PROJECTS.slice(0, 6).map((p, i) => (
+            {PROJECTS.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08}>
                 <ProjectCard project={p} />
               </Reveal>
