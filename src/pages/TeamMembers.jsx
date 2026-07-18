@@ -77,7 +77,7 @@ export default function TeamMembers() {
                     <img
                       src={m.image}
                       alt={m.name}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                      className="w-full h-full object-cover transition duration-700"
                     />
                   </div>
                   <div className="pt-5">

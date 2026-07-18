@@ -1130,6 +1130,14 @@ export const MANAGEMENT = [
 // =============================================================
 export const TEAM_MEMBERS = [
   {
+    name: 'Mr. Akash Bansal',
+    role: 'Legal and Professional Conssultant',
+    department: 'Legal',
+    image:
+      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
+  },
+  {
     name: 'Mr. Munna Chaudhary',
     role: 'Coordinator',
     department: 'Administration',
@@ -1146,9 +1154,17 @@ export const TEAM_MEMBERS = [
     bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
   },
   {
+    name: 'Mr. Himanshu Saxena',
+    role: 'Head, Senior Accountant',
+    department: 'Accounts',
+    image:
+      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
+  },
+  {
     name: 'Mr. Pawan Chauhan',
     role: 'Social Media Manager',
-    department: 'Digital',
+    department: 'IT & Digital',
     image:
       '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
@@ -1160,22 +1176,6 @@ export const TEAM_MEMBERS = [
     image:
       '/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Manages procurement and vendor relationships — ensures timely sourcing of materials, cost control and smooth supplier coordination.',
-  },
-  {
-    name: 'Mr. Akash Bansal',
-    role: 'Legal and Professional Conssultant',
-    department: 'Legal',
-    image:
-      '/images/emploi/akash-bansal.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Handles all legal matters and professional advisory — manages contracts, documentation and provides regulatory guidance to the group.',
-  },
-  {
-    name: 'Mr. Himanshu Saxena',
-    role: 'Head, Senior Accountant',
-    department: 'Accounts',
-    image:
-      '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
   },
   {
     name: 'Mr. Anupam Chittoriya',

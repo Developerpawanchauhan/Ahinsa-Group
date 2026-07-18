@@ -166,7 +166,7 @@ export default function About() {
               <Reveal key={m.name} delay={i * 0.1}>
                 <div className="group">
                   <div className="img-zoom aspect-[4/5] overflow-hidden">
-                    <img src={m.image} alt={m.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700" />
+                    <img src={m.image} alt={m.name} className="w-full h-full object-cover transition duration-700" />
                   </div>
                   <div className="pt-5">
                     <h3 className="font-serif text-xl text-fg">{m.name}</h3>
