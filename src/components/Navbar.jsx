@@ -111,9 +111,13 @@ function DesktopDropdown({ link, onOpen, onClose }) {
         />
       </Link>
 
-      {/* DROPDOWN */}
+      {/* DROPDOWN — pointer-events-none while closed, so the invisible panel
+          area below the navbar can't open the menu or swallow clicks; it only
+          becomes hoverable once the trigger link has opened it. */}
       <div
-        className={`absolute z-[60] ${isMega ? 'left-1/2' : 'left-0'} top-full pt-5`}
+        className={`absolute z-[60] ${isMega ? 'left-1/2' : 'left-0'} top-full pt-5 ${
+          open ? '' : 'pointer-events-none'
+        }`}
       >
         {isMega ? (
           <MegaPanel link={link} open={open} />
