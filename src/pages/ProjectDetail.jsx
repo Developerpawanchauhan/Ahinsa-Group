@@ -12,6 +12,7 @@ import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import BrochureGallery from '../components/BrochureGallery'
+import AutoSlideImage from '../components/AutoSlideImage'
 import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY } from '../data/site'
 
 const ICON_MAP = {
@@ -47,6 +48,12 @@ export default function ProjectDetail() {
 
   // related projects (everything except current)
   const related = PROJECTS.filter((p) => p.slug !== slug).slice(0, 3)
+
+  // Overview image auto-slide: this project's own overview + gallery shots,
+  // deduplicated, so it only ever cycles through images of THIS project.
+  const overviewImages = [project.overviewImage, ...(project.gallery || [])].filter(
+    (src, i, arr) => src && arr.indexOf(src) === i
+  )
 
   return (
     <>
@@ -119,7 +126,7 @@ export default function ProjectDetail() {
           <Reveal>
             <div className="relative">
               <div className="img-zoom aspect-[4/5] overflow-hidden">
-                <img src={project.overviewImage} alt={project.name} className="w-full h-full object-cover" />
+                <AutoSlideImage images={overviewImages} alt={project.name} className="w-full h-full object-cover" />
               </div>
               <div className="absolute -top-6 -left-6 hidden md:flex flex-col items-center justify-center w-28 h-28 bg-gold-500 text-ink-900">
                 <span className="font-serif text-2xl font-bold leading-none">{project.status}</span>

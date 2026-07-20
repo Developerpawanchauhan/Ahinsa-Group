@@ -96,7 +96,7 @@ export const PROJECTS = [
     location: 'Agra',
     type: 'Residential Plots',
     status: 'Ongoing',
-    image: '/images/projects/green-valley-orchid/card.png',
+    image: '/images/projects/green-valley-orchid/card.jpg',
     short:
       'A premium business park with Grade A workspaces, retail edge and modern amenities.',
   },
@@ -133,10 +133,10 @@ export const PROJECTS = [
   {
     slug: 'green-valley-lake-city',
     name: 'Ahinsa Green Valley Lake City',
-    location: 'Gwalior',
+    location: 'Fatehabad Road, Kundol, Agra',
     type: 'Luxury Township',
     status: 'Upcoming',
-    image: '/images/projects/green-valley-lake-city/lake-city.png',
+    image: '/images/projects/green-valley-lake-city/lake-city.jpg',
     short:
       'Signature residences with resort-style amenities, set in a lush green community along Fatehabad Road.',
   },
@@ -252,8 +252,8 @@ export const PROJECT_DETAILS = {
   'green-valley-lake-city': {
     name: 'Ahinsa Green Valley Lake City',
     tagline: 'Where everyday living meets resort-style luxury.',
-    location: 'Gwalior',
-    fullAddress: 'Gwalior',
+    location: 'Fatehabad Road, Kundol, Agra',
+    fullAddress: 'Fatehabad Road, Agra',
     type: 'Luxury Township',
     status: 'Upcoming',
     configurations: 'Residential & Commercial Plots · Grand Villas · Farm House',
@@ -262,9 +262,9 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
-    hero: '/images/projects/green-valley-lake-city/lake-city.png',
+    hero: '/images/projects/green-valley-lake-city/lake-city.jpg',
     overviewImage:
-      '/images/projects/grand-green-valley/fountain.jpg',
+      '/images/projects/green-valley-lake-city/lake-city.jpg',
     gallery: [
       // '/images/projects/grand-green-valley/boundary-wall.jpg',
       // '/images/projects/grand-green-valley/club-house (1).jpg',
@@ -536,8 +536,8 @@ export const PROJECT_DETAILS = {
     priceRange: 'On Request',
   
     mapEmbed: 'https://www.google.com/maps?q=27.2322074,78.17292&output=embed',
-    hero: '/images/projects/green-valley-orchid/card.png',
-    overviewImage: '/images/projects/green-valley-orchid/card.png',
+    hero: '/images/projects/green-valley-orchid/card.jpg',
+    overviewImage: '/images/projects/green-valley-orchid/card.jpg',
     gallery: [],
     overview: [
       'Ahinsa Green Valley Orchid is a premier commercial and industrial development strategically positioned to support the evolving needs of modern businesses. The project offers a unique opportunity for entrepreneurs, investors, manufacturers, and commercial enterprises to establish a strong presence in one of Agra\'s emerging growth zones.',,
