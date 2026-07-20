@@ -7,7 +7,7 @@ import CountUp from '../components/CountUp'
 import { COMPANY, STATS, MANAGEMENT, MILESTONES } from '../data/site'
 
 export default function About() {
-  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in'];
+  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in', 'jitendra.yadav@ahinsagroup.in'];
 
   return (
     <>
@@ -161,21 +161,27 @@ export default function About() {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-            {MANAGEMENT.slice(0, 2).map((m, i) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {MANAGEMENT.slice(0, 3).map((m, i) => (
               <Reveal key={m.name} delay={i * 0.1}>
                 <div className="group">
-                  <div className="img-zoom aspect-[4/5] overflow-hidden">
-                    <img src={m.image} alt={m.name} className="w-full h-full object-cover transition duration-700" />
-                  </div>
+                  <Link to={`/about/management#${m.slug}`}>
+                    <div className="img-zoom aspect-[4/5] overflow-hidden">
+                      <img src={m.image} alt={m.name} className="w-full h-full object-cover transition duration-700" />
+                    </div>
+                  </Link>
                   <div className="pt-5">
-                    <h3 className="font-serif text-xl text-fg">{m.name}</h3>
+                    <Link to={`/about/management#${m.slug}`}>
+                      <h3 className="font-serif text-xl text-fg hover:text-gold-700 dark:hover:text-gold-500 transition">{m.name}</h3>
+                    </Link>
                     <p className="text-gold-700 dark:text-gold-500 text-xs uppercase tracking-[0.2em] mt-1">{m.role}</p>
                     <p className="text-fg-soft text-sm leading-relaxed mt-3">{m.short}</p>
-                    <a href={`mailto:${ownerEmails[i]}`} className="inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-sm mt-4 hover:underline">
-                      <Mail className="w-4 h-4" />
-                      {ownerEmails[i]}
-                    </a>
+                    {ownerEmails[i] && (
+                      <a href={`mailto:${ownerEmails[i]}`} className="inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-sm mt-4 hover:underline">
+                        <Mail className="w-4 h-4" />
+                        {ownerEmails[i]}
+                      </a>
+                    )}
                   </div>
                 </div>
               </Reveal>

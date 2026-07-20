@@ -20,10 +20,13 @@ import Terms from './pages/Terms'
 import Sitemap from './pages/Sitemap'
 
 function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   useEffect(() => {
+    // Leave a target-page anchor (e.g. /about/management#rohit-jain) alone —
+    // that page's own hash-scroll effect handles positioning.
+    if (hash) return
     window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [pathname])
+  }, [pathname, hash])
   return null
 }
 

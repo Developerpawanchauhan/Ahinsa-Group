@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, Quote, CheckCircle2, Mail } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
@@ -6,7 +7,16 @@ import Reveal from '../components/Reveal'
 import { MANAGEMENT } from '../data/site'
 
 export default function Management() {
-  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in'];
+  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in', 'jitendra.yadav@ahinsagroup.in'];
+  const { hash } = useLocation()
+
+  // Deep-link support: /about/management#<slug> scrolls to that member's
+  // profile (used by the About Us page cards).
+  useEffect(() => {
+    if (!hash) return
+    const el = document.querySelector(hash)
+    if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }, [hash])
 
   return (
     <>
@@ -42,7 +52,8 @@ export default function Management() {
           {MANAGEMENT.map((m, i) => (
             <Reveal key={m.name} delay={(i % 2) * 0.05}>
               <div
-                className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-center ${
+                id={m.slug}
+                className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-center scroll-mt-24 md:scroll-mt-36 ${
                   i % 2 ? 'lg:[&>*:first-child]:order-2' : ''
                 }`}
               >
