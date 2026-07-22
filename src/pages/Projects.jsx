@@ -21,7 +21,7 @@ export default function Projects() {
         title="Our Projects"
         subtitle="Iconic developments shaping the skyline of Agra."
         breadcrumb="Our Projects"
-        image="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1920&q=85&auto=format&fit=crop"
+        images={PROJECTS.slice(0, 4).map((p) => p.image)}
       />
 
       {/* Filter bar */}

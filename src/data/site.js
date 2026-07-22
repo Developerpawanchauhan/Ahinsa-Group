@@ -349,6 +349,20 @@ export const PROJECT_DETAILS = {
     tagline: 'A modern address for those who lead with confidence.',
     location: 'Agra',
     fullAddress: 'Mudi Crossing, Agra',
+    // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
+    // Embeds can't start a carousel at slide 3 (img_index is ignored), so the
+    // third card shows the slide-3 image locally and links to the post at it.
+    instagram: {
+      handle: 'ahinsagroupagra',
+      posts: [
+        'https://www.instagram.com/p/DYwanblk25d/',
+        'https://www.instagram.com/p/DUYD-4rEwTL/',
+        {
+          image: '/images/instagram/DYwanblk25d-3.webp',
+          url: 'https://www.instagram.com/p/DYwanblk25d/?img_index=3',
+        },
+      ],
+    },
     type: 'Luxury Township',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots · Farm House',
@@ -444,6 +458,25 @@ export const PROJECT_DETAILS = {
     tagline: 'A flagship gated community where Agra learnt to live larger.',
     location: 'Agra',
     fullAddress: 'Kuberpur, Agra',
+    // Project-specific Instagram cards: exact carousel slides (embeds always
+    // open at slide 1, so these are local images linking to the right slide).
+    instagram: {
+      handle: 'ahinsagroupagra',
+      posts: [
+        {
+          image: '/images/instagram/DZ1MgM_Eywx-2.webp',
+          url: 'https://www.instagram.com/p/DZ1MgM_Eywx/?img_index=2',
+        },
+        {
+          image: '/images/instagram/DUYD-4rEwTL-3.webp',
+          url: 'https://www.instagram.com/p/DUYD-4rEwTL/?img_index=3',
+        },
+        {
+          image: '/images/instagram/DSKBRbVkyrV-4.webp',
+          url: 'https://www.instagram.com/p/DSKBRbVkyrV/?img_index=4',
+        },
+      ],
+    },
     type: 'Luxury Township',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots',
@@ -976,38 +1009,70 @@ export const FEATURES = [
   },
 ]
 
+// Official Instagram embeds shown on every project page after the brochure
+// section (image posts only, in this exact order). A project can override
+// this by defining its own `instagram: { handle, posts }` in PROJECT_DETAILS.
+export const INSTAGRAM = {
+  handle: 'ahinsagroupagra',
+  posts: [
+    'https://www.instagram.com/p/DYO4MgAzapX/',
+    'https://www.instagram.com/p/DZ1MgM_Eywx/',
+    'https://www.instagram.com/p/DYrQZ6tE-zE/',
+  ],
+}
+
+// Real Google Business Profile reviews, transcribed verbatim. Cards render a
+// gold monogram avatar unless an `image` field is provided (paste the
+// reviewer's Google photo URL to show their real picture).
 export const TESTIMONIALS = [
   {
-    name: 'Rohit Agarwal',
-    role: 'Resident, The Grand Green Valley',
-    image:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=240&q=85&auto=format&fit=crop',
+    name: 'Pranjal',
+    role: 'Google Review',
+    rating: 5,
     quote:
-      'Moving into an Ahinsa home meant moving into a lifestyle. The attention to detail in every corner reflects true craftsmanship.',
+      'Bahut acha project hai location aur planning dono pasand aayi staff ne har cheez clearly explain ki aur booking process bahut smooth rha',
   },
   {
-    name: 'Priya Sharma',
-    role: 'Owner, Green Valley Empire',
-    image:
-      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=240&q=85&auto=format&fit=crop',
+    name: 'Santosh Sharma',
+    role: 'Google Review',
+    rating: 5,
     quote:
-      'The home exceeded every expectation. The team was transparent, responsive and genuinely committed to delivering excellence.',
+      'I recently bought a plot here and had a really good experience. The team was supportive, explained everything clearly, and the paperwork was completed without any hassle. The location is also good. Happy with my purchase.',
   },
   {
-    name: 'Arjun Mehra',
-    role: 'Tenant, Green Valley Orchid',
-    image:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=240&q=85&auto=format&fit=crop',
+    name: 'pramod yadav',
+    role: 'Google Review',
+    rating: 5,
     quote:
-      'A workspace that inspires our team every day. Modern, well-managed and truly Grade A in every sense.',
+      'This is a wonderful project. The location is excellent, the team is professional, and the entire process was transparent. This is an excellent option for future investment. I definitely recommend this project.',
   },
   {
-    name: 'Sneha Kapoor',
-    role: 'Resident, Green Valley Township',
-    image:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=240&q=85&auto=format&fit=crop',
+    name: 'Pawan Chauhan',
+    role: 'Google Review',
+    rating: 5,
     quote:
-      'Our family found more than a home, we found a community. Ahinsa truly delivers what they promise.',
+      'Great experience buying a plot. The staff was helpful, and the process was smooth. Highly recommended!',
+  },
+  {
+    name: 'Rahul Sharma',
+    role: 'Google Review',
+    rating: 5,
+    quote:
+      'This Township positive aspects including good connectivity, availability of schools and hospitals, well-maintained parks.\nJust 10 km far from Saura Hotel Agra.',
+  },
+  {
+    name: 'Riya Gupta',
+    role: 'Google Review',
+    rating: 5,
+    quote:
+      'The location of the project is very good and future appreciation is very good.',
+  },
+  {
+    name: 'Dev tech video',
+    role: 'Google Review',
+    rating: 5,
+    quote:
+      '1. The best property is one that provides passive income and doesn’t sit idle.\n2. Location is king – even a small property in a good location can yield significant returns.\n3. Land is something that never depletes; it only becomes more valuable over time.\n4. Your real wealth is your health and skills – no one can steal them.\n5. The best property is one that reduces your stress after purchasing, not increases it.',
   },
 ]
 

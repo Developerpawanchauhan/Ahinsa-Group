@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Facebook, Instagram, Linkedin, Twitter, Youtube, MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, Twitter, Youtube, MapPin, Phone, Mail } from 'lucide-react'
 import Logo from './Logo'
 
 export default function Footer() {
@@ -7,35 +7,6 @@ export default function Footer() {
     <footer className="bg-ink-900 text-ink-200 border-t border-gold-500/15 relative overflow-hidden">
       {/* decorative gold gradient line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
-
-      {/* Newsletter */}
-      <div className="container-x py-14 border-b border-gold-500/10">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 className="font-serif text-3xl md:text-4xl text-cream">
-              Stay informed about our <span className="gold-text">latest launches</span>
-            </h3>
-            <p className="text-ink-300 mt-3 max-w-md">
-              Subscribe to receive exclusive news, project announcements and curated insights from Ahinsa Group.
-            </p>
-          </div>
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col sm:flex-row gap-3"
-          >
-            <input
-              type="email"
-              required
-              placeholder="Enter your email address"
-              className="flex-1 bg-ink-800/60 border border-gold-500/20 px-5 py-4 text-cream placeholder:text-ink-400
-                         focus:outline-none focus:border-gold-500 transition"
-            />
-            <button type="submit" className="btn-gold justify-center whitespace-nowrap">
-              Subscribe <ArrowRight className="w-4 h-4" />
-            </button>
-          </form>
-        </div>
-      </div>
 
       {/* Main footer */}
       <div className="container-x py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">

@@ -14,7 +14,8 @@ import Reveal from '../components/Reveal'
 import BrochureGallery from '../components/BrochureGallery'
 import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
-import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY } from '../data/site'
+import InstagramFeed from '../components/InstagramFeed'
+import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM } from '../data/site'
 
 const ICON_MAP = {
   ArrowRight, MapPin, Building2, Calendar, Ruler, Layers, ShieldCheck, Award,
@@ -289,6 +290,15 @@ export default function ProjectDetail() {
 
       {/* BROCHURE GALLERY — only this project's own brochure */}
       {brochureId && <BrochureGallery defaultId={brochureId} single />}
+
+      {/* INSTAGRAM — official embeds on every project page; a project can
+          override the site-wide default with its own `instagram` field */}
+      {(project.instagram || INSTAGRAM) && (
+        <InstagramFeed
+          handle={(project.instagram || INSTAGRAM).handle}
+          posts={(project.instagram || INSTAGRAM).posts}
+        />
+      )}
 
       {/* LOCATION ADVANTAGES */}
       <section className="section-pad bg-page">

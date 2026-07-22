@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules'
@@ -14,6 +15,7 @@ import {
   Clock,
   HeartHandshake,
   Quote,
+  Star,
   MapPin,
   Building2,
   Trophy,
@@ -27,6 +29,70 @@ import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY }
 
 const ICON_MAP = { Compass, Award, Clock, HeartHandshake }
 
+// "Rajesh Bansal" → "RB", "Col. R. K. Chauhan (Retd.)" → "RC"
+function initials(name) {
+  return name
+    .replace(/\b(Dr|CA|Col|Retd|Er|Adv)\.?/gi, '')
+    .replace(/[()]/g, '')
+    .trim()
+    .split(/[\s.]+/)
+    .filter(Boolean)
+    .map((w) => w[0].toUpperCase())
+    .filter((_, i, arr) => i === 0 || i === arr.length - 1)
+    .join('')
+}
+
+// Long reviews are clamped to 4 lines with a Read more toggle so every card
+// stays compact; slides stretch to equal height (see !h-auto on SwiperSlide).
+function TestimonialCard({ t }) {
+  const [expanded, setExpanded] = useState(false)
+  const isLong = t.quote.length > 250
+
+  return (
+    <div className="card-glass p-8 h-full flex flex-col">
+      <div className="flex-1">
+        <div className="flex items-center justify-between">
+          <Quote className="w-8 h-8 text-gold-500/70" />
+          <div className="flex gap-1">
+            {Array.from({ length: t.rating || 5 }).map((_, s) => (
+              <Star key={s} className="w-4 h-4 text-gold-500 fill-gold-500" />
+            ))}
+          </div>
+        </div>
+        <p
+          className={`text-fg-muted leading-relaxed mt-5 text-sm md:text-base whitespace-pre-line ${
+            isLong && !expanded ? 'line-clamp-4' : ''
+          }`}
+        >
+          &ldquo;{t.quote}&rdquo;
+        </p>
+        {isLong && (
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="mt-3 text-xs uppercase tracking-widest text-gold-700 dark:text-gold-500 hover:opacity-70 transition"
+          >
+            {expanded ? 'Read less' : 'Read more'}
+          </button>
+        )}
+      </div>
+      <div className="flex items-center gap-4 mt-7 pt-6 border-t border-soft">
+        {t.image ? (
+          <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
+        ) : (
+          <div className="w-12 h-12 shrink-0 rounded-full bg-gold-500/15 border border-gold-500/40 flex items-center justify-center font-serif text-gold-700 dark:text-gold-400">
+            {initials(t.name)}
+          </div>
+        )}
+        <div>
+          <div className="text-fg font-medium">{t.name}</div>
+          <div className="text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest mt-1">{t.role}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <>
@@ -35,7 +101,7 @@ export default function Home() {
         <Swiper
           modules={[Autoplay, EffectFade, Pagination, Navigation]}
           effect="fade"
-          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           navigation
           loop
@@ -376,20 +442,8 @@ export default function Home() {
             className="!pb-14"
           >
             {TESTIMONIALS.map((t, i) => (
-              <SwiperSlide key={i}>
-                <div className="card-glass p-8 h-full">
-                  <Quote className="w-8 h-8 text-gold-500/70" />
-                  <p className="text-fg-muted leading-relaxed mt-5 text-sm md:text-base">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-4 mt-7 pt-6 border-t border-soft">
-                    <img src={t.image} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
-                    <div>
-                      <div className="text-fg font-medium">{t.name}</div>
-                      <div className="text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest mt-1">{t.role}</div>
-                    </div>
-                  </div>
-                </div>
+              <SwiperSlide key={i} className="!h-auto">
+                <TestimonialCard t={t} />
               </SwiperSlide>
             ))}
           </Swiper>

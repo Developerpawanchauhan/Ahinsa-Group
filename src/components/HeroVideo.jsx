@@ -90,10 +90,17 @@ export default function HeroVideo({ videoId, poster, alt = '' }) {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Poster: always present, covers loading + loop restarts */}
-      <img src={poster} alt={alt} className="absolute inset-0 w-full h-full object-cover opacity-60 hero-img" />
+      {/* Poster: covers loading + loop restarts, crossfades OUT when the video
+          is revealed so the two never show at the same time (no ghosting) */}
+      <img
+        src={poster}
+        alt={alt}
+        className={`absolute inset-0 w-full h-full object-cover hero-img transition-opacity duration-1000 ${
+          visible ? 'opacity-0' : 'opacity-60'
+        }`}
+      />
 
-      {/* Oversized 16:9 frame that covers the section, video fades in over the poster */}
+      {/* Oversized 16:9 frame that covers the section, video crossfades in */}
       <div
         aria-hidden="true"
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full pointer-events-none transition-opacity duration-1000 ${
