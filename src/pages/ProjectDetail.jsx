@@ -13,6 +13,7 @@ import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import BrochureGallery from '../components/BrochureGallery'
 import AutoSlideImage from '../components/AutoSlideImage'
+import HeroVideo from '../components/HeroVideo'
 import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY } from '../data/site'
 
 const ICON_MAP = {
@@ -61,15 +62,11 @@ export default function ProjectDetail() {
       <section className="relative h-[80vh] min-h-[560px] flex items-end overflow-hidden">
         <div className="absolute inset-0 bg-ink-900">
           {project.videoEmbed ? (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <iframe
-                title={`${project.name} video`}
-                src={`${project.videoEmbed}?autoplay=1&mute=1&loop=1&playlist=${project.videoEmbed.split('/').pop()}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0`}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full opacity-60"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                frameBorder="0"
-              />
-            </div>
+            <HeroVideo
+              videoId={project.videoEmbed.split('/').pop()}
+              poster={project.hero}
+              alt={project.name}
+            />
           ) : (
             <img src={project.hero} alt={project.name} className="w-full h-full object-cover opacity-60 hero-img" />
           )}
