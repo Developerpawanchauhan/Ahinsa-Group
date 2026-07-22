@@ -169,6 +169,7 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
+    videoEmbed: 'https://www.youtube.com/embed/MRN5CEBla64',
     hero: '/images/home/hero/silde-1.jpg',
     overviewImage:
       '/images/projects/grand-green-valley/fountain.jpg',
@@ -262,6 +263,7 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
+    overviewVideo: 'https://www.youtube.com/embed/6naURT36QaY',
     hero: '/images/projects/green-valley-lake-city/lake-city.jpg',
     overviewImage:
       '/images/projects/green-valley-lake-city/lake-city.jpg',
@@ -355,6 +357,7 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.2736831,78.0959693&output=embed',
+    videoEmbed: 'https://www.youtube.com/embed/cMfuRv97hRI',
     hero: '/images/home/hero/slide-3.jpg',
     overviewImage: '/images/projects/green-valley-empire/rich-villa.jpg',
     gallery: [
@@ -449,6 +452,7 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.2322074,78.17292&output=embed',
+    videoEmbed: 'https://www.youtube.com/embed/UixAWM1hS9A',
     hero: '/images/home/hero/slide-2.jpg',
     overviewImage: '/images/projects/green-valley-township/gv-gate.jpg',
     gallery: [
@@ -787,6 +791,7 @@ export const PROJECT_DETAILS = {
     priceRange: 'On Request',
     rera: { number: 'MP-RERA Reg. No. — TBD', link: '#' },
     mapEmbed: 'https://www.google.com/maps?q=Gwalior,+Madhya+Pradesh&output=embed',
+    videoEmbed: 'https://www.youtube.com/embed/O0Stk5s2YU8',
     hero: '/images/projects/corporate-office-gwalior/corporate-office.jpeg',
     overviewImage: '/images/projects/corporate-office-gwalior/office.jpeg',
     gallery: [
@@ -1131,7 +1136,7 @@ export const MANAGEMENT = [
     role: 'Director',
     image: '/images/Team/jitendra-yadav.jpeg',
     short:
-      'With over 20 years of leadership experience across retail, insurance, banking, and real estate, Mr. Jitendra Yadav brings a wealth of industry expertise and entrepreneurial vision to Ahinsa Group.',
+      'Two decades of leadership across retail, insurance, banking and real estate, bringing deep industry expertise to Ahinsa Group.',
     bio: [
       'His professional journey began in retail and consumer products before advancing into senior leadership roles with leading financial institutions, including Reliance Life Insurance and Bank of Baroda Life Insurance. During this period, he successfully led regional operations, built high-performing teams, and drove business growth across multiple markets in North India.',
       'In 2014, Mr. Yadav ventured into the real estate sector as a Founder and Director, where he established a strong reputation for integrity, customer-centricity, and value creation. His decade-long experience in real estate has provided deep insights into land development, project execution, and sustainable community building.',
@@ -1389,6 +1394,15 @@ export const AWARDS = [
     category: 'Media Conclave Honour',
     image: '/images/awards/2026/bharat-update-badhta-up-conclave.jpg',
     description: 'Honoured for visionary leadership and contributions to Uttar Pradesh\'s growth at the Kushal Netritva Conclave.',
+  },
+  {
+    year: '2026',
+    date: '15 June 2026',
+    title: 'Food Expo & Conclave 2026 Honour',
+    awardedBy: 'Chamber of Food Processing Industries Association (CFPIA)',
+    category: 'Business Excellence & Special Guest Honour',
+    image: '/images/awards/2026/food-expo.jpeg',
+    description: 'Felicitated at the 2nd edition of the Food Expo & Conclave 2026 in Agra — presented by CFPIA and supported by APEDA and the Ministry of MSME, Government of India.',
   },
 ]
 

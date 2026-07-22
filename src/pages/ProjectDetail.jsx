@@ -60,7 +60,19 @@ export default function ProjectDetail() {
       {/* HERO (always dark cinematic) */}
       <section className="relative h-[80vh] min-h-[560px] flex items-end overflow-hidden">
         <div className="absolute inset-0 bg-ink-900">
-          <img src={project.hero} alt={project.name} className="w-full h-full object-cover opacity-60 hero-img" />
+          {project.videoEmbed ? (
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <iframe
+                title={`${project.name} video`}
+                src={`${project.videoEmbed}?autoplay=1&mute=1&loop=1&playlist=${project.videoEmbed.split('/').pop()}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0`}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full opacity-60"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                frameBorder="0"
+              />
+            </div>
+          ) : (
+            <img src={project.hero} alt={project.name} className="w-full h-full object-cover opacity-60 hero-img" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-ink-900/30 via-ink-900/40 to-ink-900" />
         </div>
         <div className="container-x relative pb-20 md:pb-28">
@@ -151,6 +163,24 @@ export default function ProjectDetail() {
             </Reveal>
           </div>
         </div>
+
+        {project.overviewVideo && (
+          <div className="container-x mt-16">
+            <Reveal>
+              <div className="relative aspect-video overflow-hidden border border-soft">
+                <iframe
+                  title={`${project.name} overview video`}
+                  src={project.overviewVideo}
+                  className="absolute inset-0 w-full h-full"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </Reveal>
+          </div>
+        )}
       </section>
 
       {/* HIGHLIGHTS */}
