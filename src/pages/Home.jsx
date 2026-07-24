@@ -25,9 +25,39 @@ import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import BrochureGallery from '../components/BrochureGallery'
 import CountUp from '../components/CountUp'
-import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY } from '../data/site'
+import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY, PROPERTY_LISTINGS } from '../data/site'
 
 const ICON_MAP = { Compass, Award, Clock, HeartHandshake }
+
+// Live availability per category, summed from the Properties-page data
+// (coming-soon projects excluded) — stays in sync automatically.
+function availableOf(...types) {
+  return PROPERTY_LISTINGS.filter((l) => !l.comingSoon)
+    .flatMap((l) => l.types)
+    .filter((t) => types.includes(t.type))
+    .reduce((n, t) => n + t.available, 0)
+}
+
+const PROPERTY_CATEGORIES = [
+  {
+    label: 'Shops',
+    image: '/images/projects/green-valley-township/gv-mall.jpg',
+    count: availableOf('Shops'),
+    text: 'High-street retail spaces in thriving township markets.',
+  },
+  {
+    label: 'Plots',
+    image: '/images/projects/green-valley-empire/site-08.jpg',
+    count: availableOf('Residential Plots', 'Commercial Plots'),
+    text: 'Vaastu-friendly residential & commercial plots, ready for registry.',
+  },
+  {
+    label: 'Villas',
+    image: '/images/projects/green-valley-empire/rich-villa.jpg',
+    count: availableOf('Villas'),
+    text: 'Signature villas crafted for spacious, resort-style living.',
+  },
+]
 
 // "Rajesh Bansal" → "RB", "Col. R. K. Chauhan (Retd.)" → "RC"
 function initials(name) {
@@ -272,6 +302,43 @@ export default function Home() {
             {PROJECTS.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08}>
                 <ProjectCard project={p} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AVAILABLE PROPERTIES — quick category cards linking to /properties */}
+      <section className="section-pad bg-page-alt border-t border-soft">
+        <div className="container-x">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <SectionHeading
+              center
+              eyebrow="Own With Ahinsa"
+              title={<>Properties <span className="gold-text">available today</span></>}
+              subtitle="Shops, plots and villas across our townships — see live availability and book a site visit."
+            />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-7">
+            {PROPERTY_CATEGORIES.map((c, i) => (
+              <Reveal key={c.label} delay={i * 0.1}>
+                <div className="card-glass group overflow-hidden h-full flex flex-col">
+                  <div className="img-zoom aspect-[4/3] relative">
+                    <img src={c.image} alt={c.label} className="w-full h-full object-cover" />
+                    <div className="absolute top-4 left-4 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
+                      {c.count} Available
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-transparent to-transparent" />
+                    <h3 className="absolute bottom-4 left-5 font-serif text-3xl text-cream">{c.label}</h3>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-fg-soft text-sm leading-relaxed flex-1">{c.text}</p>
+                    <Link to="/properties" className="btn-outline-gold justify-center mt-6 w-full">
+                      Check Availability <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>

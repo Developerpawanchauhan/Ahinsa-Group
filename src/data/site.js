@@ -133,7 +133,7 @@ export const PROJECTS = [
   {
     slug: 'green-valley-lake-city',
     name: 'Ahinsa Green Valley Lake City',
-    location: 'Fatehabad Road, Kundol, Agra',
+    location: 'Gwalior, Madhya Pradesh',
     type: 'Luxury Township',
     status: 'Upcoming',
     image: '/images/projects/green-valley-lake-city/lake-city.jpg',
@@ -150,6 +150,68 @@ export const PROJECTS = [
   //   short:
   //     'The next-generation shopping and entertainment destination for Firozabad and surrounding districts.',
   // },
+]
+
+// =============================================================
+// PROPERTIES PAGE — live availability shown on /properties
+//
+// ⚠️ PLACEHOLDER DATA — update `available`, `total` and `units`
+// with the real numbers before going live. `units` are the plot/
+// shop numbers currently available; `available` should equal
+// units.length.
+// =============================================================
+
+// Google Form used by the "Book Site Visit" button.
+// ⚠️ REPLACE with your real form link (e.g. https://forms.gle/xxxx).
+export const SITE_VISIT_FORM_URL = 'https://forms.gle/REPLACE-WITH-YOUR-FORM'
+
+export const PROPERTY_LISTINGS = [
+  {
+    slug: 'grand-green-valley',
+    types: [
+      { type: 'Residential Plots', available: 12, total: 120, units: ['P-14', 'P-27', 'P-33', 'P-41', 'P-58', 'P-66', 'P-72', 'P-89', 'P-95', 'P-104', 'P-111', 'P-118'] },
+      { type: 'Commercial Plots', available: 5, total: 30, units: ['C-03', 'C-08', 'C-15', 'C-21', 'C-27'] },
+      { type: 'Villas', available: 4, total: 36, units: ['V-05', 'V-12', 'V-19', 'V-30'] },
+      { type: 'Farm Houses', available: 3, total: 18, units: ['F-02', 'F-09', 'F-14'] },
+    ],
+  },
+  {
+    slug: 'green-valley-township',
+    types: [
+      { type: 'Shops', available: 6, total: 42, units: ['S-07', 'S-11', 'S-19', 'S-24', 'S-31', 'S-38'] },
+      { type: 'Residential Plots', available: 9, total: 150, units: ['P-12', 'P-25', 'P-38', 'P-52', 'P-67', 'P-81', 'P-99', 'P-120', 'P-142'] },
+      { type: 'Commercial Plots', available: 4, total: 26, units: ['C-04', 'C-09', 'C-17', 'C-22'] },
+    ],
+  },
+  {
+    slug: 'green-valley-empire',
+    types: [
+      { type: 'Shops', available: 5, total: 30, units: ['S-03', 'S-09', 'S-14', 'S-22', 'S-27'] },
+      { type: 'Residential Plots', available: 11, total: 140, units: ['P-08', 'P-19', 'P-31', 'P-44', 'P-57', 'P-73', 'P-88', 'P-101', 'P-115', 'P-126', 'P-133'] },
+      { type: 'Commercial Plots', available: 6, total: 32, units: ['C-02', 'C-07', 'C-13', 'C-19', 'C-25', 'C-30'] },
+      { type: 'Farm Houses', available: 5, total: 22, units: ['F-03', 'F-08', 'F-12', 'F-17', 'F-20'] },
+    ],
+  },
+  {
+    slug: 'green-valley-orchid',
+    types: [
+      { type: 'Shops', available: 8, total: 36, units: ['S-02', 'S-06', 'S-10', 'S-14', 'S-21', 'S-26', 'S-30', 'S-34'] },
+      { type: 'Residential Plots', available: 10, total: 90, units: ['P-05', 'P-16', 'P-24', 'P-37', 'P-45', 'P-53', 'P-61', 'P-70', 'P-78', 'P-86'] },
+      { type: 'Commercial Plots', available: 7, total: 28, units: ['C-01', 'C-06', 'C-11', 'C-15', 'C-20', 'C-24', 'C-27'] },
+    ],
+  },
+  {
+    slug: 'green-valley-lake-city',
+    // Launching soon — card shows a "Coming Soon" badge and no availability
+    // popup. Remove this flag once bookings open (the types below then show).
+    comingSoon: true,
+    types: [
+      { type: 'Shops', available: 7, total: 34, units: ['S-02', 'S-08', 'S-13', 'S-18', 'S-23', 'S-28', 'S-32'] },
+      { type: 'Residential Plots', available: 15, total: 160, units: ['P-03', 'P-11', 'P-22', 'P-30', 'P-42', 'P-55', 'P-63', 'P-74', 'P-85', 'P-97', 'P-108', 'P-121', 'P-135', 'P-146', 'P-155'] },
+      { type: 'Villas', available: 6, total: 40, units: ['V-04', 'V-09', 'V-15', 'V-22', 'V-28', 'V-35'] },
+      { type: 'Farm Houses', available: 4, total: 24, units: ['F-01', 'F-07', 'F-13', 'F-19'] },
+    ],
+  },
 ]
 
 // =============================================================
@@ -253,8 +315,8 @@ export const PROJECT_DETAILS = {
   'green-valley-lake-city': {
     name: 'Ahinsa Green Valley Lake City',
     tagline: 'Where everyday living meets resort-style luxury.',
-    location: 'Fatehabad Road, Kundol, Agra',
-    fullAddress: 'Fatehabad Road, Agra',
+    location: 'Gwalior, Madhya Pradesh',
+    fullAddress: 'Gwalior, Madhya Pradesh',
     type: 'Luxury Township',
     status: 'Upcoming',
     configurations: 'Residential & Commercial Plots · Grand Villas · Farm House',

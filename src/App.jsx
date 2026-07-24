@@ -10,6 +10,7 @@ import Management from './pages/Management'
 import TeamMembers from './pages/TeamMembers'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
+import Properties from './pages/Properties'
 import Media from './pages/Media'
 import Awards from './pages/Awards'
 import Events from './pages/Events'
@@ -47,6 +48,9 @@ export default function App() {
           {/* Projects + dynamic detail */}
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
+
+          {/* Live availability + site-visit booking */}
+          <Route path="/properties" element={<Properties />} />
 
           {/* Media + sub-pages */}
           <Route path="/media" element={<Media />} />

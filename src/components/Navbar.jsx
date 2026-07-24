@@ -390,8 +390,8 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-4">
             <ThemeToggle />
-            <Link to="/contact" className="btn-gold text-xs">
-              Enquire Now
+            <Link to="/properties" className="btn-gold text-xs">
+              Buy Properties
             </Link>
           </div>
 
@@ -439,8 +439,8 @@ export default function Navbar() {
                   </NavLink>
                 )
               )}
-              <Link to="/contact" onClick={() => setOpen(false)} className="btn-gold mt-6 justify-center">
-                Enquire Now
+              <Link to="/properties" onClick={() => setOpen(false)} className="btn-gold mt-6 justify-center">
+                Buy Properties
               </Link>
             </nav>
           </div>
