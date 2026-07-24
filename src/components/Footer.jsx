@@ -45,6 +45,7 @@ export default function Footer() {
               { to: '/about/management', label: 'Management' },
               
               { to: '/projects', label: 'Our Projects' },
+              { to: '/properties', label: 'Properties' },
               //media link
               { to: '/media/awards', label: 'Awards' },
               //events

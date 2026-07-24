@@ -15,6 +15,7 @@ import Media from './pages/Media'
 import Awards from './pages/Awards'
 import Events from './pages/Events'
 import Brochure from './pages/Brochure'
+import SocialAwareness from './pages/SocialAwareness'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
@@ -57,6 +58,7 @@ export default function App() {
           <Route path="/media/awards" element={<Awards />} />
           <Route path="/media/events" element={<Events />} />
           <Route path="/brochure" element={<Brochure />} />
+          <Route path="/media/social" element={<SocialAwareness />} />
 
           <Route path="/contact" element={<Contact />} />
 

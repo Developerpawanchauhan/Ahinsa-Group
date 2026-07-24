@@ -38,6 +38,7 @@ const NAV_LINKS = [
       //media section page
       { to: '/media/awards', label: 'Award Recognition', meta: 'Recognition & honours' },
       { to: '/media/events', label: 'Events', meta: 'Launches, openings & meetups' },
+      { to: '/media/social', label: 'Social Awareness', meta: 'Live from our social channels' },
     ],
   },
   { to: '/contact', label: 'Contact' },
