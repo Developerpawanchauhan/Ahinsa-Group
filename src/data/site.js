@@ -168,6 +168,7 @@ export const SITE_VISIT_FORM_URL = 'https://forms.gle/REPLACE-WITH-YOUR-FORM'
 export const PROPERTY_LISTINGS = [
   {
     slug: 'grand-green-valley',
+    image: '/images/projects/grand-green-valley/gate.jpeg',
     types: [
       { type: 'Residential Plots', available: 12, total: 120, units: ['P-14', 'P-27', 'P-33', 'P-41', 'P-58', 'P-66', 'P-72', 'P-89', 'P-95', 'P-104', 'P-111', 'P-118'] },
       { type: 'Commercial Plots', available: 5, total: 30, units: ['C-03', 'C-08', 'C-15', 'C-21', 'C-27'] },
@@ -177,6 +178,7 @@ export const PROPERTY_LISTINGS = [
   },
   {
     slug: 'green-valley-township',
+    image: '/images/projects/green-valley-township/gv-site-01.jpg',
     types: [
       { type: 'Shops', available: 6, total: 42, units: ['S-07', 'S-11', 'S-19', 'S-24', 'S-31', 'S-38'] },
       { type: 'Residential Plots', available: 9, total: 150, units: ['P-12', 'P-25', 'P-38', 'P-52', 'P-67', 'P-81', 'P-99', 'P-120', 'P-142'] },
@@ -185,6 +187,7 @@ export const PROPERTY_LISTINGS = [
   },
   {
     slug: 'green-valley-empire',
+    image: '/images/projects/green-valley-empire/add-img.jpeg',
     types: [
       { type: 'Shops', available: 5, total: 30, units: ['S-03', 'S-09', 'S-14', 'S-22', 'S-27'] },
       { type: 'Residential Plots', available: 11, total: 140, units: ['P-08', 'P-19', 'P-31', 'P-44', 'P-57', 'P-73', 'P-88', 'P-101', 'P-115', 'P-126', 'P-133'] },
@@ -194,6 +197,7 @@ export const PROPERTY_LISTINGS = [
   },
   {
     slug: 'green-valley-orchid',
+    image: '/images/projects/green-valley-orchid/site-01.jpg',
     types: [
       { type: 'Shops', available: 8, total: 36, units: ['S-02', 'S-06', 'S-10', 'S-14', 'S-21', 'S-26', 'S-30', 'S-34'] },
       { type: 'Residential Plots', available: 10, total: 90, units: ['P-05', 'P-16', 'P-24', 'P-37', 'P-45', 'P-53', 'P-61', 'P-70', 'P-78', 'P-86'] },

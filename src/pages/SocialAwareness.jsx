@@ -34,6 +34,7 @@ const SOCIALS = {
     // the ⋯ menu on Facebook and paste it here.
     posts: [
       'https://www.facebook.com/permalink.php?story_fbid=pfbid02okHtGirfyVRvDJiuzWPbJx4k9ay7TTyJJrtA1J7quX3LWoBKJZKLpGL1caJNaKdBl&id=61589690406055',
+      'https://www.facebook.com/permalink.php?story_fbid=pfbid02r8LJ8tqoS8RkKZi8q79i7VHxiB2Eom9hcGbk1qENHninomtxog5sMzaX6BiWK6yTl&id=61589690406055',
     ],
   },
   linkedin: {
@@ -91,47 +92,31 @@ export default function SocialAwareness() {
         icon={Instagram}
         eyebrow={`@${SOCIALS.instagram.handle}`}
         title={<>Live on <span className="gold-text">Instagram</span></>}
-        subtitle="Our official profile and the latest six photo posts, straight from the feed."
+        subtitle="The latest six photo posts, straight from our official feed."
         action={{ href: SOCIALS.instagram.url, label: 'Follow on Instagram' }}
       >
-        <div className="grid lg:grid-cols-3 gap-7">
-          <Reveal>
-            <div className="card-glass overflow-hidden">
-              <iframe
-                src={`https://www.instagram.com/${SOCIALS.instagram.handle}/embed/`}
-                title="Ahinsa Group Agra on Instagram"
-                className="w-full block"
-                style={{ height: 540 }}
-                frameBorder="0"
-                scrolling="no"
-                loading="lazy"
-              />
-            </div>
-          </Reveal>
-
-          <div className="lg:col-span-2 grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-            {SOCIALS.instagram.posts.map((p, i) => {
-              const src = igEmbedSrc(p)
-              return (
-                src && (
-                  <Reveal key={src} delay={(i % 3) * 0.08}>
-                    <div className="card-glass overflow-hidden">
-                      <iframe
-                        src={src}
-                        title={`Instagram post ${i + 1}`}
-                        className="w-full block"
-                        style={{ height: 460 }}
-                        frameBorder="0"
-                        scrolling="no"
-                        loading="lazy"
-                        allow="encrypted-media"
-                      />
-                    </div>
-                  </Reveal>
-                )
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          {SOCIALS.instagram.posts.map((p, i) => {
+            const src = igEmbedSrc(p)
+            return (
+              src && (
+                <Reveal key={src} delay={(i % 3) * 0.08}>
+                  <div className="card-glass overflow-hidden">
+                    <iframe
+                      src={src}
+                      title={`Instagram post ${i + 1}`}
+                      className="w-full block"
+                      style={{ height: 540 }}
+                      frameBorder="0"
+                      scrolling="no"
+                      loading="lazy"
+                      allow="encrypted-media"
+                    />
+                  </div>
+                </Reveal>
               )
-            })}
-          </div>
+            )
+          })}
         </div>
       </SectionShell>
 

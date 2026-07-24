@@ -20,11 +20,12 @@ const TYPE_ICONS = {
   'Farm Houses': Trees,
 }
 
-// Join availability data with the base project info (image, location…)
-const LISTINGS = PROPERTY_LISTINGS.map((l) => ({
-  ...l,
-  project: PROJECTS.find((p) => p.slug === l.slug),
-})).filter((l) => l.project)
+// Join availability data with the base project info; a listing's own `image`
+// overrides the project's default card image.
+const LISTINGS = PROPERTY_LISTINGS.map((l) => {
+  const project = PROJECTS.find((p) => p.slug === l.slug)
+  return project ? { ...l, project, image: l.image || project.image } : null
+}).filter(Boolean)
 
 function totalAvailable(listing) {
   return listing.types.reduce((n, t) => n + t.available, 0)
@@ -173,7 +174,7 @@ export default function Properties() {
         title="Properties"
         subtitle="Explore live availability across our townships — and book a site visit in one click."
         breadcrumb="Properties"
-        images={LISTINGS.map((l) => l.project.image)}
+        images={LISTINGS.map((l) => l.image)}
       />
 
       <section className="section-pad bg-page">
@@ -183,7 +184,7 @@ export default function Properties() {
               <Reveal key={l.slug} delay={(i % 3) * 0.08}>
                 <div className="card-glass group overflow-hidden h-full flex flex-col">
                   <div className="img-zoom aspect-[4/3] relative">
-                    <img src={l.project.image} alt={l.project.name} className="w-full h-full object-cover" />
+                    <img src={l.image} alt={l.project.name} className="w-full h-full object-cover" />
                     <div
                       className={`absolute top-4 left-4 px-3 py-1 text-[10px] uppercase tracking-widest font-medium ${
                         l.comingSoon

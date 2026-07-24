@@ -41,13 +41,13 @@ function availableOf(...types) {
 const PROPERTY_CATEGORIES = [
   {
     label: 'Shops',
-    image: '/images/projects/green-valley-township/gv-mall.jpg',
+    image: '/images/projects/grand-green-valley/mall.jpeg',
     count: availableOf('Shops'),
     text: 'High-street retail spaces in thriving township markets.',
   },
   {
     label: 'Plots',
-    image: '/images/projects/green-valley-empire/site-08.jpg',
+    image: '/images/projects/green-valley-empire/site-05.jpg',
     count: availableOf('Residential Plots', 'Commercial Plots'),
     text: 'Vaastu-friendly residential & commercial plots, ready for registry.',
   },
