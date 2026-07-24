@@ -381,7 +381,16 @@ export const PROJECT_DETAILS = {
       '/images/projects/green-valley-empire/fountain.jpg',
       '/images/projects/green-valley-empire/office.jpg',
       '/images/projects/green-valley-empire/gym.jpg',
-      
+      // Site-progress photos (July 2026), in series
+      '/images/projects/green-valley-empire/site-01.jpg',
+      '/images/projects/green-valley-empire/site-02.jpg',
+      '/images/projects/green-valley-empire/site-03.jpg',
+      '/images/projects/green-valley-empire/site-04.jpg',
+      '/images/projects/green-valley-empire/site-05.jpg',
+      '/images/projects/green-valley-empire/site-06.jpg',
+      '/images/projects/green-valley-empire/site-07.jpg',
+      '/images/projects/green-valley-empire/site-08.jpg',
+      '/images/projects/green-valley-empire/site-09.jpg',
     ],
     overview: [
       'Ahinsa Green Valley Empire represents the next chapter in premium township development, offering a refined blend of contemporary planning, world-class infrastructure, and expansive green surroundings. Created for discerning homeowners and investors, the project delivers an elevated lifestyle within a secure and well-designed community.',
@@ -495,6 +504,18 @@ export const PROJECT_DETAILS = {
       '/images/projects/green-valley-township/gv-vsps.jpg',
       '/images/projects/green-valley-township/gv-boundary-wall.jpg',
       '/images/projects/green-valley-township/kidzon.jpg',
+      // Site-progress photos (July 2026), in series
+      '/images/projects/green-valley-township/gv-site-01.jpg',
+      '/images/projects/green-valley-township/gv-site-02.jpg',
+      '/images/projects/green-valley-township/gv-site-03.jpg',
+      '/images/projects/green-valley-township/gv-site-04.jpg',
+      '/images/projects/green-valley-township/gv-site-05.jpg',
+      '/images/projects/green-valley-township/gv-site-06.jpg',
+      '/images/projects/green-valley-township/gv-site-07.jpg',
+      '/images/projects/green-valley-township/gv-site-08.jpg',
+      '/images/projects/green-valley-township/gv-site-09.jpg',
+      '/images/projects/green-valley-township/gv-site-10.jpg',
+      '/images/projects/green-valley-township/gv-site-11.jpg',
     ],
     overview: [
       'Ahinsa Green Valley is a thoughtfully planned township that brings together modern infrastructure, open green spaces, and a community-centric lifestyle. Designed to offer residents a peaceful and well-connected living environment, the development combines residential opportunities with essential conveniences, creating a destination where comfort and growth coexist.',
@@ -575,7 +596,11 @@ export const PROJECT_DETAILS = {
     mapEmbed: 'https://www.google.com/maps?q=27.2322074,78.17292&output=embed',
     hero: '/images/projects/green-valley-orchid/card.jpg',
     overviewImage: '/images/projects/green-valley-orchid/card.jpg',
-    gallery: [],
+    gallery: [
+      // Site-progress photos (July 2026), in series
+      '/images/projects/green-valley-orchid/site-01.jpg',
+      '/images/projects/green-valley-orchid/site-02.jpg',
+    ],
     overview: [
       'Ahinsa Green Valley Orchid is a premier commercial and industrial development strategically positioned to support the evolving needs of modern businesses. The project offers a unique opportunity for entrepreneurs, investors, manufacturers, and commercial enterprises to establish a strong presence in one of Agra\'s emerging growth zones.',,
       'Designed with accessibility, connectivity, and business efficiency in mind, the development benefits from proximity to major expressways, transportation networks, and key commercial destinations. The project combines modern planning with strategic location advantages, creating an ideal environment for business growth, warehousing, industrial operations, commercial establishments, and long-term investment.',
