@@ -5,7 +5,7 @@ import {
   ShieldCheck, Award, Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy,
   Activity, Zap, Car, Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee,
   Utensils, Store, Film, Music, HeartHandshake, Clock, Eye, Target, Leaf,
-  Send, CheckCircle2, Phone, Mail, ChevronRight,
+  Send, CheckCircle2, Phone, Mail, ChevronRight, Maximize2, Filter,
 } from 'lucide-react'
 
 import PageHero from '../components/PageHero'
@@ -15,6 +15,7 @@ import BrochureGallery from '../components/BrochureGallery'
 import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
 import InstagramFeed from '../components/InstagramFeed'
+import ImageLightbox from '../components/ImageLightbox'
 import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM } from '../data/site'
 
 const ICON_MAP = {
@@ -44,6 +45,12 @@ export default function ProjectDetail() {
   }
   const brochureId = SLUG_TO_BROCHURE[slug]
 
+  // Index of the gallery image shown full screen (null = lightbox closed), and
+  // the active gallery section. Declared before the redirect below so the hook
+  // order never changes.
+  const [galleryIdx, setGalleryIdx] = useState(null)
+  const [galleryTab, setGalleryTab] = useState('All')
+
   if (!project) {
     return <Navigate to="/projects" replace />
   }
@@ -56,6 +63,28 @@ export default function ProjectDetail() {
   const overviewImages = [project.overviewImage, ...(project.gallery || [])].filter(
     (src, i, arr) => src && arr.indexOf(src) === i
   )
+
+  // Instagram feed: the project's own posts when it defines them, the site-wide
+  // feed when it says nothing, and none at all when it sets `instagram: null`.
+  const feed = 'instagram' in project ? project.instagram : INSTAGRAM
+
+  // Gallery sections. Projects that define `galleryGroups` get filter tabs;
+  // the rest fall back to one flat grid of `gallery`.
+  const groups = project.galleryGroups
+  const galleryTabs = groups ? ['All', ...groups.map((g) => g.label)] : []
+  // Guard against a tab left over from a previously viewed project.
+  const activeTab = galleryTabs.includes(galleryTab) ? galleryTab : 'All'
+  const galleryImages = !groups
+    ? project.gallery || []
+    : activeTab === 'All'
+      ? groups.flatMap((g) => g.images)
+      : groups.find((g) => g.label === activeTab)?.images || []
+
+  // Switching sections reshuffles the indices, so close any open lightbox.
+  const selectGalleryTab = (tab) => {
+    setGalleryIdx(null)
+    setGalleryTab(tab)
+  }
 
   return (
     <>
@@ -268,37 +297,78 @@ export default function ProjectDetail() {
       )}
 
       {/* GALLERY */}
-      {project.gallery?.length > 0 && (
+      {galleryImages.length > 0 && (
         <section className="section-pad bg-page-soft border-y border-soft">
           <div className="container-x">
             <SectionHeading
               eyebrow="Gallery"
               title={<>A <span className="gold-text">closer look</span></>}
+              subtitle={groups ? 'Browse the township by what you came to see.' : undefined}
             />
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-12">
-              {project.gallery.map((src, i) => (
+
+            {/* Section tabs — only for projects with grouped galleries */}
+            {groups && (
+              <div className="flex flex-wrap items-center gap-2 mt-10">
+                <span className="hidden md:inline-flex items-center gap-2 text-fg-soft text-xs uppercase tracking-[0.2em] mr-2">
+                  <Filter className="w-3 h-3 text-gold-500" />
+                  Sections
+                </span>
+                {galleryTabs.map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => selectGalleryTab(tab)}
+                    aria-pressed={activeTab === tab}
+                    className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] border transition ${
+                      activeTab === tab
+                        ? 'bg-gold-500 text-ink-900 border-gold-500'
+                        : 'bg-transparent text-fg-muted border-gold-500/25 hover:border-gold-500'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className={`grid grid-cols-2 md:grid-cols-3 gap-3 ${groups ? 'mt-8' : 'mt-12'}`}>
+              {galleryImages.map((src, i) => (
                 <Reveal key={src + i} delay={(i % 3) * 0.08}>
-                  <div className={`img-zoom overflow-hidden ${i === 0 || i === 5 ? 'md:col-span-2 aspect-[16/10]' : 'aspect-[4/3]'}`}>
+                  <button
+                    type="button"
+                    onClick={() => setGalleryIdx(i)}
+                    aria-label={`View ${project.name} gallery image ${i + 1} full screen`}
+                    className={`img-zoom group relative block w-full overflow-hidden cursor-zoom-in ${
+                      i === 0 || i === 5 ? 'md:col-span-2 aspect-[16/10]' : 'aspect-[4/3]'
+                    }`}
+                  >
                     <img src={src} alt={`${project.name} gallery ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
-                  </div>
+                    <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                      <Maximize2 className="w-7 h-7 text-cream" />
+                    </span>
+                  </button>
                 </Reveal>
               ))}
             </div>
           </div>
+
+          <ImageLightbox
+            images={galleryImages}
+            index={galleryIdx}
+            onClose={() => setGalleryIdx(null)}
+            onNavigate={setGalleryIdx}
+            alt={`${project.name} gallery image`}
+          />
         </section>
       )}
 
       {/* BROCHURE GALLERY — only this project's own brochure */}
       {brochureId && <BrochureGallery defaultId={brochureId} single />}
 
-      {/* INSTAGRAM — official embeds on every project page; a project can
-          override the site-wide default with its own `instagram` field */}
-      {(project.instagram || INSTAGRAM) && (
-        <InstagramFeed
-          handle={(project.instagram || INSTAGRAM).handle}
-          posts={(project.instagram || INSTAGRAM).posts}
-        />
-      )}
+      {/* INSTAGRAM — site-wide feed by default; a project can override it with
+          its own `instagram` field, or set `instagram: null` to hide the
+          section entirely (see `feed` above). */}
+      {feed && <InstagramFeed handle={feed.handle} posts={feed.posts} />}
 
       {/* LOCATION ADVANTAGES */}
       <section className="section-pad bg-page">

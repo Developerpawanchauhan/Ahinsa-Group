@@ -216,7 +216,7 @@ export default function Home() {
               <div className="absolute -bottom-8 -right-8 w-48 h-48 hidden md:block">
                 <div className="img-zoom aspect-square overflow-hidden border-8 border-cream dark:border-ink-900">
                   <img
-                    src="/images/home/about/AhinsaComplex.jpg"
+                    src="/images/home/about/AhinsaComplex.png"
                     alt="Ahinsa Complex"
                     className="w-full h-full object-cover"
                   />

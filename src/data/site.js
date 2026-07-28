@@ -22,7 +22,7 @@ export const COMPANY = {
   tagline: 'Building Legacies, Crafting Lifestyles',
   founded: 2003,
   description:
-    'Ahinsa Group Agra is a premier real estate developer dedicated to creating iconic residential and commercial landmarks across Agra and Firozabad. Our work is defined by architectural excellence, uncompromising quality and a deep respect for the cities we build in.',
+    'Ahinsa Group Agra is a premier real estate developer dedicated to creating iconic residential and commercial landmarks. Our work is defined by architectural excellence, uncompromising quality and a deep respect for the cities we build in.',
   phone: '+91 63987 30582',
   email: 'info@ahinsagroup.in',
   address: 'Ahinsa Complex, Ram Bagh, Agra, Uttar Pradesh 282006',
@@ -227,6 +227,15 @@ export const PROJECT_DETAILS = {
     tagline: 'Where everyday living meets resort-style luxury.',
     location: 'Fatehabad Road, Kundol, Agra',
     fullAddress: 'Fatehabad Road, Agra',
+    // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
+    instagram: {
+      handle: 'ahinsagroupagra',
+      posts: [
+        'https://www.instagram.com/p/DZ9jGzszijS/',
+        'https://www.instagram.com/p/DQ3dJ8qE_Tc/',
+        'https://www.instagram.com/p/DUFXmFzE2ks/',
+      ],
+    },
     type: 'Luxury Township',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots · Grand Villas · Farm House',
@@ -246,6 +255,47 @@ export const PROJECT_DETAILS = {
       '/images/projects/grand-green-valley/grand-mall.jpg',
       '/images/projects/grand-green-valley/grand-villa.jpg',
       '/images/projects/grand-green-valley/office.jpg',
+    ],
+    // Gallery split into browsable sections (see `galleryGroups` in
+    // ProjectDetail). Only groups listed here render as filter tabs.
+    galleryGroups: [
+      {
+        label: 'Main Entrance',
+        images: [
+          '/images/projects/grand-green-valley/card.jpg',
+          '/images/projects/grand-green-valley/gate.jpeg',
+        ],
+      },
+      {
+        label: 'Shops',
+        images: [
+          '/images/projects/grand-green-valley/grand-mall.jpg',
+          '/images/projects/grand-green-valley/mall.jpeg',
+        ],
+      },
+      {
+        label: 'Parks',
+        images: ['/images/projects/grand-green-valley/cricket-stadium.jpg'],
+      },
+      {
+        label: 'Club House',
+        images: ['/images/projects/grand-green-valley/club-house (1).jpg'],
+      },
+      {
+        label: 'Villas',
+        images: ['/images/projects/grand-green-valley/grand-villa.jpg'],
+      },
+      {
+        label: 'Fountains',
+        images: ['/images/projects/grand-green-valley/fountain.jpg'],
+      },
+      {
+        label: 'Township Views',
+        images: [
+          '/images/projects/grand-green-valley/boundary-wall.jpg',
+          '/images/projects/grand-green-valley/office.jpg',
+        ],
+      },
     ],
     overview: [
       'Nestled amidst expansive green landscapes and thoughtfully planned infrastructure, Ahinsa The Grand Green Valley is a landmark integrated township designed to redefine modern living in Agra. Combining premium residential plots, elegant villas, commercial destinations, and lifestyle-driven amenities, the township offers a harmonious balance between urban convenience and natural serenity.',
@@ -321,6 +371,7 @@ export const PROJECT_DETAILS = {
     tagline: 'Where everyday living meets resort-style luxury.',
     location: 'Gwalior, Madhya Pradesh',
     fullAddress: 'Gwalior, Madhya Pradesh',
+    instagram: null, // no Instagram section on this page
     type: 'Luxury Township',
     status: 'Upcoming',
     configurations: 'Residential & Commercial Plots · Grand Villas · Farm House',
@@ -416,17 +467,12 @@ export const PROJECT_DETAILS = {
     location: 'Agra',
     fullAddress: 'Mudi Crossing, Agra',
     // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
-    // Embeds can't start a carousel at slide 3 (img_index is ignored), so the
-    // third card shows the slide-3 image locally and links to the post at it.
     instagram: {
       handle: 'ahinsagroupagra',
       posts: [
         'https://www.instagram.com/p/DYwanblk25d/',
-        'https://www.instagram.com/p/DUYD-4rEwTL/',
-        {
-          image: '/images/instagram/DYwanblk25d-3.webp',
-          url: 'https://www.instagram.com/p/DYwanblk25d/?img_index=3',
-        },
+        'https://www.instagram.com/p/DObjEdxEw90/',
+        'https://www.instagram.com/p/DV3Kktqk6wQ/',
       ],
     },
     type: 'Luxury Township',
@@ -457,6 +503,55 @@ export const PROJECT_DETAILS = {
       '/images/projects/green-valley-empire/site-07.jpg',
       '/images/projects/green-valley-empire/site-08.jpg',
       '/images/projects/green-valley-empire/site-09.jpg',
+    ],
+    // Gallery split into browsable sections (see `galleryGroups` in
+    // ProjectDetail). Only groups listed here render as filter tabs.
+    galleryGroups: [
+      {
+        label: 'Main Entrance',
+        images: [
+          '/images/projects/green-valley-empire/card.jpg',
+          '/images/projects/green-valley-empire/site-01.jpg',
+        ],
+      },
+      {
+        label: 'Parks',
+        images: [
+          '/images/projects/green-valley-empire/kidszone.jpg',
+          '/images/projects/green-valley-empire/site-06.jpg',
+        ],
+      },
+      {
+        label: 'Club House',
+        images: ['/images/projects/green-valley-empire/gym.jpg'],
+      },
+      {
+        label: 'Villas',
+        images: [
+          '/images/projects/green-valley-empire/rich-villa.jpg',
+          '/images/projects/green-valley-empire/villa.jpg',
+          '/images/projects/green-valley-empire/site-07.jpg',
+          '/images/projects/green-valley-empire/site-08.jpg',
+        ],
+      },
+      {
+        label: 'Fountains',
+        images: ['/images/projects/green-valley-empire/fountain.jpg'],
+      },
+      {
+        label: 'Site Office',
+        images: [
+          '/images/projects/green-valley-empire/office.jpg',
+          '/images/projects/green-valley-empire/site-02.jpg',
+          '/images/projects/green-valley-empire/site-03.jpg',
+          '/images/projects/green-valley-empire/site-04.jpg',
+          '/images/projects/green-valley-empire/site-09.jpg',
+        ],
+      },
+      {
+        label: 'Township Views',
+        images: ['/images/projects/green-valley-empire/site-05.jpg'],
+      },
     ],
     overview: [
       'Ahinsa Green Valley Empire represents the next chapter in premium township development, offering a refined blend of contemporary planning, world-class infrastructure, and expansive green surroundings. Created for discerning homeowners and investors, the project delivers an elevated lifestyle within a secure and well-designed community.',
@@ -533,23 +628,18 @@ export const PROJECT_DETAILS = {
     tagline: 'A flagship gated community where Agra learnt to live larger.',
     location: 'Agra',
     fullAddress: 'Kuberpur, Agra',
-    // Project-specific Instagram cards: exact carousel slides (embeds always
-    // open at slide 1, so these are local images linking to the right slide).
+    // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
+    // The middle card needs carousel slide 3, which an embed can't open at, so
+    // it stays a local image linking to that slide.
     instagram: {
       handle: 'ahinsagroupagra',
       posts: [
-        {
-          image: '/images/instagram/DZ1MgM_Eywx-2.webp',
-          url: 'https://www.instagram.com/p/DZ1MgM_Eywx/?img_index=2',
-        },
+        'https://www.instagram.com/p/DaavDLETukL/',
         {
           image: '/images/instagram/DUYD-4rEwTL-3.webp',
           url: 'https://www.instagram.com/p/DUYD-4rEwTL/?img_index=3',
         },
-        {
-          image: '/images/instagram/DSKBRbVkyrV-4.webp',
-          url: 'https://www.instagram.com/p/DSKBRbVkyrV/?img_index=4',
-        },
+        'https://www.instagram.com/p/DSKBRbVkyrV/',
       ],
     },
     type: 'Luxury Township',
@@ -582,6 +672,61 @@ export const PROJECT_DETAILS = {
       '/images/projects/green-valley-township/gv-site-09.jpg',
       '/images/projects/green-valley-township/gv-site-10.jpg',
       '/images/projects/green-valley-township/gv-site-11.jpg',
+    ],
+    // Gallery split into browsable sections (see `galleryGroups` in
+    // ProjectDetail). Only groups listed here render as filter tabs.
+    galleryGroups: [
+      {
+        label: 'Main Entrance',
+        images: [
+          '/images/projects/green-valley-township/card.jpg',
+          '/images/projects/green-valley-township/gv-gate.jpg',
+          '/images/projects/green-valley-township/gv-site-01.jpg',
+        ],
+      },
+      {
+        label: 'Shops',
+        images: [
+          '/images/projects/green-valley-township/gv-mall.jpg',
+          '/images/projects/green-valley-township/gv-site-02.jpg',
+        ],
+      },
+      {
+        label: 'Parks',
+        images: [
+          '/images/projects/green-valley-township/kidzon.jpg',
+          '/images/projects/green-valley-township/gv-site-08.jpg',
+          '/images/projects/green-valley-township/gv-site-07.jpg',
+          '/images/projects/green-valley-township/gv-site-09.jpg',
+        ],
+      },
+      {
+        label: 'Club House',
+        images: [
+          '/images/projects/green-valley-township/gv-site-03.jpg',
+          '/images/projects/green-valley-township/gv-site-06.jpg',
+        ],
+      },
+      {
+        label: 'Villas',
+        images: [
+          '/images/projects/green-valley-township/gv-site-04.jpg',
+          '/images/projects/green-valley-township/gv-site-05.jpg',
+          '/images/projects/green-valley-township/gv-site-11.jpg',
+        ],
+      },
+      {
+        label: 'Fountains',
+        images: ['/images/projects/green-valley-township/gv-site-10.jpg'],
+      },
+      {
+        label: 'Township Views',
+        images: [
+          '/images/projects/green-valley-township/gv-boundary-wall.jpg',
+          '/images/projects/green-valley-township/gv-office.jpg',
+          '/images/projects/green-valley-township/gv-vsps.jpg',
+        ],
+      },
     ],
     overview: [
       'Ahinsa Green Valley is a thoughtfully planned township that brings together modern infrastructure, open green spaces, and a community-centric lifestyle. Designed to offer residents a peaceful and well-connected living environment, the development combines residential opportunities with essential conveniences, creating a destination where comfort and growth coexist.',
@@ -651,6 +796,7 @@ export const PROJECT_DETAILS = {
     tagline: 'A premium business address engineered for the next decade.',
     location: 'Agra',
     fullAddress: 'Kuberpur, Agra',
+    instagram: null, // no Instagram section on this page
     type: 'Residential Plots',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots',
@@ -734,6 +880,7 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Agra',
     fullAddress: 'Ram Bagh, Agra',
+    instagram: null, // no Instagram section on this page
     type: 'Head Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -820,6 +967,7 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Agra',
     fullAddress: 'Ram Bagh, Agra',
+    instagram: null, // no Instagram section on this page
     type: 'Head Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -906,6 +1054,7 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Gwalior',
     fullAddress: 'Gwalior, Madhya Pradesh',
+    instagram: null, // no Instagram section on this page
     type: 'Corporate Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -1243,6 +1392,8 @@ export const MILESTONES = [
   { year: '2025', title: 'Ahinsa Green Valley Orchid', text: 'Introduced Green Valley Orchid at Kuberpur, Agra — a thoughtfully designed residential destination offering premium plots and villas in a nature-integrated setting with excellent connectivity.' },
   { year: '2025', title: 'Ahinsa Complex — Fully Developed', text: 'Completed the full development of Ahinsa Complex at Ram Bagh, Agra — a vibrant mixed-use landmark combining street-level retail with professional office spaces, now fully operational and occupied.' },
   { year: '2026', title: 'Ahinsa The Grand Square Mall', text: 'Broke ground on Ahinsa The Grand Square Mall in Firozabad — the region\'s most ambitious retail and entertainment destination featuring anchor brands, a multiplex cinema, a grand food court and a signature central atrium.' },
+  { year: '2026', title: 'Rich Villa Inauguration — Green Valley Empire', text: 'Inaugurated the Rich Villas at Ahinsa Green Valley Empire, Mudi Crossing, Agra — elegantly designed luxury homes with generous interiors, premium finishes and private gardens, launched with the blessings of Guru Vijay Kaushal Ji.' },
+  { year: '2026', title: 'Ahinsa Corporate Office, Gwalior', text: 'Inaugurated the Ahinsa Corporate Office in Gwalior, Madhya Pradesh — marking the group\'s expansion beyond Uttar Pradesh with a centrally located mixed-use landmark pairing street-facing retail with upper-floor office suites.' },
 ]
 
 
@@ -1321,27 +1472,27 @@ export const TEAM_MEMBERS = [
   // },
   {
     name: 'Mr. Munna Chaudhary',
-    role: 'Coordinator',
+    role: 'Administration Coordinator',
     department: 'Administration',
     image:
       '/images/emploi/munna.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+    bio: 'Keeps day-to-day administration running — coordinates between departments, maintains office records and follow-ups, and makes sure routine operations stay on schedule.',
   },
   {
     name: 'Mr. Akshat Jain',
-    role: 'Office Managment',
+    role: 'Office Manager',
     department: 'Administration',
     image:
       '/images/emploi/akshat-jain.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+    bio: 'Runs the corporate office end to end — manages facilities, staff scheduling, visitor and vendor coordination, and the systems that keep the workplace organised.',
   },
   {
     name: 'Mr. Himanshu Saxena',
-    role: 'Head, Senior Accountant',
+    role: 'Head of Accounts',
     department: 'Accounts',
     image:
       '/images/emploi/himansuh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Oversees the entire accounts department — manages financial records, audits and senior-level accounting operations across the organization.',
+    bio: 'Heads the accounts function for the group — owns financial records, audits, statutory compliance and periodic reporting to the management.',
   },
   {
     name: 'Mr. Alok Sharma',
@@ -1349,7 +1500,7 @@ export const TEAM_MEMBERS = [
     department: 'Purchase',
     image:
       '/images/emploi/alok-sharma.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages procurement and vendor relationships — ensures timely sourcing of materials, cost control and smooth supplier coordination.',
+    bio: 'Owns procurement from requisition to delivery — sources construction materials, negotiates with vendors, controls costs and keeps site supply on schedule.',
   },
   {
     name: 'Mr. Pawan Chauhan',
@@ -1357,7 +1508,7 @@ export const TEAM_MEMBERS = [
     department: 'IT & Digital',
     image:
       '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the company digital presence — handles social media content, online campaigns and audience engagement strategies.',
+    bio: 'Builds the group’s digital presence — plans and produces social content, runs online campaigns and grows audience engagement across platforms.',
   },
   {
     name: 'Mr. Anupam Chittoriya',
@@ -1365,15 +1516,15 @@ export const TEAM_MEMBERS = [
     department: 'Accounts',
     image:
       '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages the Tally-based accounting system — maintains accurate entries, vouchers, GST filings and overall financial data integrity.',
+    bio: 'Runs the Tally-based accounting system — books entries and vouchers, prepares GST filings and safeguards the accuracy of the group’s financial data.',
   },
   {
     name: 'Mr. Rajesh Saxena',
-    role: 'Legal Cum Accountant',
+    role: 'Legal & Accounts Executive',
     department: 'Accounts',
     image:
       '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads day-to-day accounting operations — ensures accurate ledger management, financial reporting and reconciliation across the group.',
+    bio: 'Works across accounts and legal — maintains ledgers, reconciliations and financial reporting while supporting agreements, statutory paperwork and compliance documentation.',
   },
   {
     name: 'Mr. Laxmi Narayan',
@@ -1381,26 +1532,26 @@ export const TEAM_MEMBERS = [
     department: 'Legal',
     image:
       '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Manages administrative operations within the Accounts department — oversees documentation, coordination between teams, and ensures smooth day-to-day functioning of accounting processes.',
+    bio: 'Coordinates land records and acquisition paperwork — manages title documentation and registry formalities, and liaises with landowners and revenue authorities for new sites.',
   },
   {
-    name: 'Mr. Mohit parashar',
+    name: 'Mr. Mohit Parashar',
     role: 'Project Engineer',
-    department: 'Engineer',
+    department: 'Engineering',
     image:
       '/images/emploi/mohit-parashar.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Leads the engineering team — supervises structural planning, MEP coordination and technical execution across all active sites.',
+    bio: 'Drives technical execution on site — supervises structural work, coordinates MEP and contractor teams, and tracks quality and progress against project schedules.',
   },
-  
+
   {
     name: 'Mr. Santosh Sharma',
-    role: 'Sales manager',
+    role: 'Sales Manager',
     department: 'Sales',
     image:
       '/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: ' Leads the sales team — drives client acquisition, achieves sales targets and executes effective sales strategies across the group.',
+    bio: 'Leads the sales team — drives client acquisition, manages site visits and closings, and delivers on sales targets across the group’s projects.',
   },
-  
+
 ]
 
 // =============================================================

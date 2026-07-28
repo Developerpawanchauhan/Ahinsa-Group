@@ -4,7 +4,18 @@ import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import CountUp from '../components/CountUp'
+import AutoSlideImage from '../components/AutoSlideImage'
 import { COMPANY, STATS, MANAGEMENT, MILESTONES } from '../data/site'
+
+// "Our Story" slideshow — the signature entrance gate of each township,
+// pulled from each project's own folder. Crossfades every 2s.
+const STORY_IMAGES = [
+  '/images/about/aboutgreen.jpg',
+  '/images/projects/green-valley-township/gv-gate.jpg',
+  '/images/projects/ahinsa-complex/office1.jpeg',
+  '/images/projects/green-valley-empire/card.jpg',
+  '/images/projects/grand-green-valley/fountain.jpg',
+]
 
 export default function About() {
   const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in', 'jitendra.yadav@ahinsagroup.in'];
@@ -31,10 +42,17 @@ export default function About() {
       <section className="section-pad bg-page">
         <div className="container-x grid lg:grid-cols-2 gap-14 items-center">
           <Reveal>
-            <div className="img-zoom aspect-[4/5] overflow-hidden">
-              <img
-                src="/images/about/aboutgreen.jpg"
-                alt="Ahinsa Group headquarters"
+            <div className="img-zoom aspect-[4/5] overflow-hidden story-slides">
+              {/* The Lake City arch sits right of centre in a wide frame, so a
+                  default centre crop slices it — bias that one slide rightward. */}
+              <style>{`
+                .story-slides img[src*="lake-city"] {
+                  object-position: 72% center;
+                }
+              `}</style>
+              <AutoSlideImage
+                images={STORY_IMAGES}
+                alt="Ahinsa Group landmark projects"
                 className="w-full h-full object-cover"
               />
             </div>
