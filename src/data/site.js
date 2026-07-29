@@ -1404,19 +1404,21 @@ export const MANAGEMENT = [
   {
     slug: 'rohit-jain',
     name: 'Mr. Rohit Jain',
-    role: 'Managing Director',
+    role: 'Chairman',
     image: '/images/Team/rohit-jain.jpg',
     short:
       'Visionary leader steering Ahinsa Group toward architectural excellence and sustained growth.',
     bio: [
-      'Mr. Rohit Jain leads Ahinsa Group with a commitment to real estate excellence that transforms the way cities live. His vision is rooted in transparent dealings, on-time delivery and unwavering customer trust.',
-      'His emphasis on quality craftsmanship and integrity shapes every decision the company takes — from land acquisition to handover.',
-      'Under his leadership, Ahinsa Group continues to expand thoughtfully across residential, commercial and lifestyle segments, staying true to the core values it was built upon.',
+      'Mr. Rohit Jain is the Chairman of Ahinsa Group, one of Agra\'s most respected and trusted real estate development companies. A visionary entrepreneur with deep roots in the city of the Taj Mahal, he has dedicated over two decades to transforming the way communities are built, lived in, and experienced across Uttar Pradesh.',
+      'Ahinsa Group is a legacy carried forward across decades — a name that Mr. Rohit Jain has nurtured and continued with unwavering dedication, building it into one of the most trusted names in Agra\'s real estate sector. Through his hands-on leadership and long-term vision, he has shaped Ahinsa into a brand synonymous with integrity, quality, and lasting community value.',
+      'Starting from a powerful conviction that quality real estate must be accessible, transparent, and built to last, Mr. Jain established Ahinsa Group on the timeless principle of Ahimsa — non-violence — which guides every aspect of how the company operates: with care for its customers, deep respect for the environment, and integrity in every single transaction.',
+      'Under his stewardship, Ahinsa Group has grown into a multi-project developer with landmark townships and residential developments across Agra, earning the trust of thousands of families and investors. His leadership is defined by a hands-on approach, uncompromising commitment to quality, and an overarching vision of building communities — not just structures.',
+      'Recognized nationally and internationally — from CCLA and Zee Media to Dainik Jagran, the India–Sri Lanka Real Estate Summit, and the Global Innovation & Leadership Summit in London — Mr. Jain stands as one of Agra\'s most decorated and respected business leaders, with over 18 awards across entrepreneurship, real estate excellence, and community leadership.',
     ],
     achievements: [
-      'Managing Director',
-      'Visionary Leadership',
-      'Multiple industry recognitions for excellence',
+      'Chairman, Ahinsa Group',
+      '20+ Years in Real Estate',
+      '18+ Awards & Recognitions',
     ],
   },
   {

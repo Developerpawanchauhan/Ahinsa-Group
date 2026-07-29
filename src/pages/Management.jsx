@@ -53,7 +53,7 @@ export default function Management() {
             <Reveal key={m.name} delay={(i % 2) * 0.05}>
               <div
                 id={m.slug}
-                className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-center scroll-mt-24 md:scroll-mt-36 ${
+                className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-start scroll-mt-24 md:scroll-mt-36 ${
                   i % 2 ? 'lg:[&>*:first-child]:order-2' : ''
                 }`}
               >
