@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Calendar, MapPin, Tag, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Calendar, MapPin, Tag, ArrowRight, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
+import ImageLightbox from '../components/ImageLightbox'
 import { EVENTS } from '../data/site'
 
 const GAP = 16 // matches gap-4 on the strip
@@ -48,6 +49,8 @@ function EventPhotoStrip({ images, title, index, active, onVisibility }) {
   const stripRef = useRef(null)
   const rafRef = useRef(0)
   const [paused, setPaused] = useState(false)
+  // Index into `images` of the photo shown full screen (null = closed).
+  const [lightboxIdx, setLightboxIdx] = useState(null)
 
   // Eased glide to a target offset. Driven frame by frame rather than with
   // `behavior: 'smooth'` so the duration and easing are ours, and so the long
@@ -114,12 +117,14 @@ function EventPhotoStrip({ images, title, index, active, onVisibility }) {
     }
   }, [index, onVisibility])
 
-  // `active` is true for exactly one strip at a time.
+  // `active` is true for exactly one strip at a time. The lightbox check is
+  // separate from `paused`: opening it moves the pointer off the strip, which
+  // would otherwise un-pause and scroll the row behind the overlay.
   useEffect(() => {
-    if (paused || !active || images.length < 2) return
+    if (paused || lightboxIdx !== null || !active || images.length < 2) return
     const id = setInterval(() => step(1), 2000)
     return () => clearInterval(id)
-  }, [paused, active, images.length])
+  }, [paused, lightboxIdx, active, images.length])
 
   const arrow =
     'absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center ' +
@@ -149,19 +154,27 @@ function EventPhotoStrip({ images, title, index, active, onVisibility }) {
             second copy is decorative — hidden from screen readers. */}
         {(images.length > 1 ? [...images, ...images] : images).map((img, i) => {
           const isClone = i >= images.length
+          const real = i % images.length // clones open the original photo
           return (
-            <div
+            <button
+              type="button"
               key={`${img}-${i}`}
+              onClick={() => setLightboxIdx(real)}
               aria-hidden={isClone || undefined}
-              className="img-zoom flex-shrink-0 overflow-hidden w-[80%] sm:w-[48%] lg:w-[32%] aspect-[16/10]"
+              tabIndex={isClone ? -1 : undefined}
+              aria-label={`View ${title} photo ${real + 1} full screen`}
+              className="img-zoom group relative flex-shrink-0 overflow-hidden w-[80%] sm:w-[48%] lg:w-[32%] aspect-[16/10] cursor-zoom-in"
             >
               <img
                 src={img}
-                alt={isClone ? '' : `${title} ${i + 1}`}
+                alt={isClone ? '' : `${title} ${real + 1}`}
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
-            </div>
+              <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                <Maximize2 className="w-6 h-6 text-cream" />
+              </span>
+            </button>
           )
         })}
       </div>
@@ -186,6 +199,14 @@ function EventPhotoStrip({ images, title, index, active, onVisibility }) {
           </button>
         </>
       )}
+
+      <ImageLightbox
+        images={images}
+        index={lightboxIdx}
+        onClose={() => setLightboxIdx(null)}
+        onNavigate={setLightboxIdx}
+        alt={`${title} photo`}
+      />
     </div>
   )
 }
