@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Calendar, MapPin, Tag, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import PageHero from '../components/PageHero'
@@ -8,19 +8,46 @@ import { EVENTS } from '../data/site'
 
 const GAP = 16 // matches gap-4 on the strip
 const GLIDE = 200 // ms for a one-card move
-const REWIND = 450 // ms for the much longer wrap back to the first photo
 
-const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
+/* Solves a CSS cubic-bezier timing curve for y at a given x (progress).
+   Newton-Raphson converges in a handful of passes at this precision. */
+function cubicBezier(p1x, p1y, p2x, p2y) {
+  const a = (c1, c2) => 1 - 3 * c2 + 3 * c1
+  const b = (c1, c2) => 3 * c2 - 6 * c1
+  const c = (c1) => 3 * c1
+  const at = (t, c1, c2) => ((a(c1, c2) * t + b(c1, c2)) * t + c(c1)) * t
+  const slope = (t, c1, c2) => 3 * a(c1, c2) * t * t + 2 * b(c1, c2) * t + c(c1)
+
+  return (x) => {
+    if (x <= 0) return 0
+    if (x >= 1) return 1
+    let t = x
+    for (let i = 0; i < 6; i++) {
+      const d = slope(t, p1x, p2x)
+      if (d === 0) break
+      t -= (at(t, p1x, p2x) - x) / d
+    }
+    return at(t, p1y, p2y)
+  }
+}
+
+// Exactly CSS `ease-in-out`: eases out of rest and settles back into it.
+const easeInOut = cubicBezier(0.42, 0, 0.58, 1)
+
+// Fine-grained thresholds so we can compare how much of each strip is on
+// screen, not merely whether it is.
+const THRESHOLDS = Array.from({ length: 11 }, (_, i) => i / 10)
+// A strip must be at least this visible before it may claim the autoscroll.
+const MIN_VISIBLE = 0.25
 
 /* Every photo from one event, scrolled sideways: arrow buttons, no visible
    scrollbar, and an autoscroll that advances a card every 2s. The timer only
    runs while the strip is on screen — otherwise all ten strips on the page
    would animate at once — and pauses on hover, focus or touch. */
-function EventPhotoStrip({ images, title }) {
+function EventPhotoStrip({ images, title, index, active, onVisibility }) {
   const stripRef = useRef(null)
   const rafRef = useRef(0)
   const [paused, setPaused] = useState(false)
-  const [visible, setVisible] = useState(false)
 
   // Eased glide to a target offset. Driven frame by frame rather than with
   // `behavior: 'smooth'` so the duration and easing are ours, and so the long
@@ -34,7 +61,7 @@ function EventPhotoStrip({ images, title }) {
     const start = performance.now()
     const tick = (now) => {
       const p = Math.min(1, (now - start) / duration)
-      el.scrollLeft = from + delta * easeInOutCubic(p)
+      el.scrollLeft = from + delta * easeInOut(p)
       if (p < 1) rafRef.current = requestAnimationFrame(tick)
     }
     rafRef.current = requestAnimationFrame(tick)
@@ -45,33 +72,54 @@ function EventPhotoStrip({ images, title }) {
     if (!el) return
     const card = el.firstElementChild
     const amount = card ? card.offsetWidth + GAP : el.clientWidth * 0.8
-    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4
-    const atStart = el.scrollLeft <= 4
 
-    // Wrap around so the autoscroll loops instead of stalling at the end.
-    if (dir > 0 && atEnd) glideTo(el, 0, REWIND)
-    else if (dir < 0 && atStart) glideTo(el, el.scrollWidth, REWIND)
-    else glideTo(el, el.scrollLeft + dir * amount, GLIDE)
+    // Distance covered by one full copy of the list. Measured from the DOM so
+    // gaps and the mobile side padding are accounted for exactly.
+    const first = el.children[0]
+    const clone = el.children[images.length]
+    const cycle = clone ? clone.offsetLeft - first.offsetLeft : 0
+
+    // The strip renders the photos twice, so there is always another identical
+    // copy ahead. Before each move, snap the position back into the first copy
+    // — instant and invisible, because the two copies look the same — then
+    // glide on from there. The result never runs out and never rewinds.
+    if (cycle > 0) {
+      if (dir > 0 && el.scrollLeft >= cycle) {
+        cancelAnimationFrame(rafRef.current)
+        el.scrollLeft -= cycle
+      } else if (dir < 0 && el.scrollLeft <= 0) {
+        cancelAnimationFrame(rafRef.current)
+        el.scrollLeft += cycle
+      }
+    }
+
+    glideTo(el, el.scrollLeft + dir * amount, GLIDE)
   }
 
   useEffect(() => () => cancelAnimationFrame(rafRef.current), [])
 
-  // Only autoscroll strips the visitor can actually see.
+  // Report how much of this strip is on screen; the parent uses that to pick
+  // the single strip allowed to autoscroll.
   useEffect(() => {
     const el = stripRef.current
     if (!el || typeof IntersectionObserver === 'undefined') return
-    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
-      threshold: 0.3,
-    })
+    const io = new IntersectionObserver(
+      ([entry]) => onVisibility(index, entry.isIntersecting ? entry.intersectionRatio : 0),
+      { threshold: THRESHOLDS }
+    )
     io.observe(el)
-    return () => io.disconnect()
-  }, [])
+    return () => {
+      io.disconnect()
+      onVisibility(index, 0)
+    }
+  }, [index, onVisibility])
 
+  // `active` is true for exactly one strip at a time.
   useEffect(() => {
-    if (paused || !visible || images.length < 2) return
+    if (paused || !active || images.length < 2) return
     const id = setInterval(() => step(1), 2000)
     return () => clearInterval(id)
-  }, [paused, visible, images.length])
+  }, [paused, active, images.length])
 
   const arrow =
     'absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center ' +
@@ -97,19 +145,25 @@ function EventPhotoStrip({ images, title }) {
         ref={stripRef}
         className="events-strip -mx-5 px-5 md:mx-0 md:px-0 flex gap-4 overflow-x-auto"
       >
-        {images.map((img, i) => (
-          <div
-            key={img}
-            className="img-zoom flex-shrink-0 overflow-hidden w-[80%] sm:w-[48%] lg:w-[32%] aspect-[16/10]"
-          >
-            <img
-              src={img}
-              alt={`${title} ${i + 1}`}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </div>
-        ))}
+        {/* Rendered twice so the loop always has photos ahead of it. The
+            second copy is decorative — hidden from screen readers. */}
+        {(images.length > 1 ? [...images, ...images] : images).map((img, i) => {
+          const isClone = i >= images.length
+          return (
+            <div
+              key={`${img}-${i}`}
+              aria-hidden={isClone || undefined}
+              className="img-zoom flex-shrink-0 overflow-hidden w-[80%] sm:w-[48%] lg:w-[32%] aspect-[16/10]"
+            >
+              <img
+                src={img}
+                alt={isClone ? '' : `${title} ${i + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          )
+        })}
       </div>
 
       {images.length > 1 && (
@@ -137,7 +191,23 @@ function EventPhotoStrip({ images, title }) {
 }
 
 export default function Events() {
-  // We will render all events in the same format.
+  // Only one photo strip autoscrolls at a time: whichever is most on screen.
+  // Each strip reports its visible ratio here and the largest one wins.
+  const ratios = useRef(new Map())
+  const [activeStrip, setActiveStrip] = useState(-1)
+
+  const handleVisibility = useCallback((index, ratio) => {
+    ratios.current.set(index, ratio)
+    let best = -1
+    let bestRatio = MIN_VISIBLE
+    ratios.current.forEach((r, i) => {
+      if (r > bestRatio) {
+        bestRatio = r
+        best = i
+      }
+    })
+    setActiveStrip((prev) => (prev === best ? prev : best))
+  }, [])
 
   return (
     <>
@@ -195,7 +265,13 @@ export default function Events() {
                     <p className="text-fg-muted leading-relaxed">{e.excerpt}</p>
                   </div>
                   {/* Images — every photo from this date */}
-                  <EventPhotoStrip images={e.images} title={e.title} />
+                  <EventPhotoStrip
+                    images={e.images}
+                    title={e.title}
+                    index={i}
+                    active={activeStrip === i}
+                    onVisibility={handleVisibility}
+                  />
                 </div>
               </Reveal>
             ))}
