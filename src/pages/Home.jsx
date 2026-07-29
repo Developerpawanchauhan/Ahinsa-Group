@@ -19,15 +19,20 @@ import {
   MapPin,
   Building2,
   Trophy,
+  Download,
 } from 'lucide-react'
 
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 import BrochureGallery from '../components/BrochureGallery'
+import BrochureDownloadModal from '../components/BrochureDownloadModal'
 import CountUp from '../components/CountUp'
 import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY, PROPERTY_LISTINGS } from '../data/site'
 
 const ICON_MAP = { Compass, Award, Clock, HeartHandshake }
+
+/* Data for the hidden "Available Properties" section — uncomment together
+   with that section further down.
 
 // Live availability per category, summed from the Properties-page data
 // (coming-soon projects excluded) — stays in sync automatically.
@@ -58,6 +63,7 @@ const PROPERTY_CATEGORIES = [
     text: 'Signature villas crafted for spacious, resort-style living.',
   },
 ]
+*/
 
 // "Rajesh Bansal" → "RB", "Col. R. K. Chauhan (Retd.)" → "RC"
 function initials(name) {
@@ -124,6 +130,8 @@ function TestimonialCard({ t }) {
 }
 
 export default function Home() {
+  const [downloadOpen, setDownloadOpen] = useState(false)
+
   return (
     <>
       {/* HERO SLIDER (always dark for cinematic feel) */}
@@ -308,7 +316,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AVAILABLE PROPERTIES — quick category cards linking to /properties */}
+      {/* AVAILABLE PROPERTIES (Shops / Plots / Villas) — hidden along with the
+          Properties page. Uncomment this block, the PROPERTY_CATEGORIES data
+          above, and the route + nav links to bring it all back. */}
+      {/*
       <section className="section-pad bg-page-alt border-t border-soft">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -344,6 +355,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* WHY CHOOSE US */}
       <section className="section-pad bg-page-soft relative">
@@ -519,6 +531,17 @@ export default function Home() {
 
       {/* BROCHURE GALLERY */}
       <BrochureGallery />
+
+      {/* Download CTA — same button as the Brochures page, below the gallery */}
+      <section className="bg-page-alt pb-16 -mt-10 md:-mt-14">
+        <div className="container-x flex justify-center">
+          <button onClick={() => setDownloadOpen(true)} className="btn-gold">
+            <Download className="w-4 h-4" /> Download Brochure
+          </button>
+        </div>
+      </section>
+
+      <BrochureDownloadModal open={downloadOpen} onClose={() => setDownloadOpen(false)} />
 
       {/* CTA STRIP (always dark for drama) */}
       <section className="bg-ink-900 relative overflow-hidden">

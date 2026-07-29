@@ -34,7 +34,9 @@ const NAV_LINKS = [
     label: 'Gallery',
     submenuKind: 'simple',
     children: [
-      { to: '/brochure', label: 'Brochure', meta: 'Project brochures & visual gallery' },
+      // Brochure page hidden for now — uncomment to bring it back (its route
+      // in App.jsx must be uncommented too).
+      // { to: '/brochure', label: 'Brochure', meta: 'Project brochures & visual gallery' },
       //media section page
       { to: '/media/awards', label: 'Award Recognition', meta: 'Recognition & honours' },
       { to: '/media/events', label: 'Events', meta: 'Launches, openings & meetups' },
@@ -391,8 +393,10 @@ export default function Navbar() {
 
           <div className="hidden lg:flex items-center gap-4">
             <ThemeToggle />
-            <Link to="/properties" className="btn-gold text-xs">
-              Buy Properties
+            {/* Points at /contact while the Properties page is hidden. Swap
+                back to /properties + "Buy Properties" when it returns. */}
+            <Link to="/contact" className="btn-gold text-xs">
+              Enquire Now
             </Link>
           </div>
 
@@ -440,8 +444,10 @@ export default function Navbar() {
                   </NavLink>
                 )
               )}
-              <Link to="/properties" onClick={() => setOpen(false)} className="btn-gold mt-6 justify-center">
-                Buy Properties
+              {/* Points at /contact while the Properties page is hidden. Swap
+                  back to /properties + "Buy Properties" when it returns. */}
+              <Link to="/contact" onClick={() => setOpen(false)} className="btn-gold mt-6 justify-center">
+                Enquire Now
               </Link>
             </nav>
           </div>

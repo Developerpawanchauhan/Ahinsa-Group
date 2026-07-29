@@ -45,7 +45,8 @@ export default function Footer() {
               { to: '/about/management', label: 'Management' },
               
               { to: '/projects', label: 'Our Projects' },
-              { to: '/properties', label: 'Properties' },
+              // Properties page hidden for now — uncomment to bring it back.
+              // { to: '/properties', label: 'Properties' },
               //media link
               { to: '/media/awards', label: 'Awards' },
               //events

@@ -986,6 +986,9 @@ export const PROJECT_DETAILS = {
       '/images/projects/ahinsa-complex/office3.jpeg',
       '/images/projects/ahinsa-complex/office4.jpeg',
       '/images/projects/ahinsa-complex/office5.jpeg',
+      '/images/Events/2025-07-10 - ahinsa-complex/img1.jpg',
+      '/images/Events/2025-07-10 - ahinsa-complex/img2.jpg',
+      '/images/Events/2025-07-10 - ahinsa-complex/img3.JPG',
     ],
     overview: [
       'Ahinsa Complex is one of our most established commercial addresses — a fully ready, fully active mixed-use destination home to brands, professional services and a steady footfall of regular visitors.',
@@ -1074,6 +1077,9 @@ export const PROJECT_DETAILS = {
       '/images/projects/corporate-office-gwalior/img.jpeg',
       '/images/projects/corporate-office-gwalior/img2.jpeg',
       '/images/projects/corporate-office-gwalior/img3.jpeg',
+      '/images/Events/2026-07-08 - gwalior-office/img5.JPG',
+      '/images/Events/2026-07-08 - gwalior-office/img6.JPG',
+      '/images/Events/2026-07-08 - gwalior-office/img8.JPG',
     ],
     overview: [
       'Our Gwalior corporate office is a fully ready, fully active mixed-use destination home to brands, professional services and a steady footfall of regular visitors.',

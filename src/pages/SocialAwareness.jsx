@@ -9,14 +9,14 @@ const SOCIALS = {
   instagram: {
     handle: 'ahinsagroupagra',
     url: 'https://www.instagram.com/ahinsagroupagra/',
-    // Last 6 image posts (no reels), newest first.
+    // Last 6 reels, newest first.
     posts: [
-      'https://www.instagram.com/p/DaDCkuBEyXv/',
-      'https://www.instagram.com/p/DZ1MgM_Eywx/',
-      'https://www.instagram.com/p/DYwanblk25d/',
-      'https://www.instagram.com/p/DYrQZ6tE-zE/',
-      'https://www.instagram.com/p/DYO4MgAzapX/',
-      'https://www.instagram.com/p/DUYD-4rEwTL/',
+      'https://www.instagram.com/p/DankqPmhhol/',
+      'https://www.instagram.com/p/DamrNmyT6AF/',
+      'https://www.instagram.com/p/DaavDLETukL/',
+      'https://www.instagram.com/p/DXa-ckdk86C/',
+      'https://www.instagram.com/p/DXvK9X-TRIW/',
+      'https://www.instagram.com/p/DWMBnj6Eyh2/',
     ],
   },
   youtube: {
@@ -86,27 +86,33 @@ export default function SocialAwareness() {
         image="/images/projects/grand-green-valley/card.jpg"
       />
 
-      {/* 1 — INSTAGRAM: live profile + last 6 image posts */}
+      {/* 1 — INSTAGRAM: live profile + last 6 reels */}
       <SectionShell
         id="instagram"
         icon={Instagram}
         eyebrow={`@${SOCIALS.instagram.handle}`}
         title={<>Live on <span className="gold-text">Instagram</span></>}
-        subtitle="The latest six photo posts, straight from our official feed."
+        subtitle="Our latest six reels, straight from our official feed."
         action={{ href: SOCIALS.instagram.url, label: 'Follow on Instagram' }}
       >
+        {/* We can't restyle anything inside Instagram's iframe, and its height
+            varies per post (likes row, caption length, comment bar). So each
+            tile is a fixed 9:17 window and the iframe is deliberately taller
+            than it: the profile header and the reel itself show, and the
+            variable chrome below is cropped off. Every tile then reads the
+            same size and the same way. */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {SOCIALS.instagram.posts.map((p, i) => {
             const src = igEmbedSrc(p)
             return (
               src && (
                 <Reveal key={src} delay={(i % 3) * 0.08}>
-                  <div className="card-glass overflow-hidden">
+                  <div className="card-glass overflow-hidden aspect-[9/17]">
                     <iframe
                       src={src}
-                      title={`Instagram post ${i + 1}`}
+                      title={`Instagram reel ${i + 1}`}
                       className="w-full block"
-                      style={{ height: 540 }}
+                      style={{ height: 1200 }}
                       frameBorder="0"
                       scrolling="no"
                       loading="lazy"

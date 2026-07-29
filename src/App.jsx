@@ -4,17 +4,24 @@ import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import ChatWidget from './components/ChatWidget'
 import Home from './pages/Home'
 import About from './pages/About'
 import Management from './pages/Management'
 import TeamMembers from './pages/TeamMembers'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
-import Properties from './pages/Properties'
+// Properties page hidden for now — uncomment this, its route below, the
+// "Buy Properties" buttons in Navbar.jsx, the footer link, and the
+// "Available Properties" section in Home.jsx to bring it back.
+// import Properties from './pages/Properties'
 import Media from './pages/Media'
 import Awards from './pages/Awards'
 import Events from './pages/Events'
-import Brochure from './pages/Brochure'
+// Brochure page hidden for now — uncomment this and its route + navbar entry
+// to bring it back. The brochure gallery itself still shows on the homepage
+// and on each project page.
+// import Brochure from './pages/Brochure'
 import SocialAwareness from './pages/SocialAwareness'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
@@ -51,13 +58,13 @@ export default function App() {
           <Route path="/projects/:slug" element={<ProjectDetail />} />
 
           {/* Live availability + site-visit booking */}
-          <Route path="/properties" element={<Properties />} />
+          {/* <Route path="/properties" element={<Properties />} /> */}
 
           {/* Media + sub-pages */}
           <Route path="/media" element={<Media />} />
           <Route path="/media/awards" element={<Awards />} />
           <Route path="/media/events" element={<Events />} />
-          <Route path="/brochure" element={<Brochure />} />
+          {/* <Route path="/brochure" element={<Brochure />} /> */}
           <Route path="/media/social" element={<SocialAwareness />} />
 
           <Route path="/contact" element={<Contact />} />
@@ -71,7 +78,9 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      {/* Both float bottom-right; the chat launcher sits above the WhatsApp one. */}
       <WhatsAppButton />
+      <ChatWidget />
     </>
   )
 }
