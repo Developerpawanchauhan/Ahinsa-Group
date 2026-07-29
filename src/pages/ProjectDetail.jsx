@@ -5,7 +5,7 @@ import {
   ShieldCheck, Award, Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy,
   Activity, Zap, Car, Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee,
   Utensils, Store, Film, Music, HeartHandshake, Clock, Eye, Target, Leaf,
-  Send, CheckCircle2, Phone, Mail, ChevronRight, Maximize2, Filter,
+  Send, CheckCircle2, Phone, Mail, ChevronRight, Maximize2,
 } from 'lucide-react'
 
 import PageHero from '../components/PageHero'
@@ -30,6 +30,26 @@ function Icon({ name, className = 'w-5 h-5' }) {
   return <C className={className} />
 }
 
+// A clickable gallery image. `wide` spans two columns (used by the flat
+// gallery on projects that have no sections).
+function GalleryTile({ src, label, onOpen, wide = false }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`View ${label} full screen`}
+      className={`img-zoom group relative block w-full overflow-hidden cursor-zoom-in ${
+        wide ? 'md:col-span-2 aspect-[16/10]' : 'aspect-[4/3]'
+      }`}
+    >
+      <img src={src} alt={label} className="w-full h-full object-cover" loading="lazy" />
+      <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+        <Maximize2 className="w-7 h-7 text-cream" />
+      </span>
+    </button>
+  )
+}
+
 export default function ProjectDetail() {
   const { slug } = useParams()
   const project = PROJECT_DETAILS[slug]
@@ -45,11 +65,9 @@ export default function ProjectDetail() {
   }
   const brochureId = SLUG_TO_BROCHURE[slug]
 
-  // Index of the gallery image shown full screen (null = lightbox closed), and
-  // the active gallery section. Declared before the redirect below so the hook
-  // order never changes.
+  // Index of the gallery image shown full screen (null = lightbox closed).
+  // Declared before the redirect below so the hook order never changes.
   const [galleryIdx, setGalleryIdx] = useState(null)
-  const [galleryTab, setGalleryTab] = useState('All')
 
   if (!project) {
     return <Navigate to="/projects" replace />
@@ -68,23 +86,20 @@ export default function ProjectDetail() {
   // feed when it says nothing, and none at all when it sets `instagram: null`.
   const feed = 'instagram' in project ? project.instagram : INSTAGRAM
 
-  // Gallery sections. Projects that define `galleryGroups` get filter tabs;
-  // the rest fall back to one flat grid of `gallery`.
+  // Gallery. Projects that define `galleryGroups` render one continuous
+  // gallery split into titled blocks (Main Entrance, Parks, …); the rest
+  // fall back to a single flat grid of `gallery`.
   const groups = project.galleryGroups
-  const galleryTabs = groups ? ['All', ...groups.map((g) => g.label)] : []
-  // Guard against a tab left over from a previously viewed project.
-  const activeTab = galleryTabs.includes(galleryTab) ? galleryTab : 'All'
-  const galleryImages = !groups
-    ? project.gallery || []
-    : activeTab === 'All'
-      ? groups.flatMap((g) => g.images)
-      : groups.find((g) => g.label === activeTab)?.images || []
-
-  // Switching sections reshuffles the indices, so close any open lightbox.
-  const selectGalleryTab = (tab) => {
-    setGalleryIdx(null)
-    setGalleryTab(tab)
-  }
+  // Flattened in display order, so the lightbox can step through the whole
+  // gallery across block boundaries.
+  const galleryImages = groups ? groups.flatMap((g) => g.images) : project.gallery || []
+  // Index in `galleryImages` where each block starts.
+  let cursor = 0
+  const galleryBlocks = (groups || []).map((g) => {
+    const block = { ...g, offset: cursor }
+    cursor += g.images.length
+    return block
+  })
 
   return (
     <>
@@ -303,53 +318,51 @@ export default function ProjectDetail() {
             <SectionHeading
               eyebrow="Gallery"
               title={<>A <span className="gold-text">closer look</span></>}
-              subtitle={groups ? 'Browse the township by what you came to see.' : undefined}
+              subtitle={groups ? 'Every corner of the township, section by section.' : undefined}
             />
 
-            {/* Section tabs — only for projects with grouped galleries */}
-            {groups && (
-              <div className="flex flex-wrap items-center gap-2 mt-10">
-                <span className="hidden md:inline-flex items-center gap-2 text-fg-soft text-xs uppercase tracking-[0.2em] mr-2">
-                  <Filter className="w-3 h-3 text-gold-500" />
-                  Sections
-                </span>
-                {galleryTabs.map((tab) => (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => selectGalleryTab(tab)}
-                    aria-pressed={activeTab === tab}
-                    className={`px-4 py-2 text-[10px] uppercase tracking-[0.25em] border transition ${
-                      activeTab === tab
-                        ? 'bg-gold-500 text-ink-900 border-gold-500'
-                        : 'bg-transparent text-fg-muted border-gold-500/25 hover:border-gold-500'
-                    }`}
-                  >
-                    {tab}
-                  </button>
+            {groups ? (
+              /* One continuous gallery, split into titled blocks */
+              galleryBlocks.map((block) => (
+                <div key={block.label} className="mt-14 first:mt-12">
+                  <Reveal>
+                    <div className="flex items-baseline gap-5 mb-6">
+                      <h3 className="heading-serif text-fg text-2xl md:text-3xl whitespace-nowrap">
+                        {block.label}
+                      </h3>
+                      <span className="h-px flex-1 bg-gold-500/25" />
+                      <span className="text-fg-soft text-[10px] uppercase tracking-[0.25em] whitespace-nowrap">
+                        {block.images.length} {block.images.length === 1 ? 'Photo' : 'Photos'}
+                      </span>
+                    </div>
+                  </Reveal>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {block.images.map((src, i) => (
+                      <Reveal key={src + i} delay={(i % 3) * 0.08}>
+                        <GalleryTile
+                          src={src}
+                          label={`${project.name} — ${block.label} ${i + 1}`}
+                          onOpen={() => setGalleryIdx(block.offset + i)}
+                        />
+                      </Reveal>
+                    ))}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-12">
+                {galleryImages.map((src, i) => (
+                  <Reveal key={src + i} delay={(i % 3) * 0.08}>
+                    <GalleryTile
+                      src={src}
+                      label={`${project.name} gallery ${i + 1}`}
+                      onOpen={() => setGalleryIdx(i)}
+                      wide={i === 0 || i === 5}
+                    />
+                  </Reveal>
                 ))}
               </div>
             )}
-
-            <div className={`grid grid-cols-2 md:grid-cols-3 gap-3 ${groups ? 'mt-8' : 'mt-12'}`}>
-              {galleryImages.map((src, i) => (
-                <Reveal key={src + i} delay={(i % 3) * 0.08}>
-                  <button
-                    type="button"
-                    onClick={() => setGalleryIdx(i)}
-                    aria-label={`View ${project.name} gallery image ${i + 1} full screen`}
-                    className={`img-zoom group relative block w-full overflow-hidden cursor-zoom-in ${
-                      i === 0 || i === 5 ? 'md:col-span-2 aspect-[16/10]' : 'aspect-[4/3]'
-                    }`}
-                  >
-                    <img src={src} alt={`${project.name} gallery ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
-                    <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                      <Maximize2 className="w-7 h-7 text-cream" />
-                    </span>
-                  </button>
-                </Reveal>
-              ))}
-            </div>
           </div>
 
           <ImageLightbox

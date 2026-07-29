@@ -16,6 +16,12 @@ export default function AutoSlideImage({ images, alt, className = '', interval =
 
   if (!list.length) return null
 
+  // Single image: render it plainly. No slideshow, no crossfade, and no
+  // motion wrapper that could leave it mid-animation.
+  if (list.length === 1) {
+    return <img src={list[0]} alt={alt} className={className} />
+  }
+
   return (
     <div className="relative w-full h-full">
       <AnimatePresence>
