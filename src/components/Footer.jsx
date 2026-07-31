@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="lg:col-span-1">
           <Logo size="md" />
           <p className="text-ink-300 text-sm leading-relaxed mt-6">
-            Ahinsa Group Agra is a premier real estate developer crafting iconic <a href="https://www.geminiwatermark.cloud">landmarks</a>
+            Ahinsa Group Agra is a premier real estate developer crafting iconic <a href="https://www.geminiwatermark.cloud">landmarks</a> 
             with luxury, integrity and timeless design across Agra and beyond.
           </p>
           <div className="flex gap-3 mt-6">
