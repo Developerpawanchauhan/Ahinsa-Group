@@ -5,7 +5,8 @@ import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import CountUp from '../components/CountUp'
 import AutoSlideImage from '../components/AutoSlideImage'
-import { COMPANY, STATS, MANAGEMENT, MILESTONES } from '../data/site'
+import OfficeCard from '../components/OfficeCard'
+import { COMPANY, STATS, MANAGEMENT, MILESTONES, OFFICES } from '../data/site'
 
 // "Our Story" slideshow — the signature entrance gate of each township,
 // pulled from each project's own folder. Crossfades every 2s.
@@ -30,10 +31,14 @@ export default function About() {
             object-position: 50% 35% !important;
           }
         `}</style>
+        {/* youtu.be/0iQBNcUJ2I0, started at 0:05 — on the first play and on
+            every loop. The image stays on as the poster underneath. */}
         <PageHero
           title="About Us"
           subtitle="Two decades of crafting iconic landmarks in the Taj City."
           breadcrumb="About Us"
+          videoId="0iQBNcUJ2I0"
+          videoStart={5}
           image="/images/about/hero-about.jpg"
         />
       </div>
@@ -105,6 +110,28 @@ export default function About() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* OUR OFFICES */}
+      <section className="section-pad bg-page-soft">
+        <div className="container-x">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <SectionHeading
+              center
+              eyebrow="Where We Work"
+              title={<>Our <span className="gold-text">offices</span></>}
+              subtitle="Come and meet us — our teams are here across Agra and Gwalior."
+            />
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+            {OFFICES.map((o, i) => (
+              <Reveal key={o.slug} delay={i * 0.08}>
+                <OfficeCard office={o} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -224,7 +251,7 @@ export default function About() {
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold-500/40 to-transparent" />
             <div className="space-y-12">
               {MILESTONES.map((m, i) => (
-                <Reveal key={m.year} delay={i * 0.05}>
+                <Reveal key={`${m.year}-${m.title}`} delay={i * 0.05}>
                   <div className={`flex items-start gap-6 md:gap-12 ${i % 2 ? 'md:flex-row-reverse' : ''}`}>
                     <div className="hidden md:block flex-1" />
                     <div className="absolute md:relative left-0 md:left-auto -translate-x-1/2 md:translate-x-0 md:flex-shrink-0">
@@ -234,6 +261,11 @@ export default function About() {
                     </div>
                     <div className="flex-1 pl-12 md:pl-0">
                       <div className="card-glass p-7">
+                        {m.month && (
+                          <div className="text-[10px] uppercase tracking-[0.25em] text-gold-700 dark:text-gold-500">
+                            {m.month}
+                          </div>
+                        )}
                         <div className="font-serif text-3xl gold-text">{m.year}</div>
                         <h3 className="text-fg font-medium text-lg mt-2">{m.title}</h3>
                         <p className="text-fg-soft text-sm mt-3 leading-relaxed">{m.text}</p>

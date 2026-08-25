@@ -71,6 +71,15 @@ export const PROJECTS = [
       'Signature residences with resort-style amenities, set in a lush green community along Fatehabad Road.',
   },
   {
+    slug: 'grand-square-mall',
+    name: 'Ahinsa The Grand Square Mall',
+    location: 'Fatehabad Road, Agra',
+    type: 'Retail & Entertainment',
+    status: 'Completed',
+    image: '/images/projects/grand-square-mall/img1.png',
+    short:
+      'Anchor brands, a multiplex cinema, a grand food court and a signature central atrium under one roof.',
+  },  {
     slug: 'green-valley-empire',
     name: 'Ahinsa Green Valley Empire',
     location: 'Agra',
@@ -131,6 +140,16 @@ export const PROJECTS = [
       'A landmark commercial complex blending retail, offices and services under one address.',
   },
   {
+    slug: 'ahinsa-office-firozabad',
+    name: 'Ahinsa Office, Firozabad',
+    location: 'Firozabad',
+    type: 'Corporate Office',
+    status: 'Completed',
+    image: '/images/projects/ahinsa-office-firozabad/img1.png',
+    short:
+      'A landmark commercial complex blending retail, offices and services under one address.',
+  },
+  {
     slug: 'green-valley-lake-city',
     name: 'Ahinsa Green Valley Lake City',
     location: 'Gwalior, Madhya Pradesh',
@@ -140,16 +159,17 @@ export const PROJECTS = [
     short:
       'Signature residences with resort-style amenities, set in a lush green community along Fatehabad Road.',
   },
-  // {
-  //   slug: 'ahinsa-mall-firozabad',
-  //   name: 'Ahinsa Mall Firozabad',
-  //   location: 'Firozabad, UP',
-  //   type: 'Hi-Street Luxury Mall',
-  //   status: 'Upcoming',
-  //   image: '/images/projects/ahinsa-mall-firozabad/card.png',
-  //   short:
-  //     'The next-generation shopping and entertainment destination for Firozabad and surrounding districts.',
-  // },
+  {
+    slug: 'ahinsa-mall-firozabad',
+    name: 'Ahinsa Mall Firozabad',
+    location: 'Firozabad, UP',
+    type: 'Hi-Street Luxury Mall',
+    status: 'Upcoming',
+    image: '/images/projects/ahinsa-mall-firozabad/card.png',
+    short:
+      'The next-generation shopping and entertainment destination for Firozabad and surrounding districts.',
+  },
+
 ]
 
 // =============================================================
@@ -379,7 +399,9 @@ export const PROJECT_DETAILS = {
     totalArea: 'Sprawling green campus',
     possession: 'On Request',
     priceRange: 'On Request',
-    mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
+    // TODO: exact site coordinates. This was a copy of Grand Green Valley’s
+    // Agra pin — ~100 km from Gwalior — so it points at the city for now.
+    mapEmbed: 'https://www.google.com/maps?q=Gwalior,+Madhya+Pradesh&output=embed',
     overviewVideo: 'https://www.youtube.com/embed/6naURT36QaY',
     hero: '/images/projects/green-valley-lake-city/lake-city.jpg',
     overviewImage:
@@ -911,20 +933,9 @@ export const PROJECT_DETAILS = {
       { icon: 'Award', title: 'Established Address', text: 'A known and trusted commercial landmark in the city.' },
       { icon: 'Car', title: 'Approachable Parking', text: 'Designated parking with easy in-out movement.' },
     ],
-    amenities: [
-      { icon: 'Building2', name: 'Multiple Lifts' },
-      { icon: 'Wifi', name: 'High-Speed Internet' },
-      { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Sparkles', name: 'Housekeeping & Upkeep' },
-      { icon: 'Car', name: 'Parking Area' },
-      { icon: 'Droplet', name: 'Water Supply' },
-      { icon: 'Coffee', name: 'F&amp;B Tenants' },
-      { icon: 'Store', name: 'Retail Mix' },
-      { icon: 'Users', name: 'Common Areas' },
-      { icon: 'Sun', name: 'Well-Lit Common Areas' },
-      { icon: 'Activity', name: 'Active Footfall' },
-      { icon: 'MapPin', name: 'Prime Address' },
-    ],
+    // Offices skip the "Lifestyle, delivered" amenities section — that copy
+    // is written for homes. Add entries here to bring the section back.
+    amenities: [],
     specifications: [
       {
         category: 'Building',
@@ -1001,20 +1012,9 @@ export const PROJECT_DETAILS = {
       { icon: 'Award', title: 'Established Address', text: 'A known and trusted commercial landmark in the city.' },
       { icon: 'Car', title: 'Approachable Parking', text: 'Designated parking with easy in-out movement.' },
     ],
-    amenities: [
-      { icon: 'Building2', name: 'Multiple Lifts' },
-      { icon: 'Wifi', name: 'High-Speed Internet' },
-      { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Sparkles', name: 'Housekeeping & Upkeep' },
-      { icon: 'Car', name: 'Parking Area' },
-      { icon: 'Droplet', name: 'Water Supply' },
-      { icon: 'Coffee', name: 'F&amp;B Tenants' },
-      { icon: 'Store', name: 'Retail Mix' },
-      { icon: 'Users', name: 'Common Areas' },
-      { icon: 'Sun', name: 'Well-Lit Common Areas' },
-      { icon: 'Activity', name: 'Active Footfall' },
-      { icon: 'MapPin', name: 'Prime Address' },
-    ],
+    // Offices skip the "Lifestyle, delivered" amenities section — that copy
+    // is written for homes. Add entries here to bring the section back.
+    amenities: [],
     specifications: [
       {
         category: 'Building',
@@ -1092,20 +1092,9 @@ export const PROJECT_DETAILS = {
       { icon: 'Award', title: 'Established Address', text: 'A known and trusted commercial landmark in the city.' },
       { icon: 'Car', title: 'Approachable Parking', text: 'Designated parking with easy in-out movement.' },
     ],
-    amenities: [
-      { icon: 'Building2', name: 'Multiple Lifts' },
-      { icon: 'Wifi', name: 'High-Speed Internet' },
-      { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Sparkles', name: 'Housekeeping & Upkeep' },
-      { icon: 'Car', name: 'Parking Area' },
-      { icon: 'Droplet', name: 'Water Supply' },
-      { icon: 'Coffee', name: 'F&amp;B Tenants' },
-      { icon: 'Store', name: 'Retail Mix' },
-      { icon: 'Users', name: 'Common Areas' },
-      { icon: 'Sun', name: 'Well-Lit Common Areas' },
-      { icon: 'Activity', name: 'Active Footfall' },
-      { icon: 'MapPin', name: 'Prime Address' },
-    ],
+    // Offices skip the "Lifestyle, delivered" amenities section — that copy
+    // is written for homes. Add entries here to bring the section back.
+    amenities: [],
     specifications: [
       {
         category: 'Building',
@@ -1141,6 +1130,114 @@ export const PROJECT_DETAILS = {
     ],
   },
 
+  'ahinsa-office-firozabad': {
+    name: 'Ahinsa Office, Firozabad',
+    tagline: 'A landmark mixed-use complex at the heart of the city.',
+    location: 'Firozabad',
+    fullAddress: 'Firozabad, Uttar Pradesh',
+    instagram: null, // no Instagram section on this page
+    type: 'Corporate Office',
+    status: 'Completed',
+    configurations: 'Retail Office Services',
+    unitArea: '',
+    totalArea: 'Established commercial address',
+    possession: 'Ready',
+    priceRange: 'On Request',
+    rera: { number: 'UP-RERA Reg. No. — TBD', link: '#' },
+    mapEmbed: 'https://www.google.com/maps?q=Firozabad,+Uttar+Pradesh&output=embed',
+    // ⚠️ The Gwalior walkthrough does not belong on this page. Null until a
+    // Firozabad video exists — the hero falls back to the still image.
+    videoEmbed: null,
+    // Wide facade shot — the hero crops to 80vh, so the landscape frame works
+    // better here than the portrait `uper.png`.
+    hero: '/images/projects/ahinsa-office-firozabad/img1.png',
+    overviewImage: '/images/projects/ahinsa-office-firozabad/img2.png',
+    gallery: [
+      '/images/projects/ahinsa-office-firozabad/img1.png',
+      '/images/projects/ahinsa-office-firozabad/uper.png',
+      '/images/projects/ahinsa-office-firozabad/img2.png',
+      '/images/projects/ahinsa-office-firozabad/img3.png',
+      '/images/projects/ahinsa-office-firozabad/img4.png',
+    ],
+    overview: [
+      'Our Firozabad office is a fully ready, fully active mixed-use destination home to brands, professional services and a steady footfall of regular visitors.',
+      'The building combines street-facing retail with upper-floor offices, designed so that businesses get visibility, accessibility and the prestige of a known address.',
+      'For investors and tenants alike, the Firozabad office offers the comfort of a proven asset with strong fundamentals and consistent demand.',
+    ],
+    highlights: [
+      { icon: 'MapPin', title: 'Central Location', text: 'High-visibility, high-footfall site with easy approach.' },
+      { icon: 'Store', title: 'Retail + Office Mix', text: 'Ground-floor retail with upper-level office and service tenants.' },
+      { icon: 'Award', title: 'Established Address', text: 'A known and trusted commercial landmark in the city.' },
+    ],
+    // Offices skip the "Lifestyle, delivered" amenities section — that copy
+    // is written for homes. Add entries here to bring the section back.
+    amenities: [],
+    specifications: [
+      {
+        category: 'Building',
+        items: [
+          'RCC framed structure',
+          'Designed for mixed retail and office occupancy',
+          'Multiple staircases and emergency exits',
+        ],
+      },
+      {
+        category: 'Common Areas',
+        items: [
+          'Vitrified-tile flooring in lobbies and corridors',
+          'Multiple lift wells and adequate stairwells',
+          'Designated public restrooms on shared floors',
+        ],
+      },
+      {
+        category: 'Services',
+        items: [
+          'DG backup for common services',
+          'Centralized water tank and supply',
+          'Fire detection &amp; protection systems',
+        ],
+      },
+    ],
+    floorPlans: [],
+    // ⚠️ Gwalior landmarks removed — fill in real Firozabad distances.
+    locationAdvantages: [],
+  },
+
+  'grand-square-mall': {
+    name: 'Ahinsa The Grand Square Mall',
+    tagline: 'Retail, dining and entertainment under one roof.',
+    location: 'Fatehabad Road, Agra',
+    fullAddress: 'Ahinsa The Grand Green Valley, Fatehabad Road, Agra',
+    instagram: null,
+    type: 'Retail & Entertainment',
+    status: 'Completed',
+    configurations: 'Anchor Retail · Multiplex · Food Court',
+    unitArea: 'On Request',
+    totalArea: 'On Request',
+    possession: 'Ready',
+    priceRange: 'On Request',
+    // The mall stands inside the Grand Green Valley township, so it shares that
+    // township's pin — the matching coordinates here are deliberate.
+    mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
+    videoEmbed: null,
+    // Dusk render leads the gallery — the hero lays a dark gradient over it.
+    hero: '/images/projects/grand-square-mall/hero.png',
+    overviewImage: '/images/projects/grand-square-mall/img5.png',
+    gallery: [
+      '/images/projects/grand-square-mall/hero.png',
+      '/images/projects/grand-square-mall/img1.png',
+      '/images/projects/grand-square-mall/img5.png',
+    ],
+    overview: [
+      'Ahinsa The Grand Square Mall is the group’s most ambitious retail and entertainment destination — anchor brands, a multiplex cinema, a grand food court and a signature central atrium, all under one roof.',
+      // TODO: add the full write-up.
+    ],
+    highlights: [], // TODO
+    amenities: [], // TODO
+    specifications: [],
+    floorPlans: [],
+    locationAdvantages: [], // TODO: key distances
+  },
   'ahinsa-mall-firozabad': {
     name: 'Ahinsa Mall Firozabad',
     tagline: 'The next-generation shopping and entertainment destination for Firozabad.',
@@ -1228,6 +1325,34 @@ export const PROJECT_DETAILS = {
     ],
   },
 }
+
+// =============================================================
+// OFFICES vs DEVELOPMENTS
+//
+// Our corporate offices are not something a buyer shops for, so they are kept
+// out of the homepage portfolio grid and shown on the About and Contact pages
+// instead. Ahinsa Complex stays in the portfolio — it is a landmark project in
+// its own right. Move an entry between the two lists by editing OFFICE_SLUGS.
+// =============================================================
+export const OFFICE_SLUGS = [
+  'corporate-office',
+  'corporate-office-gwalior',
+  'ahinsa-office-firozabad',
+]
+
+/** Company premises — rendered by <OfficeCard> on /about and /contact. */
+export const OFFICES = PROJECTS.filter((p) => OFFICE_SLUGS.includes(p.slug)).map((p) => {
+  const detail = PROJECT_DETAILS[p.slug] || {}
+  return {
+    ...p,
+    address: detail.fullAddress || p.location,
+    // The detail page embeds this; strip the embed flag for a directions link.
+    mapUrl: detail.mapEmbed ? detail.mapEmbed.replace('&output=embed', '') : null,
+  }
+})
+
+/** Everything a buyer can actually buy — the homepage portfolio grid. */
+export const DEVELOPMENTS = PROJECTS.filter((p) => !OFFICE_SLUGS.includes(p.slug))
 
 // =============================================================
 // FEATURES — "The Ahinsa Promise" pillars
@@ -1392,14 +1517,16 @@ export const GALLERY = [
 
 
 export const MILESTONES = [
-  { year: '2023', title: 'Ahinsa Green Valley Township', text: 'Launched our flagship integrated township at Kuberpur, Agra — offering premium Residential & Commercial Plots across a well-planned, green-centric community with wide roads and modern infrastructure.' },
-  { year: '2024', title: 'Ahinsa The Grand Green Valley', text: 'Unveiled the Grand Green Valley on Fatehabad Road, Agra — a landmark luxury township steps from the Taj Mahal, featuring Grand Villas, Residential & Commercial Plots and Farm Houses amidst lush landscapes.' },
-  { year: '2025', title: 'Ahinsa Green Valley Empire', text: 'Launched Green Valley Empire at Mudi Crossing, Agra — a premium township offering Rich Villas, Residential & Commercial Plots and Farm Houses crafted for families who value space, elegance and long-term growth.' },
-  { year: '2025', title: 'Ahinsa Green Valley Orchid', text: 'Introduced Green Valley Orchid at Kuberpur, Agra — a thoughtfully designed residential destination offering premium plots and villas in a nature-integrated setting with excellent connectivity.' },
-  { year: '2025', title: 'Ahinsa Complex — Fully Developed', text: 'Completed the full development of Ahinsa Complex at Ram Bagh, Agra — a vibrant mixed-use landmark combining street-level retail with professional office spaces, now fully operational and occupied.' },
-  { year: '2026', title: 'Ahinsa The Grand Square Mall', text: 'Broke ground on Ahinsa The Grand Square Mall in Firozabad — the region\'s most ambitious retail and entertainment destination featuring anchor brands, a multiplex cinema, a grand food court and a signature central atrium.' },
-  { year: '2026', title: 'Rich Villa Inauguration — Green Valley Empire', text: 'Inaugurated the Rich Villas at Ahinsa Green Valley Empire, Mudi Crossing, Agra — elegantly designed luxury homes with generous interiors, premium finishes and private gardens, launched with the blessings of Guru Vijay Kaushal Ji.' },
-  { year: '2026', title: 'Ahinsa Corporate Office, Gwalior', text: 'Inaugurated the Ahinsa Corporate Office in Gwalior, Madhya Pradesh — marking the group\'s expansion beyond Uttar Pradesh with a centrally located mixed-use landmark pairing street-facing retail with upper-floor office suites.' },
+  { month: 'Jan', year: '2024', title: 'Ahinsa Green Valley Township', text: 'Launched our flagship integrated township at Kuberpur, Agra \u2014 offering premium Residential & Commercial Plots across a well-planned, green-centric community with wide roads and modern infrastructure.' },
+  { month: 'Oct', year: '2024', title: 'Ahinsa The Grand Green Valley', text: 'Unveiled the Grand Green Valley on Fatehabad Road, Agra \u2014 a landmark luxury township steps from the Taj Mahal, featuring Grand Villas, Residential & Commercial Plots and Farm Houses amidst lush landscapes.' },
+  { month: 'Jan', year: '2025', title: 'Ahinsa The Grand Green Valley \u2014 Grand Launch', text: 'Opened the Grand Green Valley to buyers with a grand launch on Republic Day \u2014 the township\u2019s villas, plots and farm houses went on offer to families and investors across Agra.' },
+  { month: 'Apr', year: '2025', title: 'Ahinsa Green Valley Empire', text: 'Launched Green Valley Empire at Mudi Crossing, Agra \u2014 a premium township offering Rich Villas, Residential & Commercial Plots and Farm Houses crafted for families who value space, elegance and long-term growth.' },
+  { month: 'Jul', year: '2025', title: 'Ahinsa Complex', text: 'Opened the corporate office at Ahinsa Complex, Ram Bagh, Agra \u2014 completing a vibrant mixed-use landmark that pairs street-level retail with professional office space, now fully operational and occupied.' },
+  { month: 'Nov', year: '2025', title: 'Ahinsa Green Valley Orchid', text: 'Introduced Green Valley Orchid at Kuberpur, Agra \u2014 a thoughtfully designed residential destination offering premium plots in a nature-integrated setting with excellent connectivity.' },
+  { month: 'Jan', year: '2026', title: 'Ahinsa The Grand Green Valley \u2014 Inauguration', text: 'Inaugurated Ahinsa The Grand Green Valley on Fatehabad Road, Agra \u2014 the township\u2019s completed infrastructure, entrance gate and landscaped commons formally opened to residents.' },
+  { month: 'Mar', year: '2026', title: 'Rich Villa \u2014 Green Valley Empire', text: 'Inaugurated the Rich Villas at Ahinsa Green Valley Empire, Mudi Crossing, Agra \u2014 elegantly designed luxury homes with generous interiors, premium finishes and private gardens, launched with the blessings of Guru Vijay Kaushal Ji.' },
+  { month: 'Jul', year: '2026', title: 'Ahinsa Corporate Office, Gwalior \u2014 Inauguration', text: 'Inaugurated the Ahinsa Corporate Office in Gwalior, Madhya Pradesh \u2014 marking the group\u2019s expansion beyond Uttar Pradesh with a centrally located mixed-use landmark pairing street-facing retail with upper-floor office suites.' },
+  { month: 'Aug', year: '2026', title: 'Ahinsa Corporate Office, Firozabad \u2014 Inauguration', text: 'Inaugurated the Ahinsa Office in Firozabad, Uttar Pradesh \u2014 a ready, fully active address bringing the group closer to buyers across the district, with street-facing retail below and office suites above.' },
 ]
 
 
@@ -1434,10 +1561,14 @@ export const MANAGEMENT = [
     image: '/images/Team/rachit-jain.jpg',
     short:
       'Drives strategic vision and operational excellence across all verticals of the group.',
+    // In his own voice \u2014 a message to the Ahinsa family, not a third-person profile.
     bio: [
-      'Mr. Rachit Jain plays a central role in shaping Ahinsa Group\'s long-term direction with a focus on innovation, strategic expansion and operational excellence.',
-      'His leadership ensures seamless execution across all business functions, from project development to customer experience.',
-      'With a deep commitment to quality and customer satisfaction, he drives the group\'s ambitions while maintaining the principles of integrity and transparency.',
+      'Today, we are more than 5,000 people strong \u2014 and every single day, that family grows a little bigger.',
+      'When I look back, it\u2019s hard to believe how far we\u2019ve come. One project became six. One city became three. And we are only getting started.',
+      'But if you ask me what I\u2019m most proud of, it isn\u2019t the numbers. It\u2019s the reason behind them.',
+      'Every person who joined us did so because someone they trusted told them they could. That trust wasn\u2019t given to us \u2014 we earned it, promise by promise, delivery by delivery.',
+      'That is the only principle we have ever followed at AHINSA GROUP, whatever we promise, we deliver.',
+      'Thank you to every family member who believed in us early, and to every new one joining us today. The next chapter belongs to all of us.',
     ],
     achievements: [
       'Chief Executive Officer',
@@ -1725,6 +1856,70 @@ export const AWARDS = [
 // EVENTS — launches, ground-breakings, customer events
 // =============================================================
 export const EVENTS = [
+  {
+    date: 'August 15, 2026',
+    title: 'Ahinsa City Centre Mall, Firozabad — Grand Pre-Launch',
+    location: 'Firozabad, Uttar Pradesh',
+    type: 'Pre-Launch',
+    images: [
+      '/images/Events/2026-08-15/1.JPG',
+      '/images/Events/2026-08-15/2.JPG',
+      '/images/Events/2026-08-15/3.JPG',
+      '/images/Events/2026-08-15/4.JPG',
+      '/images/Events/2026-08-15/5.JPG',
+      '/images/Events/2026-08-15/6.JPG',
+      '/images/Events/2026-08-15/7.JPG',
+      '/images/Events/2026-08-15/8.JPG',
+      '/images/Events/2026-08-15/9.JPG',
+      '/images/Events/2026-08-15/10.JPG',
+      '/images/Events/2026-08-15/11.JPG',
+      '/images/Events/2026-08-15/12.JPG',
+      '/images/Events/2026-08-15/13.JPG',
+      '/images/Events/2026-08-15/14.JPG',
+      '/images/Events/2026-08-15/15.JPG',
+      '/images/Events/2026-08-15/16.JPG',
+      '/images/Events/2026-08-15/17.JPG',
+      '/images/Events/2026-08-15/18.JPG',
+      '/images/Events/2026-08-15/19.JPG',
+      '/images/Events/2026-08-15/20.JPG',
+      '/images/Events/2026-08-15/21.JPG',
+      '/images/Events/2026-08-15/22.JPG',
+      '/images/Events/2026-08-15/23.JPG',
+      '/images/Events/2026-08-15/24.JPG',
+      '/images/Events/2026-08-15/25.JPG',
+      '/images/Events/2026-08-15/26.JPG',
+      '/images/Events/2026-08-15/27.JPG',
+      '/images/Events/2026-08-15/28.JPG',
+      '/images/Events/2026-08-15/29.JPG',
+      '/images/Events/2026-08-15/30.JPG',
+      '/images/Events/2026-08-15/31.JPG',
+      '/images/Events/2026-08-15/32.JPG',
+      '/images/Events/2026-08-15/33.JPG',
+      '/images/Events/2026-08-15/34.JPG',
+      '/images/Events/2026-08-15/35.JPG',
+      '/images/Events/2026-08-15/36.JPG',
+    ],
+    excerpt:
+      'Grand pre-launch of Ahinsa City Centre Mall in Firozabad — the region’s next shopping and entertainment destination.',
+  },
+  {
+    date: 'August 3, 2026',
+    title: 'Ahinsa Office, Firozabad — Inauguration',
+    location: 'Firozabad, Uttar Pradesh',
+    type: 'Inauguration',
+    images: [
+      '/images/Events/2026-08-03/img1.jpg',
+      '/images/Events/2026-08-03/img2.JPG',
+      '/images/Events/2026-08-03/img3.JPG',
+      '/images/Events/2026-08-03/img4.JPG',
+      '/images/Events/2026-08-03/img5.JPG',
+      '/images/Events/2026-08-03/img6.jpg',
+      '/images/Events/2026-08-03/img7.jpg',
+      '/images/Events/2026-08-03/img8.jpg',
+    ],
+    excerpt:
+      'Inauguration of the Ahinsa Office in Firozabad — a new address for the group in western Uttar Pradesh.',
+  },
   {
     date: 'July 8, 2026',
     title: 'Ahinsa Corporate Office, Gwalior — Inauguration',

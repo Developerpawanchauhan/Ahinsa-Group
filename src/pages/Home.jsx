@@ -27,7 +27,7 @@ import SectionHeading from '../components/SectionHeading'
 import BrochureGallery from '../components/BrochureGallery'
 import BrochureDownloadModal from '../components/BrochureDownloadModal'
 import CountUp from '../components/CountUp'
-import { HERO_SLIDES, STATS, PROJECTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY, PROPERTY_LISTINGS } from '../data/site'
+import { HERO_SLIDES, STATS, DEVELOPMENTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY, PROPERTY_LISTINGS } from '../data/site'
 
 const ICON_MAP = { Compass, Award, Clock, HeartHandshake }
 
@@ -307,7 +307,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {PROJECTS.map((p, i) => (
+            {DEVELOPMENTS.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08}>
                 <ProjectCard project={p} />
               </Reveal>

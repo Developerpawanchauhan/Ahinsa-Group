@@ -11,7 +11,8 @@ import {
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
-import BrochureGallery from '../components/BrochureGallery'
+import BrochureGallery, { BROCHURE_PROJECTS } from '../components/BrochureGallery'
+import BrochureDownloadModal from '../components/BrochureDownloadModal'
 import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
 import InstagramFeed from '../components/InstagramFeed'
@@ -54,20 +55,19 @@ export default function ProjectDetail() {
   const { slug } = useParams()
   const project = PROJECT_DETAILS[slug]
 
-  // Map project slug → brochure tab id
-  // Only slugs that actually have a matching brochure appear here — each
-  // project page shows its own brochure only (no orchid brochure exists).
-  const SLUG_TO_BROCHURE = {
-    'grand-green-valley':     'grand',
-    'green-valley-empire':    'empire',
-    'green-valley-township':  'township',
-    'ahinsa-mall-firozabad':  'firozabad',
-  }
-  const brochureId = SLUG_TO_BROCHURE[slug]
+  // This page shows and offers only its own brochure. Each brochure names the
+  // project it belongs to (see BROCHURE_PROJECTS), so projects without one —
+  // Lake City and the offices — simply get no gallery and no download button.
+  const brochure = BROCHURE_PROJECTS.find((b) => b.slug === slug)
+  const brochureId = brochure?.id
+
+  // Offices without a surveyed distance list skip the "Key Distances" card.
+  const hasDistances = project?.locationAdvantages?.length > 0
 
   // Index of the gallery image shown full screen (null = lightbox closed).
   // Declared before the redirect below so the hook order never changes.
   const [galleryIdx, setGalleryIdx] = useState(null)
+  const [downloadOpen, setDownloadOpen] = useState(false)
 
   if (!project) {
     return <Navigate to="/projects" replace />
@@ -225,7 +225,9 @@ export default function ProjectDetail() {
         )}
       </section>
 
-      {/* HIGHLIGHTS */}
+      {/* HIGHLIGHTS — skipped while a project has none, so the heading never
+          appears above an empty row. */}
+      {project.highlights?.length > 0 && (
       <section className="section-pad bg-page-soft">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -235,9 +237,13 @@ export default function ProjectDetail() {
               title={<>What makes it <span className="gold-text">special</span></>}
             />
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {project.highlights.map((h, i) => (
-              <Reveal key={h.title} delay={i * 0.08}>
+              <Reveal
+                key={h.title}
+                delay={i * 0.08}
+                className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]"
+              >
                 <div className="card-glass p-7 h-full">
                   <div className="w-14 h-14 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
                     <Icon name={h.icon} className="w-6 h-6" />
@@ -250,8 +256,11 @@ export default function ProjectDetail() {
           </div>
         </div>
       </section>
+      )}
 
-      {/* AMENITIES */}
+      {/* AMENITIES — the "Lifestyle, delivered" copy is residential, so an
+          office with an empty `amenities` list skips the section entirely. */}
+      {project.amenities?.length > 0 && (
       <section className="section-pad bg-page">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -276,6 +285,7 @@ export default function ProjectDetail() {
           </div>
         </div>
       </section>
+      )}
 
       {/* FLOOR PLANS / CONFIGURATIONS */}
       {project.floorPlans?.length > 0 && (
@@ -376,7 +386,23 @@ export default function ProjectDetail() {
       )}
 
       {/* BROCHURE GALLERY — only this project's own brochure */}
-      {brochureId && <BrochureGallery defaultId={brochureId} single />}
+      {brochureId && (
+        <BrochureGallery
+          defaultId={brochureId}
+          single
+          onDownload={() => setDownloadOpen(true)}
+        />
+      )}
+
+      {/* Locked to this project — the visitor cannot pick another brochure here. */}
+      {brochureId && (
+        <BrochureDownloadModal
+          open={downloadOpen}
+          onClose={() => setDownloadOpen(false)}
+          defaultBrochureId={brochureId}
+          lockBrochure
+        />
+      )}
 
       {/* INSTAGRAM — site-wide feed by default; a project can override it with
           its own `instagram` field, or set `instagram: null` to hide the
@@ -385,7 +411,11 @@ export default function ProjectDetail() {
 
       {/* LOCATION ADVANTAGES */}
       <section className="section-pad bg-page">
-        <div className="container-x grid lg:grid-cols-2 gap-12">
+        <div
+          className={`container-x grid gap-12 ${
+            hasDistances ? 'lg:grid-cols-2' : ''
+          }`}
+        >
           <div>
             <SectionHeading
               eyebrow="Location Advantage"
@@ -405,6 +435,7 @@ export default function ProjectDetail() {
               </div>
             </Reveal>
           </div>
+          {hasDistances && (
           <Reveal delay={0.15}>
             <div className="card-glass p-8">
               <h3 className="font-serif text-2xl text-fg">Key Distances</h3>
@@ -427,6 +458,7 @@ export default function ProjectDetail() {
               </ul>
             </div>
           </Reveal>
+          )}
         </div>
       </section>
 

@@ -34,12 +34,15 @@ function loadYouTubeAPI() {
  *    the `playlist` param, so the prev/next playlist buttons never exist
  *  - the iframe never receives pointer events, so no hover/tap chrome either
  *
+ * `start` skips the opening seconds — the manual loop honours it too, so every
+ * repeat begins at the same point rather than at 0:00.
+ *
  * Sound: the video tries to start UNMUTED. Browsers block unmuted autoplay
  * unless the visitor has already engaged with the site, so when that happens we
  * fall back to muted playback (the hero still moves) and unmute on the very
  * first click/tap/keypress, which counts as the required user gesture.
  */
-export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 60 }) {
+export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 60, start = 0 }) {
   const hostRef = useRef(null)
   const playerRef = useRef(null)
   const [visible, setVisible] = useState(false)
@@ -100,6 +103,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
         playerVars: {
           autoplay: 1,
           mute: 0,
+          start,
           controls: 0,
           rel: 0,
           playsinline: 1,
@@ -138,7 +142,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
               // Manual loop: hide behind the poster, restart, fade back in.
               clearTimeout(revealTimer)
               setVisible(false)
-              e.target.seekTo(0)
+              e.target.seekTo(start)
               e.target.playVideo()
             }
           },
@@ -154,7 +158,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
       playerRef.current = null
       if (player && player.destroy) player.destroy()
     }
-  }, [videoId, defaultVolume])
+  }, [videoId, defaultVolume, start])
 
   const toggleMute = () => {
     const next = !muted

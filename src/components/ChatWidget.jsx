@@ -1,71 +1,435 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Bot, X, ArrowUpRight } from 'lucide-react'
+import { Bot, X, ArrowUpRight, Phone } from 'lucide-react'
+import { WEB3FORMS_KEY } from '../data/site'
 
 /**
- * Menu-based chat widget — a fixed decision tree, not an AI. Every answer
- * below is hard-coded; nothing is fetched and no API is called.
+ * Ahinsa property assistant — a branching menu bot, not an AI. Every reply
+ * below is hard-coded, so the widget can never quote a price it invented or
+ * promise something the sales team did not approve.
  *
- * Sits above the floating WhatsApp button on every page (mounted once in
- * App.jsx). The question options live inside the conversation, appearing under
- * the latest reply, so the whole exchange reads as one thread. "Talk to a real
- * person" hands off to WhatsApp with the full transcript pre-filled.
+ * Its job is not to answer everything. It builds interest, then captures the
+ * visitor's name and mobile number so the team can call them.
+ *
+ * Mounted once in App.jsx, above the floating WhatsApp button. The options for
+ * the current step live inside the conversation, under the latest reply, so
+ * the whole exchange reads as one thread.
+ *
+ * HARD RULES baked into the copy below — keep them when editing:
+ *   1. Never state a rate, discount or total cost. Route to WhatsApp.
+ *   2. Never promise returns, appreciation or resale value.
+ *   3. Never invent amenities, approvals, bank names or dates. If it is not
+ *      written here, the answer is "our team will confirm".
+ *   4. No legal, tax or loan-eligibility advice. Route to the team.
+ *   5. Never negotiate. Route to the team.
+ *   6. Ask for the lead once. If the visitor declines, never ask again.
+ *
+ * Language: English. Every visible string is in this file, so a Hinglish or
+ * Devanagari variant is a matter of translating the copy below.
  */
 
 /* ------------------------------------------------------------------ *
- * EDIT ME — questions, answers and copy
- * ------------------------------------------------------------------ *
- * Sample content for now. Replace `question` / `answer` with the real
- * ones — add or remove entries freely, the menu adapts to the length. */
-const CHAT_FAQS = [
-  {
-    id: 'projects',
-    question: 'Which projects are currently ongoing?',
-    answer:
-      'We are currently developing Ahinsa The Grand Green Valley (Fatehabad Road), Green Valley Empire ' +
-      '(Mudi Crossing), Green Valley Township and Green Valley Orchid (Kuberpur). Each offers both ' +
-      'residential and commercial options.',
-  },
-  {
-    id: 'pricing',
-    question: 'What are your plot and villa prices?',
-    answer:
-      'Pricing depends on the project, plot size and location. Plots are available from 111.11 up to ' +
-      '200 sq yard. Our team will share the current rate list and payment plan with you.',
-  },
-  {
-    id: 'visit',
-    question: 'How do I book a site visit?',
-    answer:
-      'Site visits are completely free, and pick-up can be arranged. Just share your name, number and a ' +
-      'preferred day, and our team will confirm the details with you.',
-  },
-  {
-    id: 'loan',
-    question: 'Do you help with home loans and registry?',
-    answer:
-      'Yes. Our projects are approved by leading banks, and our team supports you through the entire ' +
-      'process — from loan documentation right up to registry.',
-  },
-]
+ * CONFIG — contact details
+ * ------------------------------------------------------------------ */
 
-/** Same number as the floating WhatsApp button (intl format, no + or spaces). */
+/** WhatsApp number: country code + number, no +, spaces or dashes. */
 const WHATSAPP_NUMBER = '916398730582'
+const PHONE_DISPLAY = '+91 63987 30582'
+const PHONE_TEL = '+916398730582'
 
 const BOT_NAME = 'Ahinsa Assistant'
 const BOT_TAGLINE = 'Online · replies instantly'
-const WELCOME_MESSAGE = 'Hello! 👋 I can help you with our projects. Pick a question below to get started.'
-const MENU_PROMPT = 'Anything else?'
-const HUMAN_HANDOFF_LABEL = 'Talk to our consultant'
+const MENU_PROMPT = 'Choose an option'
 
-/** How long the typing dots show before an answer lands. */
+/** How long the typing dots show before a reply lands. */
 const TYPING_MS = 550
 
+/** The one line used whenever a question falls outside the knowledge below. */
+const ESCALATION =
+  `For this, our property expert will assist you personally.\n📞 Call or WhatsApp: ${PHONE_DISPLAY}`
+
 /* ------------------------------------------------------------------ *
- * Internals
+ * KNOWLEDGE BASE — ongoing projects
+ * ------------------------------------------------------------------ *
+ * Facts only. Anything not listed here must fall through to ESCALATION.
+ * Sizes and amenities mirror src/data/site.js — update both together. */
+const PROJECTS = [
+  {
+    id: 'grand',
+    label: 'Ahinsa The Grand Green Valley',
+    short: 'The Grand Green Valley',
+    address: 'Fatehabad Road, Kundol, Agra',
+    config: 'Residential & commercial plots, grand villas and farm house',
+    sizes: '111.11 · 138.88 · 166.66 · 200 sq. yd',
+    amenities:
+      'Clubhouse, swimming pool, fitness centre, landscaped gardens, jogging track,\n' +
+      'fountains, shops & malls, parking and 24x7 gated security.',
+    connectivity:
+      'Direct access from Fatehabad Road — minutes from the city’s key landmarks.',
+  },
+  {
+    id: 'empire',
+    label: 'Ahinsa Green Valley Empire',
+    short: 'Green Valley Empire',
+    address: 'Mudi Crossing, Agra',
+    config: 'Residential & commercial plots and farm house',
+    sizes: '111.11 · 138.88 · 166.66 · 200 sq. yd',
+    amenities:
+      'Clubhouse, swimming pool, fitness centre, landscaped gardens, jogging track,\n' +
+      'fountains, shops & malls, parking and 24x7 gated security.',
+    connectivity: null,
+  },
+  {
+    id: 'township',
+    label: 'Ahinsa Green Valley Township',
+    short: 'Green Valley Township',
+    address: 'Kuberpur, Agra',
+    config: 'Residential & commercial plots · possession ready',
+    sizes: '111.11 · 138.88 sq. yd',
+    amenities:
+      'Clubhouse, swimming pool, fitness centre, landscaped gardens, green belts,\n' +
+      'jogging track, shops & malls, parking and 24x7 gated security.',
+    connectivity: null,
+  },
+  {
+    id: 'orchid',
+    label: 'Ahinsa Green Valley Orchid',
+    short: 'Green Valley Orchid',
+    address: 'Kuberpur, Agra',
+    config: 'Residential & commercial plots',
+    sizes: '111.11 · 130.55 · 133.33 · 138.88 · 152.77 sq. yd',
+    amenities:
+      'Green open spaces, landscaped forecourt, on-campus cafe and food court,\n' +
+      'parking, high-speed internet and 24x7 gated security.',
+    connectivity: null,
+  },
+]
+
+/* ------------------------------------------------------------------ *
+ * THE TREE
+ * ------------------------------------------------------------------ *
+ * Every node: { text, options }. Every option is { label } plus one of:
+ *   to     — go to that node id
+ *   form   — open the lead form
+ *   href   — 'whatsapp' or 'call'
+ * `lead: true` on a node marks buying intent and arms the lead request. */
+
+const WELCOME =
+  'Namaste 🙏 Welcome to **Ahinsa Group**.\n' +
+  'I’m your property assistant.\n' +
+  'How may I help you today?'
+
+const MAIN_OPTIONS = [
+  { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+  { label: '💰 Prices', to: 'prices' },
+  { label: '📍 Book a Site Visit', to: 'visit' },
+  { label: '➕ More', to: 'more' },
+]
+
+const NODES = {
+  main: { text: WELCOME, options: MAIN_OPTIONS },
+
+  /* ---------------- Ongoing projects ---------------- */
+  ongoing: {
+    text: 'We have four ongoing projects in Agra 🏗️\nWhich one may I tell you about?',
+    options: PROJECTS.map((p) => ({ label: p.short, to: `p_${p.id}` })),
+  },
+
+  /* ---------------- Prices ---------------- */
+  prices: {
+    lead: true,
+    text:
+      'Pricing depends on the project, plot size and location — corner and park-facing plots are priced higher.\n' +
+      'Plots are available from 111.11 up to 200 sq. yd.\n' +
+      'Our team will share the current rate list on WhatsApp.',
+    options: [
+      { label: 'Payment Plan / EMI', to: 'payment' },
+      { label: 'Smallest budget option', to: 'smallest' },
+      { label: 'Current offers', to: 'offers' },
+      { label: '💬 Get Rate List', href: 'whatsapp' },
+    ],
+  },
+  payment: {
+    lead: true,
+    text:
+      'Payment plans vary by project and plot size.\n' +
+      'Our team will walk you through the booking amount and instalment options.\n' +
+      ESCALATION,
+    options: [
+      { label: '💬 Get Rate List', href: 'whatsapp' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+    ],
+  },
+  smallest: {
+    lead: true,
+    text:
+      'Our smallest plot size is 111.11 sq. yd, offered across our ongoing projects.\n' +
+      'The current rate for it will be shared by our team on WhatsApp.',
+    options: [
+      { label: '💬 Get Rate List', href: 'whatsapp' },
+      { label: '🏗️ See the projects', to: 'ongoing' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+    ],
+  },
+  offers: {
+    lead: true,
+    text:
+      'Offers change from time to time, so I would not want to quote an outdated one.\n' + ESCALATION,
+    options: [
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+      { label: `📞 Call ${PHONE_DISPLAY}`, href: 'call' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+    ],
+  },
+
+  /* ---------------- Site visit ---------------- */
+  visit: {
+    lead: true,
+    text: 'Happy to arrange that 🙏\nWhich project would you like to visit?',
+    options: PROJECTS.map((p) => ({ label: p.short, to: `v_${p.id}` })),
+  },
+  visitDone: {
+    text:
+      'Thank you 🙏 Your site visit request is noted.\n' +
+      `Our executive will call you shortly to confirm. For instant help, WhatsApp us on ${PHONE_DISPLAY}`,
+    options: [
+      { label: 'Site office location', to: 'office' },
+      { label: 'Visit timings', to: 'timings' },
+      { label: 'Pickup available?', to: 'pickup' },
+    ],
+  },
+  office: {
+    text:
+      'Our head office is at Ahinsa Complex, Ram Bagh, Agra, Uttar Pradesh 282006.\n' +
+      'For the site office of a particular project, our team will send you the exact location pin on WhatsApp.',
+    options: [
+      { label: '💬 Get location pin', href: 'whatsapp' },
+      { label: 'Visit timings', to: 'timings' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+    ],
+  },
+  timings: {
+    text: `Our team will confirm the visiting hours for your chosen project.\n${ESCALATION}`,
+    options: [
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+      { label: 'Site office location', to: 'office' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+    ],
+  },
+  pickup: {
+    text: `Our team will confirm pickup and drop for your location.\n${ESCALATION}`,
+    options: [
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+      { label: 'Visit timings', to: 'timings' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+    ],
+  },
+
+  /* ---------------- Home loan & registry ---------------- */
+  loan: {
+    text:
+      'Yes 🏦 Our projects are approved by leading banks.\n' +
+      'Our team supports you through the whole process — from loan documentation right up to registry.',
+    options: [
+      { label: 'Which banks?', to: 'banks' },
+      { label: 'Documents required', to: 'docs' },
+      { label: 'Registry charges', to: 'registry' },
+      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
+    ],
+  },
+  banks: {
+    text:
+      'Our team will confirm which banks are empanelled for the project you are considering.\n' +
+      ESCALATION,
+    options: [
+      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
+      { label: 'Documents required', to: 'docs' },
+      { label: 'Registry charges', to: 'registry' },
+    ],
+  },
+  docs: {
+    text:
+      'Usually: Aadhaar, PAN, 6-month bank statement, income proof (salary slip or ITR) and photographs.\n' +
+      'The exact list varies by bank — our team will share the final checklist.',
+    options: [
+      { label: 'Which banks?', to: 'banks' },
+      { label: 'Registry charges', to: 'registry' },
+      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
+    ],
+  },
+  registry: {
+    text:
+      'Registry and stamp duty are charged as per current UP Government rates, and our team handles the process.\n' +
+      'There are no hidden charges — every cost is shared upfront in writing.',
+    options: [
+      { label: 'Documents required', to: 'docs' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
+    ],
+  },
+
+  /* ---------------- Upcoming ---------------- */
+  upcoming: {
+    text:
+      'Two projects are on the way 🌟\n' +
+      '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh\n' +
+      '• Ahinsa City Centre Mall — Firozabad, Uttar Pradesh',
+    options: [
+      { label: 'Lake City, Gwalior', to: 'lakecity' },
+      { label: 'City Centre Mall, Firozabad', to: 'mall' },
+      { label: 'Pre-book / Early Bird', to: 'prebook' },
+    ],
+  },
+  lakecity: {
+    lead: true,
+    text:
+      'Ahinsa Green Valley Lake City is coming up in Gwalior, Madhya Pradesh.\n' +
+      'Full details will be announced at launch, and pre-registration is open for early-bird benefits.',
+    options: [
+      { label: 'Pre-book / Early Bird', to: 'prebook' },
+      { label: 'City Centre Mall, Firozabad', to: 'mall' },
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+    ],
+  },
+  mall: {
+    lead: true,
+    text:
+      'Ahinsa City Centre Mall is our upcoming commercial project in Firozabad, Uttar Pradesh.\n' +
+      'Details will be announced at launch, and pre-registration is open.',
+    options: [
+      { label: 'Pre-book / Early Bird', to: 'prebook' },
+      { label: 'Lake City, Gwalior', to: 'lakecity' },
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+    ],
+  },
+  prebook: {
+    lead: true,
+    text:
+      'Pre-registration is open for both upcoming projects 🌟\n' +
+      'Share your details and our team will inform you first, with early-bird benefits.',
+    options: [
+      { label: '📝 Notify me at launch', form: 'lead' },
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+    ],
+  },
+
+  /* ---------------- More / trust ---------------- */
+  more: {
+    text:
+      'Clear titles, bank-approved projects and on-time possession — that is our commitment.\n' +
+      '6+ signature projects and 5,000+ happy families across Agra and Gwalior.',
+    options: [
+      { label: 'Are projects approved?', to: 'approved' },
+      { label: '🏦 Home Loan & Registry', to: 'loan' },
+      { label: '🌟 Upcoming Projects', to: 'upcoming' },
+      { label: '💬 Talk to Us', href: 'whatsapp' },
+    ],
+  },
+  approved: {
+    text:
+      'Yes — our projects are approved and bank-financeable.\n' +
+      'Our team will share the approval and registration details for the specific project you are considering.',
+    options: [
+      { label: '💬 Get approval details', href: 'whatsapp' },
+      { label: '🏦 Home Loan & Registry', to: 'loan' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+    ],
+  },
+
+  /* ---------------- After the lead form ---------------- */
+  leadDone: {
+    text:
+      'Thank you 🙏 Our executive will call you shortly.\n' +
+      `For instant help, WhatsApp us on ${PHONE_DISPLAY}`,
+    options: [
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+      { label: '📍 Book a Site Visit', to: 'visit' },
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+    ],
+  },
+}
+
+/* Per-project nodes, generated from PROJECTS so the four branches stay in step. */
+for (const p of PROJECTS) {
+  NODES[`p_${p.id}`] = {
+    text: `${p.label} — ${p.address}.\n${p.config}.\nPlot sizes: ${p.sizes}`,
+    options: [
+      { label: 'Sizes & Price', to: `pp_${p.id}` },
+      { label: 'Amenities', to: `pa_${p.id}` },
+      { label: 'Location & Connectivity', to: `pl_${p.id}` },
+      { label: '📍 Book Site Visit', to: `v_${p.id}` },
+    ],
+  }
+
+  NODES[`pp_${p.id}`] = {
+    lead: true,
+    text:
+      `${p.short} is available in ${p.sizes}.\n` +
+      'Rates depend on the plot you choose — corner and park-facing plots are priced higher.\n' +
+      'Our team will share the current rate list on WhatsApp.',
+    options: [
+      { label: '💬 Get Rate List', href: 'whatsapp' },
+      { label: 'Amenities', to: `pa_${p.id}` },
+      { label: '📍 Book Site Visit', to: `v_${p.id}` },
+    ],
+  }
+
+  NODES[`pa_${p.id}`] = {
+    text: `At ${p.short} you get:\n${p.amenities}`,
+    options: [
+      { label: 'Sizes & Price', to: `pp_${p.id}` },
+      { label: 'Location & Connectivity', to: `pl_${p.id}` },
+      { label: '📍 Book Site Visit', to: `v_${p.id}` },
+    ],
+  }
+
+  NODES[`pl_${p.id}`] = {
+    text: p.connectivity
+      ? `${p.short} is at ${p.address}.\n${p.connectivity}`
+      : `${p.short} is at ${p.address}.\n` +
+        'Our team will share the exact location pin and connectivity details on WhatsApp.',
+    options: [
+      { label: '💬 Get location pin', href: 'whatsapp' },
+      { label: 'Amenities', to: `pa_${p.id}` },
+      { label: '📍 Book Site Visit', to: `v_${p.id}` },
+    ],
+  }
+
+  /* Site-visit booking for this project — opens the visit form straight away. */
+  NODES[`v_${p.id}`] = {
+    lead: true,
+    text: `Wonderful choice 🙏\nLet us get your visit to ${p.short} arranged.`,
+    autoForm: { kind: 'visit', project: p.label },
+    options: [
+      { label: '💬 Book on WhatsApp instead', href: 'whatsapp' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+    ],
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Lead delivery — the same Web3Forms inbox the brochure form uses
  * ------------------------------------------------------------------ */
 
-/** Builds the wa.me link with the full Q&A transcript pre-filled. */
+const cleanPhone = (v) => v.replace(/\D/g, '').slice(-10)
+
+async function sendLead(fields) {
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      from_name: 'Ahinsa Website — Chat Assistant',
+      ...fields,
+    }),
+  })
+  const out = await res.json()
+  if (!out.success) throw new Error('Could not submit your details — please try again.')
+}
+
+/** Builds the wa.me link with the conversation so far pre-filled. */
 function buildWhatsAppUrl(log) {
   const lines = [
     'Hello Ahinsa Group,',
@@ -83,6 +447,23 @@ function buildWhatsAppUrl(log) {
   }
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`
+}
+
+/* ------------------------------------------------------------------ *
+ * Presentation helpers
+ * ------------------------------------------------------------------ */
+
+/** Renders **bold** spans — the only markup the copy above uses. */
+function RichText({ text }) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-fg">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  )
 }
 
 function BotAvatar() {
@@ -111,11 +492,150 @@ function TypingDots() {
   )
 }
 
+const FIELD_CLASS =
+  'w-full rounded-lg border border-soft bg-page px-3 py-2 text-[13px] text-fg outline-none ' +
+  'transition placeholder:text-fg-faint focus:border-gold-500'
+
+const PURPOSES = ['Investment', 'Own Use', 'Just Exploring']
+
+/**
+ * The lead form. Two variants, never more than three fields — name, mobile and
+ * one qualifier. Never email, address or income.
+ */
+function LeadForm({ kind, project, onSubmit, onSkip }) {
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [purpose, setPurpose] = useState('')
+  const [day, setDay] = useState('')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+
+  const isVisit = kind === 'visit'
+
+  const submit = async (e) => {
+    e.preventDefault()
+    setError('')
+    const mobile = cleanPhone(phone)
+    if (name.trim().length < 2) return setError('Please enter your name.')
+    if (!/^[6-9]\d{9}$/.test(mobile)) return setError('Please enter a valid 10-digit mobile number.')
+    if (!isVisit && !purpose) return setError('Please choose a purpose.')
+
+    setBusy(true)
+    try {
+      await onSubmit({ name: name.trim(), mobile, purpose, day: day.trim(), project })
+    } catch (err) {
+      setBusy(false)
+      setError(err.message || 'Something went wrong — please try again.')
+    }
+  }
+
+  return (
+    <form
+      onSubmit={submit}
+      className="ml-9 w-[85%] rounded-2xl rounded-bl-sm border border-gold-500/30 bg-page p-3.5 shadow-sm"
+    >
+      <p className="mb-2.5 text-[12.5px] leading-relaxed text-fg-muted">
+        {isVisit
+          ? 'To confirm your visit, may I have your details?'
+          : 'To share the exact rate list and current offers, may I have your details?'}
+      </p>
+
+      <div className="flex flex-col gap-2">
+        <label className="sr-only" htmlFor="cw-name">Name</label>
+        <input
+          id="cw-name"
+          className={FIELD_CLASS}
+          placeholder="👤 Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          autoComplete="name"
+        />
+
+        <label className="sr-only" htmlFor="cw-phone">Mobile number</label>
+        <input
+          id="cw-phone"
+          className={FIELD_CLASS}
+          placeholder="📱 Mobile Number"
+          inputMode="numeric"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          autoComplete="tel"
+        />
+
+        {isVisit ? (
+          <>
+            <label className="sr-only" htmlFor="cw-day">Preferred day</label>
+            <input
+              id="cw-day"
+              className={FIELD_CLASS}
+              placeholder="📅 Preferred day (optional)"
+              value={day}
+              onChange={(e) => setDay(e.target.value)}
+            />
+          </>
+        ) : (
+          <fieldset className="mt-0.5">
+            <legend className="mb-1.5 text-[11px] text-fg-faint">🎯 Purpose</legend>
+            <div className="flex flex-wrap gap-1.5">
+              {PURPOSES.map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setPurpose(p)}
+                  aria-pressed={purpose === p}
+                  className={`rounded-full border px-2.5 py-1.5 text-[11.5px] transition ${
+                    purpose === p
+                      ? 'border-gold-500 bg-gold-500 font-medium text-ink-900'
+                      : 'border-gold-500/40 text-gold-700 hover:border-gold-500 dark:text-gold-400'
+                  }`}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+        )}
+      </div>
+
+      {error && <p className="mt-2 text-[11.5px] text-red-500">{error}</p>}
+
+      <div className="mt-3 flex items-center gap-2">
+        <button
+          type="submit"
+          disabled={busy}
+          className="rounded-full bg-gold-gradient px-4 py-2 text-[12.5px] font-semibold text-ink-900
+                     shadow-sm transition hover:brightness-105 disabled:opacity-60"
+        >
+          {busy ? 'Sending…' : isVisit ? 'Confirm visit' : 'Send my details'}
+        </button>
+        <button
+          type="button"
+          onClick={onSkip}
+          className="rounded-full px-3 py-2 text-[12px] text-fg-faint transition hover:text-fg-muted"
+        >
+          Not now
+        </button>
+      </div>
+    </form>
+  )
+}
+
+/* ------------------------------------------------------------------ *
+ * Widget
+ * ------------------------------------------------------------------ */
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState([{ id: 0, role: 'bot', text: WELCOME_MESSAGE }])
+  const [messages, setMessages] = useState([{ id: 0, role: 'bot', text: WELCOME }])
+  const [node, setNode] = useState('main')
   const [log, setLog] = useState([])
   const [typing, setTyping] = useState(false)
+
+  /* Lead state: 'idle' → 'open' (form showing) → 'sent' | 'declined'.
+     Once it is 'sent' or 'declined' we never ask again. */
+  const [lead, setLead] = useState('idle')
+  const [form, setForm] = useState(null) // { kind, project } while a form is open
+  const turns = useRef(0)
 
   const nextId = useRef(1)
   const panelRef = useRef(null)
@@ -145,26 +665,117 @@ export default function ChatWidget() {
   useEffect(() => {
     const el = feedRef.current
     if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
-  }, [messages, typing, open])
+  }, [messages, typing, form, open])
 
   useEffect(() => () => clearTimeout(typingTimer.current), [])
 
-  const ask = (faq) => {
-    if (typing) return
-    setMessages((prev) => [...prev, { id: nextId.current++, role: 'user', text: faq.question }])
+  const say = (text) => setMessages((prev) => [...prev, { id: nextId.current++, role: 'bot', text }])
+
+  /** Walks to a node: echoes the tap, pauses, then answers. */
+  const go = (option) => {
+    if (typing || form) return
+    const target = NODES[option.to]
+    if (!target) return
+
+    turns.current += 1
+    setMessages((prev) => [...prev, { id: nextId.current++, role: 'user', text: option.label }])
     setTyping(true)
 
     // A brief pause before the reply — an instant answer reads as a page jump
     // rather than a conversation.
     clearTimeout(typingTimer.current)
     typingTimer.current = setTimeout(() => {
-      setMessages((prev) => [...prev, { id: nextId.current++, role: 'bot', text: faq.answer }])
-      setLog((prev) => [...prev, { question: faq.question, answer: faq.answer }])
+      say(target.text)
+      setLog((prev) => [...prev, { question: option.label, answer: target.text }])
+      setNode(option.to)
+      setTyping(false)
+
+      // A node may open its own form — the site-visit branch does.
+      if (target.autoForm) {
+        // Already have their number — confirm rather than ask for it again.
+        if (lead === 'sent') {
+          say(
+            `Our executive already has your number and will confirm the visit.\n` +
+              `For anything urgent, WhatsApp us on ${PHONE_DISPLAY}`,
+          )
+          return
+        }
+        setForm(target.autoForm)
+        setLead('open')
+        return
+      }
+
+      // Otherwise ask once, on buying intent or after three exchanges.
+      if (lead === 'idle' && (target.lead || turns.current >= 3)) {
+        setForm({ kind: 'lead' })
+        setLead('open')
+      }
+    }, TYPING_MS)
+  }
+
+  const openForm = (kind) => {
+    if (lead === 'sent') return
+    setForm({ kind })
+    setLead('open')
+  }
+
+  const submitLead = async (values) => {
+    const isVisit = form?.kind === 'visit'
+    await sendLead({
+      subject: isVisit
+        ? `Site Visit Request — ${values.project || 'Chat Assistant'}`
+        : 'Chatbot Lead — Ahinsa Website',
+      Name: values.name,
+      Mobile: `+91 ${values.mobile}`,
+      ...(isVisit
+        ? { Project: values.project || '—', 'Preferred day': values.day || 'Not specified' }
+        : { Purpose: values.purpose }),
+      'Chat so far': log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
+    })
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: nextId.current++,
+        role: 'user',
+        text: `${values.name} · +91 ${values.mobile}${values.purpose ? ` · ${values.purpose}` : ''}`,
+      },
+    ])
+    setForm(null)
+    setLead('sent')
+    setTyping(true)
+    clearTimeout(typingTimer.current)
+    typingTimer.current = setTimeout(() => {
+      const done = isVisit ? 'visitDone' : 'leadDone'
+      say(NODES[done].text)
+      setNode(done)
       setTyping(false)
     }, TYPING_MS)
   }
 
-  const asked = log.length > 0
+  /* Declined — respect it, carry on helping, and never ask again. */
+  const skipLead = () => {
+    const wasVisit = form?.kind === 'visit'
+    setForm(null)
+    setLead('declined')
+    say(
+      wasVisit
+        ? `No problem 🙏 You can book a visit any time on WhatsApp: ${PHONE_DISPLAY}\nHow else may I help you?`
+        : 'No problem 🙏 Ask me anything else — I am happy to help.',
+    )
+    setNode(wasVisit ? 'main' : node)
+  }
+
+  const current = NODES[node] ?? NODES.main
+  const waUrl = buildWhatsAppUrl(log)
+
+  /* Options for this step, plus the always-available way back. */
+  const options = [
+    ...(current.options ?? []),
+    ...(node === 'main' ? [] : [{ label: '🔙 Main Menu', to: 'main' }]),
+  ]
+
+  const optionHref = (option) => (option.href === 'call' ? `tel:${PHONE_TEL}` : waUrl)
 
   return (
     <>
@@ -214,7 +825,7 @@ export default function ChatWidget() {
               </button>
             </div>
 
-            {/* Conversation — messages AND the question options live here */}
+            {/* Conversation — messages, the lead form AND the options live here */}
             <div ref={feedRef} className="flex flex-1 flex-col gap-3 overflow-y-auto bg-page-soft p-4">
               {messages.map((m) => (
                 <motion.div
@@ -232,7 +843,7 @@ export default function ChatWidget() {
                         : 'rounded-bl-sm border border-soft bg-page text-fg-muted shadow-sm'
                     }`}
                   >
-                    {m.text}
+                    <RichText text={m.text} />
                   </div>
                 </motion.div>
               ))}
@@ -246,42 +857,72 @@ export default function ChatWidget() {
                 </div>
               )}
 
-              {/* Question options, in the thread under the latest reply */}
-              {!typing && (
+              {/* Lead capture — takes the place of the options while it is open */}
+              {!typing && form && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: 'easeOut' }}
+                >
+                  <LeadForm
+                    kind={form.kind}
+                    project={form.project}
+                    onSubmit={submitLead}
+                    onSkip={skipLead}
+                  />
+                </motion.div>
+              )}
+
+              {/* Options for this step, in the thread under the latest reply */}
+              {!typing && !form && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, ease: 'easeOut', delay: 0.05 }}
                   className="flex flex-col items-start gap-2 pl-9"
                 >
-                  {asked && (
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-fg-faint">{MENU_PROMPT}</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-fg-faint">{MENU_PROMPT}</p>
+                  {options.map((option) =>
+                    option.href ? (
+                      <a
+                        key={option.label}
+                        href={optionHref(option)}
+                        target={option.href === 'call' ? undefined : '_blank'}
+                        rel="noopener noreferrer"
+                        className="max-w-[85%] rounded-full border border-gold-500/40 bg-page px-3.5 py-2
+                                   text-left text-[12.5px] leading-snug text-gold-700 shadow-sm transition
+                                   hover:border-gold-500 hover:bg-gold-500 hover:text-ink-900
+                                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                   focus-visible:outline-gold-500 dark:text-gold-400 dark:hover:text-ink-900"
+                      >
+                        {option.label}
+                      </a>
+                    ) : (
+                      <button
+                        key={option.label}
+                        type="button"
+                        onClick={() => (option.form ? openForm(option.form) : go(option))}
+                        className="max-w-[85%] rounded-full border border-gold-500/40 bg-page px-3.5 py-2
+                                   text-left text-[12.5px] leading-snug text-gold-700 shadow-sm transition
+                                   hover:border-gold-500 hover:bg-gold-500 hover:text-ink-900
+                                   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                                   focus-visible:outline-gold-500 dark:text-gold-400 dark:hover:text-ink-900"
+                      >
+                        {option.label}
+                      </button>
+                    ),
                   )}
-                  {CHAT_FAQS.map((faq) => (
-                    <button
-                      key={faq.id}
-                      type="button"
-                      onClick={() => ask(faq)}
-                      className="max-w-[85%] rounded-full border border-gold-500/40 bg-page px-3.5 py-2
-                                 text-left text-[12.5px] leading-snug text-gold-700 shadow-sm transition
-                                 hover:border-gold-500 hover:bg-gold-500 hover:text-ink-900
-                                 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                                 focus-visible:outline-gold-500 dark:text-gold-400 dark:hover:text-ink-900"
-                    >
-                      {faq.question}
-                    </button>
-                  ))}
                 </motion.div>
               )}
             </div>
 
             {/* Permanent hand-off to a human */}
-            <div className="border-t border-soft bg-page p-3">
+            <div className="flex items-center gap-2 border-t border-soft bg-page p-3">
               <a
-                href={buildWhatsAppUrl(log)}
+                href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5
+                className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5
                            text-[13px] font-semibold text-white shadow-sm transition hover:brightness-110
                            focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
                            focus-visible:outline-[#25D366]"
@@ -289,8 +930,20 @@ export default function ChatWidget() {
                 <svg viewBox="0 0 32 32" className="h-4 w-4 fill-current" aria-hidden="true">
                   <path d="M16 3.2A12.8 12.8 0 0 0 4.93 22.4L3.2 28.8l6.57-1.72A12.8 12.8 0 1 0 16 3.2zm0 23.36a10.6 10.6 0 0 1-5.41-1.48l-.39-.23-4 1.05 1.07-3.9-.25-.4A10.63 10.63 0 1 1 16 26.56zm5.83-7.96c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.66 0 1.57 1.14 3.08 1.3 3.29.16.21 2.25 3.44 5.46 4.82.76.33 1.36.53 1.82.68.77.24 1.47.21 2.02.13.62-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z" />
                 </svg>
-                {HUMAN_HANDOFF_LABEL}
+                WhatsApp
                 <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={`tel:${PHONE_TEL}`}
+                aria-label={`Call ${PHONE_DISPLAY}`}
+                className="flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-gold-500/40
+                           px-3 py-2.5 text-[13px] font-semibold text-gold-700 transition
+                           hover:border-gold-500 hover:bg-gold-500 hover:text-ink-900
+                           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                           focus-visible:outline-gold-500 dark:text-gold-400 dark:hover:text-ink-900"
+              >
+                <Phone className="h-4 w-4" />
+                Call
               </a>
             </div>
           </motion.div>

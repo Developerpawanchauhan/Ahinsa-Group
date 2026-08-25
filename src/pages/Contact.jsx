@@ -1,11 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2 } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
-import { COMPANY, WEB3FORMS_KEY } from '../data/site'
+import OfficeCard from '../components/OfficeCard'
+import SocialChannels from '../components/SocialChannels'
+import { COMPANY, WEB3FORMS_KEY, OFFICES } from '../data/site'
 
 export default function Contact() {
+  const { hash } = useLocation()
+
+  // Deep-link support: /contact#social scrolls to the social channels,
+  // which is where the nav "Social Awareness" item points.
+  useEffect(() => {
+    if (!hash) return
+    const el = document.querySelector(hash)
+    if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }, [hash])
+
+  // The map below shows our Agra corporate office. Pin comes from site.js, so
+  // it stays in step with the office card above and that office’s own page.
+  const agraOffice = OFFICES.find((o) => o.slug === 'corporate-office')
+  const mapSrc = agraOffice?.mapUrl
+    ? `${agraOffice.mapUrl}&output=embed`
+    : `https://www.google.com/maps?q=${encodeURIComponent(COMPANY.address)}&output=embed`
+
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [form, setForm] = useState({
@@ -205,18 +225,40 @@ export default function Contact() {
         </div>
       </section>
 
+      {/* Our offices */}
+      <section className="section-pad bg-page-soft border-t border-soft">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Visit Us"
+            title={<>Our <span className="gold-text">offices</span></>}
+            subtitle="Walk in at any of our offices across Agra and Gwalior — no appointment needed."
+          />
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-12">
+            {OFFICES.map((o, i) => (
+              <Reveal key={o.slug} delay={i * 0.08}>
+                <OfficeCard office={o} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* Social channels — moved here from the old /media/social page. */}
+      <SocialChannels />
+
       {/* Map */}
       <section className="bg-page-alt border-t border-soft">
         <div className="container-x py-16">
           <SectionHeading
             eyebrow="Find Us"
-            title={<>On the <span className="gold-text">map</span></>}
+            title={<>Corporate Office, <span className="gold-text">Agra</span></>}
+            subtitle={COMPANY.address}
           />
           <Reveal>
             <div className="mt-10 aspect-[16/9] md:aspect-[21/8] overflow-hidden border border-gold-500/25 dark:border-gold-500/20">
               <iframe
-                title="Ahinsa Group Agra location"
-                src="https://www.google.com/maps?q=Ahinsa+Complex,+Agra&output=embed"
+                title="Ahinsa Group Corporate Office, Agra — location"
+                src={mapSrc}
                 className="w-full h-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

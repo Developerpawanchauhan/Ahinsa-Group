@@ -28,10 +28,13 @@ export default function Management() {
             object-position: 50% 35% !important;
           }
         `}</style>
+        {/* youtu.be/PxkPw2srud4, played from the top. The image stays on as the
+            poster underneath. */}
         <PageHero
           title="Management"
           subtitle="The leadership shaping the vision and direction of Ahinsa Group."
           breadcrumb="About / Management"
+          videoId="PxkPw2srud4"
           image="/images/about/hero-about.jpg"
         />
       </div>

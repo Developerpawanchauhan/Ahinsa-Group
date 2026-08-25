@@ -72,7 +72,18 @@ async function generatePdf(project, onProgress) {
   pdf.save(`${project.label}.pdf`)
 }
 
-export default function BrochureDownloadModal({ open, onClose, defaultBrochureId = 'grand' }) {
+/**
+ * @param defaultBrochureId  which brochure is preselected
+ * @param lockBrochure       hide the picker and offer only that one brochure —
+ *                           used on a project page, where the visitor is
+ *                           downloading the brochure for the project they are on.
+ */
+export default function BrochureDownloadModal({
+  open,
+  onClose,
+  defaultBrochureId = 'grand',
+  lockBrochure = false,
+}) {
   const [form, setForm] = useState({ brochure: defaultBrochureId, name: '', city: '', phone: '' })
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)       // sending the email
@@ -181,12 +192,18 @@ export default function BrochureDownloadModal({ open, onClose, defaultBrochureId
 
               <div className="space-y-4">
                 <div>
-                  <label className={labelCls}>Select the Brochure</label>
-                  <select value={form.brochure} onChange={set('brochure')} disabled={working} className={inputCls}>
-                    {BROCHURE_PROJECTS.map((p) => (
-                      <option key={p.id} value={p.id}>{p.label}</option>
-                    ))}
-                  </select>
+                  <label className={labelCls}>{lockBrochure ? 'Brochure' : 'Select the Brochure'}</label>
+                  {lockBrochure ? (
+                    <p className="border border-gold-500/25 dark:border-gold-500/20 bg-gold-500/5 px-5 py-4 text-fg text-sm">
+                      {project?.label}
+                    </p>
+                  ) : (
+                    <select value={form.brochure} onChange={set('brochure')} disabled={working} className={inputCls}>
+                      {BROCHURE_PROJECTS.map((p) => (
+                        <option key={p.id} value={p.id}>{p.label}</option>
+                      ))}
+                    </select>
+                  )}
                 </div>
                 <div>
                   <label className={labelCls}>Name</label>

@@ -86,7 +86,6 @@ export default function TeamMembers() {
                     </p>
                     <h3 className="font-serif text-fg text-xl mt-2">{m.name}</h3>
                     <p className="text-fg-muted text-sm mt-1">{m.role}</p>
-                    <p className="text-fg-soft text-sm leading-relaxed mt-3">{m.bio}</p>
                   </div>
                 </div>
               </Reveal>

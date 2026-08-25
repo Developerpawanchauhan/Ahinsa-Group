@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X, ChevronLeft, ChevronRight, BookOpen, Images } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, BookOpen, Images, Download } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
 
@@ -12,6 +12,7 @@ function range(n) {
 export const BROCHURE_PROJECTS = [
   {
     id: 'grand',
+    slug: 'grand-green-valley',
     label: 'Ahinsa The Grand Green Valley',
     shortLabel: 'The Grand Green Valley',
     folder: 'ahinsa-the grand',
@@ -19,38 +20,54 @@ export const BROCHURE_PROJECTS = [
   },
   {
     id: 'township',
+    slug: 'green-valley-township',
     label: 'Ahinsa Green Valley Township',
     shortLabel: 'Green Valley Township',
     folder: 'ahinsa-green-valley',
-    images: range(25),
+    // Pages run 1–24 and page 16 is missing from the folder. Listing a file
+    // that is not there fails the whole PDF build, so it is excluded here.
+    images: range(24).filter((f) => f !== '16.png'),
   },
   {
     id: 'empire',
+    slug: 'green-valley-empire',
     label: 'Ahinsa Green Valley Empire',
     shortLabel: 'Green Valley Empire',
     folder: 'ahinsa-empire',
     images: range(36),
   },
-
-  // Hidden for now — uncomment to bring the Firozabad brochure back.
-  // {
-  //   id: 'firozabad',
-  //   label: 'Ahinsa Mall Firozabad',
-  //   shortLabel: 'Mall Firozabad',
-  //   folder: 'firozabad',
-  //   images: [
-  //     '01.png','02.png','03.png','04.png','05.png','06.png','07.png','08.png','09.png',
-  //     '10.png','11.png','12.png','13.png','14.png','15.png','16.png','17.png','18.png',
-  //     '19.png','20.png','21.png','22.png','23.png','24 (2).png','25.png','26.png',
-  //     '27.png','28.png','29 (2).png','30.png','31.png','32.png','34.png','35.png',
-  //     '36.png','37.png','38.png',
-  //   ],
-  // },
+  {
+    id: 'orchid',
+    slug: 'green-valley-orchid',
+    label: 'Ahinsa Green Valley Orchid',
+    shortLabel: 'Green Valley Orchid',
+    folder: 'ahinsa-orchid',
+    images: range(5),
+  },
+  {
+    id: 'firozabad',
+    slug: 'ahinsa-mall-firozabad',
+    label: 'Ahinsa Mall Firozabad',
+    shortLabel: 'Mall Firozabad',
+    folder: 'firozabad',
+    images: [
+      '01.png','02.png','03.png','04.png','05.png','06.png','07.png','08.png','09.png',
+      '10.png','11.png','12.png','13.png','14.png','15.png','16.png','17.png','18.png',
+      '19.png','20.png','21.png','22.png','23.png','24 (2).png','25.png','26.png',
+      '27.png','28.png','29 (2).png','30.png','31.png','32.png','34.png','35.png',
+      '36.png','37.png','38.png',
+    ],
+  },
 ]
 
 // ─── Component ──────────────────────────────────────────────────────────────
 
-export default function BrochureGallery({ defaultId = 'grand', single = false }) {
+/**
+ * @param onDownload  optional — when given, a "Download Brochure" button is
+ *                    shown directly above the pages. Project pages pass this;
+ *                    the /brochure page has its own button and does not.
+ */
+export default function BrochureGallery({ defaultId = 'grand', single = false, onDownload }) {
   const [activeId, setActiveId]       = useState(defaultId)
   const [lightboxIdx, setLightboxIdx] = useState(null)
   const trackRef                      = useRef(null)
@@ -143,12 +160,18 @@ export default function BrochureGallery({ defaultId = 'grand', single = false })
           </Reveal>
         )}
 
-        {/* ── Active project label + count ── */}
+        {/* ── Active project label + count, and the download for it ── */}
         <Reveal delay={0.05}>
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-4 mb-6">
             <Images className="w-5 h-5 text-gold-500" />
             <span className="text-fg font-medium">{project.label}</span>
             <span className="text-fg-muted text-sm">— {project.images.length} pages</span>
+            {onDownload && (
+              <button onClick={onDownload} className="btn-gold ml-auto">
+                <Download className="w-4 h-4" />
+                Download Brochure
+              </button>
+            )}
           </div>
         </Reveal>
 

@@ -1,25 +1,41 @@
 import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import AutoSlideImage from './AutoSlideImage'
+import HeroVideo from './HeroVideo'
 
-// Pass `image` for a static hero, or `images` (array) for a homepage-style
-// crossfading slideshow. The 50% dim lives on the wrapper because the
-// slideshow animates each image's own opacity during the fade.
-export default function PageHero({ title, subtitle, image, images, breadcrumb }) {
+// Pass `videoId` for a moving background (optionally `videoStart` to skip the
+// first few seconds); `image` is then the poster shown while it loads and
+// between loops. Without a video, pass `image` for a static hero or `images`
+// (array) for a crossfading slideshow.
+export default function PageHero({
+  title,
+  subtitle,
+  image,
+  images,
+  breadcrumb,
+  videoId,
+  videoStart = 0,
+}) {
   const slides = (images && images.length ? images : [image]).filter(Boolean)
 
   return (
     <section className="relative h-[70vh] min-h-[420px] flex items-end overflow-hidden">
       <div className="absolute inset-0 bg-ink-900">
-        <div className="absolute inset-0 opacity-50">
-          <AutoSlideImage
-            images={slides}
-            alt=""
-            className="w-full h-full object-cover hero-img"
-            interval={3000}
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-900/40 via-ink-900/40 to-ink-900 dark:to-ink-900" />
+        {videoId ? (
+          <HeroVideo videoId={videoId} start={videoStart} poster={slides[0]} alt="" />
+        ) : (
+          <div className="absolute inset-0 opacity-50">
+            <AutoSlideImage
+              images={slides}
+              alt=""
+              className="w-full h-full object-cover hero-img"
+              interval={3000}
+            />
+          </div>
+        )}
+        {/* Decorative only — `pointer-events-none` keeps it from swallowing
+            clicks meant for the video's volume control underneath. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink-900/40 via-ink-900/40 to-ink-900 dark:to-ink-900 pointer-events-none" />
         {/* Light-mode bottom fade to page bg */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream dark:to-transparent pointer-events-none" />
       </div>

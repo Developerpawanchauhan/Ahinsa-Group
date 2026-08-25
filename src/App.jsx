@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import ChatWidget from './components/ChatWidget'
+import WelcomePopup from './components/WelcomePopup'
 import Home from './pages/Home'
 import About from './pages/About'
 import Management from './pages/Management'
@@ -22,7 +23,6 @@ import Events from './pages/Events'
 // to bring it back. The brochure gallery itself still shows on the homepage
 // and on each project page.
 // import Brochure from './pages/Brochure'
-import SocialAwareness from './pages/SocialAwareness'
 import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
@@ -65,7 +65,6 @@ export default function App() {
           <Route path="/media/awards" element={<Awards />} />
           <Route path="/media/events" element={<Events />} />
           {/* <Route path="/brochure" element={<Brochure />} /> */}
-          <Route path="/media/social" element={<SocialAwareness />} />
 
           <Route path="/contact" element={<Contact />} />
 
@@ -81,6 +80,8 @@ export default function App() {
       {/* Both float bottom-right; the chat launcher sits above the WhatsApp one. */}
       <WhatsAppButton />
       <ChatWidget />
+      {/* Opens 10s into the first page view of a session. */}
+      <WelcomePopup />
     </>
   )
 }

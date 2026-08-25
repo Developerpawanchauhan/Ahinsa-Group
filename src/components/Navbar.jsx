@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, Phone, Sun, Moon, ChevronDown, ChevronRight, Building2, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react'
 import Logo from './Logo'
 import { useTheme } from '../hooks/useTheme'
-import { PROJECTS } from '../data/site'
+import { DEVELOPMENTS } from '../data/site'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -21,7 +21,9 @@ const NAV_LINKS = [
     to: '/projects',
     label: 'Our Projects',
     submenuKind: 'mega',
-    children: PROJECTS.map((p) => ({
+    // Offices are not something a visitor browses for, so the menu lists the
+    // same set as the homepage grid (see OFFICE_SLUGS in src/data/site.js).
+    children: DEVELOPMENTS.map((p) => ({
       to: `/projects/${p.slug}`,
       label: p.name,
       meta: `${p.type} · ${p.location}`,
@@ -40,7 +42,6 @@ const NAV_LINKS = [
       //media section page
       { to: '/media/awards', label: 'Award Recognition', meta: 'Recognition & honours' },
       { to: '/media/events', label: 'Events', meta: 'Launches, openings & meetups' },
-      { to: '/media/social', label: 'Social Awareness', meta: 'Live from our social channels' },
     ],
   },
   { to: '/contact', label: 'Contact' },

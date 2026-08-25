@@ -1,22 +1,32 @@
 import { Instagram, Youtube, Facebook, Linkedin, ArrowUpRight, MapPin } from 'lucide-react'
 
-import PageHero from '../components/PageHero'
-import SectionHeading from '../components/SectionHeading'
-import Reveal from '../components/Reveal'
-import Logo from '../components/Logo'
+import SectionHeading from './SectionHeading'
+import Reveal from './Reveal'
+import Logo from './Logo'
+
+/**
+ * Our live social feeds — Instagram, YouTube, Facebook, LinkedIn.
+ *
+ * This used to be its own page at /media/social. It now sits at the bottom of
+ * the Contact page, under "Our offices"; `#social` deep-links to it from the
+ * nav. Rendering it from a component keeps Contact.jsx readable.
+ */
 
 const SOCIALS = {
   instagram: {
     handle: 'ahinsagroupagra',
     url: 'https://www.instagram.com/ahinsagroupagra/',
-    // Last 6 reels, newest first.
+    // Last 6 posts, newest first. `ratio` must match how the post was filmed —
+    // '16 / 9' for a landscape video, '9 / 16' for a portrait reel. Get it wrong
+    // and the tile either crops the video or leaves Instagram’s like/comment
+    // chrome showing underneath it.
     posts: [
-      'https://www.instagram.com/p/DankqPmhhol/',
-      'https://www.instagram.com/p/DamrNmyT6AF/',
-      'https://www.instagram.com/p/DaavDLETukL/',
-      'https://www.instagram.com/p/DXa-ckdk86C/',
-      'https://www.instagram.com/p/DXvK9X-TRIW/',
-      'https://www.instagram.com/p/DWMBnj6Eyh2/',
+      { url: 'https://www.instagram.com/p/DankqPmhhol/', ratio: '16 / 9' },
+      { url: 'https://www.instagram.com/p/DamrNmyT6AF/', ratio: '16 / 9' },
+      { url: 'https://www.instagram.com/p/DaavDLETukL/', ratio: '16 / 9' },
+      { url: 'https://www.instagram.com/p/DXa-ckdk86C/', ratio: '9 / 16' },
+      { url: 'https://www.instagram.com/p/DXvK9X-TRIW/', ratio: '9 / 16' },
+      { url: 'https://www.instagram.com/p/DWMBnj6Eyh2/', ratio: '9 / 16' },
     ],
   },
   youtube: {
@@ -47,10 +57,16 @@ function igEmbedSrc(url) {
   return m ? `https://www.instagram.com/${m[1]}/${m[2]}/embed/` : null
 }
 
+/** Height of the avatar + handle bar Instagram puts above the media. */
+const IG_HEADER_PX = 54
+
 /* Section wrapper: heading on top, content, then a centred follow button. */
-function SectionShell({ id, icon: Icon, eyebrow, title, subtitle, action, children, alt = false }) {
+function SectionShell({ id, icon: Icon, eyebrow, title, subtitle, action, children, alt = false, topBorder = true }) {
   return (
-    <section id={id} className={`section-pad ${alt ? 'bg-page-alt' : 'bg-page'} border-t border-soft`}>
+    <section
+      id={id}
+      className={`section-pad ${alt ? 'bg-page-alt' : 'bg-page'} ${topBorder ? 'border-t border-soft' : ''}`}
+    >
       <div className="container-x">
         <div className="flex items-start gap-4 mb-12">
           <span className="w-12 h-12 shrink-0 border border-gold-500/40 flex items-center justify-center text-gold-600 dark:text-gold-500">
@@ -76,15 +92,22 @@ function SectionShell({ id, icon: Icon, eyebrow, title, subtitle, action, childr
   )
 }
 
-export default function SocialAwareness() {
+export default function SocialChannels() {
   return (
     <>
-      <PageHero
-        title="Social Awareness"
-        subtitle="Follow the Ahinsa journey — site progress, launches and community stories, live from our official channels."
-        breadcrumb="Social Awareness"
-        image="/images/projects/grand-green-valley/card.jpg"
-      />
+      {/* Intro — replaces the page hero the old standalone page had. */}
+      <section id="social" className="bg-page border-t border-soft pt-20 md:pt-28 pb-2">
+        <div className="container-x">
+          <div className="text-center max-w-3xl mx-auto">
+            <SectionHeading
+              center
+              eyebrow="Social Awareness"
+              title={<>Follow the <span className="gold-text">Ahinsa journey</span></>}
+              subtitle="Site progress, launches and community stories — live from our official channels."
+            />
+          </div>
+        </div>
+      </section>
 
       {/* 1 — INSTAGRAM: live profile + last 6 reels */}
       <SectionShell
@@ -94,25 +117,34 @@ export default function SocialAwareness() {
         title={<>Live on <span className="gold-text">Instagram</span></>}
         subtitle="Our latest six reels, straight from our official feed."
         action={{ href: SOCIALS.instagram.url, label: 'Follow on Instagram' }}
+        topBorder={false}
       >
-        {/* We can't restyle anything inside Instagram's iframe, and its height
-            varies per post (likes row, caption length, comment bar). So each
-            tile is a fixed 9:17 window and the iframe is deliberately taller
-            than it: the profile header and the reel itself show, and the
-            variable chrome below is cropped off. Every tile then reads the
-            same size and the same way. */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-          {SOCIALS.instagram.posts.map((p, i) => {
-            const src = igEmbedSrc(p)
+        {/* Instagram's embed is a document we cannot restyle: a profile header,
+            then the media, then a variable stack of likes, caption and comment
+            box. Three things keep the tiles clean:
+              - each tile takes its own post’s aspect ratio, so the video fills it
+                exactly instead of leaving chrome visible underneath
+              - the iframe is absolutely positioned, so its 1200px height is out
+                of flow and can never stretch the tile
+              - it is pulled up by the header height, so the media sits flush
+                with the top edge
+            Everything below the media is cropped away. Ratios live on the posts
+            themselves (see SOCIALS.instagram.posts). */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 items-start">
+          {SOCIALS.instagram.posts.map((post, i) => {
+            const src = igEmbedSrc(post.url)
             return (
               src && (
                 <Reveal key={src} delay={(i % 3) * 0.08}>
-                  <div className="card-glass overflow-hidden aspect-[9/17]">
+                  <div
+                    className="card-glass relative overflow-hidden"
+                    style={{ aspectRatio: post.ratio }}
+                  >
                     <iframe
                       src={src}
-                      title={`Instagram reel ${i + 1}`}
-                      className="w-full block"
-                      style={{ height: 1200 }}
+                      title={`Instagram post ${i + 1}`}
+                      className="absolute left-0 w-full"
+                      style={{ top: -IG_HEADER_PX, height: 1200 }}
                       frameBorder="0"
                       scrolling="no"
                       loading="lazy"

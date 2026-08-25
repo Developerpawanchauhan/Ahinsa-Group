@@ -170,6 +170,18 @@ html.dark ::-webkit-scrollbar-track {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
+/* Light theme only: heavier weights so panel text holds up over the blurred page behind it */
+html:not(.dark) .nav-dropdown-panel h3,
+html:not(.dark) .nav-dropdown-panel h4,
+html:not(.dark) .nav-dropdown-panel .font-serif {
+  font-weight: 700;
+}
+html:not(.dark) .nav-dropdown-panel p,
+html:not(.dark) .nav-dropdown-panel a,
+html:not(.dark) .nav-dropdown-panel span {
+  font-weight: 600;
+}
+
 /* Swiper customizations */
 .swiper-pagination-bullet {
   background: rgba(11, 11, 8, 0.35) !important;
