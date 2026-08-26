@@ -236,7 +236,7 @@ export default function Events() {
         title="Events"
         subtitle="Launches, openings, customer celebrations and industry moments at Ahinsa."
         breadcrumb="Media / Events"
-        image="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&q=85&auto=format&fit=crop"
+        image="/images/Events/hero.jpg"
       />
 
       <section className="section-pad bg-page-soft border-y border-soft">
