@@ -1,4 +1,4 @@
-# Ahinsa Mall Firozabad — Image Slot
+# Ahinsa City Centre — Image Slot
 
 **Project URL:** `/projects/ahinsa-mall-firozabad`
 **Location:** Firozabad, UP

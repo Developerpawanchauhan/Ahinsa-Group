@@ -161,7 +161,7 @@ export const PROJECTS = [
   },
   {
     slug: 'ahinsa-mall-firozabad',
-    name: 'Ahinsa Mall Firozabad',
+    name: 'Ahinsa City Centre',
     location: 'Firozabad, UP',
     type: 'Hi-Street Luxury Mall',
     status: 'Upcoming',
@@ -1239,7 +1239,7 @@ export const PROJECT_DETAILS = {
     locationAdvantages: [], // TODO: key distances
   },
   'ahinsa-mall-firozabad': {
-    name: 'Ahinsa Mall Firozabad',
+    name: 'Ahinsa City Centre',
     tagline: 'The next-generation shopping and entertainment destination for Firozabad.',
     location: 'Firozabad, UP',
     fullAddress: 'Near Railway Station, Firozabad',
@@ -1264,7 +1264,7 @@ export const PROJECT_DETAILS = {
       '/images/projects/ahinsa-mall-firozabad/laung.jpg',
     ],
     overview: [
-      'Ahinsa Mall Firozabad is conceived as the regional shopping, dining and entertainment destination that Firozabad and the surrounding districts have been waiting for. A bold mixed-format mall \u2014 anchor stores, hi-street brands, food court, multiplex and family entertainment, all under one roof.',
+      'Ahinsa City Centre is conceived as the regional shopping, dining and entertainment destination that Firozabad and the surrounding districts have been waiting for. A bold mixed-format mall \u2014 anchor stores, hi-street brands, food court, multiplex and family entertainment, all under one roof.',
       'The mall is being designed to deliver an aspirational yet accessible experience, with carefully curated brand zones, weekend programming and a vibrant central atrium that becomes the heartbeat of the city.',
       'For brands, it is a chance to lead a new market. For Firozabad, it is a destination that finally matches the energy of its people.',
     ],
@@ -1453,7 +1453,7 @@ export const MEDIA_NEWS = [
     category: 'Press Release',
     title: 'Ahinsa Group announces flagship retail destination in Firozabad',
     excerpt:
-      'Ahinsa Mall Firozabad is poised to redefine retail and entertainment for the region, with a multi-format programme spanning anchor stores, hi-street, multiplex and family entertainment.',
+      'Ahinsa City Centre is poised to redefine retail and entertainment for the region, with a multi-format programme spanning anchor stores, hi-street, multiplex and family entertainment.',
     image:
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=85&auto=format&fit=crop',
   },
@@ -1849,6 +1849,24 @@ export const AWARDS = [
     category: 'Business Excellence & Special Guest Honour',
     image: '/images/awards/2026/food-expo.jpeg',
     description: 'Felicitated at the 2nd edition of the Food Expo & Conclave 2026 in Agra — presented by CFPIA and supported by APEDA and the Ministry of MSME, Government of India.',
+  },
+  {
+    year: '2026',
+    date: '7 August 2026',
+    title: 'AI Future Ready Conclave 2026 Honour',
+    awardedBy: 'AI Future Ready Conclave 2026',
+    category: 'Conclave Honour',
+    image: '/images/awards/2026/ai-future-ready-conclave.jpg',
+    description: 'Felicitated at the AI Future Ready Conclave 2026 held in Agra.',
+  },
+  {
+    year: '2026',
+    date: '24 August 2026',
+    title: 'Viksit Uttar Pradesh Conclave 2026 Honour',
+    awardedBy: 'Tamalka India News',
+    category: 'Media Conclave Honour',
+    image: '/images/awards/2026/viksit-uttarpradesh.jpg',
+    description: 'Honoured by Deputy Chief Minister Shri Brajesh Pathak ji at the Viksit Uttar Pradesh Conclave 2026 in Lucknow.',
   },
 ]
 
