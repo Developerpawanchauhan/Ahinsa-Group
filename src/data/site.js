@@ -131,7 +131,7 @@ export const PROJECTS = [
   },
   {
     slug: 'corporate-office-gwalior',
-    name: 'Corporate Office, Gwalior',
+    name: 'Ahinsa Office, Gwalior',
     location: 'Gwalior',
     type: 'Corporate Office',
     status: 'Completed',
@@ -337,10 +337,10 @@ export const PROJECT_DETAILS = {
       { icon: 'Trophy', name: 'Indoor Games' },
       { icon: 'Activity', name: 'Jogging Track' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Droplet', name: 'Fountains' },
       { icon: 'Building2', name: 'Villas' },
+      { icon: 'Landmark', name: 'Temples' },
+      { icon: 'Compass', name: 'Vastu' },
       { icon: 'Store', name: 'Shops & Malls' },
-      { icon: 'Car', name: 'Parking Area' },
     ],
     specifications: [
       {
@@ -434,10 +434,10 @@ export const PROJECT_DETAILS = {
       { icon: 'Trophy', name: 'Indoor Games' },
       { icon: 'Activity', name: 'Jogging Track' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Droplet', name: 'Fountains' },
       { icon: 'Building2', name: 'Villas' },
+      { icon: 'Landmark', name: 'Temples' },
+      { icon: 'Compass', name: 'Vastu' },
       { icon: 'Store', name: 'Shops & Malls' },
-      { icon: 'Car', name: 'Parking Area' },
     ],
     specifications: [
       {
@@ -595,10 +595,10 @@ export const PROJECT_DETAILS = {
       { icon: 'Trophy', name: 'Indoor Games' },
       { icon: 'Activity', name: 'Jogging Track' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Droplet', name: 'Fountains' },
       { icon: 'Building2', name: 'Villas' },
+      { icon: 'Landmark', name: 'Temples' },
+      { icon: 'Compass', name: 'Vastu' },
       { icon: 'Store', name: 'Shops & Malls' },
-      { icon: 'Car', name: 'Parking Area' },
     ],
     specifications: [
       {
@@ -770,10 +770,10 @@ export const PROJECT_DETAILS = {
       { icon: 'Trophy', name: 'Indoor Games' },
       { icon: 'Activity', name: 'Jogging Track' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Droplet', name: 'Fountains' },
       { icon: 'Building2', name: 'Villas' },
+      { icon: 'Landmark', name: 'Temples' },
+      { icon: 'Compass', name: 'Vastu' },
       { icon: 'Store', name: 'Shops & Malls' },
-      { icon: 'Car', name: 'Parking Area' },
     ],
     specifications: [
       {
@@ -910,7 +910,6 @@ export const PROJECT_DETAILS = {
     totalArea: 'Established commercial address',
     possession: 'Ready',
     priceRange: 'On Request',
-    rera: { number: 'UP-RERA Reg. No. — TBD', link: '#' },
     mapEmbed: 'https://www.google.com/maps?q=27.2059136,78.0413203&output=embed',
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
@@ -986,8 +985,8 @@ export const PROJECT_DETAILS = {
     totalArea: 'Established commercial address',
     possession: 'Ready',
     priceRange: 'On Request',
-    rera: { number: 'UP-RERA Reg. No. — TBD', link: '#' },
     mapEmbed: 'https://www.google.com/maps?q=27.2059136,78.0413203&output=embed',
+    videoEmbed: 'https://www.youtube.com/embed/ZfqdNR_RiFs',
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
     gallery: [
@@ -1053,10 +1052,10 @@ export const PROJECT_DETAILS = {
   },
 
   'corporate-office-gwalior': {
-    name: 'Corporate Office, Gwalior',
+    name: 'Ahinsa Office, Gwalior',
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Gwalior',
-    fullAddress: 'Gwalior, Madhya Pradesh',
+    fullAddress: 'Athena Tower, Gwalior, M.P.',
     instagram: null, // no Instagram section on this page
     type: 'Corporate Office',
     status: 'Completed',
@@ -1065,8 +1064,7 @@ export const PROJECT_DETAILS = {
     totalArea: 'Established commercial address',
     possession: 'Ready',
     priceRange: 'On Request',
-    rera: { number: 'MP-RERA Reg. No. — TBD', link: '#' },
-    mapEmbed: 'https://www.google.com/maps?q=Gwalior,+Madhya+Pradesh&output=embed',
+    mapEmbed: 'https://www.google.com/maps?q=Athena+Tower,+Gwalior,+Madhya+Pradesh&output=embed',
     videoEmbed: 'https://www.youtube.com/embed/O0Stk5s2YU8',
     hero: '/images/projects/corporate-office-gwalior/corporate-office.jpeg',
     overviewImage: '/images/projects/corporate-office-gwalior/office.jpeg',
@@ -1082,9 +1080,10 @@ export const PROJECT_DETAILS = {
       '/images/Events/2026-07-08 - gwalior-office/img8.JPG',
     ],
     overview: [
-      'Our Gwalior corporate office is a fully ready, fully active mixed-use destination home to brands, professional services and a steady footfall of regular visitors.',
-      'The building combines street-facing retail with upper-floor offices, designed so that businesses get visibility, accessibility and the prestige of a known address.',
-      'For investors and tenants alike, the Gwalior corporate office offers the comfort of a proven asset with strong fundamentals and consistent demand.',
+      'Ahinsa Office, Gwalior is our first address outside Uttar Pradesh — a working office at Athena Tower, in the middle of the city, opened in July 2026. Street-facing retail sits below and our team works from the office suites above.',
+      'We opened it for one reason: Ahinsa Green Valley Lake City is coming to Gwalior, and it is the most ambitious development the group has taken on. A project of that scale cannot be run from another city. Families here deserve a team they can walk in and meet, not a phone number in Agra.',
+      'So this office does the real work — it holds the master plan and layouts, arranges site visits, handles documentation and registry support, and stays available long after possession. It is where the Lake City conversation begins.',
+      'You are welcome to simply walk in. No appointment needed — come and see the plans for yourself, and ask us anything.',
     ],
     highlights: [
       { icon: 'MapPin', title: 'Central Location', text: 'High-visibility, high-footfall site with easy approach.' },
@@ -1143,7 +1142,6 @@ export const PROJECT_DETAILS = {
     totalArea: 'Established commercial address',
     possession: 'Ready',
     priceRange: 'On Request',
-    rera: { number: 'UP-RERA Reg. No. — TBD', link: '#' },
     mapEmbed: 'https://www.google.com/maps?q=Firozabad,+Uttar+Pradesh&output=embed',
     // ⚠️ The Gwalior walkthrough does not belong on this page. Null until a
     // Firozabad video exists — the hero falls back to the still image.
@@ -1160,9 +1158,10 @@ export const PROJECT_DETAILS = {
       '/images/projects/ahinsa-office-firozabad/img4.png',
     ],
     overview: [
-      'Our Firozabad office is a fully ready, fully active mixed-use destination home to brands, professional services and a steady footfall of regular visitors.',
-      'The building combines street-facing retail with upper-floor offices, designed so that businesses get visibility, accessibility and the prestige of a known address.',
-      'For investors and tenants alike, the Firozabad office offers the comfort of a proven asset with strong fundamentals and consistent demand.',
+      'Ahinsa Office, Firozabad is a ready, fully active address in the heart of the district — retail at street level, our team in the office suites above. It opened in August 2026.',
+      'We opened it because Ahinsa City Centre is being built here. Firozabad has the population, the trade and the appetite for a modern retail destination, and a project of that size needs people on the ground — not visits from another city every few weeks.',
+      'For brands and investors looking at Ahinsa City Centre, this is the desk to come to: floor plates and unit sizes, the leasing and allotment process, site visits, and every question in between, answered by people who are here every day.',
+      'It also brings the group closer to families across the district who have been buying with us for years. Walk in whenever it suits you — no appointment needed.',
     ],
     highlights: [
       { icon: 'MapPin', title: 'Central Location', text: 'High-visibility, high-footfall site with easy approach.' },
@@ -1250,7 +1249,6 @@ export const PROJECT_DETAILS = {
     totalArea: 'Regional shopping &amp; entertainment hub',
     possession: 'On Request',
     priceRange: 'On Request',
-    rera: { number: 'UP-RERA Reg. No. — TBD', link: '#' },
     mapEmbed: 'https://www.google.com/maps?q=27.1465789,78.388868&output=embed',
     hero: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
     overviewImage:
@@ -1340,11 +1338,15 @@ export const OFFICE_SLUGS = [
   'ahinsa-office-firozabad',
 ]
 
+/** The one office that leads the others — highlighted wherever they are listed. */
+export const HEAD_OFFICE_SLUG = 'corporate-office'
+
 /** Company premises — rendered by <OfficeCard> on /about and /contact. */
 export const OFFICES = PROJECTS.filter((p) => OFFICE_SLUGS.includes(p.slug)).map((p) => {
   const detail = PROJECT_DETAILS[p.slug] || {}
   return {
     ...p,
+    isHeadOffice: p.slug === HEAD_OFFICE_SLUG,
     address: detail.fullAddress || p.location,
     // The detail page embeds this; strip the embed flag for a directions link.
     mapUrl: detail.mapEmbed ? detail.mapEmbed.replace('&output=embed', '') : null,
@@ -1524,8 +1526,7 @@ export const MILESTONES = [
   { month: 'Jul', year: '2025', title: 'Ahinsa Complex', text: 'Opened the corporate office at Ahinsa Complex, Ram Bagh, Agra \u2014 completing a vibrant mixed-use landmark that pairs street-level retail with professional office space, now fully operational and occupied.' },
   { month: 'Nov', year: '2025', title: 'Ahinsa Green Valley Orchid', text: 'Introduced Green Valley Orchid at Kuberpur, Agra \u2014 a thoughtfully designed residential destination offering premium plots in a nature-integrated setting with excellent connectivity.' },
   { month: 'Jan', year: '2026', title: 'Ahinsa The Grand Green Valley \u2014 Inauguration', text: 'Inaugurated Ahinsa The Grand Green Valley on Fatehabad Road, Agra \u2014 the township\u2019s completed infrastructure, entrance gate and landscaped commons formally opened to residents.' },
-  { month: 'Mar', year: '2026', title: 'Rich Villa \u2014 Green Valley Empire', text: 'Inaugurated the Rich Villas at Ahinsa Green Valley Empire, Mudi Crossing, Agra \u2014 elegantly designed luxury homes with generous interiors, premium finishes and private gardens, launched with the blessings of Guru Vijay Kaushal Ji.' },
-  { month: 'Jul', year: '2026', title: 'Ahinsa Corporate Office, Gwalior \u2014 Inauguration', text: 'Inaugurated the Ahinsa Corporate Office in Gwalior, Madhya Pradesh \u2014 marking the group\u2019s expansion beyond Uttar Pradesh with a centrally located mixed-use landmark pairing street-facing retail with upper-floor office suites.' },
+  { month: 'Jul', year: '2026', title: 'Ahinsa Office, Gwalior \u2014 Inauguration', text: 'Inaugurated the Ahinsa Office in Gwalior, Madhya Pradesh \u2014 marking the group\u2019s expansion beyond Uttar Pradesh with a centrally located mixed-use landmark pairing street-facing retail with upper-floor office suites.' },
   { month: 'Aug', year: '2026', title: 'Ahinsa Corporate Office, Firozabad \u2014 Inauguration', text: 'Inaugurated the Ahinsa Office in Firozabad, Uttar Pradesh \u2014 a ready, fully active address bringing the group closer to buyers across the district, with street-facing retail below and office suites above.' },
 ]
 
@@ -1550,7 +1551,6 @@ export const MANAGEMENT = [
     ],
     achievements: [
       'Chairman, Ahinsa Group',
-      '20+ Years in Real Estate',
       '18+ Awards & Recognitions',
     ],
   },
@@ -1568,11 +1568,9 @@ export const MANAGEMENT = [
       'But if you ask me what I\u2019m most proud of, it isn\u2019t the numbers. It\u2019s the reason behind them.',
       'Every person who joined us did so because someone they trusted told them they could. That trust wasn\u2019t given to us \u2014 we earned it, promise by promise, delivery by delivery.',
       'That is the only principle we have ever followed at AHINSA GROUP, whatever we promise, we deliver.',
-      'Thank you to every family member who believed in us early, and to every new one joining us today. The next chapter belongs to all of us.',
     ],
     achievements: [
       'Chief Executive Officer',
-      'Lead, Strategic Operations',
       'Architect, Business Excellence',
     ],
   },
@@ -1592,7 +1590,6 @@ export const MANAGEMENT = [
     achievements: [
       'Director, Ahinsa Group',
       '20+ Years Cross-Industry Leadership',
-      "Founder & Director, Real Estate (2014–Present)",
     ],
   },
 ]
@@ -1940,7 +1937,7 @@ export const EVENTS = [
   },
   {
     date: 'July 8, 2026',
-    title: 'Ahinsa Corporate Office, Gwalior — Inauguration',
+    title: 'Ahinsa Office, Gwalior — Inauguration',
     location: 'Gwalior, Madhya Pradesh',
     type: 'Inauguration',
     images: [
@@ -1957,7 +1954,7 @@ export const EVENTS = [
       '/images/Events/2026-07-08 - gwalior-office/img11.JPG',
     ],
     excerpt:
-      'Inauguration of the Ahinsa Corporate Office in Gwalior — the group’s first address beyond Uttar Pradesh.',
+      'Inauguration of the Ahinsa Office in Gwalior — the group’s first address beyond Uttar Pradesh.',
   },
   {
     date: 'May 14, 2026',

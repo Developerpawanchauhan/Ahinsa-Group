@@ -8,17 +8,37 @@ import { ArrowRight, Building2, MapPin, Navigation } from 'lucide-react'
  *
  * Deliberately lighter than the homepage ProjectCard: an office is a place to
  * visit, so the address and directions lead, not a sales blurb.
+ *
+ * The head office (see HEAD_OFFICE_SLUG) is set apart with a gold frame and a
+ * filled label, so visitors can tell at a glance which address leads.
  */
 export default function OfficeCard({ office }) {
+  const { isHeadOffice } = office
+
   return (
-    <div className="card-glass group overflow-hidden h-full flex flex-col">
+    <div
+      className={`card-glass group overflow-hidden h-full flex flex-col ${
+        // card-glass dims its border on hover; keep the head office's bright.
+        isHeadOffice
+          ? 'border-gold-500/70 hover:border-gold-500 dark:border-gold-500/50 dark:hover:border-gold-500/70 shadow-md shadow-gold-500/10'
+          : ''
+      }`}
+    >
       <Link to={`/projects/${office.slug}`} className="img-zoom aspect-[4/3] relative block">
         <img src={office.image} alt={office.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-900/85 via-transparent to-transparent" />
       </Link>
 
       <div className="p-6 flex flex-col flex-1">
-        <div className="flex items-center gap-2 text-xs text-gold-700 dark:text-gold-500 uppercase tracking-[0.2em]">
+        {/* The head office wears the label as a filled chip; the rest keep the
+            plain gold caption, so the three cards still line up. */}
+        <div
+          className={`inline-flex items-center gap-2 self-start text-xs uppercase tracking-[0.2em] ${
+            isHeadOffice
+              ? 'bg-gold-500 text-ink-900 px-2.5 py-1 font-semibold'
+              : 'text-gold-700 dark:text-gold-500'
+          }`}
+        >
           <Building2 className="w-3.5 h-3.5" />
           {office.type}
         </div>

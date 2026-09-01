@@ -5,7 +5,7 @@ import {
   ShieldCheck, Award, Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy,
   Activity, Zap, Car, Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee,
   Utensils, Store, Film, Music, HeartHandshake, Clock, Eye, Target, Leaf,
-  Send, CheckCircle2, Phone, Mail, ChevronRight, Maximize2,
+  Send, CheckCircle2, Phone, Mail, ChevronRight, Maximize2, Landmark,
 } from 'lucide-react'
 
 import PageHero from '../components/PageHero'
@@ -17,13 +17,13 @@ import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
 import InstagramFeed from '../components/InstagramFeed'
 import ImageLightbox from '../components/ImageLightbox'
-import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM } from '../data/site'
+import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS } from '../data/site'
 
 const ICON_MAP = {
   ArrowRight, MapPin, Building2, Calendar, Ruler, Layers, ShieldCheck, Award,
   Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy, Activity, Zap, Car,
   Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee, Utensils, Store, Film,
-  Music, HeartHandshake, Clock, Eye, Target, Leaf,
+  Music, HeartHandshake, Clock, Eye, Target, Leaf, Landmark,
 }
 
 function Icon({ name, className = 'w-5 h-5' }) {
@@ -61,8 +61,13 @@ export default function ProjectDetail() {
   const brochure = BROCHURE_PROJECTS.find((b) => b.slug === slug)
   const brochureId = brochure?.id
 
-  // Offices without a surveyed distance list skip the "Key Distances" card.
-  const hasDistances = project?.locationAdvantages?.length > 0
+  // Ahinsa Complex is deliberately not in OFFICE_SLUGS — it is a project, so
+  // it keeps the status badge, highlights and distances like any other.
+  const isOffice = OFFICE_SLUGS.includes(slug)
+
+  // The offices are working addresses, not somewhere a buyer is choosing
+  // between locations, so they show the map without the "Key Distances" card.
+  const hasDistances = !isOffice && project?.locationAdvantages?.length > 0
 
   // Index of the gallery image shown full screen (null = lightbox closed).
   // Declared before the redirect below so the hook order never changes.
@@ -100,6 +105,15 @@ export default function ProjectDetail() {
     cursor += g.images.length
     return block
   })
+
+  // Offices carry no unit-area figure. Drop any fact without a value so the
+  // strip never shows an empty tile, and centre what is left.
+  const quickFacts = [
+    { icon: Building2, label: 'Type', value: project.type },
+    { icon: Layers, label: 'Configuration', value: project.configurations },
+    { icon: Ruler, label: 'Unit Area', value: project.unitArea },
+    { icon: Calendar, label: 'Possession', value: project.possession },
+  ].filter((f) => f.value && String(f.value).trim())
 
   return (
     <>
@@ -166,11 +180,16 @@ export default function ProjectDetail() {
 
       {/* QUICK FACTS STRIP */}
       <section className="bg-page-alt border-y border-soft">
-        <div className="container-x py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Fact icon={Building2} label="Type" value={project.type} />
-          <Fact icon={Layers} label="Configuration" value={project.configurations} />
-          <Fact icon={Ruler} label="Unit Area" value={project.unitArea} />
-          <Fact icon={Calendar} label="Possession" value={project.possession} />
+        <div
+          className={`container-x py-8 grid gap-6 ${
+            quickFacts.length < 4
+              ? 'grid-cols-1 sm:grid-cols-3 justify-items-center'
+              : 'grid-cols-2 md:grid-cols-4'
+          }`}
+        >
+          {quickFacts.map((f) => (
+            <Fact key={f.label} icon={f.icon} label={f.label} value={f.value} />
+          ))}
         </div>
       </section>
 
@@ -182,9 +201,11 @@ export default function ProjectDetail() {
               <div className="img-zoom aspect-[4/5] overflow-hidden">
                 <AutoSlideImage images={overviewImages} alt={project.name} className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -top-6 -left-6 hidden md:flex flex-col items-center justify-center w-28 h-28 bg-gold-500 text-ink-900">
-                <span className="font-serif text-2xl font-bold leading-none">{project.status}</span>
-              </div>
+              {!isOffice && (
+                <div className="absolute -top-6 -left-6 hidden md:flex flex-col items-center justify-center w-28 h-28 bg-gold-500 text-ink-900">
+                  <span className="font-serif text-2xl font-bold leading-none">{project.status}</span>
+                </div>
+              )}
             </div>
           </Reveal>
           <div>
@@ -200,7 +221,6 @@ export default function ProjectDetail() {
             <Reveal delay={0.3}>
               <div className="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-soft">
                 <KV label="Address" value={project.fullAddress} />
-                <KV label="REG" value={project.rera?.number || 'On Request'} />
               </div>
             </Reveal>
           </div>
@@ -226,8 +246,9 @@ export default function ProjectDetail() {
       </section>
 
       {/* HIGHLIGHTS — skipped while a project has none, so the heading never
-          appears above an empty row. */}
-      {project.highlights?.length > 0 && (
+          appears above an empty row, and on the group's own offices, which are
+          working addresses rather than something being sold. */}
+      {!isOffice && project.highlights?.length > 0 && (
       <section className="section-pad bg-page-soft">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -458,30 +479,6 @@ export default function ProjectDetail() {
               </ul>
             </div>
           </Reveal>
-          )}
-        </div>
-      </section>
-
-      {/* RERA DISCLOSURE */}
-      <section className="bg-page-alt border-y border-soft">
-        <div className="container-x py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500 flex-shrink-0">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <p className="text-gold-700 dark:text-gold-500 uppercase tracking-[0.25em] text-xs">Approval Disclosure</p>
-              <p className="text-fg text-sm mt-1">{project.rera?.number || 'RERA registration details available on request.'}</p>
-              <p className="text-fg-soft text-xs mt-2 max-w-3xl">
-                Visuals, configurations and amenities indicated on this page are for representational purposes.
-                Final details may vary as per the approved plans and on-site delivery.
-              </p>
-            </div>
-          </div>
-          {project.rera?.link && project.rera.link !== '#' && (
-            <a href={project.rera.link} target="_blank" rel="noreferrer" className="btn-outline-gold whitespace-nowrap">
-              View on RERA <ArrowRight className="w-4 h-4" />
-            </a>
           )}
         </div>
       </section>

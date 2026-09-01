@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Bot, X, ArrowUpRight, Phone } from 'lucide-react'
-import { WEB3FORMS_KEY } from '../data/site'
+import { WEB3FORMS_KEY, PROJECT_DETAILS } from '../data/site'
 
 /**
  * Ahinsa property assistant — a branching menu bot, not an AI. Every reply
@@ -56,6 +56,7 @@ const ESCALATION =
 const PROJECTS = [
   {
     id: 'grand',
+    slug: 'grand-green-valley',
     label: 'Ahinsa The Grand Green Valley',
     short: 'The Grand Green Valley',
     address: 'Fatehabad Road, Kundol, Agra',
@@ -69,6 +70,7 @@ const PROJECTS = [
   },
   {
     id: 'empire',
+    slug: 'green-valley-empire',
     label: 'Ahinsa Green Valley Empire',
     short: 'Green Valley Empire',
     address: 'Mudi Crossing, Agra',
@@ -81,6 +83,7 @@ const PROJECTS = [
   },
   {
     id: 'township',
+    slug: 'green-valley-township',
     label: 'Ahinsa Green Valley Township',
     short: 'Green Valley Township',
     address: 'Kuberpur, Agra',
@@ -93,6 +96,7 @@ const PROJECTS = [
   },
   {
     id: 'orchid',
+    slug: 'green-valley-orchid',
     label: 'Ahinsa Green Valley Orchid',
     short: 'Green Valley Orchid',
     address: 'Kuberpur, Agra',
@@ -111,7 +115,7 @@ const PROJECTS = [
  * Every node: { text, options }. Every option is { label } plus one of:
  *   to     — go to that node id
  *   form   — open the lead form
- *   href   — 'whatsapp' or 'call'
+ *   href   — 'whatsapp', 'call', or any URL to open in a new tab
  * `lead: true` on a node marks buying intent and arms the lead request. */
 
 const WELCOME =
@@ -121,6 +125,7 @@ const WELCOME =
 
 const MAIN_OPTIONS = [
   { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+  { label: '🌟 Upcoming Projects', to: 'upcoming' },
   { label: '💰 Prices', to: 'prices' },
   { label: '📍 Book a Site Visit', to: 'visit' },
   { label: '➕ More', to: 'more' },
@@ -353,6 +358,9 @@ const NODES = {
 
 /* Per-project nodes, generated from PROJECTS so the four branches stay in step. */
 for (const p of PROJECTS) {
+  // Same pin the project page embeds, so the coordinates live in one place.
+  const mapUrl = PROJECT_DETAILS[p.slug]?.mapEmbed?.replace('&output=embed', '')
+
   NODES[`p_${p.id}`] = {
     text: `${p.label} — ${p.address}.\n${p.config}.\nPlot sizes: ${p.sizes}`,
     options: [
@@ -389,9 +397,11 @@ for (const p of PROJECTS) {
     text: p.connectivity
       ? `${p.short} is at ${p.address}.\n${p.connectivity}`
       : `${p.short} is at ${p.address}.\n` +
-        'Our team will share the exact location pin and connectivity details on WhatsApp.',
+        'Tap below to open the exact location on Google Maps.',
     options: [
-      { label: '💬 Get location pin', href: 'whatsapp' },
+      mapUrl
+        ? { label: '🗺️ Open in Google Maps', href: mapUrl }
+        : { label: '💬 Get location pin', href: 'whatsapp' },
       { label: 'Amenities', to: `pa_${p.id}` },
       { label: '📍 Book Site Visit', to: `v_${p.id}` },
     ],
@@ -775,7 +785,11 @@ export default function ChatWidget() {
     ...(node === 'main' ? [] : [{ label: '🔙 Main Menu', to: 'main' }]),
   ]
 
-  const optionHref = (option) => (option.href === 'call' ? `tel:${PHONE_TEL}` : waUrl)
+  const optionHref = (option) => {
+    if (option.href === 'call') return `tel:${PHONE_TEL}`
+    if (option.href === 'whatsapp') return waUrl
+    return option.href
+  }
 
   return (
     <>

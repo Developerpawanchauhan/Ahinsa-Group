@@ -9,6 +9,11 @@ function range(n) {
   return Array.from({ length: n }, (_, i) => `${i + 1}.png`)
 }
 
+/** Zero-padded page images exported from a source PDF. */
+function pages(n) {
+  return Array.from({ length: n }, (_, i) => `page-${String(i + 1).padStart(2, '0')}.jpg`)
+}
+
 export const BROCHURE_PROJECTS = [
   {
     id: 'grand',
@@ -50,13 +55,8 @@ export const BROCHURE_PROJECTS = [
     label: 'Ahinsa City Centre',
     shortLabel: 'City Centre',
     folder: 'firozabad',
-    images: [
-      '01.png','02.png','03.png','04.png','05.png','06.png','07.png','08.png','09.png',
-      '10.png','11.png','12.png','13.png','14.png','15.png','16.png','17.png','18.png',
-      '19.png','20.png','21.png','22.png','23.png','24 (2).png','25.png','26.png',
-      '27.png','28.png','29 (2).png','30.png','31.png','32.png','34.png','35.png',
-      '36.png','37.png','38.png',
-    ],
+    // Rendered from the "Ahinsa City Centre.pdf" in this folder — 28 pages.
+    images: pages(28),
   },
 ]
 

@@ -73,7 +73,24 @@ function ThemeToggle({ className = '' }) {
 }
 
 /* Desktop dropdown — supports two kinds: 'mega' (rich cards) | 'simple' (text list) */
-function DesktopDropdown({ link, onOpen, onClose }) {
+/**
+ * Desktop nav link colour.
+ *
+ * `solid` = the frosted bar is showing (scrolled, or a mega menu is open).
+ * While it is NOT showing, the bar is transparent over the page hero, which
+ * is a dark image on every page — so in light theme the links go cream
+ * instead of ink, which was near-invisible there. Hover and the dark theme
+ * are untouched in both states.
+ */
+function navLinkClass(isActive, solid) {
+  const base = 'text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer'
+  if (isActive) {
+    return `${base} ${solid ? 'text-gold-700' : 'text-gold-400'} dark:text-gold-500`
+  }
+  return `${base} ${solid ? 'text-ink-800' : 'text-cream'} dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500`
+}
+
+function DesktopDropdown({ link, onOpen, onClose, solid }) {
   const [open, setOpen] = useState(false)
   const closeTimer = useRef(null)
   const location = useLocation()
@@ -103,11 +120,7 @@ function DesktopDropdown({ link, onOpen, onClose }) {
     >
       <Link
         to={link.to}
-        className={`flex items-center gap-1.5 text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer ${
-          isActive
-            ? 'text-gold-700 dark:text-gold-500'
-            : 'text-ink-800 dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500'
-        }`}
+        className={`flex items-center gap-1.5 ${navLinkClass(isActive, solid)}`}
       >
         {link.label}
         <ChevronDown
@@ -300,6 +313,9 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
 
+  // The frosted bar is up whenever the page is scrolled or a mega menu is open.
+  const navSolid = scrolled || menuOpen
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30)
     onScroll()
@@ -370,6 +386,7 @@ export default function Navbar() {
                 <DesktopDropdown
                   key={link.to}
                   link={link}
+                  solid={navSolid}
                   onOpen={() => setMenuOpen(true)}
                   onClose={() => setMenuOpen(false)}
                 />
@@ -378,13 +395,7 @@ export default function Navbar() {
                   key={link.to}
                   to={link.to}
                   end={link.to === '/'}
-                  className={({ isActive }) =>
-                    `text-sm uppercase tracking-[0.2em] font-medium transition-colors duration-300 link-shimmer ${
-                      isActive
-                        ? 'text-gold-700 dark:text-gold-500'
-                        : 'text-ink-800 dark:text-cream/90 hover:text-gold-700 dark:hover:text-gold-500'
-                    }`
-                  }
+                  className={({ isActive }) => navLinkClass(isActive, navSolid)}
                 >
                   {link.label}
                 </NavLink>

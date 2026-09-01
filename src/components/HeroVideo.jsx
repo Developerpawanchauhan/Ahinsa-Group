@@ -22,6 +22,29 @@ function loadYouTubeAPI() {
   return ytApiPromise
 }
 
+// The visitor's own sound choice, remembered across page loads and pages.
+// Only ever written from a deliberate action on the volume control — never
+// from the muted fallback below, which is the browser's decision, not theirs.
+const SOUND_PREF_KEY = 'ahinsa:hero-video-sound'
+
+function readSoundPref() {
+  try {
+    const pref = JSON.parse(localStorage.getItem(SOUND_PREF_KEY))
+    if (typeof pref?.muted !== 'boolean') return null
+    return { muted: pref.muted, volume: Number.isFinite(pref.volume) ? pref.volume : null }
+  } catch {
+    return null // no storage (private mode, blocked cookies) — fall back to defaults
+  }
+}
+
+function writeSoundPref(pref) {
+  try {
+    localStorage.setItem(SOUND_PREF_KEY, JSON.stringify(pref))
+  } catch {
+    /* storage unavailable — the choice just won't survive a refresh */
+  }
+}
+
 /**
  * Chromeless background video for hero sections, with a volume control.
  *
@@ -41,14 +64,19 @@ function loadYouTubeAPI() {
  * unless the visitor has already engaged with the site, so when that happens we
  * fall back to muted playback (the hero still moves) and unmute on the very
  * first click/tap/keypress, which counts as the required user gesture.
+ *
+ * Once the visitor touches the volume control, that choice is stored and wins
+ * on every later page and refresh — a hero muted by hand comes back muted.
  */
 export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 60, start = 0 }) {
   const hostRef = useRef(null)
   const playerRef = useRef(null)
   const [visible, setVisible] = useState(false)
   const [ready, setReady] = useState(false)
-  const [volume, setVolume] = useState(defaultVolume)
-  const [muted, setMuted] = useState(false)
+  // Read once, before the player exists, so the very first frame is correct.
+  const [savedPref] = useState(readSoundPref)
+  const [volume, setVolume] = useState(savedPref?.volume ?? defaultVolume)
+  const [muted, setMuted] = useState(savedPref?.muted ?? false)
 
   // Mirrors of the state for use inside listeners that outlive a render.
   const mutedRef = useRef(muted)
@@ -102,7 +130,9 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
         videoId,
         playerVars: {
           autoplay: 1,
-          mute: 0,
+          // Start muted when that is the remembered choice, rather than
+          // muting in onReady — that leaves a gap where sound can escape.
+          mute: savedPref?.muted ? 1 : 0,
           start,
           controls: 0,
           rel: 0,
@@ -115,10 +145,19 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
         events: {
           onReady: (e) => {
             playerRef.current = e.target
-            e.target.setVolume(defaultVolume)
+            e.target.setVolume(volumeRef.current)
+            setReady(true)
+
+            // Muted on a previous visit — stay muted, and don't arm the
+            // gesture unmute below, or the next tap would undo their choice.
+            if (mutedRef.current) {
+              e.target.mute()
+              e.target.playVideo()
+              return
+            }
+
             e.target.unMute()
             e.target.playVideo()
-            setReady(true)
 
             // If sound-on autoplay was refused, playback never reaches PLAYING.
             // Retry muted so the hero isn't a frozen poster.
@@ -165,15 +204,18 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
     autoMutedRef.current = false
     setMuted(next)
     const p = playerRef.current
-    if (!p) return
     if (next) {
-      p.mute()
+      writeSoundPref({ muted: true, volume })
+      if (p) p.mute()
     } else {
       // Unmuting at zero would be a silent "on" — give it an audible level.
       const level = volume > 0 ? volume : defaultVolume
       setVolume(level)
-      p.setVolume(level)
-      p.unMute()
+      writeSoundPref({ muted: false, volume: level })
+      if (p) {
+        p.setVolume(level)
+        p.unMute()
+      }
     }
   }
 
@@ -184,13 +226,12 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
     const p = playerRef.current
     if (p) p.setVolume(level)
 
-    if (level === 0 && !muted) {
-      setMuted(true)
-      if (p) p.mute()
-    } else if (level > 0 && muted) {
-      setMuted(false)
-      if (p) p.unMute()
+    const nextMuted = level === 0
+    if (nextMuted !== muted) {
+      setMuted(nextMuted)
+      if (p) nextMuted ? p.mute() : p.unMute()
     }
+    writeSoundPref({ muted: nextMuted, volume: level })
   }
 
   const sliderValue = muted ? 0 : volume
