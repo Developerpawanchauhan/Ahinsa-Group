@@ -8,13 +8,13 @@
 // All contact & enquiry forms on this website send emails using
 // Web3Forms (https://web3forms.com) — a free service.
 //
-// TO RECEIVE EMAILS AT info@ahinsagroup.in:
-//   1. Go to https://web3forms.com
-//   2. Enter  info@ahinsagroup.in  and click "Create Access Key"
-//   3. Check your inbox and verify the email
-//   4. Copy the access key and paste it below (replacing the current value)
+// The key decides the destination inbox — it cannot be set from code. This
+// one is registered to info@ahinsagroup.in. To point the forms somewhere
+// else, create a key for that address at web3forms.com and swap it here;
+// all five forms (contact, project enquiry, brochure, welcome popup, chat)
+// read this one constant.
 // =============================================================
-export const WEB3FORMS_KEY = '0ffd5aef-9d9a-4efe-8ee5-7a1838acd016'
+export const WEB3FORMS_KEY = '90107475-46e6-485e-9d9d-33ec56c8d376'
 
 export const COMPANY = {
   name: 'Ahinsa Group',
