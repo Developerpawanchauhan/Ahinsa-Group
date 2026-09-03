@@ -51,7 +51,15 @@ async function loadImage(src) {
 /* Builds the PDF in the browser from the brochure's page images,
    re-compressed to JPEG so the file stays a reasonable size. */
 async function generatePdf(project, onProgress) {
-  const { jsPDF } = await import('jspdf')
+  // jsPDF is a separate chunk, fetched only when someone actually downloads.
+  // A tab left open across a deploy asks for the previous build's filename,
+  // which no longer exists on the server — reloading picks up the new one.
+  let jsPDF
+  try {
+    ({ jsPDF } = await import('jspdf'))
+  } catch {
+    throw new Error('This page is out of date. Please refresh and try again.')
+  }
   let pdf = null
   for (let i = 0; i < project.images.length; i++) {
     const img = await loadImage(`/images/brochure/${project.folder}/${project.images[i]}`)

@@ -52,6 +52,7 @@ export default function Contact() {
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
           subject: 'New Enquiry from Ahinsa Group Website',
+          from_name: 'Ahinsa Website — Contact Page',
           replyto: form.email,
           ...form,
         }),
