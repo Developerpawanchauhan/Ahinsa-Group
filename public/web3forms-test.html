@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web3Forms key test</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+    h1 { font-size: 20px; }
+    code { background: #f2f2f2; padding: 2px 6px; border-radius: 3px; }
+    button { font-size: 16px; padding: 12px 22px; cursor: pointer; }
+    pre { background: #111; color: #0f0; padding: 16px; border-radius: 6px; white-space: pre-wrap; word-break: break-word; }
+    .note { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>Web3Forms key test</h1>
+  <p>Key: <code id="key"></code></p>
+  <p>Button dabaiye. Neeche Web3Forms ka <strong>asli jawab</strong> dikhega.</p>
+  <button id="go">Send test submission</button>
+  <pre id="out">(abhi kuch nahi bheja)</pre>
+  <p class="note">Yeh sirf testing ke liye hai — kaam hone ke baad yeh file delete kar dijiyega.</p>
+
+  <script>
+    const KEY = '90107475-46e6-485e-9d9d-33ec56c8d376'
+    document.getElementById('key').textContent = KEY
+    const out = document.getElementById('out')
+
+    document.getElementById('go').addEventListener('click', async () => {
+      out.textContent = 'Sending...'
+      const body = new FormData()
+      body.append('access_key', KEY)
+      body.append('subject', 'TEST — Ahinsa website form check')
+      body.append('from_name', 'Ahinsa Website Test')
+      body.append('name', 'Test Submission')
+      body.append('message', 'Test from web3forms-test.html at ' + new Date().toLocaleString())
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body })
+        const data = await res.json()
+        out.textContent = 'HTTP ' + res.status + '\n\n' + JSON.stringify(data, null, 2)
+      } catch (e) {
+        out.textContent = 'Request failed: ' + e.message
+      }
+    })
+  </script>
+</body>
+</html>

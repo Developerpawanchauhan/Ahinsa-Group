@@ -264,6 +264,7 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
+    mapPlace: 'Ahinsa The Grand Green Valley Township, Fatehabad Road, Agra',
     videoEmbed: 'https://www.youtube.com/embed/MRN5CEBla64',
     hero: '/images/home/hero/silde-1.jpg',
     overviewImage:
@@ -402,6 +403,7 @@ export const PROJECT_DETAILS = {
     // TODO: exact site coordinates. This was a copy of Grand Green Valley’s
     // Agra pin — ~100 km from Gwalior — so it points at the city for now.
     mapEmbed: 'https://www.google.com/maps?q=Gwalior,+Madhya+Pradesh&output=embed',
+    mapPlace: 'Ahinsa Green Valley Lake City, Gwalior',
     overviewVideo: 'https://www.youtube.com/embed/6naURT36QaY',
     hero: '/images/projects/green-valley-lake-city/lake-city.jpg',
     overviewImage:
@@ -505,6 +507,7 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.2736831,78.0959693&output=embed',
+    mapPlace: 'Ahinsa Green Valley Empire, Mudi Crossing, Agra',
     videoEmbed: 'https://www.youtube.com/embed/cMfuRv97hRI',
     hero: '/images/home/hero/slide-3.jpg',
     overviewImage: '/images/projects/green-valley-empire/rich-villa.jpg',
@@ -672,6 +675,7 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.2322074,78.17292&output=embed',
+    mapPlace: 'Ahinsa Green Valley Township, Kuberpur, Agra',
     videoEmbed: 'https://www.youtube.com/embed/UixAWM1hS9A',
     hero: '/images/home/hero/slide-2.jpg',
     overviewImage: '/images/projects/green-valley-township/gv-gate.jpg',
@@ -828,6 +832,7 @@ export const PROJECT_DETAILS = {
     priceRange: 'On Request',
   
     mapEmbed: 'https://www.google.com/maps?q=27.2322074,78.17292&output=embed',
+    mapPlace: 'Ahinsa Green Valley Orchid, Kuberpur, Agra',
     hero: '/images/projects/green-valley-orchid/card.jpg',
     overviewImage: '/images/projects/green-valley-orchid/card.jpg',
     gallery: [
@@ -911,6 +916,7 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.2059136,78.0413203&output=embed',
+    mapPlace: 'Ahinsa Complex, Ram Bagh, Agra',
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
     gallery: [
@@ -985,7 +991,10 @@ export const PROJECT_DETAILS = {
     totalArea: 'Established commercial address',
     possession: 'Ready',
     priceRange: 'On Request',
-    mapEmbed: 'https://www.google.com/maps?q=27.2059136,78.0413203&output=embed',
+    mapEmbed: 'https://www.google.com/maps?q=27.2060742,78.0409564&output=embed',
+    mapPlace: 'Corporate Office, Ahinsa Complex, near Ram Bagh, Agra',
+    // From the listing’s Share link (maps.app.goo.gl/e6rJ12MihPk6J2rz8).
+    mapCid: '269455989475804450',
     videoEmbed: 'https://www.youtube.com/embed/ZfqdNR_RiFs',
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
@@ -1065,6 +1074,7 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=Athena+Tower,+Gwalior,+Madhya+Pradesh&output=embed',
+    mapPlace: 'Ahinsa Office, Athena Tower, Gwalior',
     videoEmbed: 'https://www.youtube.com/embed/O0Stk5s2YU8',
     hero: '/images/projects/corporate-office-gwalior/corporate-office.jpeg',
     overviewImage: '/images/projects/corporate-office-gwalior/office.jpeg',
@@ -1143,9 +1153,8 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=Firozabad,+Uttar+Pradesh&output=embed',
-    // ⚠️ The Gwalior walkthrough does not belong on this page. Null until a
-    // Firozabad video exists — the hero falls back to the still image.
-    videoEmbed: null,
+    mapPlace: 'Ahinsa Office, Firozabad',
+    videoEmbed: 'https://www.youtube.com/embed/0EKdYGEvrMk',
     // Wide facade shot — the hero crops to 80vh, so the landscape frame works
     // better here than the portrait `uper.png`.
     hero: '/images/projects/ahinsa-office-firozabad/img1.png',
@@ -1218,6 +1227,7 @@ export const PROJECT_DETAILS = {
     // The mall stands inside the Grand Green Valley township, so it shares that
     // township's pin — the matching coordinates here are deliberate.
     mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
+    mapPlace: 'Ahinsa The Grand Square Mall, Fatehabad Road, Agra',
     videoEmbed: null,
     // Dusk render leads the gallery — the hero lays a dark gradient over it.
     hero: '/images/projects/grand-square-mall/hero.png',
@@ -1250,6 +1260,7 @@ export const PROJECT_DETAILS = {
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.1465789,78.388868&output=embed',
+    mapPlace: 'Ahinsa City Centre, M.G. Road, Firozabad',
     hero: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
     overviewImage:
       '/images/projects/ahinsa-mall-firozabad/ongoing.jpg',
@@ -1341,6 +1352,48 @@ export const OFFICE_SLUGS = [
 /** The one office that leads the others — highlighted wherever they are listed. */
 export const HEAD_OFFICE_SLUG = 'corporate-office'
 
+/** Pulls "lat,lng" out of a `?q=27.09,78.17` embed URL, when it has them. */
+function coordsOf(mapEmbed) {
+  const m = mapEmbed?.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/)
+  return m ? `${m[1]},${m[2]}` : null
+}
+
+/**
+ * Opens Google Maps on the place’s own listing instead of a bare pin.
+ *
+ * A lat/long-only link drops an unnamed marker and Maps labels it with a plus
+ * code ("35RH+2X4 Dauki"), which tells a visitor nothing. Searching the
+ * listing name — centred on the site’s own coordinates, so a similarly named
+ * place elsewhere cannot win — opens the real entry, with photos and reviews.
+ * Falls back to the plain pin for anything with no listing name yet.
+ */
+export function mapLinkFor(detail) {
+  if (!detail) return null
+  // `mapCid` is Google’s own id for a listing, taken from its Share link. It
+  // opens that exact entry — no search, no list of look-alikes.
+  if (detail.mapCid) return `https://www.google.com/maps?cid=${detail.mapCid}`
+  const coords = coordsOf(detail.mapEmbed)
+  if (detail.mapPlace) {
+    const q = encodeURIComponent(detail.mapPlace)
+    return coords
+      ? `https://www.google.com/maps/search/${q}/@${coords},16z`
+      : `https://www.google.com/maps/search/?api=1&query=${q}`
+  }
+  return detail.mapEmbed ? detail.mapEmbed.replace('&output=embed', '') : null
+}
+
+/** The same place as an iframe src, so embedded maps show the name too. */
+export function mapEmbedFor(detail) {
+  if (!detail) return null
+  if (!detail.mapPlace) return detail.mapEmbed || null
+  const coords = coordsOf(detail.mapEmbed)
+  const q = encodeURIComponent(detail.mapPlace)
+  // `ll` keeps the view on the real site even if the name matches nothing.
+  return coords
+    ? `https://www.google.com/maps?q=${q}&ll=${coords}&z=16&output=embed`
+    : `https://www.google.com/maps?q=${q}&output=embed`
+}
+
 /** Company premises — rendered by <OfficeCard> on /about and /contact. */
 export const OFFICES = PROJECTS.filter((p) => OFFICE_SLUGS.includes(p.slug)).map((p) => {
   const detail = PROJECT_DETAILS[p.slug] || {}
@@ -1348,8 +1401,8 @@ export const OFFICES = PROJECTS.filter((p) => OFFICE_SLUGS.includes(p.slug)).map
     ...p,
     isHeadOffice: p.slug === HEAD_OFFICE_SLUG,
     address: detail.fullAddress || p.location,
-    // The detail page embeds this; strip the embed flag for a directions link.
-    mapUrl: detail.mapEmbed ? detail.mapEmbed.replace('&output=embed', '') : null,
+    mapUrl: mapLinkFor(detail),
+    mapEmbedUrl: mapEmbedFor(detail),
   }
 })
 
@@ -1571,7 +1624,6 @@ export const MANAGEMENT = [
     ],
     achievements: [
       'Chief Executive Officer',
-      'Architect, Business Excellence',
     ],
   },
   {

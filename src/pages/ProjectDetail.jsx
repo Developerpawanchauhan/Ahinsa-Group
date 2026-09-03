@@ -17,7 +17,7 @@ import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
 import InstagramFeed from '../components/InstagramFeed'
 import ImageLightbox from '../components/ImageLightbox'
-import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS } from '../data/site'
+import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS, mapEmbedFor } from '../data/site'
 
 const ICON_MAP = {
   ArrowRight, MapPin, Building2, Calendar, Ruler, Layers, ShieldCheck, Award,
@@ -447,7 +447,7 @@ export default function ProjectDetail() {
               <div className="mt-10 aspect-[4/3] overflow-hidden border border-soft">
                 <iframe
                   title={`${project.name} location`}
-                  src={project.mapEmbed || `https://www.google.com/maps?q=${encodeURIComponent(project.location + ', India')}&output=embed`}
+                  src={mapEmbedFor(project) || `https://www.google.com/maps?q=${encodeURIComponent(project.location + ', India')}&output=embed`}
                   className="w-full h-full"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

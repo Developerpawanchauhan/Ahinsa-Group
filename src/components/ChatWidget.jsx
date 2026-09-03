@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Bot, X, ArrowUpRight, Phone } from 'lucide-react'
-import { WEB3FORMS_KEY, PROJECT_DETAILS } from '../data/site'
+import { WEB3FORMS_KEY, PROJECT_DETAILS, mapLinkFor } from '../data/site'
 
 /**
  * Ahinsa property assistant — a branching menu bot, not an AI. Every reply
@@ -358,8 +358,11 @@ const NODES = {
 
 /* Per-project nodes, generated from PROJECTS so the four branches stay in step. */
 for (const p of PROJECTS) {
-  // Same pin the project page embeds, so the coordinates live in one place.
-  const mapUrl = PROJECT_DETAILS[p.slug]?.mapEmbed?.replace('&output=embed', '')
+  // Open the project’s Google Maps listing by name. A lat/long link only
+  // drops an unnamed pin and shows a plus code, which is not recognisable —
+  // searching the listing name lands on the actual entry. Coordinates stay as
+  // the fallback for anything without a listing yet.
+  const mapUrl = mapLinkFor(PROJECT_DETAILS[p.slug])
 
   NODES[`p_${p.id}`] = {
     text: `${p.label} — ${p.address}.\n${p.config}.\nPlot sizes: ${p.sizes}`,

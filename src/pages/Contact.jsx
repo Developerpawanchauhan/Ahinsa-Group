@@ -22,9 +22,9 @@ export default function Contact() {
   // The map below shows our Agra corporate office. Pin comes from site.js, so
   // it stays in step with the office card above and that office’s own page.
   const agraOffice = OFFICES.find((o) => o.slug === 'corporate-office')
-  const mapSrc = agraOffice?.mapUrl
-    ? `${agraOffice.mapUrl}&output=embed`
-    : `https://www.google.com/maps?q=${encodeURIComponent(COMPANY.address)}&output=embed`
+  const mapSrc =
+    agraOffice?.mapEmbedUrl ||
+    `https://www.google.com/maps?q=${encodeURIComponent(COMPANY.address)}&output=embed`
 
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
