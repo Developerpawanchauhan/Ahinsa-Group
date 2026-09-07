@@ -78,21 +78,24 @@ export function useStripArbiter() {
  * and an autoscroll that advances a card every 2s while the row is the one on
  * screen. Pauses on hover, focus and touch.
  *
- * The strip owns no lightbox — it calls `onOpen(i)` with the index of the
- * photo within `images`, so the caller can map that onto whatever collection
- * its own lightbox is showing.
+ * By default each item is a photo that opens a lightbox: the strip owns none
+ * itself, it calls `onOpen(i)` with the index within `items` so the caller can
+ * map that onto whatever collection its own viewer shows. Pass `renderItem`
+ * instead to scroll cards of any shape, and `cardClass` to size them.
  *
  * @param frozen  stop the autoscroll from outside — the caller's lightbox is
  *                open, and the pointer leaving the strip would otherwise
  *                un-pause it and scroll the row behind the overlay.
  */
 export default function PhotoStrip({
-  images,
+  items,
   label,
   index,
   active,
   onVisibility,
   onOpen,
+  renderItem,
+  cardClass = 'w-[80%] sm:w-[48%] lg:w-[32%] aspect-[16/10]',
   frozen = false,
   countLabel = true,
 }) {
@@ -102,8 +105,8 @@ export default function PhotoStrip({
 
   // How many times the list is repeated (see MIN_CARDS). A single photo has
   // nothing to scroll, so it is never repeated.
-  const copies = images.length > 1 ? Math.max(2, Math.ceil(MIN_CARDS / images.length)) : 1
-  const cards = copies > 1 ? Array.from({ length: copies }, () => images).flat() : images
+  const copies = items.length > 1 ? Math.max(2, Math.ceil(MIN_CARDS / items.length)) : 1
+  const cards = copies > 1 ? Array.from({ length: copies }, () => items).flat() : items
 
   // Eased glide to a target offset. Driven frame by frame rather than with
   // `behavior: 'smooth'` so the duration and easing are ours, and so the long
@@ -132,7 +135,7 @@ export default function PhotoStrip({
     // Distance covered by one full copy of the list. Measured from the DOM so
     // gaps and the mobile side padding are accounted for exactly.
     const first = el.children[0]
-    const clone = el.children[images.length]
+    const clone = el.children[items.length]
     const cycle = clone ? clone.offsetLeft - first.offsetLeft : 0
 
     // The strip repeats the photos, so there is always another identical copy
@@ -172,10 +175,10 @@ export default function PhotoStrip({
 
   // `active` is true for exactly one strip at a time.
   useEffect(() => {
-    if (paused || frozen || !active || images.length < 2) return
+    if (paused || frozen || !active || items.length < 2) return
     const id = setInterval(() => step(1), 2000)
     return () => clearInterval(id)
-  }, [paused, frozen, active, images.length])
+  }, [paused, frozen, active, items.length])
 
   const arrow =
     'absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center ' +
@@ -194,7 +197,7 @@ export default function PhotoStrip({
       {countLabel && (
         <div className="flex items-center justify-between mb-3">
           <span className="text-fg-soft text-[10px] uppercase tracking-[0.25em]">
-            {images.length} {images.length === 1 ? 'Photo' : 'Photos'}
+            {items.length} {items.length === 1 ? 'Photo' : 'Photos'}
           </span>
         </div>
       )}
@@ -203,36 +206,46 @@ export default function PhotoStrip({
         ref={stripRef}
         className="photo-strip -mx-5 px-5 md:mx-0 md:px-0 flex gap-4 overflow-x-auto"
       >
-        {/* Repeated so the loop always has photos ahead of it. Every copy
-            after the first is decorative — hidden from screen readers. */}
-        {cards.map((img, i) => {
-          const isClone = i >= images.length
-          const real = i % images.length // clones open the original photo
+        {/* Repeated so the loop always has photos ahead of it. Copies past the
+            first are hidden from screen readers so the list is announced once,
+            but they stay clickable — a visitor scrolling through them cannot
+            tell them apart from the originals. */}
+        {cards.map((item, i) => {
+          const isClone = i >= items.length
+          const real = i % items.length // clones stand in for the original
           return (
-            <button
-              type="button"
-              key={`${img}-${i}`}
-              onClick={() => onOpen(real)}
+            <div
+              key={i}
               aria-hidden={isClone || undefined}
-              tabIndex={isClone ? -1 : undefined}
-              aria-label={`View ${label} photo ${real + 1} full screen`}
-              className="img-zoom group relative flex-shrink-0 overflow-hidden w-[80%] sm:w-[48%] lg:w-[32%] aspect-[16/10] cursor-zoom-in"
+              className={`flex-shrink-0 ${cardClass}`}
             >
-              <img
-                src={img}
-                alt={isClone ? '' : `${label} ${real + 1}`}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <Maximize2 className="w-6 h-6 text-cream" />
-              </span>
-            </button>
+              {renderItem ? (
+                renderItem(item, real)
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => onOpen(real)}
+                  tabIndex={isClone ? -1 : undefined}
+                  aria-label={`View ${label} photo ${real + 1} full screen`}
+                  className="img-zoom group relative block w-full h-full overflow-hidden cursor-zoom-in"
+                >
+                  <img
+                    src={item}
+                    alt={isClone ? '' : `${label} ${real + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <Maximize2 className="w-6 h-6 text-cream" />
+                  </span>
+                </button>
+              )}
+            </div>
           )
         })}
       </div>
 
-      {images.length > 1 && (
+      {items.length > 1 && (
         <>
           <button
             type="button"

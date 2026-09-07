@@ -9,8 +9,9 @@ export default function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
 
       {/* Main footer */}
-      <div className="container-x py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div className="lg:col-span-1">
+      <div className="container-x py-16 grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        {/* The brand blurb needs the full width; the link lists pair up. */}
+        <div className="col-span-2 lg:col-span-1">
           <Logo size="md" />
           <p className="text-ink-300 text-sm leading-relaxed mt-6">
             Ahinsa Group Agra is a premier real estate developer crafting iconic <a href="https://www.geminiwatermark.cloud">landmarks</a> 

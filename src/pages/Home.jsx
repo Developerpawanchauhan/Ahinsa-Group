@@ -23,6 +23,7 @@ import {
 } from 'lucide-react'
 
 import Reveal from '../components/Reveal'
+import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
 import SectionHeading from '../components/SectionHeading'
 import BrochureGallery from '../components/BrochureGallery'
 import BrochureDownloadModal from '../components/BrochureDownloadModal'
@@ -130,6 +131,8 @@ function TestimonialCard({ t }) {
 }
 
 export default function Home() {
+  // The awards row scrolls sideways; the arbiter keeps it the only one running.
+  const { activeStrip, onVisibility } = useStripArbiter()
   const [downloadOpen, setDownloadOpen] = useState(false)
 
   return (
@@ -378,17 +381,18 @@ export default function Home() {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Two to a row on phones — one per row made the section very tall. */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
             {FEATURES.map((f, i) => {
               const Icon = ICON_MAP[f.icon] || Compass
               return (
                 <Reveal key={f.title} delay={i * 0.1}>
-                  <div className="card-glass p-8 h-full">
-                    <div className="w-14 h-14 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
-                      <Icon className="w-6 h-6" />
+                  <div className="card-glass p-4 md:p-8 h-full">
+                    <div className="w-11 h-11 md:w-14 md:h-14 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
+                      <Icon className="w-5 h-5 md:w-6 md:h-6" />
                     </div>
-                    <h3 className="font-serif text-2xl text-fg mt-6">{f.title}</h3>
-                    <p className="text-fg-soft text-sm leading-relaxed mt-3">{f.text}</p>
+                    <h3 className="font-serif text-base md:text-2xl text-fg mt-4 md:mt-6">{f.title}</h3>
+                    <p className="text-fg-soft text-xs md:text-sm leading-relaxed mt-2 md:mt-3">{f.text}</p>
                   </div>
                 </Reveal>
               )
@@ -412,12 +416,19 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...AWARDS]
-              .sort((a, b) => new Date(b.date) - new Date(a.date))
-              .slice(0, 3)
-              .map((a, i) => (
-              <Reveal key={a.title} delay={i * 0.1}>
+          {/* A scrolling row rather than a grid, so more than three honours fit
+              without making the section taller. */}
+          <PhotoStripStyles />
+          <PhotoStrip
+            items={[...AWARDS].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 8)}
+            label="Award"
+            index={0}
+            active={activeStrip === 0}
+            onVisibility={onVisibility}
+            cardClass="w-[85%] sm:w-[55%] lg:w-[32%]"
+            countLabel={false}
+            renderItem={(a) => (
+              <Link to="/media/awards" className="block h-full">
                 <article className="card-glass overflow-hidden group h-full flex flex-col">
                   <div className="img-zoom aspect-[16/10]">
                     <img src={a.image} alt={a.title} className="w-full h-full object-cover" />
@@ -444,9 +455,9 @@ export default function Home() {
                     </p>
                   </div>
                 </article>
-              </Reveal>
-            ))}
-          </div>
+              </Link>
+            )}
+          />
 
           {/* Award strip / count badge */}
           <Reveal delay={0.3}>

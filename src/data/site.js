@@ -639,10 +639,6 @@ export const PROJECT_DETAILS = {
           '/images/projects/green-valley-empire/site-09.jpg',
         ],
       },
-      {
-        label: 'Township Views',
-        images: ['/images/projects/green-valley-empire/site-05.jpg'],
-      },
     ],
     overview: [
       'Ahinsa Green Valley Empire represents the next chapter in premium township development, offering a refined blend of contemporary planning, world-class infrastructure, and expansive green surroundings. Created for discerning homeowners and investors, the project delivers an elevated lifestyle within a secure and well-designed community.',
@@ -1029,7 +1025,7 @@ export const PROJECT_DETAILS = {
         items: [
           'DG backup for common services',
           'Centralized water tank and supply',
-          'Fire detection &amp; protection systems',
+          'Fire detection & protection systems',
         ],
       },
     ],
@@ -1111,7 +1107,7 @@ export const PROJECT_DETAILS = {
         items: [
           'DG backup for common services',
           'Centralized water tank and supply',
-          'Fire detection &amp; protection systems',
+          'Fire detection & protection systems',
         ],
       },
     ],
@@ -1192,7 +1188,7 @@ export const PROJECT_DETAILS = {
         items: [
           'DG backup for common services',
           'Centralized water tank and supply',
-          'Fire detection &amp; protection systems',
+          'Fire detection & protection systems',
         ],
       },
     ],
@@ -1268,7 +1264,7 @@ export const PROJECT_DETAILS = {
         items: [
           'DG backup for common services',
           'Centralized water tank and supply',
-          'Fire detection &amp; protection systems',
+          'Fire detection & protection systems',
         ],
       },
     ],
@@ -1322,7 +1318,7 @@ export const PROJECT_DETAILS = {
     status: 'Upcoming',
     configurations: 'Anchor Retail · Hi-Street · Multiplex · Food Court',
     unitArea: '180 - 5000+ sq.ft.',
-    totalArea: 'Regional shopping &amp; entertainment hub',
+    totalArea: 'Regional shopping & entertainment hub',
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.1465789,78.388868&output=embed',
@@ -1352,7 +1348,7 @@ export const PROJECT_DETAILS = {
     amenities: [
       { icon: 'Film', name: 'Multiplex Cinema' },
       { icon: 'Utensils', name: 'Food Court' },
-      { icon: 'Coffee', name: 'Cafes &amp; Casual Dining' },
+      { icon: 'Coffee', name: 'Cafes & Casual Dining' },
       { icon: 'Store', name: 'Anchor Brand Zones' },
       { icon: 'Baby', name: 'Kids Play Zone' },
       { icon: 'Trophy', name: 'Family Entertainment' },
@@ -1361,7 +1357,7 @@ export const PROJECT_DETAILS = {
       { icon: 'Wifi', name: 'Free Wi-Fi' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
       { icon: 'Users', name: 'Family Lounge Areas' },
-      { icon: 'Layers', name: 'High-Speed Elevators &amp; Escalators' },
+      { icon: 'Layers', name: 'High-Speed Elevators & Escalators' },
     ],
     specifications: [
       {

@@ -175,7 +175,8 @@ export default function About() {
           </div>
 
           {/* Values */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
+          {/* Two to a row on phones — these are small enough to pair up. */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mt-12">
             {[
               { icon: Sparkles, title: 'Excellence', text: 'Pursuit of the highest standards in everything we deliver.' },
               { icon: Leaf, title: 'Sustainability', text: 'Construction that respects the planet and future generations.' },
@@ -183,10 +184,10 @@ export default function About() {
               { icon: Eye, title: 'Innovation', text: 'Embracing new ideas, materials and architectural thinking.' },
             ].map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08}>
-                <div className="border-t-2 border-gold-500/40 pt-6">
-                  <v.icon className="w-7 h-7 text-gold-700 dark:text-gold-500" />
-                  <h4 className="font-serif text-xl text-fg mt-4">{v.title}</h4>
-                  <p className="text-fg-soft text-sm mt-2 leading-relaxed">{v.text}</p>
+                <div className="border-t-2 border-gold-500/40 pt-4 md:pt-6">
+                  <v.icon className="w-6 h-6 md:w-7 md:h-7 text-gold-700 dark:text-gold-500" />
+                  <h4 className="font-serif text-base md:text-xl text-fg mt-3 md:mt-4">{v.title}</h4>
+                  <p className="text-fg-soft text-xs md:text-sm mt-2 leading-relaxed">{v.text}</p>
                 </div>
               </Reveal>
             ))}

@@ -69,7 +69,8 @@ export default function TeamMembers() {
         </div>
 
         <div className="container-x">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
+          {/* Two to a row on phones; the portraits stay legible at half width. */}
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-7">
             {filtered.map((m, i) => (
               <Reveal key={m.name} delay={(i % 4) * 0.06}>
                 <div className="group">
@@ -84,8 +85,8 @@ export default function TeamMembers() {
                     <p className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.25em]">
                       {m.department}
                     </p>
-                    <h3 className="font-serif text-fg text-xl mt-2">{m.name}</h3>
-                    <p className="text-fg-muted text-sm mt-1">{m.role}</p>
+                    <h3 className="font-serif text-fg text-base md:text-xl mt-2">{m.name}</h3>
+                    <p className="text-fg-muted text-xs md:text-sm mt-1">{m.role}</p>
                   </div>
                 </div>
               </Reveal>

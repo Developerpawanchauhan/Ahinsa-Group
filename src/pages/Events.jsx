@@ -15,7 +15,7 @@ function EventPhotoStrip({ images, title, index, active, onVisibility }) {
   return (
     <>
       <PhotoStrip
-        images={images}
+        items={images}
         label={title}
         index={index}
         active={active}

@@ -170,8 +170,10 @@ export default function ProjectDetail() {
               : 'grid-cols-2 md:grid-cols-4'
           }`}
         >
-          {quickFacts.map((f) => (
-            <Fact key={f.label} icon={f.icon} label={f.label} value={f.value} />
+          {quickFacts.map((f, i) => (
+            <Reveal key={f.label} delay={i * 0.08}>
+              <Fact icon={f.icon} label={f.label} value={f.value} />
+            </Reveal>
           ))}
         </div>
       </section>
@@ -241,19 +243,22 @@ export default function ProjectDetail() {
               title={<>What makes it <span className="gold-text">special</span></>}
             />
           </div>
-          <div className="flex flex-wrap justify-center gap-6">
+          {/* Two to a row on phones as well — one full-width card per row left
+              the section very tall. The card scales down to suit the narrower
+              column; from md up it is unchanged. */}
+          <div className="flex flex-wrap justify-center gap-3 md:gap-6">
             {project.highlights.map((h, i) => (
               <Reveal
                 key={h.title}
                 delay={i * 0.08}
-                className="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]"
+                className="w-[calc(50%-0.375rem)] md:w-[calc(50%-0.75rem)] lg:w-[calc(25%-1.125rem)]"
               >
-                <div className="card-glass p-7 h-full">
-                  <div className="w-14 h-14 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
-                    <Icon name={h.icon} className="w-6 h-6" />
+                <div className="card-glass p-4 md:p-7 h-full">
+                  <div className="w-11 h-11 md:w-14 md:h-14 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
+                    <Icon name={h.icon} className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
-                  <h3 className="font-serif text-xl text-fg mt-5">{h.title}</h3>
-                  <p className="text-fg-soft text-sm leading-relaxed mt-3">{h.text}</p>
+                  <h3 className="font-serif text-base md:text-xl text-fg mt-4 md:mt-5">{h.title}</h3>
+                  <p className="text-fg-soft text-xs md:text-sm leading-relaxed mt-2 md:mt-3">{h.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -275,14 +280,19 @@ export default function ProjectDetail() {
               subtitle="Every detail designed to elevate everyday living."
             />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          {/* Phones get chips that wrap and pack tight — square tiles two to a
+              row left long names cramped and the section metres tall. From sm
+              up it is the tile grid, where there is width for it. */}
+          <div className="flex flex-wrap justify-center gap-2 sm:grid sm:grid-cols-3 lg:grid-cols-6 sm:gap-4">
             {project.amenities.map((a, i) => (
               <Reveal key={a.name + i} delay={(i % 6) * 0.05}>
-                <div className="flex flex-col items-center justify-center text-center p-5 border border-soft hover:border-gold-500/60 hover:bg-gold-500/5 transition-all duration-300 group h-full">
-                  <div className="w-12 h-12 flex items-center justify-center text-gold-700 dark:text-gold-500 group-hover:scale-110 transition">
-                    <Icon name={a.icon} className="w-6 h-6" />
+                <div className="flex items-center gap-2.5 px-3.5 py-2.5 sm:flex-col sm:justify-center sm:gap-0 sm:text-center sm:p-5 border border-soft hover:border-gold-500/60 hover:bg-gold-500/5 transition-all duration-300 group h-full">
+                  <div className="w-6 h-6 sm:w-12 sm:h-12 flex items-center justify-center text-gold-700 dark:text-gold-500 flex-shrink-0 group-hover:scale-110 transition">
+                    <Icon name={a.icon} className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  <span className="text-fg text-xs md:text-sm mt-3 leading-tight">{a.name}</span>
+                  <span className="text-fg text-xs md:text-sm whitespace-nowrap sm:whitespace-normal sm:mt-3 leading-tight">
+                    {a.name}
+                  </span>
                 </div>
               </Reveal>
             ))}
@@ -352,7 +362,7 @@ export default function ProjectDetail() {
                     </div>
                   </Reveal>
                   <PhotoStrip
-                    images={block.images}
+                    items={block.images}
                     label={`${project.name} — ${block.label}`}
                     index={blockIndex}
                     active={activeStrip === blockIndex}
@@ -366,7 +376,7 @@ export default function ProjectDetail() {
             ) : (
               <div className="mt-4">
                 <PhotoStrip
-                  images={galleryImages}
+                  items={galleryImages}
                   label={`${project.name} gallery`}
                   index={0}
                   active={activeStrip === 0}
