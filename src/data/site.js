@@ -285,6 +285,85 @@ export const PROJECT_DETAILS = {
         images: [
           '/images/projects/grand-green-valley/card.jpg',
           '/images/projects/grand-green-valley/gate.jpeg',
+          '/images/projects/grand-green-valley/gate2.jpeg',
+        ],
+      },
+      {
+        label: 'Township Views',
+        images: [
+          '/images/projects/grand-green-valley/droneview.jpeg',
+          '/images/projects/grand-green-valley/dronevide2.jpeg',
+          '/images/projects/grand-green-valley/boundary-wall.jpg',
+        ],
+      },
+      {
+        label: 'Grand Villas',
+        images: [
+          '/images/projects/grand-green-valley/grand-villa.jpg',
+        ],
+      },
+      {
+        label: 'Rich Villas',
+        images: [
+          '/images/projects/grand-green-valley/richvilla1.jpeg',
+          '/images/projects/grand-green-valley/richvilla2.jpeg',
+          '/images/projects/grand-green-valley/richvilla3.jpeg',
+          '/images/projects/grand-green-valley/richvilla4.jpeg',
+          '/images/projects/grand-green-valley/richvilla5.jpeg',
+          '/images/projects/grand-green-valley/richvilla6.jpeg',
+          '/images/projects/grand-green-valley/richvilla7.jpeg',
+          '/images/projects/grand-green-valley/richvilla8.jpeg',
+        ],
+      },
+      {
+        label: 'Farm Houses',
+        images: [
+          '/images/projects/grand-green-valley/farmhouse.jpeg',
+          '/images/projects/grand-green-valley/farm house.jpeg',
+          '/images/projects/grand-green-valley/farmhouse4.jpeg',
+        ],
+      },
+      {
+        label: 'Club House',
+        images: [
+          '/images/projects/grand-green-valley/club-house (1).jpg',
+          '/images/projects/grand-green-valley/clubhouse.jpeg',
+          '/images/projects/grand-green-valley/clubhouse2.jpeg',
+        ],
+      },
+      {
+        label: 'Parks',
+        images: [
+          '/images/projects/grand-green-valley/cricket-stadium.jpg',
+          '/images/projects/grand-green-valley/park.jpeg',
+          '/images/projects/grand-green-valley/park1.jpeg',
+          '/images/projects/grand-green-valley/park2.jpeg',
+          '/images/projects/grand-green-valley/park2.2.jpeg',
+          '/images/projects/grand-green-valley/park3.jpeg',
+          '/images/projects/grand-green-valley/park4.jpeg',
+          '/images/projects/grand-green-valley/park5.jpeg',
+        ],
+      },
+      {
+        label: 'Landscaping',
+        images: [
+          '/images/projects/grand-green-valley/gren.jpeg',
+          '/images/projects/grand-green-valley/green2.jpeg',
+          '/images/projects/grand-green-valley/green3.jpeg',
+        ],
+      },
+      {
+        label: 'Fountains',
+        images: [
+          '/images/projects/grand-green-valley/fountain.jpg',
+          '/images/projects/grand-green-valley/fountain.jpeg',
+          '/images/projects/grand-green-valley/victoriaFountain.jpeg',
+        ],
+      },
+      {
+        label: 'Temple',
+        images: [
+          '/images/projects/grand-green-valley/temple.jpeg',
         ],
       },
       {
@@ -292,29 +371,21 @@ export const PROJECT_DETAILS = {
         images: [
           '/images/projects/grand-green-valley/grand-mall.jpg',
           '/images/projects/grand-green-valley/mall.jpeg',
+          '/images/projects/grand-green-valley/mall1.jpeg',
+          '/images/projects/grand-green-valley/mall1.2.jpeg',
+          '/images/projects/grand-green-valley/mall2.jpeg',
+          '/images/projects/grand-green-valley/mall2.2.jpeg',
+          '/images/projects/grand-green-valley/mall3.jpeg',
+          '/images/projects/grand-green-valley/mall4.jpeg',
         ],
       },
       {
-        label: 'Parks',
-        images: ['/images/projects/grand-green-valley/cricket-stadium.jpg'],
-      },
-      {
-        label: 'Club House',
-        images: ['/images/projects/grand-green-valley/club-house (1).jpg'],
-      },
-      {
-        label: 'Villas',
-        images: ['/images/projects/grand-green-valley/grand-villa.jpg'],
-      },
-      {
-        label: 'Fountains',
-        images: ['/images/projects/grand-green-valley/fountain.jpg'],
-      },
-      {
-        label: 'Township Views',
+        label: 'Offices',
         images: [
-          '/images/projects/grand-green-valley/boundary-wall.jpg',
           '/images/projects/grand-green-valley/office.jpg',
+          '/images/projects/grand-green-valley/office1.jpeg',
+          '/images/projects/grand-green-valley/office2.jpeg',
+          '/images/projects/grand-green-valley/office3.jpeg',
         ],
       },
     ],
