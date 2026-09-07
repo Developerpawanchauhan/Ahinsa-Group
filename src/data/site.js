@@ -300,11 +300,6 @@ export const PROJECT_DETAILS = {
         label: 'Grand Villas',
         images: [
           '/images/projects/grand-green-valley/grand-villa.jpg',
-        ],
-      },
-      {
-        label: 'Rich Villas',
-        images: [
           '/images/projects/grand-green-valley/richvilla1.jpeg',
           '/images/projects/grand-green-valley/richvilla2.jpeg',
           '/images/projects/grand-green-valley/richvilla3.jpeg',

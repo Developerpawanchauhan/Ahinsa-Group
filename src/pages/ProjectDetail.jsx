@@ -5,7 +5,7 @@ import {
   ShieldCheck, Award, Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy,
   Activity, Zap, Car, Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee,
   Utensils, Store, Film, Music, HeartHandshake, Clock, Eye, Target, Leaf,
-  Send, CheckCircle2, Phone, Mail, ChevronRight, Maximize2, Landmark,
+  Send, CheckCircle2, Phone, Mail, ChevronRight, Landmark,
 } from 'lucide-react'
 
 import PageHero from '../components/PageHero'
@@ -17,6 +17,7 @@ import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
 import InstagramFeed from '../components/InstagramFeed'
 import ImageLightbox from '../components/ImageLightbox'
+import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
 import { PROJECT_DETAILS, PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS, mapEmbedFor } from '../data/site'
 
 const ICON_MAP = {
@@ -29,26 +30,6 @@ const ICON_MAP = {
 function Icon({ name, className = 'w-5 h-5' }) {
   const C = ICON_MAP[name] || Sparkles
   return <C className={className} />
-}
-
-// A clickable gallery image. `wide` spans two columns (used by the flat
-// gallery on projects that have no sections).
-function GalleryTile({ src, label, onOpen, wide = false }) {
-  return (
-    <button
-      type="button"
-      onClick={onOpen}
-      aria-label={`View ${label} full screen`}
-      className={`img-zoom group relative block w-full overflow-hidden cursor-zoom-in ${
-        wide ? 'md:col-span-2 aspect-[16/10]' : 'aspect-[4/3]'
-      }`}
-    >
-      <img src={src} alt={label} className="w-full h-full object-cover" loading="lazy" />
-      <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-        <Maximize2 className="w-7 h-7 text-cream" />
-      </span>
-    </button>
-  )
 }
 
 export default function ProjectDetail() {
@@ -72,6 +53,8 @@ export default function ProjectDetail() {
   // Index of the gallery image shown full screen (null = lightbox closed).
   // Declared before the redirect below so the hook order never changes.
   const [galleryIdx, setGalleryIdx] = useState(null)
+  // Gallery sections scroll sideways; only the one on screen autoscrolls.
+  const { activeStrip, onVisibility } = useStripArbiter()
   const [downloadOpen, setDownloadOpen] = useState(false)
 
   if (!project) {
@@ -345,6 +328,7 @@ export default function ProjectDetail() {
       {/* GALLERY */}
       {galleryImages.length > 0 && (
         <section className="section-pad bg-page-soft border-y border-soft">
+          <PhotoStripStyles />
           <div className="container-x">
             <SectionHeading
               eyebrow="Gallery"
@@ -354,7 +338,7 @@ export default function ProjectDetail() {
 
             {groups ? (
               /* One continuous gallery, split into titled blocks */
-              galleryBlocks.map((block) => (
+              galleryBlocks.map((block, blockIndex) => (
                 <div key={block.label} className="mt-14 first:mt-12">
                   <Reveal>
                     <div className="flex items-baseline gap-5 mb-6">
@@ -367,31 +351,29 @@ export default function ProjectDetail() {
                       </span>
                     </div>
                   </Reveal>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {block.images.map((src, i) => (
-                      <Reveal key={src + i} delay={(i % 3) * 0.08}>
-                        <GalleryTile
-                          src={src}
-                          label={`${project.name} — ${block.label} ${i + 1}`}
-                          onOpen={() => setGalleryIdx(block.offset + i)}
-                        />
-                      </Reveal>
-                    ))}
-                  </div>
+                  <PhotoStrip
+                    images={block.images}
+                    label={`${project.name} — ${block.label}`}
+                    index={blockIndex}
+                    active={activeStrip === blockIndex}
+                    onVisibility={onVisibility}
+                    onOpen={(i) => setGalleryIdx(block.offset + i)}
+                    frozen={galleryIdx !== null}
+                    countLabel={false}
+                  />
                 </div>
               ))
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-12">
-                {galleryImages.map((src, i) => (
-                  <Reveal key={src + i} delay={(i % 3) * 0.08}>
-                    <GalleryTile
-                      src={src}
-                      label={`${project.name} gallery ${i + 1}`}
-                      onOpen={() => setGalleryIdx(i)}
-                      wide={i === 0 || i === 5}
-                    />
-                  </Reveal>
-                ))}
+              <div className="mt-4">
+                <PhotoStrip
+                  images={galleryImages}
+                  label={`${project.name} gallery`}
+                  index={0}
+                  active={activeStrip === 0}
+                  onVisibility={onVisibility}
+                  onOpen={setGalleryIdx}
+                  frozen={galleryIdx !== null}
+                />
               </div>
             )}
           </div>
