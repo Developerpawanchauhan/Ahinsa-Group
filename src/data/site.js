@@ -1298,6 +1298,17 @@ export const PROJECT_DETAILS = {
       '/images/projects/grand-square-mall/hero.png',
       '/images/projects/grand-square-mall/img1.png',
       '/images/projects/grand-square-mall/img5.png',
+      // Photographs of the finished mall. They live in the township folder
+      // because the mall stands inside Grand Green Valley and its gallery
+      // shows them too — one copy on disk, referenced from both pages.
+      '/images/projects/grand-green-valley/grand-mall.jpg',
+      '/images/projects/grand-green-valley/mall.jpeg',
+      '/images/projects/grand-green-valley/mall1.jpeg',
+      '/images/projects/grand-green-valley/mall1.2.jpeg',
+      '/images/projects/grand-green-valley/mall2.jpeg',
+      '/images/projects/grand-green-valley/mall2.2.jpeg',
+      '/images/projects/grand-green-valley/mall3.jpeg',
+      '/images/projects/grand-green-valley/mall4.jpeg',
     ],
     overview: [
       'Ahinsa The Grand Square Mall is the group’s most ambitious retail and entertainment destination — anchor brands, a multiplex cinema, a grand food court and a signature central atrium, all under one roof.',
