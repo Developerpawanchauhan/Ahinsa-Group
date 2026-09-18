@@ -19,7 +19,6 @@ export const BROCHURE_PROJECTS = [
     id: 'grand',
     slug: 'grand-green-valley',
     label: 'Ahinsa The Grand Green Valley',
-    shortLabel: 'The Grand Green Valley',
     folder: 'ahinsa-the grand',
     images: range(42),
   },
@@ -27,7 +26,6 @@ export const BROCHURE_PROJECTS = [
     id: 'township',
     slug: 'green-valley-township',
     label: 'Ahinsa Green Valley Township',
-    shortLabel: 'Green Valley Township',
     folder: 'ahinsa-green-valley',
     // Pages run 1–24 and page 16 is missing from the folder. Listing a file
     // that is not there fails the whole PDF build, so it is excluded here.
@@ -37,23 +35,13 @@ export const BROCHURE_PROJECTS = [
     id: 'empire',
     slug: 'green-valley-empire',
     label: 'Ahinsa Green Valley Empire',
-    shortLabel: 'Green Valley Empire',
     folder: 'ahinsa-empire',
     images: range(36),
-  },
-  {
-    id: 'orchid',
-    slug: 'green-valley-orchid',
-    label: 'Ahinsa Green Valley Orchid',
-    shortLabel: 'Green Valley Orchid',
-    folder: 'ahinsa-orchid',
-    images: range(5),
   },
   {
     id: 'firozabad',
     slug: 'ahinsa-mall-firozabad',
     label: 'Ahinsa City Centre',
-    shortLabel: 'City Centre',
     folder: 'firozabad',
     // Rendered from the "Ahinsa City Centre.pdf" in this folder — 28 pages.
     images: pages(28),
@@ -71,6 +59,15 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
   const [activeId, setActiveId]       = useState(defaultId)
   const [lightboxIdx, setLightboxIdx] = useState(null)
   const trackRef                      = useRef(null)
+
+  // Moving from one project page to another changes `defaultId` without this
+  // component unmounting — the router reuses it for every /projects/:slug — so
+  // the initial state above is not enough. Without this the page would keep
+  // showing the brochure of the project the visitor came from.
+  useEffect(() => {
+    setActiveId(defaultId)
+    setLightboxIdx(null)
+  }, [defaultId])
 
   const project = BROCHURE_PROJECTS.find(p => p.id === activeId)
 
@@ -142,18 +139,20 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
         {/* ── Project selector tabs (hidden in single-project mode) ── */}
         {!single && (
           <Reveal>
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {/* Every tab carries the full "Ahinsa …" name, so the type is set
+                small and tight to keep the row on one line on a desktop. */}
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12">
               {BROCHURE_PROJECTS.map((p) => (
                 <button
                   key={p.id}
                   onClick={() => switchProject(p.id)}
-                  className={`px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] transition-all duration-300 border ${
+                  className={`px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 border ${
                     activeId === p.id
                       ? 'bg-ink-900 text-gold-400 border-gold-500 shadow-lg shadow-gold-500/10'
                       : 'bg-transparent text-fg-muted border-soft hover:border-gold-500/60 hover:text-gold-500'
                   }`}
                 >
-                  {p.shortLabel}
+                  {p.label}
                 </button>
               ))}
             </div>

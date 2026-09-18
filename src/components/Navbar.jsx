@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, Sun, Moon, ChevronDown, ChevronRight, Building2, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react'
+import { Menu, X, Phone, Sun, Moon, ChevronDown, ChevronRight, CornerDownRight, Building2, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react'
 import Logo from './Logo'
 import { useTheme } from '../hooks/useTheme'
 import { DEVELOPMENTS } from '../data/site'
@@ -29,6 +29,13 @@ const NAV_LINKS = [
       meta: `${p.type} · ${p.location}`,
       status: p.status,
       image: p.image,
+      // Projects built inside this one (the mall, inside Grand Green Valley)
+      // hang off their parent's entry instead of taking a slot of their own.
+      subItems: p.subProjects.map((s) => ({
+        to: `/projects/${s.slug}`,
+        label: s.name,
+        meta: s.type,
+      })),
     })),
   },
   {
@@ -173,29 +180,48 @@ function MegaPanel({ link, open }) {
         </div>
         <div className="grid grid-cols-2 gap-2">
           {link.children.map((child) => (
-            <Link
-              key={child.to}
-              to={child.to}
-              className="flex items-start gap-3 p-3 group hover:bg-gold-500/10 transition rounded-sm"
-            >
-              <div className="img-zoom relative w-16 h-16 flex-shrink-0 overflow-hidden">
-                <img src={child.image} alt={child.label} className="w-full h-full object-cover" />
-                <span className="absolute top-1 left-1 bg-gold-500 text-ink-900 text-[7px] uppercase tracking-wider px-1 py-0.5 leading-none">
-                  {child.status}
-                </span>
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="font-serif text-fg text-sm leading-tight group-hover:text-gold-700 dark:group-hover:text-gold-500 transition truncate">
-                  {child.label}
-                </h4>
-                <p className="text-fg-soft text-[10px] uppercase tracking-[0.15em] mt-1 truncate">
-                  {child.meta}
-                </p>
-                <span className="inline-flex items-center gap-1 text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-widest mt-1.5 opacity-0 group-hover:opacity-100 transition">
-                  Discover <ChevronRight className="w-2.5 h-2.5" />
-                </span>
-              </div>
-            </Link>
+            <div key={child.to}>
+              <Link
+                to={child.to}
+                className="flex items-start gap-3 p-3 group hover:bg-gold-500/10 transition rounded-sm"
+              >
+                <div className="img-zoom relative w-16 h-16 flex-shrink-0 overflow-hidden">
+                  <img src={child.image} alt={child.label} className="w-full h-full object-cover" />
+                  <span className="absolute top-1 left-1 bg-gold-500 text-ink-900 text-[7px] uppercase tracking-wider px-1 py-0.5 leading-none">
+                    {child.status}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-serif text-fg text-sm leading-tight group-hover:text-gold-700 dark:group-hover:text-gold-500 transition truncate">
+                    {child.label}
+                  </h4>
+                  <p className="text-fg-soft text-[10px] uppercase tracking-[0.15em] mt-1 truncate">
+                    {child.meta}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-widest mt-1.5 opacity-0 group-hover:opacity-100 transition">
+                    Discover <ChevronRight className="w-2.5 h-2.5" />
+                  </span>
+                </div>
+              </Link>
+
+              {/* Sub-projects sit under their parent, lined up with its title
+                  (12px padding + 64px thumbnail + 12px gap = 88px). A link
+                  cannot nest inside a link, so they are siblings of the card. */}
+              {child.subItems?.length > 0 && (
+                <div className="pl-[88px] pr-3 -mt-2 pb-2 space-y-0.5">
+                  {child.subItems.map((sub) => (
+                    <Link
+                      key={sub.to}
+                      to={sub.to}
+                      className="flex items-center gap-1.5 py-1 text-fg-soft text-[11px] leading-tight hover:text-gold-700 dark:hover:text-gold-500 transition"
+                    >
+                      <CornerDownRight className="w-3 h-3 text-gold-500 flex-shrink-0" />
+                      <span className="truncate">{sub.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
@@ -275,31 +301,57 @@ function MobileAccordion({ link, onItemClick }) {
       >
         <div className="pl-4 space-y-1">
           {link.children.map((child) => (
-            <NavLink
-              key={child.to + child.label}
-              to={child.to}
-              end
-              onClick={onItemClick}
-              className={({ isActive: a }) =>
-                `flex items-center gap-3 py-2.5 px-2 border-l-2 transition ${
-                  a
-                    ? 'border-gold-500 text-gold-700 dark:text-gold-500'
-                    : 'border-gold-500/15 text-ink-700 dark:text-cream/70'
-                }`
-              }
-            >
-              {isMega ? (
-                <Building2 className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
-              ) : (
-                <ChevronRight className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
-              )}
-              <div className="flex-1 min-w-0">
-                <div className="text-xs font-medium leading-tight">{child.label}</div>
-                <div className="text-[10px] text-fg-faint uppercase tracking-widest mt-0.5 truncate">
-                  {child.meta}
+            <div key={child.to + child.label}>
+              <NavLink
+                to={child.to}
+                end
+                onClick={onItemClick}
+                className={({ isActive: a }) =>
+                  `flex items-center gap-3 py-2.5 px-2 border-l-2 transition ${
+                    a
+                      ? 'border-gold-500 text-gold-700 dark:text-gold-500'
+                      : 'border-gold-500/15 text-ink-700 dark:text-cream/70'
+                  }`
+                }
+              >
+                {isMega ? (
+                  <Building2 className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
+                ) : (
+                  <ChevronRight className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-medium leading-tight">{child.label}</div>
+                  <div className="text-[10px] text-fg-faint uppercase tracking-widest mt-0.5 truncate">
+                    {child.meta}
+                  </div>
                 </div>
-              </div>
-            </NavLink>
+              </NavLink>
+
+              {/* Sub-projects, indented one step under their parent. */}
+              {child.subItems?.map((sub) => (
+                <NavLink
+                  key={sub.to}
+                  to={sub.to}
+                  end
+                  onClick={onItemClick}
+                  className={({ isActive: a }) =>
+                    `flex items-center gap-2 py-2 pl-7 pr-2 border-l-2 transition ${
+                      a
+                        ? 'border-gold-500 text-gold-700 dark:text-gold-500'
+                        : 'border-gold-500/15 text-ink-700 dark:text-cream/70'
+                    }`
+                  }
+                >
+                  <CornerDownRight className="w-3.5 h-3.5 text-gold-500 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs leading-tight">{sub.label}</div>
+                    <div className="text-[10px] text-fg-faint uppercase tracking-widest mt-0.5 truncate">
+                      {sub.meta}
+                    </div>
+                  </div>
+                </NavLink>
+              ))}
+            </div>
           ))}
         </div>
       </div>

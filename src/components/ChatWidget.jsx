@@ -107,6 +107,22 @@ const PROJECTS = [
       'parking, high-speed internet and 24x7 gated security.',
     connectivity: null,
   },
+  {
+    // Shops and showrooms, not plots — `kind` switches the size and price
+    // replies to commercial wording. Details are from the project brochure.
+    id: 'citycentre',
+    slug: 'ahinsa-mall-firozabad',
+    kind: 'commercial',
+    label: 'Ahinsa City Centre Mall',
+    short: 'City Centre Mall',
+    address: 'MG Road, Firozabad',
+    config: 'Shops, showrooms and commercial spaces across five retail levels',
+    sizes: '180 – 5,000+ sq. ft.',
+    amenities:
+      'High-speed WiFi, lifts & escalators, common washrooms, basement parking,\n' +
+      '100% power backup, CCTV surveillance, fire safety systems and climate-controlled common areas.',
+    connectivity: 'Minutes from the railway station, with maximum visibility and easy connectivity.',
+  },
 ]
 
 /* ------------------------------------------------------------------ *
@@ -128,7 +144,6 @@ const MAIN_OPTIONS = [
   { label: '🌟 Upcoming Projects', to: 'upcoming' },
   { label: '💰 Prices', to: 'prices' },
   { label: '📍 Book a Site Visit', to: 'visit' },
-  { label: '➕ More', to: 'more' },
 ]
 
 const NODES = {
@@ -136,7 +151,8 @@ const NODES = {
 
   /* ---------------- Ongoing projects ---------------- */
   ongoing: {
-    text: 'We have four ongoing projects in Agra 🏗️\nWhich one may I tell you about?',
+    // No count or city here — the list below grows, and it is no longer only Agra.
+    text: 'Here are our ongoing projects 🏗️\nWhich one may I tell you about?',
     options: PROJECTS.map((p) => ({ label: p.short, to: `p_${p.id}` })),
   },
 
@@ -196,9 +212,10 @@ const NODES = {
   },
   visitDone: {
     text:
-      'Thank you 🙏 Your site visit request is noted.\n' +
-      `Our executive will call you shortly to confirm. For instant help, WhatsApp us on ${PHONE_DISPLAY}`,
+      'Thank you 🙏 WhatsApp has opened with your visit request — just tap **Send** and our team will confirm the time.\n' +
+      'If it did not open, use the button below.',
     options: [
+      { label: '💬 Send visit request on WhatsApp', href: 'lead' },
       { label: 'Site office location', to: 'office' },
       { label: 'Visit timings', to: 'timings' },
       { label: 'Pickup available?', to: 'pickup' },
@@ -206,7 +223,7 @@ const NODES = {
   },
   office: {
     text:
-      'Our head office is at Ahinsa Complex, Ram Bagh, Agra, Uttar Pradesh 282006.\n' +
+      'Our head office is at 11/49B, Ahinsa Complex, Gulab Nagar, Rambagh, Agra 282006.\n' +
       'For the site office of a particular project, our team will send you the exact location pin on WhatsApp.',
     options: [
       { label: '💬 Get location pin', href: 'whatsapp' },
@@ -231,59 +248,16 @@ const NODES = {
     ],
   },
 
-  /* ---------------- Home loan & registry ---------------- */
-  loan: {
-    text:
-      'Yes 🏦 Our projects are approved by leading banks.\n' +
-      'Our team supports you through the whole process — from loan documentation right up to registry.',
-    options: [
-      { label: 'Which banks?', to: 'banks' },
-      { label: 'Documents required', to: 'docs' },
-      { label: 'Registry charges', to: 'registry' },
-      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
-    ],
-  },
-  banks: {
-    text:
-      'Our team will confirm which banks are empanelled for the project you are considering.\n' +
-      ESCALATION,
-    options: [
-      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
-      { label: 'Documents required', to: 'docs' },
-      { label: 'Registry charges', to: 'registry' },
-    ],
-  },
-  docs: {
-    text:
-      'Usually: Aadhaar, PAN, 6-month bank statement, income proof (salary slip or ITR) and photographs.\n' +
-      'The exact list varies by bank — our team will share the final checklist.',
-    options: [
-      { label: 'Which banks?', to: 'banks' },
-      { label: 'Registry charges', to: 'registry' },
-      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
-    ],
-  },
-  registry: {
-    text:
-      'Registry and stamp duty are charged as per current UP Government rates, and our team handles the process.\n' +
-      'There are no hidden charges — every cost is shared upfront in writing.',
-    options: [
-      { label: 'Documents required', to: 'docs' },
-      { label: '📍 Book a Site Visit', to: 'visit' },
-      { label: '💬 Talk to Loan Expert', href: 'whatsapp' },
-    ],
-  },
-
   /* ---------------- Upcoming ---------------- */
+  // Ahinsa City Centre Mall moved to Ongoing — it has its own branch now.
   upcoming: {
     text:
-      'Two projects are on the way 🌟\n' +
-      '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh\n' +
-      '• Ahinsa City Centre Mall — Firozabad, Uttar Pradesh',
+      'One project is on the way 🌟\n' +
+      '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh',
     options: [
       { label: 'Lake City, Gwalior', to: 'lakecity' },
-      { label: 'City Centre Mall, Firozabad', to: 'mall' },
       { label: 'Pre-book / Early Bird', to: 'prebook' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
   },
   lakecity: {
@@ -293,25 +267,14 @@ const NODES = {
       'Full details will be announced at launch, and pre-registration is open for early-bird benefits.',
     options: [
       { label: 'Pre-book / Early Bird', to: 'prebook' },
-      { label: 'City Centre Mall, Firozabad', to: 'mall' },
       { label: '💬 WhatsApp us', href: 'whatsapp' },
-    ],
-  },
-  mall: {
-    lead: true,
-    text:
-      'Ahinsa City Centre Mall is our upcoming commercial project in Firozabad, Uttar Pradesh.\n' +
-      'Details will be announced at launch, and pre-registration is open.',
-    options: [
-      { label: 'Pre-book / Early Bird', to: 'prebook' },
-      { label: 'Lake City, Gwalior', to: 'lakecity' },
-      { label: '💬 WhatsApp us', href: 'whatsapp' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
   },
   prebook: {
     lead: true,
     text:
-      'Pre-registration is open for both upcoming projects 🌟\n' +
+      'Pre-registration is open for Ahinsa Green Valley Lake City 🌟\n' +
       'Share your details and our team will inform you first, with early-bird benefits.',
     options: [
       { label: '📝 Notify me at launch', form: 'lead' },
@@ -320,44 +283,24 @@ const NODES = {
     ],
   },
 
-  /* ---------------- More / trust ---------------- */
-  more: {
-    text:
-      'Clear titles, bank-approved projects and on-time possession — that is our commitment.\n' +
-      '6+ signature projects and 5,000+ happy families across Agra and Gwalior.',
-    options: [
-      { label: 'Are projects approved?', to: 'approved' },
-      { label: '🏦 Home Loan & Registry', to: 'loan' },
-      { label: '🌟 Upcoming Projects', to: 'upcoming' },
-      { label: '💬 Talk to Us', href: 'whatsapp' },
-    ],
-  },
-  approved: {
-    text:
-      'Yes — our projects are approved and bank-financeable.\n' +
-      'Our team will share the approval and registration details for the specific project you are considering.',
-    options: [
-      { label: '💬 Get approval details', href: 'whatsapp' },
-      { label: '🏦 Home Loan & Registry', to: 'loan' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
-    ],
-  },
-
   /* ---------------- After the lead form ---------------- */
   leadDone: {
     text:
-      'Thank you 🙏 Our executive will call you shortly.\n' +
-      `For instant help, WhatsApp us on ${PHONE_DISPLAY}`,
+      'Thank you 🙏 WhatsApp has opened with your details — just tap **Send** and our team will share the rate list.\n' +
+      'If it did not open, use the button below.',
     options: [
+      { label: '💬 Send my details on WhatsApp', href: 'lead' },
       { label: '🏗️ Ongoing Projects', to: 'ongoing' },
       { label: '📍 Book a Site Visit', to: 'visit' },
-      { label: '💬 WhatsApp us', href: 'whatsapp' },
     ],
   },
 }
 
-/* Per-project nodes, generated from PROJECTS so the four branches stay in step. */
+/* Per-project nodes, generated from PROJECTS so every branch stays in step. */
 for (const p of PROJECTS) {
+  // Plots are sold by size and position; a mall's shops by unit, floor and
+  // frontage. Only the size line and the price reply differ between the two.
+  const commercial = p.kind === 'commercial'
   // Open the project’s Google Maps listing by name. A lat/long link only
   // drops an unnamed pin and shows a plus code, which is not recognisable —
   // searching the listing name lands on the actual entry. Coordinates stay as
@@ -365,7 +308,7 @@ for (const p of PROJECTS) {
   const mapUrl = mapLinkFor(PROJECT_DETAILS[p.slug])
 
   NODES[`p_${p.id}`] = {
-    text: `${p.label} — ${p.address}.\n${p.config}.\nPlot sizes: ${p.sizes}`,
+    text: `${p.label} — ${p.address}.\n${p.config}.\n${commercial ? 'Unit sizes' : 'Plot sizes'}: ${p.sizes}`,
     options: [
       { label: 'Sizes & Price', to: `pp_${p.id}` },
       { label: 'Amenities', to: `pa_${p.id}` },
@@ -376,10 +319,13 @@ for (const p of PROJECTS) {
 
   NODES[`pp_${p.id}`] = {
     lead: true,
-    text:
-      `${p.short} is available in ${p.sizes}.\n` +
-      'Rates depend on the plot you choose — corner and park-facing plots are priced higher.\n' +
-      'Our team will share the current rate list on WhatsApp.',
+    text: commercial
+      ? `${p.short} has units from ${p.sizes}.\n` +
+        'Rates depend on the unit you choose — its size, floor and frontage.\n' +
+        'Our team will share the current price list on WhatsApp.'
+      : `${p.short} is available in ${p.sizes}.\n` +
+        'Rates depend on the plot you choose — corner and park-facing plots are priced higher.\n' +
+        'Our team will share the current rate list on WhatsApp.',
     options: [
       { label: '💬 Get Rate List', href: 'whatsapp' },
       { label: 'Amenities', to: `pa_${p.id}` },
@@ -458,6 +404,26 @@ function buildWhatsAppUrl(log) {
       lines.push('', `${i + 1}) Q: ${entry.question}`, `A: ${entry.answer}`)
     })
   }
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`
+}
+
+/** The lead form's details as a ready-to-send WhatsApp message. Sent from the
+ *  visitor's own WhatsApp, it starts a conversation with the team straight
+ *  away instead of leaving them waiting for a call-back. */
+function buildLeadWhatsAppUrl({ isVisit, values, log }) {
+  const lines = [
+    'Hello Ahinsa Group,',
+    '',
+    isVisit
+      ? `I would like to book a site visit${values.project ? ` to ${values.project}` : ''}.`
+      : 'I would like the current rate list and offers.',
+    '',
+    `Name: ${values.name}`,
+    `Mobile: +91 ${values.mobile}`,
+    isVisit ? `Preferred day: ${values.day || 'Any day'}` : `Purpose: ${values.purpose}`,
+  ]
+  if (log.length) lines.push('', `Asked about: ${log.map((e) => e.question).join(' → ')}`)
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`
 }
@@ -619,7 +585,7 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
           className="rounded-full bg-gold-gradient px-4 py-2 text-[12.5px] font-semibold text-ink-900
                      shadow-sm transition hover:brightness-105 disabled:opacity-60"
         >
-          {busy ? 'Sending…' : isVisit ? 'Confirm visit' : 'Send my details'}
+          {busy ? 'Opening WhatsApp…' : isVisit ? 'Confirm on WhatsApp' : 'Send on WhatsApp'}
         </button>
         <button
           type="button"
@@ -648,6 +614,9 @@ export default function ChatWidget() {
      Once it is 'sent' or 'declined' we never ask again. */
   const [lead, setLead] = useState('idle')
   const [form, setForm] = useState(null) // { kind, project } while a form is open
+  // The WhatsApp message built from the submitted form — offered again as a
+  // button in case the browser did not let the first window open.
+  const [leadUrl, setLeadUrl] = useState(null)
   const turns = useRef(0)
 
   const nextId = useRef(1)
@@ -732,9 +701,21 @@ export default function ChatWidget() {
     setLead('open')
   }
 
-  const submitLead = async (values) => {
+  const submitLead = (values) => {
     const isVisit = form?.kind === 'visit'
-    await sendLead({
+
+    // WhatsApp opens first, while this is still the visitor's own click. A
+    // window opened after waiting on the network counts as a pop-up and gets
+    // blocked — on iPhones especially — so nothing here is awaited before it.
+    const url = buildLeadWhatsAppUrl({ isVisit, values, log })
+    setLeadUrl(url)
+    window.open(url, '_blank', 'noopener')
+
+    // The same details still go to the inbox, as a backup. The conversation
+    // no longer waits on it: the reply used to appear only once the email had
+    // gone through, so a slow or failed send left the chat stuck on its typing
+    // dots. If the email fails, the WhatsApp message carries the details.
+    sendLead({
       subject: isVisit
         ? `Site Visit Request — ${values.project || 'Chat Assistant'}`
         : 'Chatbot Lead — Ahinsa Website',
@@ -744,7 +725,7 @@ export default function ChatWidget() {
         ? { Project: values.project || '—', 'Preferred day': values.day || 'Not specified' }
         : { Purpose: values.purpose }),
       'Chat so far': log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
-    })
+    }).catch((err) => console.warn('Chat lead email failed:', err))
 
     setMessages((prev) => [
       ...prev,
@@ -756,14 +737,11 @@ export default function ChatWidget() {
     ])
     setForm(null)
     setLead('sent')
-    setTyping(true)
     clearTimeout(typingTimer.current)
-    typingTimer.current = setTimeout(() => {
-      const done = isVisit ? 'visitDone' : 'leadDone'
-      say(NODES[done].text)
-      setNode(done)
-      setTyping(false)
-    }, TYPING_MS)
+    setTyping(false)
+    const done = isVisit ? 'visitDone' : 'leadDone'
+    say(NODES[done].text)
+    setNode(done)
   }
 
   /* Declined — respect it, carry on helping, and never ask again. */
@@ -791,6 +769,8 @@ export default function ChatWidget() {
   const optionHref = (option) => {
     if (option.href === 'call') return `tel:${PHONE_TEL}`
     if (option.href === 'whatsapp') return waUrl
+    // The visitor's own form details, ready to send.
+    if (option.href === 'lead') return leadUrl || waUrl
     return option.href
   }
 

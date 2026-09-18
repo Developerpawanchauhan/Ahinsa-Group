@@ -76,9 +76,9 @@ export default function Footer() {
             <li className="flex gap-3 text-ink-300">
               <MapPin className="w-4 h-4 text-gold-500 flex-shrink-0 mt-0.5" />
               <span>
-                Ahinsa Complex, Ram Bagh Crossing,
+                11/49B, Ahinsa Complex, Gulab Nagar,
                 <br />
-                Agra, Uttar Pradesh, 282006
+                Rambagh, Agra 282006
               </span>
             </li>
             <li className="flex gap-3 text-ink-300">

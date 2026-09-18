@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, MapPin, Building2, Filter } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
-import { PROJECTS } from '../data/site'
+// Top-level projects only — one built inside another (the Grand Square Mall,
+// inside Grand Green Valley) is reached from its parent's page.
+import { LISTED_PROJECTS as PROJECTS } from '../data/site'
 
 const STATUS_FILTERS = ['All', 'Ongoing', 'Completed', 'New Launch']
 

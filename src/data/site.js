@@ -25,7 +25,7 @@ export const COMPANY = {
     'Ahinsa Group Agra is a premier real estate developer dedicated to creating iconic residential and commercial landmarks. Our work is defined by architectural excellence, uncompromising quality and a deep respect for the cities we build in.',
   phone: '+91 63987 30582',
   email: 'info@ahinsagroup.in',
-  address: 'Ahinsa Complex, Ram Bagh, Agra, Uttar Pradesh 282006',
+  address: '11/49B, Ahinsa Complex, Gulab Nagar, Rambagh, Agra 282006',
 }
 
 export const STATS = [
@@ -73,6 +73,9 @@ export const PROJECTS = [
   {
     slug: 'grand-square-mall',
     name: 'Ahinsa The Grand Square Mall',
+    // Built inside the Grand Green Valley township, so it is listed under that
+    // project rather than beside it (see DEVELOPMENTS and subProjectsOf).
+    parent: 'grand-green-valley',
     location: 'Fatehabad Road, Agra',
     type: 'Retail & Entertainment',
     status: 'Completed',
@@ -162,9 +165,9 @@ export const PROJECTS = [
   {
     slug: 'ahinsa-mall-firozabad',
     name: 'Ahinsa City Centre',
-    location: 'Firozabad, UP',
+    location: 'MG Road, Firozabad',
     type: 'Hi-Street Luxury Mall',
-    status: 'Upcoming',
+    status: 'Ongoing',
     image: '/images/projects/ahinsa-mall-firozabad/card.png',
     short:
       'The next-generation shopping and entertainment destination for Firozabad and surrounding districts.',
@@ -266,6 +269,12 @@ export const PROJECT_DETAILS = {
     mapEmbed: 'https://www.google.com/maps?q=27.0900026,78.1799518&output=embed',
     mapPlace: 'Ahinsa The Grand Green Valley Township, Fatehabad Road, Agra',
     videoEmbed: 'https://www.youtube.com/embed/MRN5CEBla64',
+    // Played inside "A closer look", in their own row after the photo sections.
+    galleryVideos: [
+      'https://www.youtube.com/embed/MRN5CEBla64',
+      'https://www.youtube.com/embed/VdEv4GQjEBE',
+      'https://www.youtube.com/embed/XcofmLOzp0k',
+    ],
     hero: '/images/home/hero/silde-1.jpg',
     overviewImage:
       '/images/projects/grand-green-valley/fountain.jpg',
@@ -308,14 +317,6 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/richvilla6.jpeg',
           '/images/projects/grand-green-valley/richvilla7.jpeg',
           '/images/projects/grand-green-valley/richvilla8.jpeg',
-        ],
-      },
-      {
-        label: 'Farm Houses',
-        images: [
-          '/images/projects/grand-green-valley/farmhouse.jpeg',
-          '/images/projects/grand-green-valley/farm house.jpeg',
-          '/images/projects/grand-green-valley/farmhouse4.jpeg',
         ],
       },
       {
@@ -395,18 +396,75 @@ export const PROJECT_DETAILS = {
       { icon: 'ShieldCheck', title: 'Gated & Secure', text: '24x7 multi-tier security with CCTV and access-controlled entry.' },
       { icon: 'MapPin', title: 'Prime Connectivity', text: 'Direct access from Fatehabad Road \u2014 minutes from the city\u2019s key landmarks.' },
     ],
+    // Brochure page 5, 'Step inside the outdoors' - the developer's own copy.
+    feature: {
+      eyebrow: 'Welcome',
+      title: 'Step inside the outdoors.',
+      text:
+        'An exceptional community set amidst breathtaking natural beauty. Surrounded by lush gardens, the neighbourhood blends seamlessly with the rolling landscape, offering a tranquil haven. Meandering pathways connect every corner of this vibrant, flourishing environment \u2014 so you are among greenery with each step you take.',
+      images: [
+        '/images/projects/grand-green-valley/fountain.jpeg',
+      ],
+    },
+
+    // The three ideas the layout is built on, and what each looks like on site.
+    vision: {
+      eyebrow: 'The Masterplan',
+      title: 'A township planned around its greens',
+      pillars: [
+        { icon: 'Leaf', label: 'Green' },
+        { icon: 'ShieldCheck', label: 'Secure' },
+        { icon: 'HeartHandshake', label: 'Community' },
+      ],
+      image: '/images/projects/grand-green-valley/brochure-masterplan.jpg',
+      text:
+        'Wide tree-lined roads, planted belts and open plazas were set out first; the plots and villas follow them. What a family sees on the way in is greenery, not boundary walls.',
+      note: 'Artistic impressions from the project brochure.',
+      cards: [
+        {
+          label: 'The Main Gate',
+          image: '/images/projects/grand-green-valley/brochure-main-gate.jpg',
+          text: 'A lit colonnaded arch on the approach, with a fountain court and statuary flanking the drive in.',
+        },
+        {
+          label: 'Central Park & Waterfall',
+          image: '/images/projects/grand-green-valley/brochure-central-park.jpg',
+          text: 'A water wall at the heart of the central park, ringed by paved walks, flowering beds and palms.',
+        },
+        {
+          label: 'Club House',
+          image: '/images/projects/grand-green-valley/brochure-clubhouse.jpg',
+          text: 'The Unity Hub \u2014 pool, lawns and indoor facilities behind a colonnaded front, at the centre of the township.',
+        },
+      ],
+    },
+
+    // Brochure page 9, 'Master Layout'. The drawing is that page's own, cropped.
+    site: {
+      eyebrow: 'Master Layout',
+      title: 'Fatehabad Road, Kundol, Agra',
+      text:
+        'The layout runs a spine of wide roads through the site, with the clubhouse, parks and plazas placed along it and the plots arranged around them. Every sector reaches a green within a short walk.',
+      map: '/images/projects/grand-green-valley/master-layout.jpg',
+      mapNote: 'Master layout is indicative. Plot sizes and positions are as per the approved plan.',
+      facts: [
+        { icon: 'Ruler', label: 'Plot Sizes', text: '111.11 \u00b7 138.88 \u00b7 166.66 \u00b7 200 sq. yd' },
+        { icon: 'Compass', label: 'Vastu Compliant', text: 'Plots and roads laid out to vastu principles' },
+        { icon: 'Zap', label: 'Full Infrastructure', text: 'Roads, water, sewage and power backup in place' },
+        { icon: 'ShieldCheck', label: 'Gated & Watched', text: 'Gated entry, streetlights and 24x7 surveillance' },
+      ],
+    },
+
     amenities: [
       { icon: 'Waves', name: 'Swimming Pool' },
       { icon: 'Dumbbell', name: 'Fitness Centre' },
       { icon: 'Users', name: 'Clubhouse' },
       { icon: 'Trees', name: 'Landscaped Gardens' },
       { icon: 'Baby', name: "Children's Play Area" },
-      { icon: 'Trophy', name: 'Indoor Games' },
-      { icon: 'Activity', name: 'Jogging Track' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
       { icon: 'Building2', name: 'Villas' },
       { icon: 'Landmark', name: 'Temples' },
-      { icon: 'Compass', name: 'Vastu' },
+      { icon: 'Compass', name: 'Vastu Compliant' },
       { icon: 'Store', name: 'Shops & Malls' },
     ],
     specifications: [
@@ -457,7 +515,7 @@ export const PROJECT_DETAILS = {
     name: 'Ahinsa Green Valley Lake City',
     tagline: 'Where everyday living meets resort-style luxury.',
     location: 'Gwalior, Madhya Pradesh',
-    fullAddress: 'Gwalior, Madhya Pradesh',
+    fullAddress: 'Shivapuri Road, Shitla Chauraha, Gwalior, Madhya Pradesh',
     instagram: null, // no Instagram section on this page
     type: 'Luxury Township',
     status: 'Upcoming',
@@ -469,7 +527,7 @@ export const PROJECT_DETAILS = {
     // TODO: exact site coordinates. This was a copy of Grand Green Valley’s
     // Agra pin — ~100 km from Gwalior — so it points at the city for now.
     mapEmbed: 'https://www.google.com/maps?q=Gwalior,+Madhya+Pradesh&output=embed',
-    mapPlace: 'Ahinsa Green Valley Lake City, Gwalior',
+    mapPlace: 'Ahinsa Green Valley Lake City, Shitla Chauraha, Gwalior',
     overviewVideo: 'https://www.youtube.com/embed/6naURT36QaY',
     hero: '/images/projects/green-valley-lake-city/lake-city.jpg',
     overviewImage:
@@ -504,7 +562,7 @@ export const PROJECT_DETAILS = {
       { icon: 'ShieldCheck', name: '24x7 Security' },
       { icon: 'Building2', name: 'Villas' },
       { icon: 'Landmark', name: 'Temples' },
-      { icon: 'Compass', name: 'Vastu' },
+      { icon: 'Compass', name: 'Vastu Compliant' },
       { icon: 'Store', name: 'Shops & Malls' },
     ],
     specifications: [
@@ -575,6 +633,11 @@ export const PROJECT_DETAILS = {
     mapEmbed: 'https://www.google.com/maps?q=27.2736831,78.0959693&output=embed',
     mapPlace: 'Ahinsa Green Valley Empire, Mudi Crossing, Agra',
     videoEmbed: 'https://www.youtube.com/embed/cMfuRv97hRI',
+    // Played inside "A closer look". YouTube and Instagram links both work —
+    // each is shown with its own player.
+    galleryVideos: [
+      'https://www.youtube.com/embed/DW8b84zmq08',
+    ],
     hero: '/images/home/hero/slide-3.jpg',
     overviewImage: '/images/projects/green-valley-empire/rich-villa.jpg',
     gallery: [
@@ -662,7 +725,7 @@ export const PROJECT_DETAILS = {
       { icon: 'ShieldCheck', name: '24x7 Security' },
       { icon: 'Building2', name: 'Villas' },
       { icon: 'Landmark', name: 'Temples' },
-      { icon: 'Compass', name: 'Vastu' },
+      { icon: 'Compass', name: 'Vastu Compliant' },
       { icon: 'Store', name: 'Shops & Malls' },
     ],
     specifications: [
@@ -828,17 +891,15 @@ export const PROJECT_DETAILS = {
       { icon: 'ShieldCheck', title: 'Gated Security', text: 'Boundary wall, single entry point and round-the-clock guards for a safe, secure community.' },
     ],
     amenities: [
-      { icon: 'Waves', name: 'Swimming Pool' },
       { icon: 'Dumbbell', name: 'Fitness Centre' },
       { icon: 'Users', name: 'Clubhouse' },
       { icon: 'Trees', name: 'Landscaped Gardens' },
       { icon: 'Baby', name: "Children's Play Area" },
-      { icon: 'Trophy', name: 'Indoor Games' },
       { icon: 'Activity', name: 'Jogging Track' },
       { icon: 'ShieldCheck', name: '24x7 Security' },
       { icon: 'Building2', name: 'Villas' },
       { icon: 'Landmark', name: 'Temples' },
-      { icon: 'Compass', name: 'Vastu' },
+      { icon: 'Compass', name: 'Vastu Compliant' },
       { icon: 'Store', name: 'Shops & Malls' },
     ],
     specifications: [
@@ -1044,7 +1105,7 @@ export const PROJECT_DETAILS = {
     name: 'Corporate Office',
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Agra',
-    fullAddress: 'Ram Bagh, Agra',
+    fullAddress: '11/49B, Ahinsa Complex, Gulab Nagar, Rambagh, Agra 282006',
     instagram: null, // no Instagram section on this page
     type: 'Head Office',
     status: 'Completed',
@@ -1126,7 +1187,7 @@ export const PROJECT_DETAILS = {
     name: 'Ahinsa Office, Gwalior',
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Gwalior',
-    fullAddress: 'Athena Tower, Gwalior, M.P.',
+    fullAddress: 'Athena Tower, City Centre, Behind S.P. Office, Tulsi Vihar Colony, Gwalior, Madhya Pradesh',
     instagram: null, // no Instagram section on this page
     type: 'Corporate Office',
     status: 'Completed',
@@ -1136,7 +1197,7 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=Athena+Tower,+Gwalior,+Madhya+Pradesh&output=embed',
-    mapPlace: 'Ahinsa Office, Athena Tower, Gwalior',
+    mapPlace: 'Ahinsa Office, Athena Tower, City Centre, Gwalior',
     videoEmbed: 'https://www.youtube.com/embed/O0Stk5s2YU8',
     hero: '/images/projects/corporate-office-gwalior/corporate-office.jpeg',
     overviewImage: '/images/projects/corporate-office-gwalior/office.jpeg',
@@ -1205,7 +1266,7 @@ export const PROJECT_DETAILS = {
     name: 'Ahinsa Office, Firozabad',
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Firozabad',
-    fullAddress: 'Firozabad, Uttar Pradesh',
+    fullAddress: 'Arya Nagar, Near Hotel Monark, Bypass Road, Firozabad',
     instagram: null, // no Instagram section on this page
     type: 'Corporate Office',
     status: 'Completed',
@@ -1215,7 +1276,7 @@ export const PROJECT_DETAILS = {
     possession: 'Ready',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=Firozabad,+Uttar+Pradesh&output=embed',
-    mapPlace: 'Ahinsa Office, Firozabad',
+    mapPlace: 'Ahinsa Office, Arya Nagar, Bypass Road, Firozabad',
     videoEmbed: 'https://www.youtube.com/embed/0EKdYGEvrMk',
     // Wide facade shot — the hero crops to 80vh, so the landscape frame works
     // better here than the portrait `uper.png`.
@@ -1322,18 +1383,27 @@ export const PROJECT_DETAILS = {
   },
   'ahinsa-mall-firozabad': {
     name: 'Ahinsa City Centre',
-    tagline: 'The next-generation shopping and entertainment destination for Firozabad.',
-    location: 'Firozabad, UP',
-    fullAddress: 'Near Railway Station, Firozabad',
+    tagline: 'A linear high street on MG Road, anchored by a five-level mall.',
+    location: 'MG Road, Firozabad',
+    fullAddress: 'MG Road, Firozabad',
+    instagram: {
+      handle: 'ahinsagroupagra',
+      posts: [
+        'https://www.instagram.com/p/DcGnWVqz4MJ/',
+        'https://www.instagram.com/p/DdHOhEjz-HG/',
+        'https://www.instagram.com/p/Dcx-judzA-k/',
+      ],
+    },
     type: 'Hi-Street Luxury Mall',
-    status: 'Upcoming',
-    configurations: 'Anchor Retail · Hi-Street · Multiplex · Food Court',
-    unitArea: '180 - 5000+ sq.ft.',
-    totalArea: 'Regional shopping & entertainment hub',
+    status: 'Ongoing',
+    configurations: 'Masterplan, architecture and landscape by ACPL \u2014 India \u00b7 Dubai',
+    unitArea: '',
+    totalArea: '2 acres (approx. 8,104.67 sq. m.)',
     possession: 'On Request',
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.1465789,78.388868&output=embed',
-    mapPlace: 'Ahinsa City Centre, M.G. Road, Firozabad',
+    mapPlace: 'Ahinsa City Centre Mall, MG Road, Firozabad',
+    videoEmbed: 'https://www.youtube.com/embed/UCSItlT-rfk',
     hero: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
     overviewImage:
       '/images/projects/ahinsa-mall-firozabad/ongoing.jpg',
@@ -1345,30 +1415,91 @@ export const PROJECT_DETAILS = {
       '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
       '/images/projects/ahinsa-mall-firozabad/laung.jpg',
     ],
+    // Played inside "A closer look", in their own row after the photos.
+    galleryVideos: [
+      'https://www.youtube.com/embed/UCSItlT-rfk',
+      'https://www.youtube.com/embed/os12Tu9NaUM',
+    ],
     overview: [
-      'Ahinsa City Centre is conceived as the regional shopping, dining and entertainment destination that Firozabad and the surrounding districts have been waiting for. A bold mixed-format mall \u2014 anchor stores, hi-street brands, food court, multiplex and family entertainment, all under one roof.',
-      'The mall is being designed to deliver an aspirational yet accessible experience, with carefully curated brand zones, weekend programming and a vibrant central atrium that becomes the heartbeat of the city.',
-      'For brands, it is a chance to lead a new market. For Firozabad, it is a destination that finally matches the energy of its people.',
+      'The site is two acres on MG Road, minutes from the railway station and the city bus depot, on the corridor that carries Firozabad\u2019s daily trade and commuter traffic.',
+      'The masterplan runs shopfronts along the length of the site so every unit gets its own frontage, then steps up into a taller anchor block holding the atrium, the food court and a rooftop terrace \u2014 five levels in all, from lower ground to third floor.',
+      'Masterplan, architecture and landscape are by ACPL \u2014 India \u00b7 Dubai \u2014 with the unit grid laid out to vastu principles throughout.',
     ],
     highlights: [
-      { icon: 'Store', title: 'Anchor + Hi-Street', text: 'Curated mix of large anchor stores and signature hi-street labels.' },
-      { icon: 'Film', title: 'Multiplex Cinema', text: 'A modern multi-screen cinema as the entertainment anchor.' },
-      { icon: 'Utensils', title: 'Grand Food Court', text: 'Multi-cuisine food court plus signature restaurants.' },
-      { icon: 'Sparkles', title: 'Iconic Atrium', text: 'A central atrium with skylight \u2014 the social heart of the mall.' },
+      { icon: 'MapPin', title: 'Prime Location', text: 'On MG Road \u2014 0.3 km from Firozabad railway station and 1.2 km from the city bus depot.' },
+      { icon: 'Layers', title: 'Five Retail Levels', text: 'Lower ground to third floor, holding 212 shop, showroom and restaurant units.' },
+      { icon: 'Compass', title: 'Designed by ACPL', text: 'Masterplan, architecture and landscape by ACPL \u2014 India \u00b7 Dubai.' },
+      { icon: 'Target', title: 'Secure Investment', text: 'A rare organised-retail asset in one of Firozabad\u2019s fastest-growing corridors.' },
     ],
+    // Brochure page 5, kept as its own spread: statement left, renders right.
+    feature: {
+      eyebrow: 'The Future of Firozabad',
+      title: 'A symbol of pride.',
+      text:
+        'Firozabad has the population, the trade and the appetite for a modern retail destination \u2014 but not yet the address to match it. Ahinsa City Centre Mall is designed to be that address: a single high-street commercial hub where shopping, dining and leisure sit together under one roof.',
+      images: [
+        '/images/projects/ahinsa-mall-firozabad/inside.jpg',
+      ],
+    },
+    // Brochure page 6, 'MG Road, Firozabad'. The map is that page's own
+    // annotated satellite image, cropped out of it.
+    site: {
+      eyebrow: 'Site Location',
+      title: 'MG Road, Firozabad',
+      text:
+        'The site sits on MG Road, minutes from the railway station and the city bus depot, on the corridor that carries Firozabad\u2019s daily trade and commuter traffic.',
+      map: '/images/projects/ahinsa-mall-firozabad/site-map.jpg',
+      mapNote: 'Map is indicative and not to scale. Distances are approximate.',
+      facts: [
+        { icon: 'Ruler', label: 'Plot Area', text: '2 acres (approx. 8,104.67 sq. m.)' },
+        { icon: 'Compass', label: 'Vastu Compliant', text: 'Planned to vastu principles throughout' },
+        { icon: 'Store', label: 'High-Street Commercial', text: 'Shopfronts addressing the road directly' },
+        { icon: 'Users', label: 'Experiential Zones', text: 'Plazas, atrium and water features' },
+      ],
+    },
+    // Brochure page 8, 'A place that keeps people': the three ideas behind
+    // the design, the centrepiece, and what each idea looks like built.
+    vision: {
+      eyebrow: 'Vision & Concept',
+      title: 'A place that keeps people',
+      pillars: [
+        { icon: 'Building2', label: 'Modern' },
+        { icon: 'Leaf', label: 'Sustainable' },
+        { icon: 'Users', label: 'Experience' },
+      ],
+      image: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
+      text:
+        'A development that communicates life and vitality \u2014 adaptable, natural and flexible. A nature-inspired space that evolves with the people who use it.',
+      cards: [
+        {
+          label: 'Built Form',
+          image: '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',
+          text: 'A fluidic connection between all the spaces, for a seamless experience at site level.',
+        },
+        {
+          label: 'Identity',
+          image: '/images/projects/ahinsa-mall-firozabad/inside2.jpg',
+          text: 'A binding element across the built form that gives the project a single, unmistakable identity.',
+        },
+        {
+          label: 'Facade',
+          image: '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
+          text: 'A more responsive facade that draws planting and daylight into the elevation.',
+        },
+      ],
+    },
+    // From the brochure: what the mall offers, then the services it runs on.
     amenities: [
-      { icon: 'Film', name: 'Multiplex Cinema' },
-      { icon: 'Utensils', name: 'Food Court' },
-      { icon: 'Coffee', name: 'Cafes & Casual Dining' },
-      { icon: 'Store', name: 'Anchor Brand Zones' },
-      { icon: 'Baby', name: 'Kids Play Zone' },
-      { icon: 'Trophy', name: 'Family Entertainment' },
-      { icon: 'Car', name: 'Parking Area' },
-      { icon: 'Layout', name: 'Grand Central Atrium' },
-      { icon: 'Wifi', name: 'Free Wi-Fi' },
-      { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Users', name: 'Family Lounge Areas' },
-      { icon: 'Layers', name: 'High-Speed Elevators & Escalators' },
+      { icon: 'Store', name: 'Premium Retail Spaces' },
+      { icon: 'Sparkles', name: 'Experiential Zones' },
+      { icon: 'Building2', name: 'Modern Infrastructure' },
+      { icon: 'Compass', name: 'Vastu Compliant' },
+      { icon: 'Wifi', name: 'High-Speed WiFi' },
+      { icon: 'ArrowUpDown', name: 'Lifts & Escalators' },
+      { icon: 'SquareParking', name: 'Ample Parking' },
+      { icon: 'Cctv', name: 'CCTV Surveillance' },
+      { icon: 'FireExtinguisher', name: 'Fire Safety Systems' },
+      { icon: 'Snowflake', name: 'Water & Climate Control' },
     ],
     specifications: [
       {
@@ -1396,10 +1527,20 @@ export const PROJECT_DETAILS = {
         ],
       },
     ],
-    floorPlans: [],
+    // Plan drawings and unit counts from the brochure. `image` points at the
+    // rendered brochure page, so the plan shown is always the current one.
+    floorPlansNote:
+      'Five retail levels, 212 units in all \u2014 shops and showrooms below, restaurants and the food court on top.',
+    floorPlans: [
+      { config: 'Lower Ground Floor', area: '50 units \u00b7 21,437 sq ft', image: '/images/brochure/firozabad/page-17.jpg' },
+      { config: 'Ground Floor', area: '50 units \u00b7 24,487 sq ft', image: '/images/brochure/firozabad/page-16.jpg' },
+      { config: 'First Floor', area: '45 units \u00b7 19,951 sq ft', image: '/images/brochure/firozabad/page-18.jpg' },
+      { config: 'Second Floor', area: '45 units \u00b7 19,948 sq ft', image: '/images/brochure/firozabad/page-19.jpg' },
+      { config: 'Third Floor \u2014 Food Court & Restaurants', area: '22 units \u00b7 10,563 sq ft', image: '/images/brochure/firozabad/page-20.jpg' },
+    ],
     locationAdvantages: [
-      { place: 'Firozabad Railway Station', distance: 'Adjacent (~500 m)', type: 'Transit' },
-      { place: 'Firozabad Bus Stand', distance: '~ 1 km', type: 'Transit' },
+      { place: 'Firozabad Railway Station', distance: '~ 0.3 km', type: 'Transit' },
+      { place: 'City Bus Depot', distance: '~ 1.2 km', type: 'Transit' },
       { place: 'Firozabad City Centre', distance: '~ 2 km', type: 'Commercial' },
       { place: 'District Hospital Firozabad', distance: '~ 2 km', type: 'Healthcare' },
       { place: 'NH-19 Agra–Kanpur Highway', distance: '~ 3 km', type: 'Highway' },
@@ -1479,8 +1620,29 @@ export const OFFICES = PROJECTS.filter((p) => OFFICE_SLUGS.includes(p.slug)).map
   }
 })
 
+/** Projects built inside another one, listed within it rather than beside it. */
+export const subProjectsOf = (slug) => PROJECTS.filter((p) => p.parent === slug)
+
+/** The project this one sits inside, or null for a top-level project. */
+export const parentOf = (slug) => {
+  const parent = PROJECTS.find((p) => p.slug === slug)?.parent
+  return parent ? PROJECTS.find((p) => p.slug === parent) || null : null
+}
+
+/** Top-level projects — every project except one that sits inside another.
+ *  Anything with a `parent` rides along on its parent as `subProjects`, so the
+ *  portfolio grid and the menu show it nested.
+ *
+ *  Upcoming projects always come last, after everything a visitor can see or
+ *  buy today. The sort is stable, so the order in PROJECTS holds within each
+ *  group — change a status and the project moves on its own. */
+const upcomingLast = (a, b) => (a.status === 'Upcoming') - (b.status === 'Upcoming')
+export const LISTED_PROJECTS = PROJECTS.filter((p) => !p.parent).sort(upcomingLast)
+
 /** Everything a buyer can actually buy — the homepage portfolio grid. */
-export const DEVELOPMENTS = PROJECTS.filter((p) => !OFFICE_SLUGS.includes(p.slug))
+export const DEVELOPMENTS = LISTED_PROJECTS
+  .filter((p) => !OFFICE_SLUGS.includes(p.slug))
+  .map((p) => ({ ...p, subProjects: subProjectsOf(p.slug) }))
 
 // =============================================================
 // FEATURES — "The Ahinsa Promise" pillars
@@ -1666,6 +1828,8 @@ export const MANAGEMENT = [
     name: 'Mr. Rohit Jain',
     role: 'Chairman',
     image: '/images/Team/rohit-jain.jpg',
+    // Shown under the photo on the Management page.
+    video: 'https://www.youtube.com/embed/PxkPw2srud4',
     short:
       'Visionary leader steering Ahinsa Group toward architectural excellence and sustained growth.',
     bio: [

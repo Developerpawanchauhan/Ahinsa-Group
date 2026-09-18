@@ -4,7 +4,8 @@ import SectionHeading from './SectionHeading'
 
 // Turns any Instagram post/reel URL into its official embed URL.
 // e.g. https://www.instagram.com/reel/ABC123/  →  https://www.instagram.com/reel/ABC123/embed/
-function embedSrc(url) {
+// Exported for the project gallery, which plays Instagram videos too.
+export function embedSrc(url) {
   const m = url.match(/\/(p|reel|tv)\/([A-Za-z0-9_-]+)/)
   return m ? `https://www.instagram.com/${m[1]}/${m[2]}/embed/` : null
 }

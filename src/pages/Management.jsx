@@ -4,6 +4,7 @@ import { ArrowRight, Quote, CheckCircle2, Mail } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
+import VideoTile from '../components/VideoTile'
 import { MANAGEMENT } from '../data/site'
 
 export default function Management() {
@@ -64,6 +65,9 @@ export default function Management() {
                   <div className="img-zoom aspect-[4/5] overflow-hidden">
                     <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
                   </div>
+                  {m.video && (
+                    <VideoTile src={m.video} title={`${m.name} video`} className="mt-5" />
+                  )}
                 </div>
                 <div className="lg:col-span-7">
                   <p className="eyebrow">{m.role}</p>
