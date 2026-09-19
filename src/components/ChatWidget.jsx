@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Bot, X, ArrowUpRight, Phone } from 'lucide-react'
 import { WEB3FORMS_KEY, PROJECT_DETAILS, mapLinkFor } from '../data/site'
+import { sendToGoogleSheet } from '../lib/googleSheet'
 
 /**
  * Ahinsa property assistant — a branching menu bot, not an AI. Every reply
@@ -726,6 +727,21 @@ export default function ChatWidget() {
         : { Purpose: values.purpose }),
       'Chat so far': log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
     }).catch((err) => console.warn('Chat lead email failed:', err))
+
+    // And as a row in the Google Sheet. Like the email above, this is fired
+    // and left alone — the reply must not wait on the network.
+    sendToGoogleSheet(
+      {
+        name: values.name,
+        mobile: values.mobile,
+        project: values.project || '',
+        interest: values.purpose || (isVisit ? 'Site Visit' : 'Other'),
+        message: isVisit
+          ? `Preferred day: ${values.day || 'Not specified'}`
+          : log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
+      },
+      isVisit ? 'Site Visit Request' : 'Chat Assistant',
+    )
 
     setMessages((prev) => [
       ...prev,

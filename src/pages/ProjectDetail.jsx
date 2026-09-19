@@ -20,6 +20,7 @@ import InstagramFeed, { embedSrc as instagramEmbedSrc } from '../components/Inst
 import ImageLightbox from '../components/ImageLightbox'
 import VideoTile from '../components/VideoTile'
 import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
+import { sendToGoogleSheet } from '../lib/googleSheet'
 import {
   PROJECT_DETAILS, LISTED_PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS,
   mapEmbedFor, parentOf, subProjectsOf,
@@ -917,6 +918,8 @@ function EnquirySection({ projectName }) {
       })
       const result = await response.json()
       if (result.success) {
+        // Same details, also as a row in the Google Sheet. Not awaited.
+        sendToGoogleSheet({ ...form, project: projectName }, 'Project Enquiry')
         setSubmitted(true)
         setForm({ name: '', email: '', phone: '', message: '' })
         setTimeout(() => setSubmitted(false), 4000)

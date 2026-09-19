@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { X, Download, Loader2, CheckCircle2 } from 'lucide-react'
 import { BROCHURE_PROJECTS } from './BrochureGallery'
 import { WEB3FORMS_KEY } from '../data/site'
+import { sendToGoogleSheet } from '../lib/googleSheet'
 
 /*
  * Brochure download popup — fill details (brochure, name, city, phone),
@@ -139,7 +140,14 @@ export default function BrochureDownloadModal({
         phone,
       })
 
-      // 2. Build and save the PDF
+      // 2. Same details, also as a row in the Google Sheet. Not awaited, so
+      //    the download below starts straight away.
+      sendToGoogleSheet(
+        { name: form.name.trim(), city: form.city.trim(), phone, project: project.label },
+        'Brochure Download',
+      )
+
+      // 3. Build and save the PDF
       setBusy(false)
       setProgress(0)
       await generatePdf(project, setProgress)

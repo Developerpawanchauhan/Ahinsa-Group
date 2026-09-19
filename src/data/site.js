@@ -16,6 +16,25 @@
 // =============================================================
 export const WEB3FORMS_KEY = '90107475-46e6-485e-9d9d-33ec56c8d376'
 
+// =============================================================
+// GOOGLE SHEET WEBHOOK
+// Alongside the email, every form also writes a row to the Google
+// Sheet behind this Apps Script Web App (see src/lib/googleSheet.js).
+// It runs in addition to the email, never instead of it, and a failure
+// here never stops a form from going through.
+//
+// The Web App must be deployed as "Execute as: Me" with
+// "Who has access: Anyone" — the request comes from the visitor's own
+// browser, so anything narrower will be refused.
+//
+// Note: this site is a static build with no server of its own, so the
+// secret below ships inside the JavaScript and anyone can read it. It
+// marks our rows as ours; it does not keep anyone else out.
+// =============================================================
+export const SHEET_WEBHOOK_URL =
+  'https://script.google.com/macros/s/AKfycbyPxfFAYTpjHV45kLcocWn-MhlQE1PJ4gVnqe3Qq48EvJ01j83mAT4cKhKWF0wHQMxw9g/exec'
+export const SHEET_SECRET_KEY = 'ahinsa-secure-282005'
+
 export const COMPANY = {
   name: 'Ahinsa Group',
   city: 'Agra',

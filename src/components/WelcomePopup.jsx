@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { X, Send, CheckCircle2, Loader2 } from 'lucide-react'
 import Logo from './Logo'
 import { WEB3FORMS_KEY } from '../data/site'
+import { sendToGoogleSheet } from '../lib/googleSheet'
 
 /**
  * Visitor enquiry popup — appears five seconds after someone opens anything
@@ -120,6 +121,16 @@ export default function WelcomePopup() {
       })
       const out = await res.json()
       if (!out.success) throw new Error()
+      // Same details, also as a row in the Google Sheet. Not awaited.
+      sendToGoogleSheet(
+        {
+          name: form.name.trim(),
+          email: form.email.trim(),
+          phone,
+          interest: form.reason,
+        },
+        'Welcome Popup',
+      )
       setDone(true)
       setTimeout(() => setOpen(false), 2600)
     } catch {

@@ -7,6 +7,7 @@ import Reveal from '../components/Reveal'
 import OfficeCard from '../components/OfficeCard'
 import SocialChannels from '../components/SocialChannels'
 import { COMPANY, WEB3FORMS_KEY, OFFICES } from '../data/site'
+import { sendToGoogleSheet } from '../lib/googleSheet'
 
 export default function Contact() {
   const { hash } = useLocation()
@@ -59,6 +60,8 @@ export default function Contact() {
       })
       const result = await response.json()
       if (result.success) {
+        // Same details, also as a row in the Google Sheet. Not awaited.
+        sendToGoogleSheet(form, 'Contact Form')
         setSubmitted(true)
         setForm({ name: '', email: '', phone: '', interest: 'Residential', message: '' })
         setTimeout(() => setSubmitted(false), 3500)
