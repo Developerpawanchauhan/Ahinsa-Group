@@ -280,7 +280,7 @@ export const PROJECT_DETAILS = {
     },
     type: 'Luxury Township',
     status: 'Ongoing',
-    configurations: 'Residential & Commercial Plots · Grand Villas · Farm House',
+    configurations: 'Residential & Commercial Plots · Grand Villas',
     unitArea: '111.11 · 138.88 · 166.66 · 200 sq yard',
     totalArea: 'Sprawling green campus',
     possession: 'On Request',
@@ -379,6 +379,8 @@ export const PROJECT_DETAILS = {
         label: 'Temple',
         images: [
           '/images/projects/grand-green-valley/temple.jpeg',
+          '/images/projects/grand-green-valley/temple2.jpeg',
+          '/images/projects/grand-green-valley/temple3.jpeg',
         ],
       },
       {
@@ -532,14 +534,14 @@ export const PROJECT_DETAILS = {
 
   'green-valley-lake-city': {
     name: 'Ahinsa Green Valley Lake City',
-    tagline: 'Where everyday living meets resort-style luxury.',
+    tagline: 'An upcoming township on Shivpuri Road, Gwalior.',
     location: 'Gwalior, Madhya Pradesh',
     fullAddress: 'Shivapuri Road, Shitla Chauraha, Gwalior, Madhya Pradesh',
     instagram: null, // no Instagram section on this page
     type: 'Luxury Township',
     status: 'Upcoming',
-    configurations: 'Residential & Commercial Plots · Grand Villas · Farm House',
-    unitArea: '111.11 · 138.88 · 166.66 · 200 sq yard',
+    configurations: 'Residential & Commercial Plots · Grand Villas',
+    unitArea: '',
     totalArea: 'Sprawling green campus',
     possession: 'On Request',
     priceRange: 'On Request',
@@ -560,30 +562,12 @@ export const PROJECT_DETAILS = {
       // '/images/projects/grand-green-valley/office.jpg',
     ],
     overview: [
-      'Nestled amidst expansive green landscapes and thoughtfully planned infrastructure, Ahinsa Green Valley Lake City is a landmark integrated township designed to redefine modern living in Agra. Combining premium residential plots, elegant villas, commercial destinations, and lifestyle-driven amenities, the township offers a harmonious balance between urban convenience and natural serenity.',
-      'Every aspect of the development has been carefully envisioned to create a vibrant community where residents can enjoy spacious surroundings, seamless connectivity, and a superior quality of life. Wide internal roads, landscaped green zones, recreational spaces, and contemporary infrastructure come together to create an address that reflects both prestige and long-term value.',
-      'Strategically located with excellent access to Agra\'s major highways, educational institutions, business hubs, and cultural landmarks, Green Valley Lake City is more than a residential destination — it\'s a thriving ecosystem designed for families, investors, and future generations.',
+      'Ahinsa Green Valley Lake City is an upcoming township on Shivpuri Road at Shitla Chauraha, Gwalior \u2014 the group\u2019s first township in Madhya Pradesh, and the plotted-township idea behind our Agra developments brought to a new city.',
+      'The plan sets out residential and commercial plots alongside grand villas, laid along wide internal roads with landscaped green belts between them. As in every Ahinsa township, the greens, the roads and the services are set out first, and the plots follow.',
+      'The project is at planning stage and its details are still being finalised. To register your interest, or to hear when plots are released, please get in touch \u2014 our Gwalior office is at Athena Tower, City Centre, behind the S.P. office.',
     ],
-    highlights: [
-      { icon: 'Trees', title: 'Lush Green Campus', text: 'Acres of landscaped greens and walking trails surround every tower.' },
-      { icon: 'Building2', title: 'Iconic Architecture', text: 'Contemporary elevations with timeless detailing and premium finishes.' },
-      { icon: 'ShieldCheck', title: 'Gated & Secure', text: '24x7 multi-tier security with CCTV and access-controlled entry.' },
-      { icon: 'MapPin', title: 'Prime Connectivity', text: 'Direct access from Fatehabad Road — minutes from the city’s key landmarks.' },
-    ],
-    amenities: [
-      { icon: 'Waves', name: 'Swimming Pool' },
-      { icon: 'Dumbbell', name: 'Fitness Centre' },
-      { icon: 'Users', name: 'Clubhouse' },
-      { icon: 'Trees', name: 'Landscaped Gardens' },
-      { icon: 'Baby', name: "Children's Play Area" },
-      { icon: 'Trophy', name: 'Indoor Games' },
-      { icon: 'Activity', name: 'Jogging Track' },
-      { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Building2', name: 'Villas' },
-      { icon: 'Landmark', name: 'Temples' },
-      { icon: 'Compass', name: 'Vastu Compliant' },
-      { icon: 'Store', name: 'Shops & Malls' },
-    ],
+    highlights: [],
+    amenities: [],
     specifications: [
       {
         category: 'Structure',
@@ -618,14 +602,10 @@ export const PROJECT_DETAILS = {
         ],
       },
     ],
-    locationAdvantages: [
-      { place: 'Taj Mahal', distance: '~ 8 km', type: 'Heritage' },
-      { place: 'Agra Cantt Railway Station', distance: '~ 10 km', type: 'Transit' },
-      { place: 'Fatehabad Road retail strip', distance: 'Adjacent', type: 'Retail' },
-      { place: 'Agra International Airport', distance: '~ 13 km', type: 'Transit' },
-      { place: 'Schools & hospitals', distance: '5 – 7 km', type: 'Civic' },
-      { place: 'Yamuna Expressway access', distance: '~ 15 km', type: 'Highway' },
-    ],
+    // The map only ever pointed at the city, and the distances listed were
+    // Agra's. Both are hidden until the real site data is in.
+    showLocation: false,
+    locationAdvantages: [],
   },
 
   'green-valley-empire': {
@@ -1373,17 +1353,14 @@ export const PROJECT_DETAILS = {
     videoEmbed: null,
     // Dusk render leads the gallery — the hero lays a dark gradient over it.
     hero: '/images/projects/grand-square-mall/hero.png',
-    overviewImage: '/images/projects/grand-square-mall/img5.png',
+    overviewImage: '/images/projects/grand-square-mall/img1.png',
     gallery: [
       '/images/projects/grand-square-mall/hero.png',
       '/images/projects/grand-square-mall/img1.png',
-      '/images/projects/grand-square-mall/img5.png',
       // Photographs of the finished mall. They live in the township folder
       // because the mall stands inside Grand Green Valley and its gallery
       // shows them too — one copy on disk, referenced from both pages.
-      '/images/projects/grand-green-valley/grand-mall.jpg',
       '/images/projects/grand-green-valley/mall.jpeg',
-      '/images/projects/grand-green-valley/mall1.jpeg',
       '/images/projects/grand-green-valley/mall1.2.jpeg',
       '/images/projects/grand-green-valley/mall2.jpeg',
       '/images/projects/grand-green-valley/mall2.2.jpeg',

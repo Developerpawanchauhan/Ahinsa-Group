@@ -763,7 +763,9 @@ export default function ProjectDetail() {
           section entirely (see `feed` above). */}
       {feed && <InstagramFeed handle={feed.handle} posts={feed.posts} />}
 
-      {/* LOCATION ADVANTAGES */}
+      {/* LOCATION ADVANTAGES — a project sets `showLocation: false` when it has
+          no site map or distances worth standing behind yet. */}
+      {project.showLocation !== false && (
       <section className="section-pad bg-page">
         <div
           className={`container-x grid gap-12 ${
@@ -815,6 +817,7 @@ export default function ProjectDetail() {
           )}
         </div>
       </section>
+      )}
 
       {/* ENQUIRY FORM */}
       {/* Keyed, so a part-filled form or a "thank you" does not carry over
