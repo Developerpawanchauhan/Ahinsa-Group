@@ -91,31 +91,34 @@ export default function Awards() {
                   </span>
                 </div>
               </Reveal>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Two across on a phone as well. The card's padding, the medal
+                  badge and the label tracking step down to suit half a
+                  phone's width. */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 md:gap-6">
                 {byYear[year].map((a, i) => (
                   <Reveal key={a.title} delay={i * 0.08}>
                     <article className="card-glass overflow-hidden h-full flex flex-col group">
                       <div className="img-zoom aspect-[16/10]">
                         <img src={a.image} alt={a.title} className="w-full h-full object-cover" />
                       </div>
-                      <div className="p-6 flex-1 flex flex-col">
-                        <div className="flex items-start gap-3">
-                          <div className="w-10 h-10 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500 flex-shrink-0">
-                            <Award className="w-4 h-4" />
+                      <div className="p-4 sm:p-6 flex-1 flex flex-col">
+                        <div className="flex items-start gap-2 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500 flex-shrink-0">
+                            <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           </div>
-                          <div className="flex-1">
-                            <p className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.25em]">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.25em]">
                               {a.category}
                             </p>
-                            <h4 className="font-serif text-lg text-fg mt-1 leading-tight group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
+                            <h4 className="font-serif text-base sm:text-lg text-fg mt-1 leading-tight group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
                               {a.title}
                             </h4>
                           </div>
                         </div>
-                        <p className="text-fg-soft text-xs uppercase tracking-[0.2em] mt-4">
+                        <p className="text-fg-soft text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] mt-3 sm:mt-4">
                           {a.awardedBy}
                         </p>
-                        <p className="text-fg-soft text-sm mt-3 leading-relaxed">{a.description}</p>
+                        <p className="text-fg-soft text-xs sm:text-sm mt-2 sm:mt-3 leading-relaxed">{a.description}</p>
                       </div>
                     </article>
                   </Reveal>

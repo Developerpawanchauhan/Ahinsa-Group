@@ -78,8 +78,12 @@ export default function ProjectDetail() {
     return <Navigate to="/projects" replace />
   }
 
-  // related projects (everything except current)
-  const related = LISTED_PROJECTS.filter((p) => p.slug !== slug).slice(0, 3)
+  // What closes the page. An office points at our other offices — someone on
+  // the Gwalior page is looking for where else to find us, not for a township
+  // to buy into. Every other project points at other projects.
+  const related = (isOffice ? LISTED_PROJECTS.filter((p) => OFFICE_SLUGS.includes(p.slug)) : LISTED_PROJECTS)
+    .filter((p) => p.slug !== slug)
+    .slice(0, 3)
 
   // Where this project sits in the portfolio: the township a project is built
   // inside (for the breadcrumb), and the projects built inside this one.
@@ -822,11 +826,20 @@ export default function ProjectDetail() {
         <div className="container-x">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
             <SectionHeading
-              eyebrow="Explore More"
-              title={<>Other <span className="gold-text">signature</span> projects</>}
+              eyebrow={isOffice ? 'Find Us' : 'Explore More'}
+              title={
+                isOffice ? (
+                  <>Our other <span className="gold-text">offices</span></>
+                ) : (
+                  <>Other <span className="gold-text">signature</span> projects</>
+                )
+              }
             />
-            <Link to="/projects" className="btn-outline-gold self-start lg:self-end whitespace-nowrap">
-              View All Projects <ArrowRight className="w-4 h-4" />
+            <Link
+              to={isOffice ? '/contact' : '/projects'}
+              className="btn-outline-gold self-start lg:self-end whitespace-nowrap"
+            >
+              {isOffice ? 'Contact Us' : 'View All Projects'} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -835,9 +848,13 @@ export default function ProjectDetail() {
                 <Link to={`/projects/${r.slug}`} className="block card-glass overflow-hidden group h-full">
                   <div className="img-zoom aspect-[4/3] relative">
                     <img src={r.image} alt={r.name} className="w-full h-full object-cover" />
-                    <div className="absolute top-3 left-3 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
-                      {r.status}
-                    </div>
+                    {/* Offices carry no status badge anywhere else on the
+                        site, so they do not get one here either. */}
+                    {!isOffice && (
+                      <div className="absolute top-3 left-3 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
+                        {r.status}
+                      </div>
+                    )}
                   </div>
                   <div className="p-5">
                     <div className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.2em]">{r.type}</div>

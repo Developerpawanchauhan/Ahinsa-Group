@@ -147,13 +147,15 @@ export default function About() {
             />
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-7">
+          {/* Side by side at every width. On a phone the padding and type
+              step down so two columns still breathe. */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:gap-7">
             <Reveal>
-              <div className="card-glass p-10 h-full relative overflow-hidden">
-                <Eye className="w-12 h-12 text-gold-700 dark:text-gold-500" />
-                <h3 className="heading-serif text-3xl text-fg mt-6">Our Vision</h3>
-                <div className="gold-divider mx-0 my-5" />
-                <p className="text-fg-muted leading-relaxed">
+              <div className="card-glass p-5 sm:p-8 lg:p-10 h-full relative overflow-hidden">
+                <Eye className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-700 dark:text-gold-500" />
+                <h3 className="heading-serif text-xl sm:text-2xl lg:text-3xl text-fg mt-4 sm:mt-6">Our Vision</h3>
+                <div className="gold-divider mx-0 my-3 sm:my-5" />
+                <p className="text-fg-muted text-sm sm:text-base leading-relaxed">
                   To be the most trusted real estate brand in North India by creating spaces that elevate
                   lifestyles, empower businesses and stand as enduring symbols of design excellence.
                 </p>
@@ -161,11 +163,11 @@ export default function About() {
               </div>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="card-glass p-10 h-full relative overflow-hidden">
-                <Target className="w-12 h-12 text-gold-700 dark:text-gold-500" />
-                <h3 className="heading-serif text-3xl text-fg mt-6">Our Mission</h3>
-                <div className="gold-divider mx-0 my-5" />
-                <p className="text-fg-muted leading-relaxed">
+              <div className="card-glass p-5 sm:p-8 lg:p-10 h-full relative overflow-hidden">
+                <Target className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-gold-700 dark:text-gold-500" />
+                <h3 className="heading-serif text-xl sm:text-2xl lg:text-3xl text-fg mt-4 sm:mt-6">Our Mission</h3>
+                <div className="gold-divider mx-0 my-3 sm:my-5" />
+                <p className="text-fg-muted text-sm sm:text-base leading-relaxed">
                   To deliver thoughtfully designed, sustainably built and meticulously executed real estate
                   &mdash; where every project enhances the lives of those who live, work or invest in it.
                 </p>
