@@ -1585,6 +1585,10 @@ export function mapLinkFor(detail) {
 /** The same place as an iframe src, so embedded maps show the name too. */
 export function mapEmbedFor(detail) {
   if (!detail) return null
+  // The same listing the Directions link opens. Without this the iframe runs a
+  // search for the name, so the frame — and its "View larger map" — lands on a
+  // result list rather than the business's own card.
+  if (detail.mapCid) return `https://www.google.com/maps?cid=${detail.mapCid}&output=embed`
   if (!detail.mapPlace) return detail.mapEmbed || null
   const coords = coordsOf(detail.mapEmbed)
   const q = encodeURIComponent(detail.mapPlace)
