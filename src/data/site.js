@@ -973,20 +973,7 @@ export const PROJECT_DETAILS = {
       { icon: 'Trees', title: 'Green Open Spaces', text: 'Wide roads, open green belts and landscaped areas creating a refreshing living environment.' },
       { icon: 'ShieldCheck', title: 'Gated Community', text: 'Secure boundary with controlled entry and 24x7 CCTV surveillance for complete peace of mind.' },
     ],
-    amenities: [
-      { icon: 'Building2', name: 'Double-Height Lobby' },
-      { icon: 'Baby', name: "Children's Play Area" },
-      { icon: 'Wifi', name: 'High-Speed Internet' },
-      { icon: 'ShieldCheck', name: '24x7 Security' },
-      { icon: 'Droplet', name: 'Fountains' },
-      { icon: 'Coffee', name: 'On-Campus Cafe' },
-      { icon: 'Utensils', name: 'Food Court' },
-      { icon: 'Car', name: 'Parking Area' },
-      { icon: 'Layers', name: 'High-Speed Elevators' },
-      { icon: 'Leaf', name: 'Green Open Spaces' },
-      { icon: 'Trees', name: 'Landscaped Forecourt' },
-      { icon: 'Sun', name: 'Energy-Efficient Lighting' },
-    ],
+    amenities: [],
     specifications: [
       {
         category: 'Building',
@@ -1090,13 +1077,16 @@ export const PROJECT_DETAILS = {
       },
     ],
     floorPlans: [],
+    // Driving distances. The complex sits on the left bank of the Yamuna,
+    // so anything on the far bank is reached round by a bridge and is
+    // roughly twice its straight-line distance away.
     locationAdvantages: [
       { place: 'Aram Bagh (Ram Bagh Garden)', distance: 'Adjacent (~300 m)', type: 'Heritage' },
       { place: 'Chini Ka Rauza', distance: '~ 1 km', type: 'Heritage' },
-      { place: 'Itmad-ud-Daula (Baby Taj)', distance: '~ 1.5 km', type: 'Heritage' },
-      { place: 'Taj Mahal', distance: '~ 3.5 km', type: 'Heritage' },
-      { place: 'Agra Fort', distance: '~ 4 km', type: 'Heritage' },
-      { place: 'Agra Cantt Railway Station', distance: '~ 5 km', type: 'Transit' },
+      { place: 'Itmad-ud-Daula (Baby Taj)', distance: '~ 2 km', type: 'Heritage' },
+      { place: 'Taj Mahal', distance: '~ 8 km', type: 'Heritage' },
+      { place: 'Agra Fort', distance: '~ 7 km', type: 'Heritage' },
+      { place: 'Agra Cantt Railway Station', distance: '~ 11 km', type: 'Transit' },
     ],
   },
 

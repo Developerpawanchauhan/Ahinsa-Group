@@ -596,11 +596,28 @@ export default function Home() {
 }
 
 function ProjectCard({ project }) {
+  // An upcoming project is the one a buyer can still get into early, so it is
+  // set apart rather than wearing the same badge as everything already built:
+  // a gold ring around the card, and a lit badge instead of a solid one.
+  const isUpcoming = project.status === 'Upcoming'
+
   return (
-    <Link to={`/projects/${project.slug}`} className="block card-glass group overflow-hidden">
+    <Link
+      to={`/projects/${project.slug}`}
+      className={`block card-glass group overflow-hidden ${
+        isUpcoming ? 'ring-1 ring-gold-500/50 shadow-lg shadow-gold-500/10' : ''
+      }`}
+    >
       <div className="img-zoom aspect-[4/3] relative">
         <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
-        <div className="absolute top-4 left-4 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
+        <div
+          className={`absolute top-4 left-4 px-3 py-1 text-[10px] uppercase tracking-widest font-medium ${
+            isUpcoming
+              ? 'flex items-center gap-1.5 bg-ink-900/85 text-gold-400 border border-gold-500 backdrop-blur-sm'
+              : 'bg-gold-500 text-ink-900'
+          }`}
+        >
+          {isUpcoming && <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />}
           {project.status}
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-transparent to-transparent" />
