@@ -26,8 +26,10 @@ export default function Projects() {
         images={PROJECTS.slice(0, 4).map((p) => p.image)}
       />
 
-      {/* Filter bar */}
-      <section className="bg-page-alt border-b border-soft sticky top-[72px] z-30 backdrop-blur-md">
+      {/* Filter bar — scrolls away with the page. Pinned under the navbar it
+          ate most of a phone's screen, because the four buttons wrap onto two
+          rows there and sat on top of the cards being scrolled past. */}
+      <section className="bg-page-alt border-b border-soft">
         <div className="container-x py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-fg-soft text-sm">
             <Filter className="w-4 h-4 text-gold-700 dark:text-gold-500" />

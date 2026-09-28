@@ -800,6 +800,8 @@ export const PROJECT_DETAILS = {
     priceRange: 'On Request',
     mapEmbed: 'https://www.google.com/maps?q=27.2322074,78.17292&output=embed',
     mapPlace: 'Ahinsa Green Valley Township, Kuberpur, Agra',
+    // "Ahinsa Green Valley" on Maps, listed as a housing development.
+    mapCid: '10144680586639642992',
     videoEmbed: 'https://www.youtube.com/embed/UixAWM1hS9A',
     hero: '/images/home/hero/slide-2.jpg',
     overviewImage: '/images/projects/green-valley-township/gv-gate.jpg',

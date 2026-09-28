@@ -143,7 +143,6 @@ const WELCOME =
 const MAIN_OPTIONS = [
   { label: '🏗️ Ongoing Projects', to: 'ongoing' },
   { label: '🌟 Upcoming Projects', to: 'upcoming' },
-  { label: '💰 Prices', to: 'prices' },
   { label: '📍 Book a Site Visit', to: 'visit' },
 ]
 
@@ -155,54 +154,6 @@ const NODES = {
     // No count or city here — the list below grows, and it is no longer only Agra.
     text: 'Here are our ongoing projects 🏗️\nWhich one may I tell you about?',
     options: PROJECTS.map((p) => ({ label: p.short, to: `p_${p.id}` })),
-  },
-
-  /* ---------------- Prices ---------------- */
-  prices: {
-    lead: true,
-    text:
-      'Pricing depends on the project, plot size and location — corner and park-facing plots are priced higher.\n' +
-      'Plots are available from 111.11 up to 200 sq. yd.\n' +
-      'Our team will share the current rate list on WhatsApp.',
-    options: [
-      { label: 'Payment Plan / EMI', to: 'payment' },
-      { label: 'Smallest budget option', to: 'smallest' },
-      { label: 'Current offers', to: 'offers' },
-      { label: '💬 Get Rate List', href: 'whatsapp' },
-    ],
-  },
-  payment: {
-    lead: true,
-    text:
-      'Payment plans vary by project and plot size.\n' +
-      'Our team will walk you through the booking amount and instalment options.\n' +
-      ESCALATION,
-    options: [
-      { label: '💬 Get Rate List', href: 'whatsapp' },
-      { label: '📍 Book a Site Visit', to: 'visit' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
-    ],
-  },
-  smallest: {
-    lead: true,
-    text:
-      'Our smallest plot size is 111.11 sq. yd, offered across our ongoing projects.\n' +
-      'The current rate for it will be shared by our team on WhatsApp.',
-    options: [
-      { label: '💬 Get Rate List', href: 'whatsapp' },
-      { label: '🏗️ See the projects', to: 'ongoing' },
-      { label: '📍 Book a Site Visit', to: 'visit' },
-    ],
-  },
-  offers: {
-    lead: true,
-    text:
-      'Offers change from time to time, so I would not want to quote an outdated one.\n' + ESCALATION,
-    options: [
-      { label: '💬 WhatsApp us', href: 'whatsapp' },
-      { label: `📞 Call ${PHONE_DISPLAY}`, href: 'call' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
-    ],
   },
 
   /* ---------------- Site visit ---------------- */
@@ -257,28 +208,15 @@ const NODES = {
       '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh',
     options: [
       { label: 'Lake City, Gwalior', to: 'lakecity' },
-      { label: 'Pre-book / Early Bird', to: 'prebook' },
       { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
   },
   lakecity: {
     lead: true,
     text:
-      'Ahinsa Green Valley Lake City is coming up in Gwalior, Madhya Pradesh.\n' +
-      'Full details will be announced at launch, and pre-registration is open for early-bird benefits.',
+      'Ahinsa Green Valley Lake City is coming up on Shivpuri Road, Gwalior, Madhya Pradesh.\n' +
+      'The project is at planning stage — full details will be announced at launch.',
     options: [
-      { label: 'Pre-book / Early Bird', to: 'prebook' },
-      { label: '💬 WhatsApp us', href: 'whatsapp' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
-    ],
-  },
-  prebook: {
-    lead: true,
-    text:
-      'Pre-registration is open for Ahinsa Green Valley Lake City 🌟\n' +
-      'Share your details and our team will inform you first, with early-bird benefits.',
-    options: [
-      { label: '📝 Notify me at launch', form: 'lead' },
       { label: '💬 WhatsApp us', href: 'whatsapp' },
       { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
