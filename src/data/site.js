@@ -1921,7 +1921,7 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Pawan Chauhan',
-    role: 'Social Media Manager',
+    role: 'IT & Social Media Manager',
     department: 'IT & Digital',
     image:
       '/images/emploi/pawan-chauhan.jpg?w=600&q=85&auto=format&fit=crop',
@@ -1929,7 +1929,7 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Anupam Chittoriya',
-    role: 'Accountant',
+    role: 'Senior Accountant',
     department: 'Accounts',
     image:
       '/images/emploi/anupam-chitoria.jpg?w=600&q=85&auto=format&fit=crop',
@@ -1937,7 +1937,7 @@ export const TEAM_MEMBERS = [
   },
   {
     name: 'Mr. Laxmi Narayan',
-    role: 'Land Coordinator',
+    role: 'Human Resources & Legal Assistant',
     department: 'Legal',
     image:
       '/images/emploi/laxmi-narayan.jpg?w=600&q=85&auto=format&fit=crop',
