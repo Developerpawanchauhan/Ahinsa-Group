@@ -912,7 +912,7 @@ function KV({ label, value }) {
 function EnquirySection({ projectName }) {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', city: '', message: '' })
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
@@ -941,7 +941,7 @@ function EnquirySection({ projectName }) {
         // Same details, also as a row in the Google Sheet. Not awaited.
         sendToGoogleSheet({ ...form, project: projectName }, 'Project Enquiry')
         setSubmitted(true)
-        setForm({ name: '', email: '', phone: '', message: '' })
+        setForm({ name: '', email: '', phone: '', city: '', message: '' })
         setTimeout(() => setSubmitted(false), 4000)
       }
     } catch (error) {
@@ -1009,6 +1009,13 @@ function EnquirySection({ projectName }) {
                   className="w-full bg-ink-900/60 border border-gold-500/20 px-4 py-3 text-cream placeholder:text-ink-400 focus:outline-none focus:border-gold-500 transition"
                 />
               </div>
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-[0.2em] text-gold-400 mb-2">City *</label>
+              <input
+                required name="city" value={form.city} onChange={handleChange}
+                className="w-full bg-ink-900/60 border border-gold-500/20 px-4 py-3 text-cream placeholder:text-ink-400 focus:outline-none focus:border-gold-500 transition"
+              />
             </div>
             <div>
               <label className="block text-xs uppercase tracking-[0.2em] text-gold-400 mb-2">Message</label>

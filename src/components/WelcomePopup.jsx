@@ -59,7 +59,7 @@ const labelCls =
 export default function WelcomePopup() {
   const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', phone: '', reason: REASONS[0] })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', city: '', reason: REASONS[0] })
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [done, setDone] = useState(false)
@@ -101,6 +101,7 @@ export default function WelcomePopup() {
     if (form.name.trim().length < 2) return setError('Please enter your name.')
     if (!/^\S+@\S+\.\S+$/.test(form.email.trim())) return setError('Please enter a valid email address.')
     if (!/^[6-9]\d{9}$/.test(phone)) return setError('Please enter a valid 10-digit mobile number.')
+    if (form.city.trim().length < 2) return setError('Please enter your city.')
 
     setBusy(true)
     try {
@@ -115,6 +116,7 @@ export default function WelcomePopup() {
           Name: form.name.trim(),
           Email: form.email.trim(),
           Phone: `+91 ${phone}`,
+          City: form.city.trim(),
           'Reason for visiting': form.reason,
           Page: window.location.pathname,
         }),
@@ -127,6 +129,7 @@ export default function WelcomePopup() {
           name: form.name.trim(),
           email: form.email.trim(),
           phone,
+          city: form.city.trim(),
           interest: form.reason,
         },
         'Welcome Popup',
@@ -248,6 +251,19 @@ export default function WelcomePopup() {
                         onChange={set('phone')}
                         disabled={busy}
                         autoComplete="tel"
+                      />
+                    </div>
+
+                    <div>
+                      <label className={labelCls} htmlFor="wp-city">City</label>
+                      <input
+                        id="wp-city"
+                        className={fieldCls}
+                        placeholder="Your city"
+                        value={form.city}
+                        onChange={set('city')}
+                        disabled={busy}
+                        autoComplete="address-level2"
                       />
                     </div>
 

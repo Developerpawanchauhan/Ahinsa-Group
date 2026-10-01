@@ -1936,14 +1936,6 @@ export const TEAM_MEMBERS = [
     bio: 'Runs the Tally-based accounting system — books entries and vouchers, prepares GST filings and safeguards the accuracy of the group’s financial data.',
   },
   {
-    name: 'Mr. Rajesh Saxena',
-    role: 'Legal & Accounts Executive',
-    department: 'Accounts',
-    image:
-      '/images/emploi/rajesh-saxena.jpg?w=600&q=85&auto=format&fit=crop',
-    bio: 'Works across accounts and legal — maintains ledgers, reconciliations and financial reporting while supporting agreements, statutory paperwork and compliance documentation.',
-  },
-  {
     name: 'Mr. Laxmi Narayan',
     role: 'Land Coordinator',
     department: 'Legal',

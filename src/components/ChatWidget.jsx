@@ -60,6 +60,7 @@ const PROJECTS = [
     slug: 'grand-green-valley',
     label: 'Ahinsa The Grand Green Valley',
     short: 'The Grand Green Valley',
+    city: 'Agra',
     address: 'Fatehabad Road, Kundol, Agra',
     config: 'Residential & commercial plots, grand villas and farm house',
     sizes: '111.11 · 138.88 · 166.66 · 200 sq. yd',
@@ -74,6 +75,7 @@ const PROJECTS = [
     slug: 'green-valley-empire',
     label: 'Ahinsa Green Valley Empire',
     short: 'Green Valley Empire',
+    city: 'Agra',
     address: 'Mudi Crossing, Agra',
     config: 'Residential & commercial plots and farm house',
     sizes: '111.11 · 138.88 · 166.66 · 200 sq. yd',
@@ -87,6 +89,7 @@ const PROJECTS = [
     slug: 'green-valley-township',
     label: 'Ahinsa Green Valley Township',
     short: 'Green Valley Township',
+    city: 'Agra',
     address: 'Kuberpur, Agra',
     config: 'Residential & commercial plots · possession ready',
     sizes: '111.11 · 138.88 sq. yd',
@@ -100,6 +103,7 @@ const PROJECTS = [
     slug: 'green-valley-orchid',
     label: 'Ahinsa Green Valley Orchid',
     short: 'Green Valley Orchid',
+    city: 'Agra',
     address: 'Kuberpur, Agra',
     config: 'Residential & commercial plots',
     sizes: '111.11 · 130.55 · 133.33 · 138.88 · 152.77 sq. yd',
@@ -116,6 +120,7 @@ const PROJECTS = [
     kind: 'commercial',
     label: 'Ahinsa City Centre Mall',
     short: 'City Centre Mall',
+    city: 'Firozabad',
     address: 'MG Road, Firozabad',
     config: 'Shops, showrooms and commercial spaces across five retail levels',
     sizes: '180 – 5,000+ sq. ft.',
@@ -151,16 +156,17 @@ const NODES = {
 
   /* ---------------- Ongoing projects ---------------- */
   ongoing: {
-    // No count or city here — the list below grows, and it is no longer only Agra.
+    // No count here — the list below grows. Each option names its own city,
+    // since the projects are no longer all in Agra.
     text: 'Here are our ongoing projects 🏗️\nWhich one may I tell you about?',
-    options: PROJECTS.map((p) => ({ label: p.short, to: `p_${p.id}` })),
+    options: PROJECTS.map((p) => ({ label: `${p.short}, ${p.city}`, to: `p_${p.id}` })),
   },
 
   /* ---------------- Site visit ---------------- */
   visit: {
     lead: true,
     text: 'Happy to arrange that 🙏\nWhich project would you like to visit?',
-    options: PROJECTS.map((p) => ({ label: p.short, to: `v_${p.id}` })),
+    options: PROJECTS.map((p) => ({ label: `${p.short}, ${p.city}`, to: `v_${p.id}` })),
   },
   visitDone: {
     text:
@@ -360,6 +366,7 @@ function buildLeadWhatsAppUrl({ isVisit, values, log }) {
     '',
     `Name: ${values.name}`,
     `Mobile: +91 ${values.mobile}`,
+    `City: ${values.city}`,
     isVisit ? `Preferred day: ${values.day || 'Any day'}` : `Purpose: ${values.purpose}`,
   ]
   if (log.length) lines.push('', `Asked about: ${log.map((e) => e.question).join(' → ')}`)
@@ -423,6 +430,7 @@ const PURPOSES = ['Investment', 'Own Use', 'Just Exploring']
 function LeadForm({ kind, project, onSubmit, onSkip }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [city, setCity] = useState('')
   const [purpose, setPurpose] = useState('')
   const [day, setDay] = useState('')
   const [error, setError] = useState('')
@@ -436,11 +444,12 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
     const mobile = cleanPhone(phone)
     if (name.trim().length < 2) return setError('Please enter your name.')
     if (!/^[6-9]\d{9}$/.test(mobile)) return setError('Please enter a valid 10-digit mobile number.')
+    if (city.trim().length < 2) return setError('Please enter your city.')
     if (!isVisit && !purpose) return setError('Please choose a purpose.')
 
     setBusy(true)
     try {
-      await onSubmit({ name: name.trim(), mobile, purpose, day: day.trim(), project })
+      await onSubmit({ name: name.trim(), mobile, city: city.trim(), purpose, day: day.trim(), project })
     } catch (err) {
       setBusy(false)
       setError(err.message || 'Something went wrong — please try again.')
@@ -478,6 +487,16 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           autoComplete="tel"
+        />
+
+        <label className="sr-only" htmlFor="cw-city">City</label>
+        <input
+          id="cw-city"
+          className={FIELD_CLASS}
+          placeholder="🏙️ City"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          autoComplete="address-level2"
         />
 
         {isVisit ? (
@@ -660,6 +679,7 @@ export default function ChatWidget() {
         : 'Chatbot Lead — Ahinsa Website',
       Name: values.name,
       Mobile: `+91 ${values.mobile}`,
+      City: values.city,
       ...(isVisit
         ? { Project: values.project || '—', 'Preferred day': values.day || 'Not specified' }
         : { Purpose: values.purpose }),
@@ -672,6 +692,7 @@ export default function ChatWidget() {
       {
         name: values.name,
         mobile: values.mobile,
+        city: values.city,
         project: values.project || '',
         interest: values.purpose || (isVisit ? 'Site Visit' : 'Other'),
         message: isVisit

@@ -33,6 +33,7 @@ export default function Contact() {
     name: '',
     email: '',
     phone: '',
+    city: '',
     interest: 'Residential',
     message: '',
   })
@@ -63,7 +64,7 @@ export default function Contact() {
         // Same details, also as a row in the Google Sheet. Not awaited.
         sendToGoogleSheet(form, 'Contact Form')
         setSubmitted(true)
-        setForm({ name: '', email: '', phone: '', interest: 'Residential', message: '' })
+        setForm({ name: '', email: '', phone: '', city: '', interest: 'Residential', message: '' })
         setTimeout(() => setSubmitted(false), 3500)
       }
     } catch (error) {
@@ -124,13 +125,18 @@ export default function Contact() {
                 <Field name="name" label="Full Name *" value={form.name} onChange={handleChange} required />
                 <Field name="email" label="Email Address *" type="email" value={form.email} onChange={handleChange} required />
                 <Field name="phone" label="Phone Number *" type="tel" value={form.phone} onChange={handleChange} required />
-                <SelectField
-                  name="interest"
-                  label="I'm Interested In"
-                  value={form.interest}
-                  onChange={handleChange}
-                  options={['Residential', 'Commercial', 'Investment', 'General Enquiry']}
-                />
+                <Field name="city" label="City *" value={form.city} onChange={handleChange} required />
+                {/* Full width, so the four required fields above stay as two
+                    even rows. */}
+                <div className="md:col-span-2">
+                  <SelectField
+                    name="interest"
+                    label="I'm Interested In"
+                    value={form.interest}
+                    onChange={handleChange}
+                    options={['Residential', 'Commercial', 'Investment', 'General Enquiry']}
+                  />
+                </div>
                 <div className="md:col-span-2">
                   <label className="block text-xs uppercase tracking-[0.2em] text-gold-700 dark:text-gold-500 mb-2">Message</label>
                   <textarea
