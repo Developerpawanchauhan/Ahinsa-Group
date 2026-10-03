@@ -16,6 +16,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* The site draws itself 20% smaller from a desktop width up. At 100% browser
+   zoom it read as oversized on a large monitor; this is the 80% view that
+   looked right, without asking the visitor to zoom out themselves.
+
+   `zoom` widens the layout space the same way browser zoom-out does, so
+   nothing needs re-laying out. Viewport units are the one exception: vh and vw
+   resolve against the real viewport and are NOT zoomed, so everything sized in
+   them carries an `lg:` value of its own, divided by 0.8, to come out at the
+   size it asks for. Search for "vh]" or "vw]" before adding more.
+
+   Phones and tablets are left alone — their layouts were tuned at this size. */
+@media (min-width: 1024px) {
+  html {
+    zoom: 0.8;
+  }
+}
+
 /* DEFAULT (LIGHT) */
 body {
   font-family: 'Inter', system-ui, sans-serif;

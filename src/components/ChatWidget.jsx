@@ -850,7 +850,7 @@ export default function ChatWidget() {
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="fixed z-[60] flex flex-col overflow-hidden rounded-2xl border border-gold-500/25
                        bg-page shadow-[0_24px_60px_rgba(0,0,0,0.35)] outline-none
-                       bottom-[196px] right-5 w-[370px] max-h-[min(580px,72vh)]
+                       bottom-[196px] right-5 w-[370px] max-h-[min(580px,72vh)] lg:max-h-[min(580px,90vh)]
                        max-sm:left-3 max-sm:right-3 max-sm:w-auto max-sm:max-h-[68vh]"
           >
             {/* Header */}

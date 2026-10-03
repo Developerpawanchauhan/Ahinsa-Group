@@ -296,7 +296,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
       {/* Oversized 16:9 frame that covers the section, video crossfades in */}
       <div
         aria-hidden="true"
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full pointer-events-none transition-opacity duration-1000 ${
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full lg:w-[222.22vh] lg:h-[70.31vw] pointer-events-none transition-opacity duration-1000 ${
           visible ? 'opacity-60' : 'opacity-0'
         }`}
       >

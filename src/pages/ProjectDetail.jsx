@@ -141,7 +141,8 @@ export default function ProjectDetail() {
   return (
     <>
       {/* HERO (always dark cinematic) */}
-      <section className="relative h-[80vh] min-h-[560px] flex items-end overflow-hidden">
+      {/* lg:h-[100vh] is 80vh once the page zoom is applied — see index.css. */}
+      <section className="relative h-[80vh] lg:h-[100vh] min-h-[560px] flex items-end overflow-hidden">
         <div className="absolute inset-0 bg-ink-900">
           {project.videoEmbed ? (
             <HeroVideo

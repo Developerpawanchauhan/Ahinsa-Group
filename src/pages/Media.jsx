@@ -17,7 +17,8 @@ export default function Media() {
       />
 
       {/* Video / brand film (always dark for cinematic feel) */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      {/* lg:h-[75vh] is 60vh once the page zoom is applied — see index.css. */}
+      <section className="relative h-[60vh] lg:h-[75vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=1920&q=85&auto=format&fit=crop"
           alt=""

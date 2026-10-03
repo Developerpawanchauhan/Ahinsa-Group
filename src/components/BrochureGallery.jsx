@@ -288,7 +288,7 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
           <img
             src={imgSrc(project.images[lightboxIdx])}
             alt={`${project.label} — page ${lightboxIdx + 1}`}
-            className="max-h-[84vh] max-w-[84vw] object-contain shadow-2xl"
+            className="max-h-[84vh] max-w-[84vw] lg:max-h-[105vh] lg:max-w-[105vw] object-contain shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           />
 
@@ -305,7 +305,7 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
           </button>
 
           {/* Thumbnail strip */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1 overflow-x-auto max-w-[80vw] px-2 py-1"
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-1 overflow-x-auto max-w-[80vw] lg:max-w-[100vw] px-2 py-1"
                style={{ scrollbarWidth: 'none' }}>
             {project.images.map((file, i) => (
               <button

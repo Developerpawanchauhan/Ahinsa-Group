@@ -164,7 +164,7 @@ export default function WelcomePopup() {
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-md max-h-[92vh] overflow-y-auto bg-cream dark:bg-ink-900
+            className="relative w-full max-w-md max-h-[92vh] lg:max-h-[115vh] overflow-y-auto bg-cream dark:bg-ink-900
                        border border-gold-500/30 shadow-2xl"
           >
             <div className="h-px bg-gradient-to-r from-transparent via-gold-500 to-transparent" />

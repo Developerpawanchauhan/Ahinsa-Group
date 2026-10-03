@@ -19,7 +19,8 @@ export default function PageHero({
   const slides = (images && images.length ? images : [image]).filter(Boolean)
 
   return (
-    <section className="relative h-[70vh] min-h-[420px] flex items-end overflow-hidden">
+    // lg:h-[87.5vh] is 70vh once the page zoom is applied — see index.css.
+    <section className="relative h-[70vh] lg:h-[87.5vh] min-h-[420px] flex items-end overflow-hidden">
       <div className="absolute inset-0 bg-ink-900">
         {videoId ? (
           <HeroVideo videoId={videoId} start={videoStart} poster={slides[0]} alt="" />

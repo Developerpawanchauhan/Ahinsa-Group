@@ -67,7 +67,7 @@ function AvailabilityModal({ listing, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={`Available properties at ${project.name}`}
-        className="relative bg-page border border-gold-500/25 w-full max-w-2xl max-h-[85vh] overflow-y-auto shadow-2xl"
+        className="relative bg-page border border-gold-500/25 w-full max-w-2xl max-h-[85vh] lg:max-h-[106.25vh] overflow-y-auto shadow-2xl"
         initial={{ opacity: 0, y: 24, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 24, scale: 0.97 }}
