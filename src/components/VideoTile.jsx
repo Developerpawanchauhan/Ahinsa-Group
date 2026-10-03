@@ -8,9 +8,11 @@ import { Play } from 'lucide-react'
  * only on request keeps the page as quick as the images around it. Used by the
  * project gallery and the profiles on the Management page.
  *
- * @param src  a YouTube embed URL — https://www.youtube.com/embed/<id>
+ * @param src     a YouTube embed URL — https://www.youtube.com/embed/<id>
+ * @param onPlay  optional — fires once the player loads, so a caller scrolling
+ *                this tile in a strip can stop the strip moving under it.
  */
-export default function VideoTile({ src, title, className = '' }) {
+export default function VideoTile({ src, title, className = '', onPlay }) {
   const [playing, setPlaying] = useState(false)
   const id = src.split('/').pop()
 
@@ -28,7 +30,10 @@ export default function VideoTile({ src, title, className = '' }) {
       ) : (
         <button
           type="button"
-          onClick={() => setPlaying(true)}
+          onClick={() => {
+            setPlaying(true)
+            onPlay?.()
+          }}
           aria-label={`Play ${title}`}
           className="group absolute inset-0 w-full h-full"
         >

@@ -16,7 +16,7 @@ import BrochureGallery, { BROCHURE_PROJECTS } from '../components/BrochureGaller
 import BrochureDownloadModal from '../components/BrochureDownloadModal'
 import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
-import InstagramFeed, { embedSrc as instagramEmbedSrc } from '../components/InstagramFeed'
+import InstagramFeed from '../components/InstagramFeed'
 import ImageLightbox from '../components/ImageLightbox'
 import VideoTile from '../components/VideoTile'
 import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
@@ -65,6 +65,9 @@ export default function ProjectDetail() {
   // Gallery sections scroll sideways; only the one on screen autoscrolls.
   const { activeStrip, onVisibility } = useStripArbiter()
   const [downloadOpen, setDownloadOpen] = useState(false)
+  // Set once a gallery video's player loads, so the row it sits in stops
+  // autoscrolling under it. Declared here, above the redirect, with the rest.
+  const [videoPlaying, setVideoPlaying] = useState(false)
 
   // The router reuses this page for every /projects/:slug, so moving from one
   // project to another re-renders it without unmounting. Anything tied to a
@@ -72,6 +75,7 @@ export default function ProjectDetail() {
   useEffect(() => {
     setLightbox(null)
     setDownloadOpen(false)
+    setVideoPlaying(false)
   }, [slug])
 
   if (!project) {
@@ -122,12 +126,16 @@ export default function ProjectDetail() {
           ? 'sm:grid-cols-4'
           : 'sm:grid-cols-3 lg:grid-cols-6'
 
-  // Gallery videos: YouTube links play in a click-to-load tile, Instagram links
-  // in Instagram's own embed. Anything Instagram cannot embed is dropped.
-  const galleryVideos = project.galleryVideos || []
-  const isInstagram = (url) => /instagram\.com\//i.test(url)
-  const youtubeVideos = galleryVideos.filter((url) => !isInstagram(url))
-  const instagramVideos = galleryVideos.filter((url) => isInstagram(url) && instagramEmbedSrc(url))
+  // Gallery videos are YouTube only. Instagram reels belong to the "Moments
+  // from Instagram" section further down, under the project's `instagram`
+  // posts — one put in `galleryVideos` by mistake is ignored rather than
+  // rendered as a broken tile here.
+  const galleryVideos = (project.galleryVideos || []).filter(
+    (url) => !/instagram\.com\//i.test(url)
+  )
+  // The strip arbiter gives one row at a time the autoscroll, keyed by index.
+  // The photo rows take 0..n-1, so the video row follows them.
+  const videoStripIndex = groups ? groups.length : 1
 
   // Offices and the mall carry no unit-area figure. Drop any fact without a
   // value so the strip never shows an empty tile, and centre what is left.
@@ -639,67 +647,37 @@ export default function ProjectDetail() {
             )}
 
             {/* Videos sit under the photos with a heading like a gallery
-                section — a grid, not a looping strip, which with so few would
-                only repeat them. */}
-            {project.galleryVideos?.length > 0 && (
+                section, and scroll the same way the photo rows do. */}
+            {galleryVideos.length > 0 && (
               <div className="mt-14">
                 <Reveal>
                   <div className="flex items-baseline gap-5 mb-6">
                     <h3 className="heading-serif text-fg text-2xl md:text-3xl whitespace-nowrap">Videos</h3>
                     <span className="h-px flex-1 bg-gold-500/25" />
                     <span className="text-fg-soft text-[10px] uppercase tracking-[0.25em] whitespace-nowrap">
-                      {project.galleryVideos.length} {project.galleryVideos.length === 1 ? 'Video' : 'Videos'}
+                      {galleryVideos.length} {galleryVideos.length === 1 ? 'Video' : 'Videos'}
                     </span>
                   </div>
                 </Reveal>
-                {/* YouTube first. One video sits centred; three (or six…) go
-                    three across; anything else two across — so a row never
-                    ends with one video on its own. */}
-                {youtubeVideos.length > 0 && (
-                  <div
-                    className={`grid gap-4 md:gap-6 ${
-                      youtubeVideos.length === 1
-                        ? 'max-w-3xl mx-auto'
-                        : youtubeVideos.length % 3 === 0
-                          ? 'md:grid-cols-3'
-                          : 'md:grid-cols-2'
-                    }`}
-                  >
-                    {youtubeVideos.map((src, i) => (
-                      <Reveal key={src} delay={i * 0.08}>
-                        <VideoTile src={src} title={`${project.name} video ${i + 1}`} />
-                      </Reveal>
-                    ))}
-                  </div>
-                )}
-
-                {/* Instagram videos play in Instagram's own tall embed, so they
-                    get a row of their own rather than sitting beside the wide
-                    YouTube frames. Centred, so two do not hang to the left. */}
-                {instagramVideos.length > 0 && (
-                  <div className={`flex flex-wrap justify-center gap-4 md:gap-6 ${youtubeVideos.length ? 'mt-6' : ''}`}>
-                    {instagramVideos.map((url, i) => (
-                      <Reveal
-                        key={url}
-                        delay={i * 0.08}
-                        className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-                      >
-                        <div className="card-glass overflow-hidden">
-                          <iframe
-                            src={instagramEmbedSrc(url)}
-                            title={`${project.name} Instagram video ${i + 1}`}
-                            className="w-full block"
-                            style={{ height: 540 }}
-                            frameBorder="0"
-                            scrolling="no"
-                            loading="lazy"
-                            allow="encrypted-media"
-                          />
-                        </div>
-                      </Reveal>
-                    ))}
-                  </div>
-                )}
+                {/* The autoscroll stops as soon as a player loads, so the row
+                    never slides out from under a video someone is watching. */}
+                <PhotoStrip
+                  items={galleryVideos}
+                  label={`${project.name} video`}
+                  index={videoStripIndex}
+                  active={activeStrip === videoStripIndex}
+                  onVisibility={onVisibility}
+                  cardClass="w-[80%] sm:w-[48%] lg:w-[32%]"
+                  frozen={lightbox !== null || videoPlaying}
+                  countLabel={false}
+                  renderItem={(src, i) => (
+                    <VideoTile
+                      src={src}
+                      title={`${project.name} video ${i + 1}`}
+                      onPlay={() => setVideoPlaying(true)}
+                    />
+                  )}
+                />
               </div>
             )}
           </div>

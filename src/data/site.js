@@ -685,6 +685,8 @@ export const PROJECT_DETAILS = {
         'https://www.instagram.com/p/DYwanblk25d/',
         'https://www.instagram.com/p/DObjEdxEw90/',
         'https://www.instagram.com/p/DV3Kktqk6wQ/',
+        'https://www.instagram.com/p/DVIcvAQk96E/',
+        'https://www.instagram.com/p/DNx-j7F5vdm/',
       ],
     },
     type: 'Luxury Township',
@@ -702,11 +704,6 @@ export const PROJECT_DETAILS = {
     galleryVideos: [
       'https://www.youtube.com/embed/j6qEkYoPBeE',
       'https://www.youtube.com/embed/DW8b84zmq08',
-      // Instagram reels — these render in Instagram's own tall embed, in a row
-      // of their own under the YouTube frames.
-      'https://www.instagram.com/p/DV3Kktqk6wQ/',
-      'https://www.instagram.com/p/DVIcvAQk96E/',
-      'https://www.instagram.com/p/DNx-j7F5vdm/',
     ],
     hero: '/images/home/hero/slide-3.jpg',
     overviewImage: '/images/projects/green-valley-empire/rich-villa.jpg',
