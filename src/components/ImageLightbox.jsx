@@ -31,9 +31,12 @@ export default function ImageLightbox({ images = [], index = null, onClose, onNa
 
   const many = images.length > 1
 
+  // The overlay is /95, not /96: 96 is not a step on Tailwind's opacity scale,
+  // so that class produced no rule at all and the overlay was blur only. Over a
+  // dark page it passed; in the light theme it left the white controls on cream.
   return (
     <div
-      className="fixed inset-0 z-50 bg-ink-900/96 backdrop-blur-sm flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-ink-900/95 backdrop-blur-sm flex items-center justify-center"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -43,14 +46,15 @@ export default function ImageLightbox({ images = [], index = null, onClose, onNa
         onClick={onClose}
         aria-label="Close"
         className="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center
-                   text-white/60 hover:text-gold-400 border border-white/10 hover:border-gold-500
+                   bg-ink-900/70 text-white backdrop-blur-sm border border-white/30 shadow-lg
+                   hover:bg-gold-500 hover:text-ink-900 hover:border-gold-500
                    transition-all duration-200"
       >
         <X className="w-5 h-5" />
       </button>
 
       {many && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 text-white/40 text-xs font-mono tracking-widest">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-ink-900/70 backdrop-blur-sm px-3 py-1 text-white/80 text-xs font-mono tracking-widest">
           {index + 1} &nbsp;/&nbsp; {images.length}
         </div>
       )}
@@ -63,7 +67,8 @@ export default function ImageLightbox({ images = [], index = null, onClose, onNa
           }}
           aria-label="Previous image"
           className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center
-                     text-white/60 hover:text-gold-400 border border-white/10 hover:border-gold-500
+                     bg-ink-900/70 text-white backdrop-blur-sm border border-white/30 shadow-lg
+                   hover:bg-gold-500 hover:text-ink-900 hover:border-gold-500
                      transition-all duration-200"
         >
           <ChevronLeft className="w-6 h-6" />
@@ -85,7 +90,8 @@ export default function ImageLightbox({ images = [], index = null, onClose, onNa
           }}
           aria-label="Next image"
           className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center
-                     text-white/60 hover:text-gold-400 border border-white/10 hover:border-gold-500
+                     bg-ink-900/70 text-white backdrop-blur-sm border border-white/30 shadow-lg
+                   hover:bg-gold-500 hover:text-ink-900 hover:border-gold-500
                      transition-all duration-200"
         >
           <ChevronRight className="w-6 h-6" />

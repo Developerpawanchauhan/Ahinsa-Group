@@ -481,7 +481,9 @@ export default function Navbar() {
             open ? 'max-h-[1400px] mt-4' : 'max-h-0'
           }`}
         >
-          <div className="container-x py-4 bg-cream/98 dark:bg-ink-900/98 backdrop-blur-md border-t border-gold-500/15">
+          {/* /95, not /98: 98 is not a step on Tailwind's opacity scale, so the
+              panel was getting no background at all and the page showed through. */}
+          <div className="container-x py-4 bg-cream/95 dark:bg-ink-900/95 backdrop-blur-md border-t border-gold-500/15">
             <nav className="flex flex-col">
               {NAV_LINKS.map((link) =>
                 link.children ? (

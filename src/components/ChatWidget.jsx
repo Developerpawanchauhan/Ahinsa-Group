@@ -149,6 +149,7 @@ const MAIN_OPTIONS = [
   { label: '🏗️ Ongoing Projects', to: 'ongoing' },
   { label: '🌟 Upcoming Projects', to: 'upcoming' },
   { label: '📍 Book a Site Visit', to: 'visit' },
+  { label: '❓ Other Queries', to: 'other' },
 ]
 
 const NODES = {
@@ -206,6 +207,23 @@ const NODES = {
     ],
   },
 
+  /* ---------------- Other queries ---------------- *
+   * The questions below already had answers in the tree but could only be
+   * reached after booking a visit. This gathers them, and gives anything they
+   * do not cover a way through in the visitor's own words. */
+  other: {
+    text:
+      'Of course 🙏 Here are the things people ask most often.\n' +
+      'If yours is not among them, write it in your own words and our team will reply.',
+    options: [
+      { label: 'Site office location', to: 'office' },
+      { label: 'Visit timings', to: 'timings' },
+      { label: 'Pickup & drop', to: 'pickup' },
+      { label: '✍️ Write my own query', form: 'query' },
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
+    ],
+  },
+
   /* ---------------- Upcoming ---------------- */
   // Ahinsa City Centre Mall moved to Ongoing — it has its own branch now.
   upcoming: {
@@ -237,6 +255,16 @@ const NODES = {
       { label: '💬 Send my details on WhatsApp', href: 'lead' },
       { label: '🏗️ Ongoing Projects', to: 'ongoing' },
       { label: '📍 Book a Site Visit', to: 'visit' },
+    ],
+  },
+  queryDone: {
+    text:
+      'Thank you 🙏 WhatsApp has opened with your query — just tap **Send** and our team will reply.\n' +
+      'If it did not open, use the button below.',
+    options: [
+      { label: '💬 Send my query on WhatsApp', href: 'lead' },
+      { label: '❓ Ask something else', to: 'other' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
   },
 }
@@ -356,18 +384,25 @@ function buildWhatsAppUrl(log) {
 /** The lead form's details as a ready-to-send WhatsApp message. Sent from the
  *  visitor's own WhatsApp, it starts a conversation with the team straight
  *  away instead of leaving them waiting for a call-back. */
-function buildLeadWhatsAppUrl({ isVisit, values, log }) {
+function buildLeadWhatsAppUrl({ isVisit, isQuery, values, log }) {
   const lines = [
     'Hello Ahinsa Group,',
     '',
     isVisit
       ? `I would like to book a site visit${values.project ? ` to ${values.project}` : ''}.`
-      : 'I would like the current rate list and offers.',
+      : isQuery
+        ? 'I have a query:'
+        : 'I would like the current rate list and offers.',
     '',
+    ...(isQuery ? [values.question, ''] : []),
     `Name: ${values.name}`,
     `Mobile: +91 ${values.mobile}`,
     `City: ${values.city}`,
-    isVisit ? `Preferred day: ${values.day || 'Any day'}` : `Purpose: ${values.purpose}`,
+    ...(isVisit
+      ? [`Preferred day: ${values.day || 'Any day'}`]
+      : isQuery
+        ? []
+        : [`Purpose: ${values.purpose}`]),
   ]
   if (log.length) lines.push('', `Asked about: ${log.map((e) => e.question).join(' → ')}`)
 
@@ -433,10 +468,13 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
   const [city, setCity] = useState('')
   const [purpose, setPurpose] = useState('')
   const [day, setDay] = useState('')
+  const [question, setQuestion] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
   const isVisit = kind === 'visit'
+  // Anything the tree does not answer: the visitor writes it themselves.
+  const isQuery = kind === 'query'
 
   const submit = async (e) => {
     e.preventDefault()
@@ -445,11 +483,20 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
     if (name.trim().length < 2) return setError('Please enter your name.')
     if (!/^[6-9]\d{9}$/.test(mobile)) return setError('Please enter a valid 10-digit mobile number.')
     if (city.trim().length < 2) return setError('Please enter your city.')
-    if (!isVisit && !purpose) return setError('Please choose a purpose.')
+    if (isQuery && question.trim().length < 5) return setError('Please write your query.')
+    if (!isVisit && !isQuery && !purpose) return setError('Please choose a purpose.')
 
     setBusy(true)
     try {
-      await onSubmit({ name: name.trim(), mobile, city: city.trim(), purpose, day: day.trim(), project })
+      await onSubmit({
+        name: name.trim(),
+        mobile,
+        city: city.trim(),
+        purpose,
+        day: day.trim(),
+        question: question.trim(),
+        project,
+      })
     } catch (err) {
       setBusy(false)
       setError(err.message || 'Something went wrong — please try again.')
@@ -464,7 +511,9 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
       <p className="mb-2.5 text-[12.5px] leading-relaxed text-fg-muted">
         {isVisit
           ? 'To confirm your visit, may I have your details?'
-          : 'To share the exact rate list and current offers, may I have your details?'}
+          : isQuery
+            ? 'Please write your query below, with your details so our team can get back to you.'
+            : 'To share the exact rate list and current offers, may I have your details?'}
       </p>
 
       <div className="flex flex-col gap-2">
@@ -510,6 +559,18 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
               onChange={(e) => setDay(e.target.value)}
             />
           </>
+        ) : isQuery ? (
+          <>
+            <label className="sr-only" htmlFor="cw-query">Your query</label>
+            <textarea
+              id="cw-query"
+              rows={3}
+              className={`${FIELD_CLASS} resize-none`}
+              placeholder="✍️ Your query or problem"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
+          </>
         ) : (
           <fieldset className="mt-0.5">
             <legend className="mb-1.5 text-[11px] text-fg-faint">🎯 Purpose</legend>
@@ -543,7 +604,13 @@ function LeadForm({ kind, project, onSubmit, onSkip }) {
           className="rounded-full bg-gold-gradient px-4 py-2 text-[12.5px] font-semibold text-ink-900
                      shadow-sm transition hover:brightness-105 disabled:opacity-60"
         >
-          {busy ? 'Opening WhatsApp…' : isVisit ? 'Confirm on WhatsApp' : 'Send on WhatsApp'}
+          {busy
+            ? 'Opening WhatsApp…'
+            : isVisit
+              ? 'Confirm on WhatsApp'
+              : isQuery
+                ? 'Send my query'
+                : 'Send on WhatsApp'}
         </button>
         <button
           type="button"
@@ -654,18 +721,21 @@ export default function ChatWidget() {
   }
 
   const openForm = (kind) => {
-    if (lead === 'sent') return
+    // A query is something the visitor asked to write, so it opens even after
+    // they have already sent their details once. The lead prompt does not.
+    if (lead === 'sent' && kind !== 'query') return
     setForm({ kind })
     setLead('open')
   }
 
   const submitLead = (values) => {
     const isVisit = form?.kind === 'visit'
+    const isQuery = form?.kind === 'query'
 
     // WhatsApp opens first, while this is still the visitor's own click. A
     // window opened after waiting on the network counts as a pop-up and gets
     // blocked — on iPhones especially — so nothing here is awaited before it.
-    const url = buildLeadWhatsAppUrl({ isVisit, values, log })
+    const url = buildLeadWhatsAppUrl({ isVisit, isQuery, values, log })
     setLeadUrl(url)
     window.open(url, '_blank', 'noopener')
 
@@ -676,13 +746,17 @@ export default function ChatWidget() {
     sendLead({
       subject: isVisit
         ? `Site Visit Request — ${values.project || 'Chat Assistant'}`
-        : 'Chatbot Lead — Ahinsa Website',
+        : isQuery
+          ? 'Chatbot Query — Ahinsa Website'
+          : 'Chatbot Lead — Ahinsa Website',
       Name: values.name,
       Mobile: `+91 ${values.mobile}`,
       City: values.city,
       ...(isVisit
         ? { Project: values.project || '—', 'Preferred day': values.day || 'Not specified' }
-        : { Purpose: values.purpose }),
+        : isQuery
+          ? { Query: values.question }
+          : { Purpose: values.purpose }),
       'Chat so far': log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
     }).catch((err) => console.warn('Chat lead email failed:', err))
 
@@ -694,12 +768,14 @@ export default function ChatWidget() {
         mobile: values.mobile,
         city: values.city,
         project: values.project || '',
-        interest: values.purpose || (isVisit ? 'Site Visit' : 'Other'),
+        interest: values.purpose || (isVisit ? 'Site Visit' : isQuery ? 'Query' : 'Other'),
         message: isVisit
           ? `Preferred day: ${values.day || 'Not specified'}`
-          : log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
+          : isQuery
+            ? values.question
+            : log.map((e, i) => `${i + 1}) ${e.question}`).join(' → ') || 'Opened the chat',
       },
-      isVisit ? 'Site Visit Request' : 'Chat Assistant',
+      isVisit ? 'Site Visit Request' : isQuery ? 'Chatbot Query' : 'Chat Assistant',
     )
 
     setMessages((prev) => [
@@ -707,14 +783,16 @@ export default function ChatWidget() {
       {
         id: nextId.current++,
         role: 'user',
-        text: `${values.name} · +91 ${values.mobile}${values.purpose ? ` · ${values.purpose}` : ''}`,
+        text: isQuery
+          ? `${values.name} · +91 ${values.mobile}\n${values.question}`
+          : `${values.name} · +91 ${values.mobile}${values.purpose ? ` · ${values.purpose}` : ''}`,
       },
     ])
     setForm(null)
     setLead('sent')
     clearTimeout(typingTimer.current)
     setTyping(false)
-    const done = isVisit ? 'visitDone' : 'leadDone'
+    const done = isVisit ? 'visitDone' : isQuery ? 'queryDone' : 'leadDone'
     say(NODES[done].text)
     setNode(done)
   }

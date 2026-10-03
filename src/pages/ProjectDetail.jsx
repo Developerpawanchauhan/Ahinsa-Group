@@ -5,7 +5,7 @@ import {
   ShieldCheck, Award, Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy,
   Activity, Zap, Car, Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee,
   Utensils, Store, Film, Music, HeartHandshake, Clock, Eye, Target, Leaf,
-  Send, CheckCircle2, Phone, Mail, ChevronRight, Landmark,
+  Send, CheckCircle2, Phone, Mail, ChevronRight, Landmark, Home,
   ArrowUpDown, Toilet, SquareParking, Cctv, FireExtinguisher, Snowflake,
 } from 'lucide-react'
 
@@ -30,7 +30,7 @@ const ICON_MAP = {
   ArrowRight, MapPin, Building2, Calendar, Ruler, Layers, ShieldCheck, Award,
   Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy, Activity, Zap, Car,
   Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee, Utensils, Store, Film,
-  Music, HeartHandshake, Clock, Eye, Target, Leaf, Landmark,
+  Music, HeartHandshake, Clock, Eye, Target, Leaf, Landmark, Home,
   ArrowUpDown, Toilet, SquareParking, Cctv, FireExtinguisher, Snowflake,
 }
 
@@ -90,11 +90,14 @@ export default function ProjectDetail() {
   const parent = parentOf(slug)
   const subProjects = subProjectsOf(slug)
 
-  // Overview image auto-slide: this project's own overview + gallery shots,
-  // deduplicated, so it only ever cycles through images of THIS project.
-  const overviewImages = [project.overviewImage, ...(project.gallery || [])].filter(
-    (src, i, arr) => src && arr.indexOf(src) === i
-  )
+  // Overview image auto-slide. A project lists the frames itself in
+  // `overviewImages`, and those are its renders only — cycling the whole
+  // gallery pulled in site and construction photographs, which sat badly
+  // against the render the section opens on. Without a list it stays on the
+  // single overview image rather than falling back to the gallery.
+  const overviewImages = (
+    project.overviewImages?.length ? project.overviewImages : [project.overviewImage]
+  ).filter((src, i, arr) => src && arr.indexOf(src) === i)
 
   // Instagram feed: the project's own posts when it defines them, the site-wide
   // feed when it says nothing, and none at all when it sets `instagram: null`.
@@ -491,11 +494,24 @@ export default function ProjectDetail() {
       <section className="section-pad bg-page">
         <div className="container-x">
           <div className="text-center max-w-3xl mx-auto mb-14">
+            {/* A project can re-head this grid when the tiles are not
+                amenities — the mall lists the tenants it is looking for. */}
             <SectionHeading
               center
-              eyebrow="World-Class Amenities"
-              title={<>Lifestyle, <span className="gold-text">delivered</span></>}
-              subtitle="Every detail designed to elevate everyday living."
+              eyebrow={project.amenitiesHeading?.eyebrow || 'World-Class Amenities'}
+              title={
+                project.amenitiesHeading ? (
+                  <>
+                    {project.amenitiesHeading.title}{' '}
+                    <span className="gold-text">{project.amenitiesHeading.accent}</span>
+                  </>
+                ) : (
+                  <>Lifestyle, <span className="gold-text">delivered</span></>
+                )
+              }
+              subtitle={
+                project.amenitiesHeading?.subtitle || 'Every detail designed to elevate everyday living.'
+              }
             />
           </div>
           {/* Phones get chips that wrap and pack tight — square tiles two to a
@@ -520,6 +536,51 @@ export default function ProjectDetail() {
           </div>
         </div>
       </section>
+      )}
+
+      {/* FACILITIES — the brochure's own grouped lists, kept in its groups:
+          what the township runs on, or how a building is laid out floor by
+          floor. Four short columns rather than one long run of bullets. */}
+      {project.facilities?.groups?.length > 0 && (
+        <section className="section-pad bg-page-alt border-y border-soft">
+          <div className="container-x">
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <SectionHeading
+                center
+                eyebrow={project.facilities.eyebrow}
+                title={
+                  <>
+                    {project.facilities.title}{' '}
+                    <span className="gold-text">{project.facilities.accent}</span>
+                  </>
+                }
+                subtitle={project.facilities.subtitle}
+              />
+            </div>
+            {/* Two across on a phone, four from lg — the lists are short. */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
+              {project.facilities.groups.map((g, i) => (
+                <Reveal key={g.label} delay={i * 0.08}>
+                  <div className="h-full border border-soft p-4 sm:p-6 hover:border-gold-500/60 transition-colors duration-300">
+                    <span className="w-10 h-10 sm:w-11 sm:h-11 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
+                      <Icon name={g.icon} className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </span>
+                    <h3 className="font-serif text-base sm:text-xl text-fg mt-4 leading-tight">{g.label}</h3>
+                    <div className="gold-divider mx-0 my-3 sm:my-4" />
+                    <ul className="space-y-1.5 sm:space-y-2">
+                      {g.items.map((item) => (
+                        <li key={item} className="flex gap-2 text-fg-muted text-xs sm:text-sm leading-relaxed">
+                          <span className="text-gold-500 flex-shrink-0">&middot;</span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
       {/* GALLERY */}

@@ -247,7 +247,7 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
       {/* ── Lightbox ── */}
       {lightboxIdx !== null && (
         <div
-          className="fixed inset-0 z-50 bg-ink-900/96 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-ink-900/95 backdrop-blur-sm flex items-center justify-center"
           onClick={closeLightbox}
         >
           {/* Close */}
@@ -255,14 +255,15 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
             onClick={closeLightbox}
             aria-label="Close"
             className="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center
-                       text-white/60 hover:text-gold-400 border border-white/10 hover:border-gold-500
+                       bg-ink-900/70 text-white backdrop-blur-sm border border-white/30 shadow-lg
+                       hover:bg-gold-500 hover:text-ink-900 hover:border-gold-500
                        transition-all duration-200"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Counter */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 text-white/40 text-xs font-mono tracking-widest">
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 bg-ink-900/70 backdrop-blur-sm px-3 py-1 text-white/80 text-xs font-mono tracking-widest">
             {lightboxIdx + 1} &nbsp;/&nbsp; {project.images.length}
           </div>
 
@@ -276,7 +277,8 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
             onClick={(e) => { e.stopPropagation(); lbPrev() }}
             aria-label="Previous"
             className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center
-                       text-white/60 hover:text-gold-400 border border-white/10 hover:border-gold-500
+                       bg-ink-900/70 text-white backdrop-blur-sm border border-white/30 shadow-lg
+                       hover:bg-gold-500 hover:text-ink-900 hover:border-gold-500
                        transition-all duration-200"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -295,7 +297,8 @@ export default function BrochureGallery({ defaultId = 'grand', single = false, o
             onClick={(e) => { e.stopPropagation(); lbNext() }}
             aria-label="Next"
             className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center
-                       text-white/60 hover:text-gold-400 border border-white/10 hover:border-gold-500
+                       bg-ink-900/70 text-white backdrop-blur-sm border border-white/30 shadow-lg
+                       hover:bg-gold-500 hover:text-ink-900 hover:border-gold-500
                        transition-all duration-200"
           >
             <ChevronRight className="w-6 h-6" />

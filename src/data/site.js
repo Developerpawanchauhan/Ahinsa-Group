@@ -297,6 +297,15 @@ export const PROJECT_DETAILS = {
     hero: '/images/home/hero/silde-1.jpg',
     overviewImage:
       '/images/projects/grand-green-valley/fountain.jpg',
+    // The renders only. The overview slideshow runs on this list; the
+    // gallery below still carries the photographs of the site.
+    overviewImages: [
+      '/images/projects/grand-green-valley/fountain.jpg',
+      '/images/projects/grand-green-valley/boundary-wall.jpg',
+      '/images/projects/grand-green-valley/club-house (1).jpg',
+      '/images/projects/grand-green-valley/grand-mall.jpg',
+      '/images/projects/grand-green-valley/grand-villa.jpg',
+    ],
     gallery: [
       '/images/projects/grand-green-valley/boundary-wall.jpg',
       '/images/projects/grand-green-valley/club-house (1).jpg',
@@ -488,6 +497,61 @@ export const PROJECT_DETAILS = {
       { icon: 'Compass', name: 'Vastu Compliant' },
       { icon: 'Store', name: 'Shops & Malls' },
     ],
+
+    // Brochure page 9, beside the master layout — the township's own four
+    // lists, kept in the brochure's groups and wording.
+    facilities: {
+      eyebrow: 'Township Facilities',
+      title: 'Everything the township',
+      accent: 'runs on',
+      groups: [
+        {
+          icon: 'Store',
+          label: 'Commercial facilities',
+          items: [
+            'Shopping centres and retail spaces',
+            'Restaurants and cafes',
+            'Offices and coworking spaces',
+          ],
+        },
+        {
+          icon: 'Activity',
+          label: 'Healthcare and wellness',
+          items: [
+            'Medical centres',
+            'Clinics and pharmacies',
+            'Yoga and wellness centres',
+            'Sports facilities and stadiums',
+            'Parks and gardens',
+            'Swimming pools',
+            'Gyms and fitness centres',
+            'Clubhouses and community centres',
+            "Playgrounds and kids' areas",
+          ],
+        },
+        {
+          icon: 'Zap',
+          label: 'Infrastructure',
+          items: [
+            'Roads and transportation',
+            'Water and sewage systems',
+            'Electricity and power backup',
+            'Streetlights and security systems',
+          ],
+        },
+        {
+          icon: 'ShieldCheck',
+          label: 'Services',
+          items: [
+            'Waste management and disposal',
+            'Maintenance and repair services',
+            'Security and surveillance',
+            'Concierge and helpdesk services',
+          ],
+        },
+      ],
+    },
+
     specifications: [
       {
         category: 'Structure',
@@ -639,6 +703,15 @@ export const PROJECT_DETAILS = {
     ],
     hero: '/images/home/hero/slide-3.jpg',
     overviewImage: '/images/projects/green-valley-empire/rich-villa.jpg',
+    // The renders only. The overview slideshow runs on this list; the
+    // gallery below still carries the photographs of the site.
+    overviewImages: [
+      '/images/projects/green-valley-empire/rich-villa.jpg',
+      '/images/projects/green-valley-empire/card.jpg',
+      '/images/projects/green-valley-empire/villa.jpg',
+      '/images/projects/green-valley-empire/fountain.jpg',
+      '/images/projects/green-valley-empire/office.jpg',
+    ],
     gallery: [
       '/images/projects/green-valley-empire/card.jpg',
       '/images/projects/green-valley-empire/rich-villa.jpg',
@@ -805,6 +878,16 @@ export const PROJECT_DETAILS = {
     videoEmbed: 'https://www.youtube.com/embed/UixAWM1hS9A',
     hero: '/images/home/hero/slide-2.jpg',
     overviewImage: '/images/projects/green-valley-township/gv-gate.jpg',
+    // The renders only. The overview slideshow runs on this list; the
+    // gallery below still carries the photographs of the site.
+    overviewImages: [
+      '/images/projects/green-valley-township/gv-gate.jpg',
+      '/images/projects/green-valley-township/card.jpg',
+      '/images/projects/green-valley-township/gv-mall.jpg',
+      '/images/projects/green-valley-township/gv-vsps.jpg',
+      '/images/projects/green-valley-township/gv-boundary-wall.jpg',
+      '/images/projects/green-valley-township/kidzon.jpg',
+    ],
     gallery: [
       '/images/projects/green-valley-township/card.jpg',
       '/images/projects/green-valley-township/gv-mall.jpg',
@@ -1346,6 +1429,12 @@ export const PROJECT_DETAILS = {
     // Dusk render leads the gallery — the hero lays a dark gradient over it.
     hero: '/images/projects/grand-square-mall/hero.png',
     overviewImage: '/images/projects/grand-square-mall/img1.png',
+    // The renders only. The overview slideshow runs on this list; the
+    // gallery below still carries the photographs of the site.
+    overviewImages: [
+      '/images/projects/grand-square-mall/img1.png',
+      '/images/projects/grand-square-mall/hero.png',
+    ],
     gallery: [
       '/images/projects/grand-square-mall/hero.png',
       '/images/projects/grand-square-mall/img1.png',
@@ -1359,12 +1448,53 @@ export const PROJECT_DETAILS = {
       '/images/projects/grand-green-valley/mall3.jpeg',
       '/images/projects/grand-green-valley/mall4.jpeg',
     ],
+    // From the mall's own brochure page. The brochure names specific global
+    // brands as examples; they are not signed tenants, so the write-up here
+    // keeps the categories and leaves the names out.
     overview: [
-      'Ahinsa The Grand Square Mall is the group’s most ambitious retail and entertainment destination — anchor brands, a multiplex cinema, a grand food court and a signature central atrium, all under one roof.',
-      // TODO: add the full write-up.
+      'Grand Square Mall, in The Grand Green Valley on the outskirts of Agra, is a premier shopping and lifestyle destination built around a seamless experience. Renowned global brands sit alongside a wide variety of fashion, electronics, beauty and home goods.',
+      'The mall’s modern amenities include ample parking, high-speed elevators and free Wi-Fi, so getting round it is easy however busy the day. With its integrated design of commercial, residential and recreational spaces, Grand Square Mall offers a complete lifestyle experience rather than a shopping trip.',
+      'The layout runs across four levels: a spacious basement hall, a ground floor of double- and single-height shops, a first floor with 13 retail outlets, and a second floor with 5 large halls.',
     ],
-    highlights: [], // TODO
-    amenities: [], // TODO
+    highlights: [
+      { icon: 'Store', title: 'Global Brand Line-up', text: 'Fashion, electronics, beauty and home goods across the retail levels.' },
+      { icon: 'Layers', title: 'Four Levels', text: 'Basement hall, ground-floor shops, 13 first-floor outlets and 5 halls above.' },
+      { icon: 'Car', title: 'Ample Parking', text: 'Parking for every visitor, with high-speed elevators serving each floor.' },
+      { icon: 'Building2', title: 'Integrated Design', text: 'Commercial, residential and recreational spaces planned as one place.' },
+    ],
+
+    // Not amenities — the categories the mall is leasing to. The heading below
+    // re-labels the tile grid to say so.
+    amenitiesHeading: {
+      eyebrow: 'Leasing',
+      title: 'Ideal tenants for',
+      accent: 'our mall',
+      subtitle: 'We are looking for the following at Ahinsa The Grand Square Mall.',
+    },
+    amenities: [
+      { icon: 'Store', name: 'Retail Shops' },
+      { icon: 'Building2', name: 'Corporate Offices' },
+      { icon: 'Landmark', name: 'Banking Services' },
+      { icon: 'Utensils', name: 'Food & Beverage Outlets' },
+      { icon: 'Dumbbell', name: 'Gyms & Fitness Centres' },
+      { icon: 'Film', name: 'Entertainment Zones' },
+      { icon: 'Award', name: 'Educational Institutes' },
+      { icon: 'Layout', name: 'Supermarkets & Stores' },
+    ],
+
+    // The brochure's floor-by-floor breakdown.
+    facilities: {
+      eyebrow: 'The Layout',
+      title: 'Four levels,',
+      accent: 'one destination',
+      groups: [
+        { icon: 'Layers', label: 'Basement', items: ['A spacious basement hall'] },
+        { icon: 'Store', label: 'Ground Floor', items: ['Double-height shops', 'Single-height shops'] },
+        { icon: 'Layout', label: 'First Floor', items: ['13 retail outlets'] },
+        { icon: 'Users', label: 'Second Floor', items: ['5 large halls'] },
+      ],
+    },
+
     specifications: [],
     floorPlans: [],
     locationAdvantages: [], // TODO: key distances
@@ -1395,6 +1525,17 @@ export const PROJECT_DETAILS = {
     hero: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
     overviewImage:
       '/images/projects/ahinsa-mall-firozabad/ongoing.jpg',
+    // The renders only. The overview slideshow runs on this list; the
+    // gallery below still carries the photographs of the site.
+    overviewImages: [
+      '/images/projects/ahinsa-mall-firozabad/ongoing.jpg',
+      '/images/projects/ahinsa-mall-firozabad/mall.jpg',
+      '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',
+      '/images/projects/ahinsa-mall-firozabad/inside.jpg',
+      '/images/projects/ahinsa-mall-firozabad/inside2.jpg',
+      '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
+      '/images/projects/ahinsa-mall-firozabad/laung.jpg',
+    ],
     gallery: [
       '/images/projects/ahinsa-mall-firozabad/mall.jpg',
       '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',
