@@ -290,6 +290,7 @@ export const PROJECT_DETAILS = {
     videoEmbed: 'https://www.youtube.com/embed/MRN5CEBla64',
     // Played inside "A closer look", in their own row after the photo sections.
     galleryVideos: [
+      'https://www.youtube.com/embed/wEjzx8p6eGA',
       'https://www.youtube.com/embed/MRN5CEBla64',
       'https://www.youtube.com/embed/VdEv4GQjEBE',
       'https://www.youtube.com/embed/XcofmLOzp0k',
@@ -699,7 +700,13 @@ export const PROJECT_DETAILS = {
     // Played inside "A closer look". YouTube and Instagram links both work —
     // each is shown with its own player.
     galleryVideos: [
+      'https://www.youtube.com/embed/j6qEkYoPBeE',
       'https://www.youtube.com/embed/DW8b84zmq08',
+      // Instagram reels — these render in Instagram's own tall embed, in a row
+      // of their own under the YouTube frames.
+      'https://www.instagram.com/p/DV3Kktqk6wQ/',
+      'https://www.instagram.com/p/DVIcvAQk96E/',
+      'https://www.instagram.com/p/DNx-j7F5vdm/',
     ],
     hero: '/images/home/hero/slide-3.jpg',
     overviewImage: '/images/projects/green-valley-empire/rich-villa.jpg',
