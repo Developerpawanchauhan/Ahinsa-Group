@@ -682,11 +682,11 @@ export const PROJECT_DETAILS = {
     instagram: {
       handle: 'ahinsagroupagra',
       posts: [
-        'https://www.instagram.com/p/DYwanblk25d/',
-        'https://www.instagram.com/p/DObjEdxEw90/',
-        'https://www.instagram.com/p/DV3Kktqk6wQ/',
-        'https://www.instagram.com/p/DVIcvAQk96E/',
         'https://www.instagram.com/p/DNx-j7F5vdm/',
+        'https://www.instagram.com/p/DVIcvAQk96E/',
+        'https://www.instagram.com/p/DV3Kktqk6wQ/',
+        'https://www.instagram.com/p/DObjEdxEw90/',
+        'https://www.instagram.com/p/DYwanblk25d/',
       ],
     },
     type: 'Luxury Township',
@@ -1439,6 +1439,8 @@ export const PROJECT_DETAILS = {
       '/images/projects/grand-square-mall/img1.png',
       '/images/projects/grand-square-mall/hero.png',
     ],
+    // Still, three to a row — no scrolling strip on the mall pages.
+    galleryLayout: 'grid',
     gallery: [
       '/images/projects/grand-square-mall/hero.png',
       '/images/projects/grand-square-mall/img1.png',
@@ -1540,6 +1542,8 @@ export const PROJECT_DETAILS = {
       '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
       '/images/projects/ahinsa-mall-firozabad/laung.jpg',
     ],
+    // Still, three to a row — no scrolling strip on the mall pages.
+    galleryLayout: 'grid',
     gallery: [
       '/images/projects/ahinsa-mall-firozabad/mall.jpg',
       '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',

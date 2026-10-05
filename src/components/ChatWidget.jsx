@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Bot, X, ArrowUpRight, Phone } from 'lucide-react'
-import { WEB3FORMS_KEY, PROJECT_DETAILS, mapLinkFor } from '../data/site'
+import { WEB3FORMS_KEY, PROJECT_DETAILS, OFFICES, mapLinkFor } from '../data/site'
 import { sendToGoogleSheet } from '../lib/googleSheet'
 
 /**
@@ -37,6 +37,18 @@ import { sendToGoogleSheet } from '../lib/googleSheet'
 const WHATSAPP_NUMBER = '916398730582'
 const PHONE_DISPLAY = '+91 63987 30582'
 const PHONE_TEL = '+916398730582'
+
+/** Site visits run 8 AM to 8 PM; the exact slot is fixed with the team. */
+const VISIT_HOURS = '8 AM and 8 PM'
+
+/** The Agra corporate office — the one the "Site office location" reply opens on. */
+const HEAD_OFFICE = OFFICES.find((o) => o.isHeadOffice) || OFFICES[0]
+
+/** Opens WhatsApp with a ready-written request to fix a visit time. */
+const SCHEDULE_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  'Hello Ahinsa Group,\n\n' +
+    `I would like to schedule a site visit. Please let me know a suitable time between ${VISIT_HOURS}.`,
+)}`
 
 const BOT_NAME = 'Ahinsa Assistant'
 const BOT_TAGLINE = 'Online · replies instantly'
@@ -177,33 +189,30 @@ const NODES = {
       { label: '💬 Send visit request on WhatsApp', href: 'lead' },
       { label: 'Site office location', to: 'office' },
       { label: 'Visit timings', to: 'timings' },
-      { label: 'Pickup available?', to: 'pickup' },
     ],
   },
+
+  // The head office first, then a choice of city. Each city's address and map
+  // link come from OFFICES in site.js — the same source the About and Contact
+  // pages use — so an address changed there changes here too.
   office: {
     text:
-      'Our head office is at 11/49B, Ahinsa Complex, Gulab Nagar, Rambagh, Agra 282006.\n' +
-      'For the site office of a particular project, our team will send you the exact location pin on WhatsApp.',
-    options: [
-      { label: '💬 Get location pin', href: 'whatsapp' },
-      { label: 'Visit timings', to: 'timings' },
-      { label: '📍 Book a Site Visit', to: 'visit' },
-    ],
+      `Our head office is in ${HEAD_OFFICE.location} 🏢\n` +
+      `${HEAD_OFFICE.address}\n\n` +
+      'We also have offices in ' +
+      OFFICES.filter((o) => !o.isHeadOffice).map((o) => o.location).join(' and ') +
+      '. Which city would you like?',
+    options: OFFICES.map((o) => ({ label: `📍 ${o.location}`, to: `off_${o.slug}` })),
   },
+
   timings: {
-    text: `Our team will confirm the visiting hours for your chosen project.\n${ESCALATION}`,
+    text:
+      `Site visits can be arranged between **${VISIT_HOURS}**, at a time fixed with our team.\n` +
+      'Tap below to pick your slot on WhatsApp.',
     options: [
-      { label: '💬 WhatsApp us', href: 'whatsapp' },
+      { label: '🗓️ Schedule on WhatsApp', href: SCHEDULE_URL },
+      { label: '📍 Book a Site Visit', to: 'visit' },
       { label: 'Site office location', to: 'office' },
-      { label: '📍 Book a Site Visit', to: 'visit' },
-    ],
-  },
-  pickup: {
-    text: `Our team will confirm pickup and drop for your location.\n${ESCALATION}`,
-    options: [
-      { label: '💬 WhatsApp us', href: 'whatsapp' },
-      { label: 'Visit timings', to: 'timings' },
-      { label: '📍 Book a Site Visit', to: 'visit' },
     ],
   },
 
@@ -218,7 +227,6 @@ const NODES = {
     options: [
       { label: 'Site office location', to: 'office' },
       { label: 'Visit timings', to: 'timings' },
-      { label: 'Pickup & drop', to: 'pickup' },
       { label: '✍️ Write my own query', form: 'query' },
       { label: '💬 WhatsApp us', href: 'whatsapp' },
     ],
@@ -267,6 +275,23 @@ const NODES = {
       { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
   },
+}
+
+/* One node per office: its address, and its Google Maps listing. The other
+   cities stay one tap away, so a visitor can compare without going back. */
+for (const o of OFFICES) {
+  const title = o.isHeadOffice ? `Head Office, ${o.location}` : o.name
+  NODES[`off_${o.slug}`] = {
+    text: `🏢 ${title}\n${o.address}`,
+    options: [
+      ...(o.mapUrl ? [{ label: '🗺️ Open in Google Maps', href: o.mapUrl }] : []),
+      ...OFFICES.filter((x) => x.slug !== o.slug).map((x) => ({
+        label: `📍 ${x.location} office`,
+        to: `off_${x.slug}`,
+      })),
+      { label: '📍 Book a Site Visit', to: 'visit' },
+    ],
+  }
 }
 
 /* Per-project nodes, generated from PROJECTS so every branch stays in step. */

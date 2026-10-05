@@ -8,6 +8,12 @@ import { Play } from 'lucide-react'
  * only on request keeps the page as quick as the images around it. Used by the
  * project gallery and the profiles on the Management page.
  *
+ * Nothing plays on its own: every page load starts on the thumbnail, and the
+ * player only loads on a click. When it does, `start=0` sends it to the very
+ * beginning. Without it YouTube resumes from wherever that video was last left
+ * — after a refresh, or where the same video got to as a page's hero
+ * background — so a fresh click could open half way through.
+ *
  * @param src     a YouTube embed URL — https://www.youtube.com/embed/<id>
  * @param onPlay  optional — fires once the player loads, so a caller scrolling
  *                this tile in a strip can stop the strip moving under it.
@@ -21,7 +27,7 @@ export default function VideoTile({ src, title, className = '', onPlay }) {
       {playing ? (
         <iframe
           title={title}
-          src={`${src}?autoplay=1&rel=0`}
+          src={`${src}?autoplay=1&rel=0&start=0`}
           className="absolute inset-0 w-full h-full"
           referrerPolicy="strict-origin-when-cross-origin"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

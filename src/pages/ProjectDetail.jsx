@@ -5,7 +5,7 @@ import {
   ShieldCheck, Award, Compass, Trees, Waves, Dumbbell, Users, Baby, Trophy,
   Activity, Zap, Car, Camera, Droplet, Sparkles, Sun, Layout, Wifi, Coffee,
   Utensils, Store, Film, Music, HeartHandshake, Clock, Eye, Target, Leaf,
-  Send, CheckCircle2, Phone, Mail, ChevronRight, Landmark, Home,
+  Send, CheckCircle2, Phone, Mail, ChevronRight, Landmark, Home, Maximize2,
   ArrowUpDown, Toilet, SquareParking, Cctv, FireExtinguisher, Snowflake,
 } from 'lucide-react'
 
@@ -33,6 +33,12 @@ const ICON_MAP = {
   Music, HeartHandshake, Clock, Eye, Target, Leaf, Landmark, Home,
   ArrowUpDown, Toilet, SquareParking, Cctv, FireExtinguisher, Snowflake,
 }
+
+/* One cell of the still gallery grid: two to a row on a phone, three from md
+   up. The widths take the gap-4 between cells out first, so a row of three
+   adds up to exactly 100%. Laid out with flex rather than grid so a short last
+   row is centred instead of hanging off the left. */
+const GRID_CELL = 'w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)]'
 
 function Icon({ name, className = 'w-5 h-5' }) {
   const C = ICON_MAP[name] || Sparkles
@@ -136,6 +142,10 @@ export default function ProjectDetail() {
   // The strip arbiter gives one row at a time the autoscroll, keyed by index.
   // The photo rows take 0..n-1, so the video row follows them.
   const videoStripIndex = groups ? groups.length : 1
+  // `galleryLayout: 'grid'` lays the flat gallery and its videos out still,
+  // three to a row, instead of in the scrolling strip. For the malls, whose
+  // galleries are short enough to see whole.
+  const galleryGrid = project.galleryLayout === 'grid'
 
   // Offices and the mall carry no unit-area figure. Drop any fact without a
   // value so the strip never shows an empty tile, and centre what is left.
@@ -630,6 +640,34 @@ export default function ProjectDetail() {
                   />
                 </div>
               ))
+            ) : galleryImages.length > 0 && galleryGrid ? (
+              <div className="mt-12">
+                <p className="text-fg-soft text-[10px] uppercase tracking-[0.25em] mb-3">
+                  {galleryImages.length} {galleryImages.length === 1 ? 'Photo' : 'Photos'}
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {galleryImages.map((src, i) => (
+                    <Reveal key={src} delay={(i % 3) * 0.08} className={GRID_CELL}>
+                      <button
+                        type="button"
+                        onClick={() => setLightbox({ images: galleryImages, index: i })}
+                        aria-label={`View ${project.name} photo ${i + 1} full screen`}
+                        className="img-zoom group relative block w-full aspect-[16/10] overflow-hidden cursor-zoom-in"
+                      >
+                        <img
+                          src={src}
+                          alt={`${project.name} ${i + 1}`}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                        <span className="absolute inset-0 flex items-center justify-center bg-ink-900/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                          <Maximize2 className="w-6 h-6 text-cream" />
+                        </span>
+                      </button>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
             ) : (
               galleryImages.length > 0 && (
                 <div className="mt-4">
@@ -659,25 +697,35 @@ export default function ProjectDetail() {
                     </span>
                   </div>
                 </Reveal>
-                {/* The autoscroll stops as soon as a player loads, so the row
-                    never slides out from under a video someone is watching. */}
-                <PhotoStrip
-                  items={galleryVideos}
-                  label={`${project.name} video`}
-                  index={videoStripIndex}
-                  active={activeStrip === videoStripIndex}
-                  onVisibility={onVisibility}
-                  cardClass="w-[80%] sm:w-[48%] lg:w-[32%]"
-                  frozen={lightbox !== null || videoPlaying}
-                  countLabel={false}
-                  renderItem={(src, i) => (
-                    <VideoTile
-                      src={src}
-                      title={`${project.name} video ${i + 1}`}
-                      onPlay={() => setVideoPlaying(true)}
-                    />
-                  )}
-                />
+                {galleryGrid ? (
+                  <div className="flex flex-wrap justify-center gap-4">
+                    {galleryVideos.map((src, i) => (
+                      <Reveal key={src} delay={(i % 3) * 0.08} className={GRID_CELL}>
+                        <VideoTile src={src} title={`${project.name} video ${i + 1}`} />
+                      </Reveal>
+                    ))}
+                  </div>
+                ) : (
+                  /* The autoscroll stops as soon as a player loads, so the row
+                     never slides out from under a video someone is watching. */
+                  <PhotoStrip
+                    items={galleryVideos}
+                    label={`${project.name} video`}
+                    index={videoStripIndex}
+                    active={activeStrip === videoStripIndex}
+                    onVisibility={onVisibility}
+                    cardClass="w-[80%] sm:w-[48%] lg:w-[32%]"
+                    frozen={lightbox !== null || videoPlaying}
+                    countLabel={false}
+                    renderItem={(src, i) => (
+                      <VideoTile
+                        src={src}
+                        title={`${project.name} video ${i + 1}`}
+                        onPlay={() => setVideoPlaying(true)}
+                      />
+                    )}
+                  />
+                )}
               </div>
             )}
           </div>

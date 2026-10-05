@@ -67,8 +67,16 @@ function writeSoundPref(pref) {
  *
  * Once the visitor touches the volume control, that choice is stored and wins
  * on every later page and refresh — a hero muted by hand comes back muted.
+ *
+ * It plays only while it is on screen. Scrolled away, it pauses, and picks up
+ * again on the way back. Before this it played on with its sound all the way
+ * down the page — and on several projects the hero is the same video as one in
+ * "A closer look", so that sound read as a gallery video playing by itself. A
+ * refresh partway down the page made it worse: the browser restores the scroll,
+ * the hero loads out of sight, and its sound started up under the gallery.
  */
 export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 60, start = 0 }) {
+  const rootRef = useRef(null)
   const hostRef = useRef(null)
   const playerRef = useRef(null)
   const [visible, setVisible] = useState(false)
@@ -99,6 +107,10 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
     let destroyed = false
     let started = false
     let gestureEvents = null
+    let observer = null
+    // Whether the hero is on screen. Assumed so where IntersectionObserver is
+    // missing, which keeps the old always-playing behaviour there.
+    let inView = !('IntersectionObserver' in window)
 
     // The visitor's first gesture lets us turn sound on after a blocked start.
     const unmuteOnGesture = () => {
@@ -122,6 +134,50 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
       )
     }
 
+    // Starts the hero the first time, and resumes it every time after. The
+    // first start tries for sound; if the browser refuses, it retries muted
+    // and waits for the visitor's first tap to turn the sound on.
+    const begin = (p) => {
+      if (started) {
+        p.playVideo()
+        return
+      }
+      clearTimeout(blockedTimer)
+      if (mutedRef.current) {
+        p.mute()
+        p.playVideo()
+        return
+      }
+      p.unMute()
+      p.playVideo()
+
+      // If sound-on autoplay was refused, playback never reaches PLAYING.
+      // Retry muted so the hero isn't a frozen poster — unless it has been
+      // scrolled away meanwhile, in which case the next return retries.
+      blockedTimer = setTimeout(() => {
+        if (started || destroyed || !inView) return
+        autoMutedRef.current = true
+        setMuted(true)
+        p.mute()
+        p.playVideo()
+        addGestureListeners()
+      }, 1500)
+    }
+
+    if (!inView && rootRef.current) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          inView = entry.isIntersecting
+          const p = playerRef.current
+          if (!p) return
+          if (inView) begin(p)
+          else p.pauseVideo()
+        },
+        { threshold: 0.25 },
+      )
+      observer.observe(rootRef.current)
+    }
+
     loadYouTubeAPI().then((YT) => {
       if (destroyed || !hostRef.current || !YT) return
       player = new YT.Player(hostRef.current, {
@@ -129,7 +185,8 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
         height: '100%',
         videoId,
         playerVars: {
-          autoplay: 1,
+          // Off: `begin` starts it, and only once the hero is on screen.
+          autoplay: 0,
           // Start muted when that is the remembered choice, rather than
           // muting in onReady — that leaves a gap where sound can escape.
           mute: savedPref?.muted ? 1 : 0,
@@ -147,28 +204,9 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
             playerRef.current = e.target
             e.target.setVolume(volumeRef.current)
             setReady(true)
-
-            // Muted on a previous visit — stay muted, and don't arm the
-            // gesture unmute below, or the next tap would undo their choice.
-            if (mutedRef.current) {
-              e.target.mute()
-              e.target.playVideo()
-              return
-            }
-
-            e.target.unMute()
-            e.target.playVideo()
-
-            // If sound-on autoplay was refused, playback never reaches PLAYING.
-            // Retry muted so the hero isn't a frozen poster.
-            blockedTimer = setTimeout(() => {
-              if (started || destroyed) return
-              autoMutedRef.current = true
-              setMuted(true)
-              e.target.mute()
-              e.target.playVideo()
-              addGestureListeners()
-            }, 1500)
+            // Loaded out of sight — a refresh partway down restores the
+            // scroll — it waits, silent, for the observer to bring it in.
+            if (inView) begin(e.target)
           },
           onStateChange: (e) => {
             if (e.data === YT.PlayerState.PLAYING) {
@@ -182,7 +220,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
               clearTimeout(revealTimer)
               setVisible(false)
               e.target.seekTo(start)
-              e.target.playVideo()
+              if (inView) e.target.playVideo()
             }
           },
         },
@@ -191,6 +229,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
 
     return () => {
       destroyed = true
+      if (observer) observer.disconnect()
       clearTimeout(revealTimer)
       clearTimeout(blockedTimer)
       removeGestureListeners()
@@ -237,7 +276,7 @@ export default function HeroVideo({ videoId, poster, alt = '', defaultVolume = 6
   const sliderValue = muted ? 0 : volume
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div ref={rootRef} className="absolute inset-0 overflow-hidden">
       <style>{`
         .hero-vol {
           -webkit-appearance: none;
