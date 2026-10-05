@@ -291,9 +291,10 @@ export const PROJECT_DETAILS = {
     // Played inside "A closer look", in their own row after the photo sections.
     galleryVideos: [
       'https://www.youtube.com/embed/wEjzx8p6eGA',
-      'https://www.youtube.com/embed/MRN5CEBla64',
       'https://www.youtube.com/embed/VdEv4GQjEBE',
       'https://www.youtube.com/embed/XcofmLOzp0k',
+      // The hero's own video, last.
+      'https://www.youtube.com/embed/MRN5CEBla64',
     ],
     hero: '/images/home/hero/silde-1.jpg',
     overviewImage:
@@ -1197,6 +1198,11 @@ export const PROJECT_DETAILS = {
     // From the listing’s Share link (maps.app.goo.gl/e6rJ12MihPk6J2rz8).
     mapCid: '269455989475804450',
     videoEmbed: 'https://www.youtube.com/embed/ZfqdNR_RiFs',
+    // The hero video again, in "A closer look", where it can be watched
+    // with its sound and controls.
+    galleryVideos: [
+      'https://www.youtube.com/embed/ZfqdNR_RiFs',
+    ],
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
     gallery: [
@@ -1277,6 +1283,11 @@ export const PROJECT_DETAILS = {
     mapEmbed: 'https://www.google.com/maps?q=Athena+Tower,+Gwalior,+Madhya+Pradesh&output=embed',
     mapPlace: 'Ahinsa Office, Athena Tower, City Centre, Gwalior',
     videoEmbed: 'https://www.youtube.com/embed/O0Stk5s2YU8',
+    // The hero video again, in "A closer look", where it can be watched
+    // with its sound and controls.
+    galleryVideos: [
+      'https://www.youtube.com/embed/O0Stk5s2YU8',
+    ],
     hero: '/images/projects/corporate-office-gwalior/corporate-office.jpeg',
     overviewImage: '/images/projects/corporate-office-gwalior/office.jpeg',
     gallery: [
@@ -1356,6 +1367,11 @@ export const PROJECT_DETAILS = {
     mapEmbed: 'https://www.google.com/maps?q=Firozabad,+Uttar+Pradesh&output=embed',
     mapPlace: 'Ahinsa Office, Arya Nagar, Bypass Road, Firozabad',
     videoEmbed: 'https://www.youtube.com/embed/0EKdYGEvrMk',
+    // The hero video again, in "A closer look", where it can be watched
+    // with its sound and controls.
+    galleryVideos: [
+      'https://www.youtube.com/embed/0EKdYGEvrMk',
+    ],
     // Wide facade shot — the hero crops to 80vh, so the landscape frame works
     // better here than the portrait `uper.png`.
     hero: '/images/projects/ahinsa-office-firozabad/img1.png',

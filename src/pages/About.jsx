@@ -250,7 +250,67 @@ export default function About() {
             />
           </div>
 
-          <div className="relative">
+          {/* Phones: a zigzag. The cards step from side to side, each joined to
+              the next by a dashed diagonal that runs from its outer corner to
+              the next card's step number, and each slides in from its own
+              side. The desktop timeline below needs two columns of width. */}
+          <div className="md:hidden">
+            {MILESTONES.map((m, i) => {
+              const right = i % 2 === 1
+              const last = i === MILESTONES.length - 1
+              return (
+                <div key={`${m.year}-${m.title}`}>
+                  <Reveal from={right ? 'right' : 'left'}>
+                    <div className={`relative w-[88%] ${right ? 'ml-auto' : ''}`}>
+                      <span
+                        className={`absolute -top-3 ${right ? 'right-4' : 'left-4'} z-10 w-7 h-7 rounded-full bg-gold-500 text-ink-900 font-serif font-bold text-[11px] flex items-center justify-center ring-4 ring-cream dark:ring-ink-900`}
+                      >
+                        {i + 1}
+                      </span>
+                      <div
+                        className={`card-glass px-5 pb-5 pt-6 ${
+                          right ? 'text-right border-r-2 border-r-gold-500' : 'border-l-2 border-l-gold-500'
+                        }`}
+                      >
+                        {/* The year sits on the card's outer edge either way. */}
+                        <div className={`flex items-baseline gap-2 ${right ? 'flex-row-reverse' : ''}`}>
+                          <span className="font-serif text-2xl gold-text leading-none">{m.year}</span>
+                          {m.month && (
+                            <span className="text-[10px] uppercase tracking-[0.25em] text-gold-700 dark:text-gold-500">
+                              {m.month}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="text-fg font-medium text-[15px] leading-snug mt-2">{m.title}</h3>
+                        <p className="text-fg-soft text-[13px] leading-relaxed mt-2">{m.text}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                  {!last && (
+                    <svg
+                      viewBox="0 0 100 40"
+                      preserveAspectRatio="none"
+                      className="block w-full h-10 text-gold-500/60"
+                      aria-hidden="true"
+                    >
+                      <line
+                        x1={right ? 90 : 10}
+                        y1="0"
+                        x2={right ? 8 : 92}
+                        y2="40"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeDasharray="4 4"
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </svg>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="relative hidden md:block">
             <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gold-500/40 to-transparent" />
             <div className="space-y-12">
               {MILESTONES.map((m, i) => (

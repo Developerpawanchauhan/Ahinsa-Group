@@ -697,7 +697,15 @@ export default function ProjectDetail() {
                     </span>
                   </div>
                 </Reveal>
-                {galleryGrid ? (
+                {galleryVideos.length === 1 ? (
+                  /* One video has nothing to scroll to — in a strip it would sit
+                     a third wide in the left corner. Centred and large instead. */
+                  <Reveal>
+                    <div className="max-w-3xl mx-auto">
+                      <VideoTile src={galleryVideos[0]} title={`${project.name} video`} />
+                    </div>
+                  </Reveal>
+                ) : galleryGrid ? (
                   <div className="flex flex-wrap justify-center gap-4">
                     {galleryVideos.map((src, i) => (
                       <Reveal key={src} delay={(i % 3) * 0.08} className={GRID_CELL}>
