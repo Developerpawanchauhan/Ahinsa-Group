@@ -2129,6 +2129,14 @@ export const TEAM_MEMBERS = [
     bio: 'Owns procurement from requisition to delivery — sources construction materials, negotiates with vendors, controls costs and keeps site supply on schedule.',
   },
   {
+    name: 'Mr. Anoop Gautam',
+    role: 'Legal Head',
+    department: 'Legal',
+    image:
+      '/images/emploi/anoop-gautam.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Heads the group’s legal function — oversees property titles and documentation, agreements and registries, and keeps every project in step with the regulations that govern it.',
+  },
+  {
     name: 'Mr. Pawan Chauhan',
     role: 'IT & Social Media Manager',
     department: 'IT & Digital',
