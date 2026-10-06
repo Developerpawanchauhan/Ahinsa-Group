@@ -310,8 +310,10 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {/* h-full passes the row's height through the reveal wrapper, so
+                every card in a row is as tall as the tallest one. */}
             {DEVELOPMENTS.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.08}>
+              <Reveal key={p.slug} delay={i * 0.08} className="h-full">
                 <ProjectCard project={p} />
               </Reveal>
             ))}
@@ -604,7 +606,7 @@ function ProjectCard({ project }) {
   return (
     <Link
       to={`/projects/${project.slug}`}
-      className={`block card-glass group overflow-hidden ${
+      className={`h-full flex flex-col card-glass group overflow-hidden ${
         isUpcoming ? 'ring-1 ring-gold-500/50 shadow-lg shadow-gold-500/10' : ''
       }`}
     >
@@ -622,7 +624,9 @@ function ProjectCard({ project }) {
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-transparent to-transparent" />
       </div>
-      <div className="p-6">
+      {/* Fills the rest of the card, so "Discover" sits on the same line in
+          every card of a row however long the name above it runs. */}
+      <div className="p-6 flex-1 flex flex-col">
         <div className="flex items-center gap-2 text-xs text-gold-700 dark:text-gold-500 uppercase tracking-[0.2em]">
           <Building2 className="w-3.5 h-3.5" />
           {project.type}
@@ -635,7 +639,7 @@ function ProjectCard({ project }) {
           {project.location}
         </div>
         <p className="text-fg-soft text-sm mt-4 leading-relaxed line-clamp-2">{project.short}</p>
-        <div className="mt-5 inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
+        <div className="mt-auto pt-5 self-start inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
           Discover <ArrowRight className="w-3 h-3" />
         </div>
       </div>

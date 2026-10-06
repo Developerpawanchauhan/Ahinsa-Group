@@ -60,8 +60,11 @@ export default function Projects() {
         <div className="container-x">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filtered.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 6) * 0.08}>
-                <Link to={`/projects/${p.slug}`} className="block card-glass group overflow-hidden h-full">
+              // h-full on the reveal wrapper as well as the card: without it the
+              // card's h-full had no height to fill, and cards in a row ended
+              // at different heights depending on their text.
+              <Reveal key={p.slug} delay={(i % 6) * 0.08} className="h-full">
+                <Link to={`/projects/${p.slug}`} className="h-full flex flex-col card-glass group overflow-hidden">
                   <div className="img-zoom aspect-[4/3] relative">
                     <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
                     <div className="absolute top-4 left-4 bg-gold-500 text-ink-900 px-3 py-1 text-[10px] uppercase tracking-widest font-medium">
@@ -69,7 +72,7 @@ export default function Projects() {
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-ink-900/90 via-transparent to-transparent" />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-2 text-xs text-gold-700 dark:text-gold-500 uppercase tracking-[0.2em]">
                       <Building2 className="w-3.5 h-3.5" />
                       {p.type}
@@ -82,7 +85,7 @@ export default function Projects() {
                       {p.location}
                     </div>
                     <p className="text-fg-soft text-sm mt-4 leading-relaxed line-clamp-2">{p.short}</p>
-                    <div className="mt-5 inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
+                    <div className="mt-auto pt-5 self-start inline-flex items-center gap-2 text-gold-700 dark:text-gold-500 text-xs uppercase tracking-widest">
                       View Details <ArrowRight className="w-3 h-3" />
                     </div>
                   </div>
