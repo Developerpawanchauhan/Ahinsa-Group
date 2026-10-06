@@ -104,7 +104,7 @@ export const PROJECTS = [
   },  {
     slug: 'green-valley-empire',
     name: 'Ahinsa Green Valley Empire',
-    location: 'Agra',
+    location: 'Mudi Crossing, Agra',
     type: 'Luxury Township',
     status: 'Ongoing',
     image: '/images/projects/green-valley-empire/card.jpg',
@@ -114,7 +114,7 @@ export const PROJECTS = [
   {
     slug: 'green-valley-township',
     name: 'Ahinsa Green Valley Township',
-    location: 'Agra',
+    location: 'Kuberpur, Agra',
     type: 'Luxury Township',
     status: 'Ongoing',
     image: '/images/projects/green-valley-township/card.jpg',
@@ -124,7 +124,7 @@ export const PROJECTS = [
   {
     slug: 'green-valley-orchid',
     name: 'Ahinsa Green Valley Orchid',
-    location: 'Agra',
+    location: 'Kuberpur, Agra',
     type: 'Residential Plots',
     status: 'Ongoing',
     image: '/images/projects/green-valley-orchid/card.jpg',
@@ -134,7 +134,7 @@ export const PROJECTS = [
   {
     slug: 'ahinsa-complex',
     name: 'Ahinsa Complex',
-    location: 'Agra',
+    location: 'Ram Bagh, Agra',
     type: 'Head Office',
     status: 'Completed',
     image: '/images/projects/ahinsa-complex/card.jpg',
@@ -721,7 +721,7 @@ export const PROJECT_DETAILS = {
   'green-valley-empire': {
     name: 'Ahinsa Green Valley Empire',
     tagline: 'A modern address for those who lead with confidence.',
-    location: 'Agra',
+    location: 'Mudi Crossing, Agra',
     fullAddress: 'Mudi Crossing, Agra',
     // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
     instagram: {
@@ -897,7 +897,7 @@ export const PROJECT_DETAILS = {
   'green-valley-township': {
     name: 'Ahinsa Green Valley Township',
     tagline: 'A flagship gated community where Agra learnt to live larger.',
-    location: 'Agra',
+    location: 'Kuberpur, Agra',
     fullAddress: 'Kuberpur, Agra',
     // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
     // The middle card needs carousel slide 3, which an embed can't open at, so
@@ -1076,7 +1076,7 @@ export const PROJECT_DETAILS = {
   'green-valley-orchid': {
     name: 'Ahinsa Green Valley Orchid',
     tagline: 'A premium business address engineered for the next decade.',
-    location: 'Agra',
+    location: 'Kuberpur, Agra',
     fullAddress: 'Kuberpur, Agra',
     instagram: null, // no Instagram section on this page
     type: 'Residential Plots',
@@ -1148,7 +1148,7 @@ export const PROJECT_DETAILS = {
   'ahinsa-complex': {
     name: 'Ahinsa Complex',
     tagline: 'A landmark mixed-use complex at the heart of the city.',
-    location: 'Agra',
+    location: 'Ram Bagh, Agra',
     fullAddress: 'Ram Bagh, Agra',
     instagram: null, // no Instagram section on this page
     type: 'Head Office',
@@ -2176,6 +2176,14 @@ export const TEAM_MEMBERS = [
     image:
       '/images/emploi/shantosh-sharma.jpg?w=600&q=85&auto=format&fit=crop',
     bio: 'Leads the sales team — drives client acquisition, manages site visits and closings, and delivers on sales targets across the group’s projects.',
+  },
+  {
+    name: 'Prerna Sharma',
+    role: 'Sales Executive',
+    department: 'Sales',
+    image:
+      '/images/emploi/prerna-sharma.jpg?w=600&q=85&auto=format&fit=crop',
+    bio: 'Works with buyers from first enquiry to booking — shares project details, arranges site visits and follows up so every family gets clear answers along the way.',
   },
 
 ]
