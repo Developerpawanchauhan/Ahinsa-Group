@@ -182,6 +182,17 @@ export const PROJECTS = [
       'Signature residences with resort-style amenities, set in a lush green community along Fatehabad Road.',
   },
   {
+    slug: 'green-valley-residency',
+    name: 'THE PRIDE - Ahinsa Green Valley Residency',
+    // TODO: the site's city, once announced — it shows on every card and menu.
+    location: 'Location to be announced',
+    type: 'Residential Community',
+    status: 'Upcoming',
+    image: '/images/projects/green-valley-residency/the-pride.jpg',
+    short:
+      'A gated residential community in the Ahinsa Green Valley family — where pride meets peace.',
+  },
+  {
     slug: 'ahinsa-mall-firozabad',
     name: 'Ahinsa City Centre',
     location: 'MG Road, Firozabad',
@@ -670,6 +681,39 @@ export const PROJECT_DETAILS = {
     ],
     // The map only ever pointed at the city, and the distances listed were
     // Agra's. Both are hidden until the real site data is in.
+    showLocation: false,
+    locationAdvantages: [],
+  },
+
+  // Announced October 2026. So far only the name, the line "Where Pride Meets
+  // Peace" and the entrance render are confirmed, so the page carries those and
+  // nothing it would have to invent: no map, sizes, amenities or distances yet.
+  // Each section below fills in, and appears, as its details are released.
+  'green-valley-residency': {
+    name: 'THE PRIDE - Ahinsa Green Valley Residency',
+    tagline: 'Where Pride Meets Peace.',
+    location: 'Location to be announced',
+    fullAddress: 'Location to be announced',
+    instagram: null,
+    type: 'Residential Community',
+    status: 'Upcoming',
+    configurations: '',
+    unitArea: '',
+    totalArea: '',
+    possession: 'On Request',
+    priceRange: 'On Request',
+    hero: '/images/projects/green-valley-residency/the-pride.jpg',
+    overviewImage: '/images/projects/green-valley-residency/the-pride.jpg',
+    gallery: [],
+    overview: [
+      'THE PRIDE, Ahinsa Green Valley Residency, is the newest address in the Ahinsa Green Valley family — a gated residential community built around one idea: where pride meets peace.',
+      'It is planned to open on a grand gated entrance with its own security and visitor-control lodge, water features on either side and a lamp-lit, landscaped approach — the same care for the arrival that runs through every Ahinsa project.',
+      'The project is at planning stage and its details are still being finalised. To register your interest, or to hear first when it launches, please get in touch with our team.',
+    ],
+    highlights: [],
+    amenities: [],
+    specifications: [],
+    floorPlans: [],
     showLocation: false,
     locationAdvantages: [],
   },

@@ -232,10 +232,17 @@ export default function ProjectDetail() {
       {/* QUICK FACTS STRIP */}
       <section className="bg-page-alt border-y border-soft">
         <div
+          // As many columns as there are facts, so a short strip stays centred
+          // rather than leaving an empty column on the right. Spelled out in
+          // full: Tailwind only builds classes it can read whole in the source.
           className={`container-x py-8 grid gap-6 ${
-            quickFacts.length < 4
-              ? 'grid-cols-1 sm:grid-cols-3 max-w-4xl mx-auto'
-              : 'grid-cols-2 md:grid-cols-4'
+            quickFacts.length >= 4
+              ? 'grid-cols-2 md:grid-cols-4'
+              : quickFacts.length === 3
+                ? 'grid-cols-1 sm:grid-cols-3 max-w-4xl mx-auto'
+                : quickFacts.length === 2
+                  ? 'grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto'
+                  : 'grid-cols-1 max-w-sm mx-auto'
           }`}
         >
           {quickFacts.map((f, i) => (

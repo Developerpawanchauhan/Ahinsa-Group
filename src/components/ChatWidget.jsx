@@ -236,9 +236,23 @@ const NODES = {
   // Ahinsa City Centre Mall moved to Ongoing — it has its own branch now.
   upcoming: {
     text:
-      'One project is on the way 🌟\n' +
-      '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh',
+      'Two projects are on the way 🌟\n' +
+      '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh\n' +
+      '• THE PRIDE - Ahinsa Green Valley Residency — location to be announced',
     options: [
+      { label: 'Lake City, Gwalior', to: 'lakecity' },
+      // TODO: add ", <city>" once the location is announced, like the others.
+      { label: 'THE PRIDE - Green Valley Residency', to: 'pride' },
+      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+    ],
+  },
+  pride: {
+    lead: true,
+    text:
+      'THE PRIDE - Ahinsa Green Valley Residency is our newest upcoming project — a gated residential community, where pride meets peace.\n' +
+      'The project is at planning stage — full details, including the location, will be announced at launch.',
+    options: [
+      { label: '💬 WhatsApp us', href: 'whatsapp' },
       { label: 'Lake City, Gwalior', to: 'lakecity' },
       { label: '🏗️ Ongoing Projects', to: 'ongoing' },
     ],
