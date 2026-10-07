@@ -20,6 +20,7 @@ import InstagramFeed from '../components/InstagramFeed'
 import ImageLightbox from '../components/ImageLightbox'
 import VideoTile from '../components/VideoTile'
 import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
+import ScrollRow from '../components/ScrollRow'
 import { sendToGoogleSheet } from '../lib/googleSheet'
 import {
   PROJECT_DETAILS, LISTED_PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS,
@@ -39,6 +40,10 @@ const ICON_MAP = {
    adds up to exactly 100%. Laid out with flex rather than grid so a short last
    row is centred instead of hanging off the left. */
 const GRID_CELL = 'w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)]'
+
+/* One video in the gallery's scrolling row: most of a phone's width so the
+   next one peeks in, two from sm, three from lg — the gap-4 taken out first. */
+const VIDEO_CELL = 'w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]'
 
 function Icon({ name, className = 'w-5 h-5' }) {
   const C = ICON_MAP[name] || Sparkles
@@ -71,9 +76,6 @@ export default function ProjectDetail() {
   // Gallery sections scroll sideways; only the one on screen autoscrolls.
   const { activeStrip, onVisibility } = useStripArbiter()
   const [downloadOpen, setDownloadOpen] = useState(false)
-  // Set once a gallery video's player loads, so the row it sits in stops
-  // autoscrolling under it. Declared here, above the redirect, with the rest.
-  const [videoPlaying, setVideoPlaying] = useState(false)
 
   // The router reuses this page for every /projects/:slug, so moving from one
   // project to another re-renders it without unmounting. Anything tied to a
@@ -81,7 +83,6 @@ export default function ProjectDetail() {
   useEffect(() => {
     setLightbox(null)
     setDownloadOpen(false)
-    setVideoPlaying(false)
   }, [slug])
 
   if (!project) {
@@ -139,9 +140,6 @@ export default function ProjectDetail() {
   const galleryVideos = (project.galleryVideos || []).filter(
     (url) => !/instagram\.com\//i.test(url)
   )
-  // The strip arbiter gives one row at a time the autoscroll, keyed by index.
-  // The photo rows take 0..n-1, so the video row follows them.
-  const videoStripIndex = groups ? groups.length : 1
   // `galleryLayout: 'grid'` lays the flat gallery and its videos out still,
   // three to a row, instead of in the scrolling strip. For the malls, whose
   // galleries are short enough to see whole.
@@ -727,23 +725,16 @@ export default function ProjectDetail() {
                     ))}
                   </div>
                 ) : (
-                  /* The autoscroll stops as soon as a player loads, so the row
-                     never slides out from under a video someone is watching. */
-                  <PhotoStrip
+                  /* Not PhotoStrip: its loop repeats each tile and jumps a copy
+                     back, which swapped a playing video for a still copy of it
+                     and left the sound running off screen. ScrollRow keeps
+                     every video once, where the visitor left it. */
+                  <ScrollRow
                     items={galleryVideos}
-                    label={`${project.name} video`}
-                    index={videoStripIndex}
-                    active={activeStrip === videoStripIndex}
-                    onVisibility={onVisibility}
-                    cardClass="w-[80%] sm:w-[48%] lg:w-[32%]"
-                    frozen={lightbox !== null || videoPlaying}
-                    countLabel={false}
+                    cardClass={VIDEO_CELL}
+                    label="videos"
                     renderItem={(src, i) => (
-                      <VideoTile
-                        src={src}
-                        title={`${project.name} video ${i + 1}`}
-                        onPlay={() => setVideoPlaying(true)}
-                      />
+                      <VideoTile src={src} title={`${project.name} video ${i + 1}`} />
                     )}
                   />
                 )}

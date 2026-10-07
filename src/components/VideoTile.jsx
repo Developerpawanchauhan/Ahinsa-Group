@@ -14,11 +14,9 @@ import { Play } from 'lucide-react'
  * — after a refresh, or where the same video got to as a page's hero
  * background — so a fresh click could open half way through.
  *
- * @param src     a YouTube embed URL — https://www.youtube.com/embed/<id>
- * @param onPlay  optional — fires once the player loads, so a caller scrolling
- *                this tile in a strip can stop the strip moving under it.
+ * @param src  a YouTube embed URL — https://www.youtube.com/embed/<id>
  */
-export default function VideoTile({ src, title, className = '', onPlay }) {
+export default function VideoTile({ src, title, className = '' }) {
   const [playing, setPlaying] = useState(false)
   const id = src.split('/').pop()
 
@@ -36,10 +34,7 @@ export default function VideoTile({ src, title, className = '', onPlay }) {
       ) : (
         <button
           type="button"
-          onClick={() => {
-            setPlaying(true)
-            onPlay?.()
-          }}
+          onClick={() => setPlaying(true)}
           aria-label={`Play ${title}`}
           className="group absolute inset-0 w-full h-full"
         >
