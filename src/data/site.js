@@ -184,8 +184,7 @@ export const PROJECTS = [
   {
     slug: 'green-valley-residency',
     name: 'THE PRIDE - Ahinsa Green Valley Residency',
-    // TODO: the site's city, once announced — it shows on every card and menu.
-    location: 'Location to be announced',
+    location: 'NH2 National Highway, Etmadpur, Agra',
     type: 'Residential Community',
     status: 'Upcoming',
     image: '/images/projects/green-valley-residency/the-pride.jpg',
@@ -685,15 +684,16 @@ export const PROJECT_DETAILS = {
     locationAdvantages: [],
   },
 
-  // Announced October 2026. So far only the name, the line "Where Pride Meets
-  // Peace" and the entrance render are confirmed, so the page carries those and
-  // nothing it would have to invent: no map, sizes, amenities or distances yet.
-  // Each section below fills in, and appears, as its details are released.
+  // Announced October 2026. So far the name, the location, the line "Where
+  // Pride Meets Peace" and the entrance render are confirmed, so the page
+  // carries those and nothing it would have to invent: no map pin, sizes,
+  // amenities or distances yet. Each section below fills in, and appears, as
+  // its details are released.
   'green-valley-residency': {
     name: 'THE PRIDE - Ahinsa Green Valley Residency',
     tagline: 'Where Pride Meets Peace.',
-    location: 'Location to be announced',
-    fullAddress: 'Location to be announced',
+    location: 'NH2 National Highway, Etmadpur, Agra',
+    fullAddress: 'NH2 National Highway, Etmadpur, Agra',
     instagram: null,
     type: 'Residential Community',
     status: 'Upcoming',
@@ -706,7 +706,7 @@ export const PROJECT_DETAILS = {
     overviewImage: '/images/projects/green-valley-residency/the-pride.jpg',
     gallery: [],
     overview: [
-      'THE PRIDE, Ahinsa Green Valley Residency, is the newest address in the Ahinsa Green Valley family — a gated residential community built around one idea: where pride meets peace.',
+      'THE PRIDE, Ahinsa Green Valley Residency, is the newest address in the Ahinsa Green Valley family — a gated residential community on NH2 National Highway at Etmadpur, Agra, built around one idea: where pride meets peace.',
       'It is planned to open on a grand gated entrance with its own security and visitor-control lodge, water features on either side and a lamp-lit, landscaped approach — the same care for the arrival that runs through every Ahinsa project.',
       'The project is at planning stage and its details are still being finalised. To register your interest, or to hear first when it launches, please get in touch with our team.',
     ],
@@ -787,6 +787,8 @@ export const PROJECT_DETAILS = {
         images: [
           '/images/projects/green-valley-empire/card.jpg',
           '/images/projects/green-valley-empire/site-01.jpg',
+          '/images/projects/green-valley-empire/gate-clock-tower.jpg',
+          '/images/projects/green-valley-empire/gate-front.jpg',
         ],
       },
       {
@@ -794,6 +796,9 @@ export const PROJECT_DETAILS = {
         images: [
           '/images/projects/green-valley-empire/kidszone.jpg',
           '/images/projects/green-valley-empire/site-06.jpg',
+          // Was in "Township Views" until that group came off this page, then
+          // only in the overview slideshow until that went renders-only.
+          '/images/projects/green-valley-empire/site-05.jpg',
         ],
       },
       {
@@ -821,6 +826,17 @@ export const PROJECT_DETAILS = {
           '/images/projects/green-valley-empire/site-03.jpg',
           '/images/projects/green-valley-empire/site-04.jpg',
           '/images/projects/green-valley-empire/site-09.jpg',
+        ],
+      },
+      {
+        // Site photos, converted from the iPhone originals IMG_0719, 0742,
+        // 0714 and 0718 (HEIC, which browsers cannot show).
+        label: 'Township Views',
+        images: [
+          '/images/projects/green-valley-empire/township-view-1.jpg',
+          '/images/projects/green-valley-empire/township-view-2.jpg',
+          '/images/projects/green-valley-empire/township-view-3.jpg',
+          '/images/projects/green-valley-empire/township-view-4.jpg',
         ],
       },
     ],
@@ -965,7 +981,9 @@ export const PROJECT_DETAILS = {
         images: [
           '/images/projects/green-valley-township/card.jpg',
           '/images/projects/green-valley-township/gv-gate.jpg',
-          '/images/projects/green-valley-township/gv-site-01.jpg',
+          // The same shot as gv-site-01.jpg, cleaned up — it takes that one's
+          // place rather than sitting beside a near-copy of itself.
+          '/images/projects/green-valley-township/gv-gate-entrance.jpg',
         ],
       },
       {
@@ -992,24 +1010,23 @@ export const PROJECT_DETAILS = {
         ],
       },
       {
-        label: 'Villas',
+        // Was "Villas", but these are houses across the township rather than
+        // the project's villas. It takes in what the separate "Township Views"
+        // group held below — two groups by one name would collide, since the
+        // gallery keys each group by its label.
+        label: 'Township Views',
         images: [
           '/images/projects/green-valley-township/gv-site-04.jpg',
           '/images/projects/green-valley-township/gv-site-05.jpg',
           '/images/projects/green-valley-township/gv-site-11.jpg',
+          '/images/projects/green-valley-township/gv-boundary-wall.jpg',
+          '/images/projects/green-valley-township/gv-office.jpg',
+          '/images/projects/green-valley-township/gv-vsps.jpg',
         ],
       },
       {
         label: 'Fountains',
         images: ['/images/projects/green-valley-township/gv-site-10.jpg'],
-      },
-      {
-        label: 'Township Views',
-        images: [
-          '/images/projects/green-valley-township/gv-boundary-wall.jpg',
-          '/images/projects/green-valley-township/gv-office.jpg',
-          '/images/projects/green-valley-township/gv-vsps.jpg',
-        ],
       },
     ],
     overview: [

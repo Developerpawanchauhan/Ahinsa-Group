@@ -216,11 +216,17 @@ export default function ProjectDetail() {
                 <MapPin className="w-4 h-4 text-gold-500" />
                 {project.location}
               </span>
-              <span className="hidden md:inline text-cream/30">|</span>
-              <span className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-gold-500" />
-                {project.configurations}
-              </span>
+              {/* Left out while a project has no configuration yet, or the row
+                  ends on a divider and an icon with nothing beside it. */}
+              {project.configurations?.trim() && (
+                <>
+                  <span className="hidden md:inline text-cream/30">|</span>
+                  <span className="flex items-center gap-2">
+                    <Building2 className="w-4 h-4 text-gold-500" />
+                    {project.configurations}
+                  </span>
+                </>
+              )}
             </div>
           </Reveal>
           <Reveal delay={0.3}>
