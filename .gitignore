@@ -1,2 +1,5 @@
 dist/
 node_modules/
+
+# Source PDFs that brochure pages are rendered from — too large to ship.
+brochure-source/

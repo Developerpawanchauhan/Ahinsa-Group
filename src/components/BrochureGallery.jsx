@@ -46,6 +46,17 @@ export const BROCHURE_PROJECTS = [
     // Rendered from the "Ahinsa City Centre.pdf" in this folder — 28 pages.
     images: pages(28),
   },
+  {
+    id: 'pride',
+    slug: 'green-valley-residency',
+    label: 'THE PRIDE - Ahinsa Green Valley Residency',
+    folder: 'the-pride',
+    // Rendered from the 15-page PDF (brochure-source/, kept out of public/ —
+    // it is ~400 MB). Pages 9 Master Layout Plan, 13 Boundary Wall and 14
+    // Landscape are black but for their titles in that PDF itself, so they are
+    // left out until a corrected file comes; render them in and drop the filter.
+    images: pages(15).filter((f) => !['page-09.jpg', 'page-13.jpg', 'page-14.jpg'].includes(f)),
+  },
 ]
 
 // ─── Component ──────────────────────────────────────────────────────────────
