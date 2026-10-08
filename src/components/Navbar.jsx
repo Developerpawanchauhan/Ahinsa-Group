@@ -117,6 +117,21 @@ function DesktopDropdown({ link, onOpen, onClose, solid }) {
     }, 150)
   }
 
+  // Opening a page from the menu closes it. Hover alone never would: after the
+  // click the pointer is still over the panel, so the menu sat open on top of
+  // the page it had just opened. Once closed it stays closed until the pointer
+  // leaves and comes back, as a fresh hover.
+  const close = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    setOpen(false)
+    onClose?.()
+  }
+  // Also on any route change, however it came about (back button included).
+  useEffect(() => {
+    close()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname])
+
   const isMega = link.submenuKind === 'mega'
 
   return (
@@ -124,6 +139,11 @@ function DesktopDropdown({ link, onOpen, onClose, solid }) {
       className="relative"
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
+      // Any link in here — the trigger or a panel item, even one for the page
+      // already open, which no route change would catch.
+      onClick={(e) => {
+        if (e.target.closest('a')) close()
+      }}
     >
       <Link
         to={link.to}
@@ -266,6 +286,12 @@ function SimplePanel({ link, open }) {
 function MobileAccordion({ link, onItemClick }) {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  // The mobile menu only slides shut — it stays mounted — so without this a
+  // submenu expanded before navigating was still expanded the next time the
+  // menu opened. Fold it back up whenever the page changes.
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname])
   const isActive = location.pathname === link.to || location.pathname.startsWith(link.to + '/')
   const isMega = link.submenuKind === 'mega'
 

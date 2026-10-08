@@ -158,8 +158,7 @@ const WELCOME =
   'How may I help you today?'
 
 const MAIN_OPTIONS = [
-  { label: '🏗️ Ongoing Projects', to: 'ongoing' },
-  { label: '🌟 Upcoming Projects', to: 'upcoming' },
+  { label: '🏗️ Our Projects', to: 'projects' },
   { label: '📍 Book a Site Visit', to: 'visit' },
   { label: '❓ Other Queries', to: 'other' },
 ]
@@ -167,19 +166,39 @@ const MAIN_OPTIONS = [
 const NODES = {
   main: { text: WELCOME, options: MAIN_OPTIONS },
 
-  /* ---------------- Ongoing projects ---------------- */
-  ongoing: {
-    // No count here — the list below grows. Each option names its own city,
-    // since the projects are no longer all in Agra.
-    text: 'Here are our ongoing projects 🏗️\nWhich one may I tell you about?',
-    options: PROJECTS.map((p) => ({ label: `${p.short}, ${p.city}`, to: `p_${p.id}` })),
+  /* ---------------- Our projects ---------------- */
+  // One list for everything: the ongoing projects first, then the upcoming
+  // ones, marked 🌟 so a visitor can tell them apart. No count — the list
+  // grows. Each option names its own city, as they are not all in Agra.
+  projects: {
+    text: 'Here are our projects 🏗️\nWhich one may I tell you about?',
+    options: [
+      ...PROJECTS.map((p) => ({ label: `${p.short}, ${p.city}`, to: `p_${p.id}` })),
+      // Ongoing, but kept out of PROJECTS: that list builds size, price and
+      // amenity replies, and THE PRIDE has none of those published yet.
+      { label: 'THE PRIDE - Green Valley Residency, Agra', to: 'pride' },
+      { label: '🌟 Lake City, Gwalior (Upcoming)', to: 'lakecity' },
+    ],
   },
 
   /* ---------------- Site visit ---------------- */
   visit: {
     lead: true,
     text: 'Happy to arrange that 🙏\nWhich project would you like to visit?',
-    options: PROJECTS.map((p) => ({ label: `${p.short}, ${p.city}`, to: `v_${p.id}` })),
+    options: [
+      ...PROJECTS.map((p) => ({ label: `${p.short}, ${p.city}`, to: `v_${p.id}` })),
+      { label: 'THE PRIDE - Green Valley Residency, Agra', to: 'v_pride' },
+    ],
+  },
+  // Visit booking for THE PRIDE, the same as the ones built from PROJECTS below.
+  v_pride: {
+    lead: true,
+    text: 'Wonderful choice 🙏\nLet us get your visit to THE PRIDE arranged.',
+    autoForm: { kind: 'visit', project: 'THE PRIDE - Ahinsa Green Valley Residency' },
+    options: [
+      { label: '💬 Book on WhatsApp instead', href: 'whatsapp' },
+      { label: '🏗️ Our Projects', to: 'projects' },
+    ],
   },
   visitDone: {
     text:
@@ -232,28 +251,16 @@ const NODES = {
     ],
   },
 
-  /* ---------------- Upcoming ---------------- */
-  // Ahinsa City Centre Mall moved to Ongoing — it has its own branch now.
-  upcoming: {
-    text:
-      'Two projects are on the way 🌟\n' +
-      '• Ahinsa Green Valley Lake City — Gwalior, Madhya Pradesh\n' +
-      '• THE PRIDE - Ahinsa Green Valley Residency — NH2 National Highway, Etmadpur, Agra',
-    options: [
-      { label: 'Lake City, Gwalior', to: 'lakecity' },
-      { label: 'THE PRIDE - Green Valley Residency, Agra', to: 'pride' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
-    ],
-  },
+  /* ---------------- Upcoming projects (reached from "Our Projects") ---------------- */
   pride: {
     lead: true,
     text:
-      'THE PRIDE - Ahinsa Green Valley Residency is our newest upcoming project — a gated residential community on NH2 National Highway at Etmadpur, Agra, where pride meets peace.\n' +
-      'The project is at planning stage — full details will be announced at launch.',
+      'THE PRIDE - Ahinsa Green Valley Residency is one of our ongoing projects — a gated residential community on NH2 National Highway at Etmadpur, Agra, where pride meets peace.\n' +
+      'Our team will share the latest details and pricing on WhatsApp.',
     options: [
       { label: '💬 WhatsApp us', href: 'whatsapp' },
-      { label: 'Lake City, Gwalior', to: 'lakecity' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+      { label: '📍 Book Site Visit', to: 'v_pride' },
+      { label: '🏗️ Our Projects', to: 'projects' },
     ],
   },
   lakecity: {
@@ -263,7 +270,7 @@ const NODES = {
       'The project is at planning stage — full details will be announced at launch.',
     options: [
       { label: '💬 WhatsApp us', href: 'whatsapp' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+      { label: '🏗️ Our Projects', to: 'projects' },
     ],
   },
 
@@ -274,7 +281,7 @@ const NODES = {
       'If it did not open, use the button below.',
     options: [
       { label: '💬 Send my details on WhatsApp', href: 'lead' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+      { label: '🏗️ Our Projects', to: 'projects' },
       { label: '📍 Book a Site Visit', to: 'visit' },
     ],
   },
@@ -285,7 +292,7 @@ const NODES = {
     options: [
       { label: '💬 Send my query on WhatsApp', href: 'lead' },
       { label: '❓ Ask something else', to: 'other' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+      { label: '🏗️ Our Projects', to: 'projects' },
     ],
   },
 }
@@ -374,7 +381,7 @@ for (const p of PROJECTS) {
     autoForm: { kind: 'visit', project: p.label },
     options: [
       { label: '💬 Book on WhatsApp instead', href: 'whatsapp' },
-      { label: '🏗️ Ongoing Projects', to: 'ongoing' },
+      { label: '🏗️ Our Projects', to: 'projects' },
     ],
   }
 }

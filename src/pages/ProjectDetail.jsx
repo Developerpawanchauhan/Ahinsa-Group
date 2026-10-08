@@ -137,9 +137,22 @@ export default function ProjectDetail() {
   // from Instagram" section further down, under the project's `instagram`
   // posts — one put in `galleryVideos` by mistake is ignored rather than
   // rendered as a broken tile here.
-  const galleryVideos = (project.galleryVideos || []).filter(
-    (url) => !/instagram\.com\//i.test(url)
-  )
+  //
+  // An entry is a URL, or `{ src, title, accent }` to give the video a heading
+  // of its own — `accent` is the part set in gold. Both read as { src, ... }.
+  const galleryVideos = (project.galleryVideos || [])
+    .map((v) => (typeof v === 'string' ? { src: v } : v))
+    .filter((v) => v?.src && !/instagram\.com\//i.test(v.src))
+
+  // A video's own heading, sat above its tile, when it has one.
+  const videoHeading = (v) =>
+    v.title || v.accent ? (
+      <h4 className="font-serif text-fg text-lg md:text-xl leading-snug mb-3">
+        {v.title} {v.accent && <span className="gold-text">{v.accent}</span>}
+      </h4>
+    ) : null
+  const videoLabel = (v, i) =>
+    [v.title, v.accent].filter(Boolean).join(' ') || `${project.name} video${i == null ? '' : ' ' + (i + 1)}`
   // `galleryLayout: 'grid'` lays the flat gallery and its videos out still,
   // three to a row, instead of in the scrolling strip. For the malls, whose
   // galleries are short enough to see whole.
@@ -713,14 +726,16 @@ export default function ProjectDetail() {
                      a third wide in the left corner. Centred and large instead. */
                   <Reveal>
                     <div className="max-w-3xl mx-auto">
-                      <VideoTile src={galleryVideos[0]} title={`${project.name} video`} />
+                      {videoHeading(galleryVideos[0])}
+                      <VideoTile src={galleryVideos[0].src} title={videoLabel(galleryVideos[0])} />
                     </div>
                   </Reveal>
                 ) : galleryGrid ? (
                   <div className="flex flex-wrap justify-center gap-4">
-                    {galleryVideos.map((src, i) => (
-                      <Reveal key={src} delay={(i % 3) * 0.08} className={GRID_CELL}>
-                        <VideoTile src={src} title={`${project.name} video ${i + 1}`} />
+                    {galleryVideos.map((v, i) => (
+                      <Reveal key={v.src} delay={(i % 3) * 0.08} className={GRID_CELL}>
+                        {videoHeading(v)}
+                        <VideoTile src={v.src} title={videoLabel(v, i)} />
                       </Reveal>
                     ))}
                   </div>
@@ -733,8 +748,11 @@ export default function ProjectDetail() {
                     items={galleryVideos}
                     cardClass={VIDEO_CELL}
                     label="videos"
-                    renderItem={(src, i) => (
-                      <VideoTile src={src} title={`${project.name} video ${i + 1}`} />
+                    renderItem={(v, i) => (
+                      <>
+                        {videoHeading(v)}
+                        <VideoTile src={v.src} title={videoLabel(v, i)} />
+                      </>
                     )}
                   />
                 )}

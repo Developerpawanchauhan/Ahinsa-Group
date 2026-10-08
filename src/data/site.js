@@ -186,7 +186,7 @@ export const PROJECTS = [
     name: 'THE PRIDE - Ahinsa Green Valley Residency',
     location: 'NH2 National Highway, Etmadpur, Agra',
     type: 'Residential Community',
-    status: 'Upcoming',
+    status: 'Ongoing',
     image: '/images/projects/green-valley-residency/the-pride.jpg',
     short:
       'A gated residential community in the Ahinsa Green Valley family — where pride meets peace.',
@@ -684,11 +684,10 @@ export const PROJECT_DETAILS = {
     locationAdvantages: [],
   },
 
-  // Announced October 2026. So far the name, the location, the line "Where
-  // Pride Meets Peace" and the entrance render are confirmed, so the page
-  // carries those and nothing it would have to invent: no map pin, sizes,
-  // amenities or distances yet. Each section below fills in, and appears, as
-  // its details are released.
+  // Ongoing. So far the name, the location, the line "Where Pride Meets Peace"
+  // and the entrance render are confirmed, so the page carries those and
+  // nothing it would have to invent: no map pin, sizes, amenities or distances
+  // yet. Each section below fills in, and appears, as its details are given.
   'green-valley-residency': {
     name: 'THE PRIDE - Ahinsa Green Valley Residency',
     tagline: 'Where Pride Meets Peace.',
@@ -696,7 +695,7 @@ export const PROJECT_DETAILS = {
     fullAddress: 'NH2 National Highway, Etmadpur, Agra',
     instagram: null,
     type: 'Residential Community',
-    status: 'Upcoming',
+    status: 'Ongoing',
     configurations: '',
     unitArea: '',
     totalArea: '',
@@ -707,8 +706,8 @@ export const PROJECT_DETAILS = {
     gallery: [],
     overview: [
       'THE PRIDE, Ahinsa Green Valley Residency, is the newest address in the Ahinsa Green Valley family — a gated residential community on NH2 National Highway at Etmadpur, Agra, built around one idea: where pride meets peace.',
-      'It is planned to open on a grand gated entrance with its own security and visitor-control lodge, water features on either side and a lamp-lit, landscaped approach — the same care for the arrival that runs through every Ahinsa project.',
-      'The project is at planning stage and its details are still being finalised. To register your interest, or to hear first when it launches, please get in touch with our team.',
+      'It is designed to open on a grand gated entrance with its own security and visitor-control lodge, water features on either side and a lamp-lit, landscaped approach — the same care for the arrival that runs through every Ahinsa project.',
+      'The project is under way. For the latest details, pricing and a site visit, please get in touch with our team.',
     ],
     highlights: [],
     amenities: [],
@@ -1003,11 +1002,8 @@ export const PROJECT_DETAILS = {
         ],
       },
       {
-        label: 'Club House',
-        images: [
-          '/images/projects/green-valley-township/gv-site-03.jpg',
-          '/images/projects/green-valley-township/gv-site-06.jpg',
-        ],
+        label: 'Office',
+        images: ['/images/projects/green-valley-township/gv-site-03.jpg'],
       },
       {
         // Was "Villas", but these are houses across the township rather than
@@ -1019,6 +1015,7 @@ export const PROJECT_DETAILS = {
           '/images/projects/green-valley-township/gv-site-04.jpg',
           '/images/projects/green-valley-township/gv-site-05.jpg',
           '/images/projects/green-valley-township/gv-site-11.jpg',
+          '/images/projects/green-valley-township/gv-site-06.jpg',
           '/images/projects/green-valley-township/gv-boundary-wall.jpg',
           '/images/projects/green-valley-township/gv-office.jpg',
           '/images/projects/green-valley-township/gv-vsps.jpg',
@@ -1262,7 +1259,11 @@ export const PROJECT_DETAILS = {
     // The hero video again, in "A closer look", where it can be watched
     // with its sound and controls.
     galleryVideos: [
-      'https://www.youtube.com/embed/ZfqdNR_RiFs',
+      {
+        src: 'https://www.youtube.com/embed/ZfqdNR_RiFs',
+        title: 'Corporate Office, Agra',
+        accent: 'Launching & Poojan',
+      },
     ],
     hero: '/images/projects/ahinsa-complex/card.jpg',
     overviewImage: '/images/projects/ahinsa-complex/ongoing.jpeg',
@@ -1347,7 +1348,11 @@ export const PROJECT_DETAILS = {
     // The hero video again, in "A closer look", where it can be watched
     // with its sound and controls.
     galleryVideos: [
-      'https://www.youtube.com/embed/O0Stk5s2YU8',
+      {
+        src: 'https://www.youtube.com/embed/O0Stk5s2YU8',
+        title: 'Ahinsa Office, Gwalior',
+        accent: 'Launching & Poojan',
+      },
     ],
     hero: '/images/projects/corporate-office-gwalior/corporate-office.jpeg',
     overviewImage: '/images/projects/corporate-office-gwalior/office.jpeg',
@@ -1431,7 +1436,11 @@ export const PROJECT_DETAILS = {
     // The hero video again, in "A closer look", where it can be watched
     // with its sound and controls.
     galleryVideos: [
-      'https://www.youtube.com/embed/0EKdYGEvrMk',
+      {
+        src: 'https://www.youtube.com/embed/0EKdYGEvrMk',
+        title: 'Ahinsa Office, Firozabad',
+        accent: 'Launching & Poojan',
+      },
     ],
     // Wide facade shot — the hero crops to 80vh, so the landscape frame works
     // better here than the portrait `uper.png`.
@@ -1546,24 +1555,7 @@ export const PROJECT_DETAILS = {
       { icon: 'Building2', title: 'Integrated Design', text: 'Commercial, residential and recreational spaces planned as one place.' },
     ],
 
-    // Not amenities — the categories the mall is leasing to. The heading below
-    // re-labels the tile grid to say so.
-    amenitiesHeading: {
-      eyebrow: 'Leasing',
-      title: 'Ideal tenants for',
-      accent: 'our mall',
-      subtitle: 'We are looking for the following at Ahinsa The Grand Square Mall.',
-    },
-    amenities: [
-      { icon: 'Store', name: 'Retail Shops' },
-      { icon: 'Building2', name: 'Corporate Offices' },
-      { icon: 'Landmark', name: 'Banking Services' },
-      { icon: 'Utensils', name: 'Food & Beverage Outlets' },
-      { icon: 'Dumbbell', name: 'Gyms & Fitness Centres' },
-      { icon: 'Film', name: 'Entertainment Zones' },
-      { icon: 'Award', name: 'Educational Institutes' },
-      { icon: 'Layout', name: 'Supermarkets & Stores' },
-    ],
+    amenities: [],
 
     // The brochure's floor-by-floor breakdown.
     facilities: {

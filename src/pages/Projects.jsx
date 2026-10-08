@@ -9,7 +9,7 @@ import { LISTED_PROJECTS as PROJECTS } from '../data/site'
 
 // These are matched against a project's own `status`, so the labels have to be
 // the words used there — "New Launch" matched nothing and always came back empty.
-const STATUS_FILTERS = ['All', 'Ongoing', 'Completed', 'Upcoming']
+const STATUS_FILTERS = ['All', 'Ongoing', 'Upcoming']
 
 export default function Projects() {
   const [filter, setFilter] = useState('All')
