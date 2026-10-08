@@ -709,7 +709,58 @@ export const PROJECT_DETAILS = {
       'It is designed to open on a grand gated entrance with its own security and visitor-control lodge, water features on either side and a lamp-lit, landscaped approach — the same care for the arrival that runs through every Ahinsa project.',
       'The project is under way. For the latest details, pricing and a site visit, please get in touch with our team.',
     ],
-    highlights: [],
+    // What the brochure's renders show: the gate (p. 3, 5), the club house and
+    // its gym (p. 11, 12), the temple (p. 15) and the greens around them (p. 4).
+    highlights: [
+      { icon: 'ShieldCheck', title: 'Gated & Secure', text: 'A grand gated entrance with its own security and visitor-control lodge.' },
+      { icon: 'Users', title: 'Club House & Gym', text: 'A club house with a fully equipped gym, landscaped lawns and pergola seating.' },
+      { icon: 'Landmark', title: 'Temple', text: 'A temple within the community, set in a lit, landscaped garden of its own.' },
+      { icon: 'Trees', title: 'Green Surroundings', text: 'Lush green plantation, landscaped surroundings and wide internal roads.' },
+    ],
+
+    // Brochure page 4, 'Step inside the outdoors', in the brochure's own words.
+    // Its line on the location is left out — the address is shown everywhere
+    // else on the page.
+    feature: {
+      eyebrow: 'Step Inside the Outdoors',
+      title: 'A better tomorrow begins here.',
+      text:
+        'Welcome to The Pride – Ahinsa Green Valley, an exceptional new township destination in Agra, thoughtfully planned for a refined and peaceful way of life. Set amidst lush green plantation and beautifully planned residential plots, this exclusive community brings together nature, modern infrastructure and a sense of belonging. Wide internal roads, landscaped green surroundings and thoughtfully planned spaces create a harmonious setting for families to build their dream homes.',
+      images: ['/images/projects/green-valley-residency/pride-clubhouse.jpg'],
+    },
+
+    // The temple at the centre; the club house, its gym and the gate around it.
+    // Images are cut from brochure pages 15, 12 and 5.
+    vision: {
+      eyebrow: 'Life at The Pride',
+      title: 'Where pride meets peace',
+      pillars: [
+        { icon: 'Award', label: 'Pride' },
+        { icon: 'Leaf', label: 'Peace' },
+        { icon: 'HeartHandshake', label: 'Belonging' },
+      ],
+      image: '/images/projects/green-valley-residency/pride-temple.jpg',
+      text:
+        'Nature, modern infrastructure and a sense of belonging — brought together in one gated community, with a temple at its heart.',
+      cards: [
+        {
+          label: 'Club House',
+          image: '/images/projects/green-valley-residency/pride-clubhouse-entrance.jpg',
+          text: 'The Pride’s own club house, opening onto landscaped lawns, a pergola seating court and a children’s play area.',
+        },
+        {
+          label: 'Gym',
+          image: '/images/projects/green-valley-residency/pride-gym.jpg',
+          text: 'A fully equipped gym inside the club house, its glass wall looking out over the lawns.',
+        },
+        {
+          label: 'Main Gate',
+          image: '/images/projects/green-valley-residency/pride-gate.jpg',
+          text: 'A grand entrance with a security and visitor-control lodge and water features on either side.',
+        },
+      ],
+    },
+
     amenities: [
       { icon: 'Users', name: 'Clubhouse' },
       { icon: 'Dumbbell', name: 'Gym' },
