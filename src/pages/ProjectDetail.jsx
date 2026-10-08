@@ -131,7 +131,9 @@ export default function ProjectDetail() {
         ? 'sm:grid-cols-3 lg:grid-cols-5'
         : amenityCount % 4 === 0
           ? 'sm:grid-cols-4'
-          : 'sm:grid-cols-3 lg:grid-cols-6'
+          : amenityCount % 3 === 0
+            ? 'sm:grid-cols-3'
+            : 'sm:grid-cols-3 lg:grid-cols-6'
 
   // Gallery videos are YouTube only. Instagram reels belong to the "Moments
   // from Instagram" section further down, under the project's `instagram`
