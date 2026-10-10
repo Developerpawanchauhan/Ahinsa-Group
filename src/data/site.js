@@ -877,6 +877,7 @@ export const PROJECT_DETAILS = {
           '/images/projects/green-valley-empire/gym.jpg',
           '/images/projects/green-valley-empire/oct26-17.jpg',
           '/images/projects/green-valley-empire/oct26-37.jpg',
+          '/images/projects/green-valley-empire/oct26-19.jpg',
         ],
       },
       {
@@ -929,6 +930,7 @@ export const PROJECT_DETAILS = {
           '/images/projects/green-valley-empire/oct26-34.jpg',
           '/images/projects/green-valley-empire/oct26-38.jpg',
           '/images/projects/green-valley-empire/oct26-40.jpg',
+          '/images/projects/green-valley-empire/oct26-19.jpg',
         ],
       },
       {
