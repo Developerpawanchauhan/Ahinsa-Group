@@ -463,15 +463,17 @@ export default function ProjectDetail() {
 
             <div className="grid gap-14 lg:gap-10 lg:grid-cols-12 items-center mt-14">
               {/* The three ideas. A row on phones, a column beside the circle
-                  from lg up, as in the brochure. */}
-              <div className="lg:col-span-3 flex lg:flex-col justify-center gap-6 sm:gap-10">
+                  from lg up, as in the brochure. On a phone the labels take
+                  tighter spacing and the row may wrap: "MODERN · SUSTAINABLE ·
+                  EXPERIENCE" at full spacing ran 21px past a 360px screen. */}
+              <div className="lg:col-span-3 flex flex-wrap lg:flex-nowrap lg:flex-col justify-center gap-x-4 gap-y-6 sm:gap-10">
                 {project.vision.pillars.map((p, i) => (
                   <Reveal key={p.label} delay={i * 0.08}>
                     <div className="flex flex-col items-center gap-3">
                       <span className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gold-500/50 flex items-center justify-center text-gold-700 dark:text-gold-500">
                         <Icon name={p.icon} className="w-6 h-6 md:w-7 md:h-7" />
                       </span>
-                      <span className="bg-gold-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-fg-soft whitespace-nowrap">
+                      <span className="bg-gold-500/10 px-2 sm:px-3 py-1 text-[10px] uppercase tracking-[0.12em] sm:tracking-[0.25em] text-fg-soft whitespace-nowrap">
                         {p.label}
                       </span>
                     </div>
@@ -1006,14 +1008,17 @@ export default function ProjectDetail() {
   )
 }
 
+/* On a phone four facts sit two to a row, about 150px each. Beside its icon a
+   label like "CONFIGURATION" did not fit and pushed the page wider than the
+   screen, so there the icon sits above the text and the letter-spacing eases. */
 function Fact({ icon: I, label, value }) {
   return (
-    <div className="flex items-start gap-4">
+    <div className="flex flex-col sm:flex-row items-start gap-2 sm:gap-4">
       <div className="w-10 h-10 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500 flex-shrink-0">
         <I className="w-4 h-4" />
       </div>
-      <div>
-        <div className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.25em]">{label}</div>
+      <div className="min-w-0">
+        <div className="text-gold-700 dark:text-gold-500 text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.25em]">{label}</div>
         <div className="text-fg text-sm mt-1">{value}</div>
       </div>
     </div>

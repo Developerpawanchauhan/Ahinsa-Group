@@ -14,6 +14,12 @@
 
 html {
   scroll-behavior: smooth;
+  /* The page never scrolls sideways. `body { overflow-x: hidden }` alone was
+     not enough on phones: anything past the right edge — a slide-in waiting to
+     be revealed, the WhatsApp pulse — still widened the page, and a swipe
+     panned it. `clip` cuts the overflow off at the root without making a
+     scroll container, so `position: sticky` keeps working. */
+  overflow-x: clip;
 }
 
 /* The site draws itself 20% smaller from a desktop width up. At 100% browser
@@ -33,12 +39,28 @@ html {
   }
 }
 
+/* The WhatsApp button's pulse. Tailwind's `animate-ping` grows to 2x — 28px
+   past the button on each side, and the button is only 20px from the screen
+   edge, so it ran off the right of every page on a phone. 1.6x stays inside. */
+@keyframes wa-pulse {
+  75%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.wa-pulse {
+  animation: wa-pulse 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 /* DEFAULT (LIGHT) */
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background-color: #FAF8F2;
   color: #161612;
+  /* `hidden` for browsers too old for `clip`, which then overrides it. */
   overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 

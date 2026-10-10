@@ -16,8 +16,8 @@ export default function WhatsAppButton() {
       title="Chat with us on WhatsApp"
       className="group fixed bottom-5 right-5 z-40 flex items-center justify-center"
     >
-      {/* Pulsing ring */}
-      <span className="absolute inline-flex h-14 w-14 rounded-full bg-[#25D366] opacity-60 animate-ping" />
+      {/* Pulsing ring — `wa-pulse` in index.css, sized to stay on screen. */}
+      <span className="absolute inline-flex h-14 w-14 rounded-full bg-[#25D366] opacity-60 wa-pulse" />
 
       {/* Button */}
       <span
