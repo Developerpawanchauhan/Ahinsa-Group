@@ -2240,24 +2240,6 @@ export const MANAGEMENT = [
       'Chief Executive Officer',
     ],
   },
-  {
-    slug: 'jitendra-yadav',
-    name: 'Mr. Jitendra Yadav',
-    role: 'Director',
-    image: '/images/Team/jitendra-yadav.jpeg',
-    short:
-      'Two decades of leadership across retail, insurance, banking and real estate, bringing deep industry expertise to Ahinsa Group.',
-    bio: [
-      'His professional journey began in retail and consumer products before advancing into senior leadership roles with leading financial institutions, including Reliance Life Insurance and Bank of Baroda Life Insurance. During this period, he successfully led regional operations, built high-performing teams, and drove business growth across multiple markets in North India.',
-      'In 2014, Mr. Yadav ventured into the real estate sector as a Founder and Director, where he established a strong reputation for integrity, customer-centricity, and value creation. His decade-long experience in real estate has provided deep insights into land development, project execution, and sustainable community building.',
-      'As Director of Ahinsa Group, Mr. Yadav is focused on driving strategic growth, delivering exceptional developments, and upholding the highest standards of quality and trust. His leadership is guided by a simple philosophy: creating lasting value through transparency, innovation, and customer satisfaction.',
-      '“We believe real estate is not just about developing properties—it is about creating spaces that enrich lives and inspire future generations.”',
-    ],
-    achievements: [
-      'Director, Ahinsa Group',
-      '20+ Years Cross-Industry Leadership',
-    ],
-  },
 ]
 
 // =============================================================

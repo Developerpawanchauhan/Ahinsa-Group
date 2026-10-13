@@ -14,7 +14,9 @@ const NAV_LINKS = [
     children: [
       { to: '/about', label: 'About Us', meta: 'Our story, vision & values' },
       { to: '/about/management', label: 'Management', meta: 'Board & senior leadership' },
-      { to: '/about/team', label: 'Team', meta: 'Operating leadership across functions' },
+      // Team page hidden for now — uncomment to bring it back (its route
+      // in App.jsx is commented out too).
+      // { to: '/about/team', label: 'Team', meta: 'Operating leadership across functions' },
     ],
   },
   {

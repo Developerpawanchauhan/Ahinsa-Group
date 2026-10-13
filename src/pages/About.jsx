@@ -19,7 +19,7 @@ const STORY_IMAGES = [
 ]
 
 export default function About() {
-  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in', 'jitendra.yadav@ahinsagroup.in'];
+  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in'];
 
   return (
     <>
@@ -209,8 +209,8 @@ export default function About() {
             />
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-            {MANAGEMENT.slice(0, 3).map((m, i) => (
+          <div className="grid sm:grid-cols-2 gap-10 max-w-4xl mx-auto">
+            {MANAGEMENT.map((m, i) => (
               <Reveal key={m.name} delay={i * 0.1}>
                 <div className="group">
                   <Link to={`/about/management#${m.slug}`}>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { ArrowRight, Quote, CheckCircle2, Mail } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
+import { Quote, CheckCircle2, Mail } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
@@ -8,7 +8,7 @@ import VideoTile from '../components/VideoTile'
 import { MANAGEMENT } from '../data/site'
 
 export default function Management() {
-  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in', 'jitendra.yadav@ahinsagroup.in'];
+  const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in'];
   const { hash } = useLocation()
 
   // Deep-link support: /about/management#<slug> scrolls to that member's
@@ -100,29 +100,6 @@ export default function Management() {
               </div>
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      <section className="section-pad bg-page">
-        <div className="container-x text-center max-w-3xl mx-auto">
-          <Reveal>
-            <h2 className="heading-serif text-fg text-3xl md:text-5xl">
-              Meet the <span className="gold-text">team</span> that brings every project to life
-            </h2>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="text-fg-soft mt-6">
-              Beyond the boardroom, a passionate operating team turns vision into delivered reality.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
-              <Link to="/about/team" className="btn-gold">
-                Meet Our Team <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link to="/contact" className="btn-outline-gold">Get in Touch</Link>
-            </div>
-          </Reveal>
         </div>
       </section>
     </>

@@ -9,7 +9,9 @@ import WelcomePopup from './components/WelcomePopup'
 import Home from './pages/Home'
 import About from './pages/About'
 import Management from './pages/Management'
-import TeamMembers from './pages/TeamMembers'
+// Team page hidden for now — uncomment this, its route below, and the
+// "Team" entries in Navbar.jsx and Sitemap.jsx to bring it back.
+// import TeamMembers from './pages/TeamMembers'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
 // Properties page hidden for now — uncomment this, its route below, the
@@ -51,7 +53,7 @@ export default function App() {
           {/* About + sub-pages */}
           <Route path="/about" element={<About />} />
           <Route path="/about/management" element={<Management />} />
-          <Route path="/about/team" element={<TeamMembers />} />
+          {/* <Route path="/about/team" element={<TeamMembers />} /> */}
 
           {/* Projects + dynamic detail */}
           <Route path="/projects" element={<Projects />} />

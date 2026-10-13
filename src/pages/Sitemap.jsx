@@ -16,7 +16,8 @@ const SECTIONS = [
     links: [
       { to: '/about', label: 'About Us' },
       { to: '/about/management', label: 'Management' },
-      { to: '/about/team', label: 'Team' },
+      // Team page hidden for now — uncomment to bring it back.
+      // { to: '/about/team', label: 'Team' },
     ],
   },
   {
