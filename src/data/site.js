@@ -335,6 +335,8 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/card.jpg',
           '/images/projects/grand-green-valley/gate.jpeg',
           '/images/projects/grand-green-valley/gate2.jpeg',
+          '/images/projects/grand-green-valley/oct26-25.jpg',
+          '/images/projects/grand-green-valley/oct26-26.jpg',
         ],
       },
       {
@@ -357,6 +359,19 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/richvilla6.jpeg',
           '/images/projects/grand-green-valley/richvilla7.jpeg',
           '/images/projects/grand-green-valley/richvilla8.jpeg',
+          '/images/projects/grand-green-valley/oct26-14.jpg',
+          '/images/projects/grand-green-valley/oct26-15.jpg',
+        ],
+      },
+      {
+        label: 'Villa Interiors',
+        images: [
+          '/images/projects/grand-green-valley/oct26-16.jpg',
+          '/images/projects/grand-green-valley/oct26-17.jpg',
+          '/images/projects/grand-green-valley/oct26-18.jpg',
+          '/images/projects/grand-green-valley/oct26-19.jpg',
+          '/images/projects/grand-green-valley/oct26-20.jpg',
+          '/images/projects/grand-green-valley/oct26-21.jpg',
         ],
       },
       {
@@ -365,6 +380,15 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/club-house (1).jpg',
           '/images/projects/grand-green-valley/clubhouse.jpeg',
           '/images/projects/grand-green-valley/clubhouse2.jpeg',
+          '/images/projects/grand-green-valley/oct26-05.jpg',
+          '/images/projects/grand-green-valley/oct26-06.jpg',
+          '/images/projects/grand-green-valley/oct26-07.jpg',
+          '/images/projects/grand-green-valley/oct26-08.jpg',
+          '/images/projects/grand-green-valley/oct26-09.jpg',
+          '/images/projects/grand-green-valley/oct26-10.jpg',
+          '/images/projects/grand-green-valley/oct26-11.jpg',
+          '/images/projects/grand-green-valley/oct26-12.jpg',
+          '/images/projects/grand-green-valley/oct26-13.jpg',
         ],
       },
       {
@@ -386,6 +410,8 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/gren.jpeg',
           '/images/projects/grand-green-valley/green2.jpeg',
           '/images/projects/grand-green-valley/green3.jpeg',
+          '/images/projects/grand-green-valley/oct26-22.jpg',
+          '/images/projects/grand-green-valley/oct26-23.jpg',
         ],
       },
       {
@@ -394,6 +420,7 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/fountain.jpg',
           '/images/projects/grand-green-valley/fountain.jpeg',
           '/images/projects/grand-green-valley/victoriaFountain.jpeg',
+          '/images/projects/grand-green-valley/oct26-24.jpg',
         ],
       },
       {
@@ -415,6 +442,10 @@ export const PROJECT_DETAILS = {
           '/images/projects/grand-green-valley/mall2.2.jpeg',
           '/images/projects/grand-green-valley/mall3.jpeg',
           '/images/projects/grand-green-valley/mall4.jpeg',
+          '/images/projects/grand-green-valley/oct26-01.jpg',
+          '/images/projects/grand-green-valley/oct26-02.jpg',
+          '/images/projects/grand-green-valley/oct26-03.jpg',
+          '/images/projects/grand-green-valley/oct26-04.jpg',
         ],
       },
       {
