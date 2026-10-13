@@ -16,14 +16,17 @@
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.30.6",
-    "swiper": "^11.1.15"
+    "react-router-dom": "^7.18.4",
+    "swiper": "^12.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.23",
     "tailwindcss": "^3.4.15",
-    "vite": "^5.4.11"
+    "vite": "^6.4.4"
+  },
+  "overrides": {
+    "postcss-selector-parser": "^7.1.6"
   }
 }

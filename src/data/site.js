@@ -2235,7 +2235,7 @@ export const MANAGEMENT = [
     slug: 'rohit-jain',
     name: 'Mr. Rohit Jain',
     role: 'Chairman',
-    image: '/images/Team/rohit-jain.jpg',
+    image: '/images/Team/rohit-jain-office.jpg',
     // Shown under the photo on the Management page.
     video: 'https://www.youtube.com/embed/PxkPw2srud4',
     short:
