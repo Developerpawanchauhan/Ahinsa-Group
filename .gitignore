@@ -3,3 +3,9 @@ node_modules/
 
 # Source PDFs that brochure pages are rendered from — too large to ship.
 brochure-source/
+
+# Original phone photos. The site uses resized copies (e.g. oct26-01.jpg);
+# committing the originals makes every sync upload tens of MB.
+PXL_*
+*.heic
+*.HEIC
