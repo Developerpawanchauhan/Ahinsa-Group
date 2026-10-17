@@ -390,7 +390,7 @@ export default function RohitJain() {
   const article = useRef(null)
   const [minutes, setMinutes] = useState(null)
   const chairman = MANAGEMENT.find((m) => m.slug === 'rohit-jain')
-  const { published, images, portrait, avatar } = ROHIT_JAIN_ARTICLE
+  const { published, hero, avatar } = ROHIT_JAIN_ARTICLE
   const publishedOn = new Date(published).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 
   // Reading time from the article's own text, so it stays right as it is edited.
@@ -403,22 +403,16 @@ export default function RohitJain() {
     <div className="bg-cream text-ink-800">
       <ReadingProgress />
 
-      {/* HERO — name, then the main photo as the page's centrepiece. On phones
-          the standfirst follows the photo, so the photo comes straight after the
-          name; from lg it sits under the standfirst, with the numbers card
-          overlapping its foot. */}
-      <header className="relative overflow-hidden bg-gradient-to-b from-[#F1EADA] via-[#F6F1E5] to-cream pt-28 md:pt-40 pb-12 md:pb-20">
-        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 -top-48 w-[52rem] h-[52rem] rounded-full bg-gold-300/20 blur-3xl" />
-        <span
-          aria-hidden="true"
-          className="hidden md:block absolute -right-8 top-24 font-display text-[22rem] leading-none text-gold-500/[0.07] select-none"
-        >
-          RJ
-        </span>
+      {/* HERO. Phones: name, then the main photo edge to edge, then the
+          standfirst and numbers. From lg: two columns — the text on the left,
+          the photo on the right; the empty 1fr rows above and below the text
+          centre it against the photo. */}
+      <header className="relative overflow-hidden bg-gradient-to-b from-[#F1EADA] via-[#F6F1E5] to-cream pt-28 md:pt-40 pb-12 md:pb-20 lg:pb-24">
+        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:-right-40 -top-48 w-[52rem] h-[52rem] rounded-full bg-gold-300/20 blur-3xl" />
 
-        <div className="container-x relative flex flex-col">
-          <div className="order-1 text-center max-w-4xl mx-auto">
-            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-gold-700">
+        <div className="container-x relative flex flex-col lg:grid lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_auto_1fr] lg:gap-x-12 xl:gap-x-16">
+          <div className="order-1 lg:col-start-1 lg:col-span-7 lg:row-start-2 text-center lg:text-left max-w-4xl mx-auto lg:mx-0">
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1 text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-gold-700">
               <Link to="/" className="hover:text-gold-600 transition">Home</Link>
               <ChevronRight className="w-3 h-3" />
               <Link to="/about" className="hidden sm:inline hover:text-gold-600 transition">About Us</Link>
@@ -428,7 +422,7 @@ export default function RohitJain() {
               <span className="text-ink-500">Rohit Jain</span>
             </nav>
 
-            <p className="eyebrow mt-7 md:mt-9 justify-center">Leadership Profile</p>
+            <p className="eyebrow mt-7 md:mt-9 justify-center lg:justify-start">Leadership Profile</p>
             <h1 className="mt-4 md:mt-6">
               <span className="block heading-serif text-[3.4rem] md:text-8xl text-ink-900 leading-none">Rohit Jain</span>
               <span className="block mt-3 md:mt-5 font-display italic text-xl md:text-3xl text-gold-700">
@@ -437,13 +431,13 @@ export default function RohitJain() {
             </h1>
           </div>
 
-          <div className="order-3 lg:order-2 text-center max-w-2xl mx-auto mt-8 lg:mt-8">
+          <div className="order-3 lg:col-start-1 lg:col-span-7 lg:row-start-3 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 mt-8">
             <p className="text-[17px] md:text-xl text-ink-600 leading-relaxed text-balance">
               An entrepreneur for more than two decades, Mr. Rohit Jain leads Ahinsa Group — the Agra developer
               behind The Grand Green Valley and the Green Valley townships — on a simple standard: build communities,
               inspire trust and leave a legacy.
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ink-500">
+            <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-sm text-ink-500">
               <span className="flex items-center gap-2">
                 <img src={avatar} alt="" width="28" height="28" className="w-7 h-7 rounded-full object-cover border border-gold-500/40" />
                 By <span className="text-ink-900 font-medium">Ahinsa Group</span>
@@ -461,34 +455,31 @@ export default function RohitJain() {
             </div>
           </div>
 
-          {/* THE MAIN PHOTO. A tall portrait fills a phone screen edge to edge;
-              from md the wide office shot takes over. Both are the same sitting. */}
-          <figure className="order-2 lg:order-3 relative -mx-5 md:mx-auto md:w-full max-w-6xl mt-8 lg:mt-14">
+          {/* THE MAIN PHOTO, 3:4. Edge to edge on a phone, framed in gold
+              from md — on its own line up to lg, then beside the text. */}
+          <figure className="order-2 lg:col-start-8 lg:col-span-5 lg:row-start-1 lg:row-span-5 relative -mx-5 md:mx-auto md:w-full md:max-w-md lg:max-w-none mt-8 lg:mt-0">
             <div aria-hidden="true" className="hidden md:block absolute inset-0 translate-x-5 translate-y-5 border border-gold-500/50" />
-            <picture className="block">
-              <source media="(min-width: 768px)" srcSet={images[0]} width="1600" height="900" />
-              <img
-                src={portrait}
-                alt="Rohit Jain, Chairman of Ahinsa Group, at the Ahinsa Group office in Agra"
-                width="1200"
-                height="1500"
-                fetchpriority="high"
-                className="relative block w-full aspect-[4/5] md:aspect-video object-cover shadow-[0_40px_80px_-30px_rgba(58,45,10,0.55)]"
-              />
-            </picture>
-            <div aria-hidden="true" className="md:hidden absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-900/70 to-transparent" />
-            <figcaption className="absolute left-5 bottom-5 md:left-auto md:right-5 md:top-5 md:bottom-auto inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-ink-800 shadow-sm">
+            <img
+              src={hero}
+              alt="Rohit Jain, Chairman of Ahinsa Group, at the Ahinsa Group office in Agra"
+              width="1200"
+              height="1600"
+              fetchpriority="high"
+              className="relative block w-full aspect-[3/4] object-cover shadow-[0_40px_80px_-30px_rgba(58,45,10,0.55)]"
+            />
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-900/60 to-transparent" />
+            <figcaption className="absolute left-5 bottom-5 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-ink-800 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
               Mr. Rohit Jain · Ahinsa Group office, Agra
             </figcaption>
           </figure>
 
           {/* Two by two on phones, one row from lg — with rules between the cells. */}
-          <dl className="order-4 relative z-10 mt-8 lg:-mt-14 mx-auto w-full lg:w-[82%] grid grid-cols-2 lg:grid-cols-4 bg-white border border-gold-500/25 shadow-[0_24px_60px_-30px_rgba(58,45,10,0.45)]">
+          <dl className="order-4 lg:col-start-1 lg:col-span-7 lg:row-start-4 relative mt-8 lg:mt-10 mx-auto w-full grid grid-cols-2 lg:grid-cols-4 bg-white border border-gold-500/25 shadow-[0_24px_60px_-30px_rgba(58,45,10,0.45)]">
             {HERO_STATS.map((s, i) => (
               <div
                 key={s.label}
-                className={`text-center p-5 md:p-7 border-gold-500/20 ${i % 2 === 0 ? 'border-r' : ''} ${
+                className={`text-center p-5 md:p-7 lg:p-5 xl:p-6 border-gold-500/20 ${i % 2 === 0 ? 'border-r' : ''} ${
                   i < 2 ? 'border-b lg:border-b-0' : ''
                 } ${i < HERO_STATS.length - 1 ? 'lg:border-r' : ''}`}
               >

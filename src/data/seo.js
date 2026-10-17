@@ -29,6 +29,8 @@ export const ROHIT_JAIN_ARTICLE = {
     '/images/rohit-jain/rohit-jain-agra-1x1.jpg',
   ],
   portrait: '/images/Team/rohit-jain-office.jpg',
+  // The article's own lead photo, 3:4, beside the title.
+  hero: '/images/rohit-jain/rohit-jain-ahinsa-group-agra-3x4.jpg',
   avatar: '/images/rohit-jain/rohit-jain-avatar.jpg',
 }
 
