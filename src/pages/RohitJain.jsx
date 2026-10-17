@@ -390,7 +390,7 @@ export default function RohitJain() {
   const article = useRef(null)
   const [minutes, setMinutes] = useState(null)
   const chairman = MANAGEMENT.find((m) => m.slug === 'rohit-jain')
-  const { published, hero, avatar } = ROHIT_JAIN_ARTICLE
+  const { published, portrait, avatar } = ROHIT_JAIN_ARTICLE
   const publishedOn = new Date(published).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 
   // Reading time from the article's own text, so it stays right as it is edited.
@@ -411,7 +411,7 @@ export default function RohitJain() {
         <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:-right-40 -top-48 w-[52rem] h-[52rem] rounded-full bg-gold-300/20 blur-3xl" />
 
         <div className="container-x relative flex flex-col lg:grid lg:grid-cols-12 lg:grid-rows-[1fr_auto_auto_auto_1fr] lg:gap-x-12 xl:gap-x-16">
-          <div className="order-1 lg:col-start-1 lg:col-span-6 lg:row-start-2 text-center lg:text-left max-w-4xl mx-auto lg:mx-0">
+          <div className="order-1 lg:col-start-1 lg:col-span-7 lg:row-start-2 text-center lg:text-left max-w-4xl mx-auto lg:mx-0">
             <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center lg:justify-start gap-x-2 gap-y-1 text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-gold-700">
               <Link to="/" className="hover:text-gold-600 transition">Home</Link>
               <ChevronRight className="w-3 h-3" />
@@ -431,7 +431,7 @@ export default function RohitJain() {
             </h1>
           </div>
 
-          <div className="order-3 lg:col-start-1 lg:col-span-6 lg:row-start-3 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 mt-8">
+          <div className="order-3 lg:col-start-1 lg:col-span-7 lg:row-start-3 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 mt-8">
             <p className="text-[17px] md:text-xl text-ink-600 leading-relaxed text-balance">
               An entrepreneur for more than two decades, Mr. Rohit Jain leads Ahinsa Group — the Agra developer
               behind The Grand Green Valley and the Green Valley townships — on a simple standard: build communities,
@@ -455,17 +455,17 @@ export default function RohitJain() {
             </div>
           </div>
 
-          {/* THE MAIN PHOTO, 4:3 landscape. Edge to edge on a phone, framed in
+          {/* THE MAIN PHOTO, 4:5 portrait. Edge to edge on a phone, framed in
               gold from md — on its own line up to lg, then beside the text. */}
-          <figure className="order-2 lg:col-start-7 lg:col-span-6 lg:row-start-1 lg:row-span-5 lg:self-center relative -mx-5 md:mx-auto md:w-full md:max-w-2xl lg:max-w-none mt-8 lg:mt-0">
+          <figure className="order-2 lg:col-start-8 lg:col-span-5 lg:row-start-1 lg:row-span-5 lg:self-center relative -mx-5 md:mx-auto md:w-full md:max-w-md lg:max-w-none mt-8 lg:mt-0">
             <div aria-hidden="true" className="hidden md:block absolute inset-0 translate-x-5 translate-y-5 border border-gold-500/50" />
             <img
-              src={hero}
+              src={portrait}
               alt="Rohit Jain, Chairman of Ahinsa Group, at the Ahinsa Group office in Agra"
               width="1200"
-              height="900"
+              height="1500"
               fetchpriority="high"
-              className="relative block w-full aspect-[4/3] object-cover shadow-[0_40px_80px_-30px_rgba(58,45,10,0.55)]"
+              className="relative block w-full aspect-[4/5] object-cover shadow-[0_40px_80px_-30px_rgba(58,45,10,0.55)]"
             />
             <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-900/60 to-transparent" />
             <figcaption className="absolute left-5 bottom-5 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-ink-800 shadow-sm">
@@ -475,7 +475,7 @@ export default function RohitJain() {
           </figure>
 
           {/* Two by two on phones, one row from lg — with rules between the cells. */}
-          <dl className="order-4 lg:col-start-1 lg:col-span-6 lg:row-start-4 relative mt-8 lg:mt-10 mx-auto w-full grid grid-cols-2 lg:grid-cols-4 bg-white border border-gold-500/25 shadow-[0_24px_60px_-30px_rgba(58,45,10,0.45)]">
+          <dl className="order-4 lg:col-start-1 lg:col-span-7 lg:row-start-4 relative mt-8 lg:mt-10 mx-auto w-full grid grid-cols-2 lg:grid-cols-4 bg-white border border-gold-500/25 shadow-[0_24px_60px_-30px_rgba(58,45,10,0.45)]">
             {HERO_STATS.map((s, i) => (
               <div
                 key={s.label}
