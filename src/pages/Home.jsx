@@ -29,6 +29,8 @@ import BrochureGallery from '../components/BrochureGallery'
 import BrochureDownloadModal from '../components/BrochureDownloadModal'
 import CountUp from '../components/CountUp'
 import { HERO_SLIDES, STATS, DEVELOPMENTS, FEATURES, TESTIMONIALS, AWARDS, COMPANY, PROPERTY_LISTINGS } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 const ICON_MAP = { Compass, Award, Clock, HeartHandshake }
 
@@ -131,6 +133,7 @@ function TestimonialCard({ t }) {
 }
 
 export default function Home() {
+  usePageMeta(PAGE_META.home)
   // The awards row scrolls sideways; the arbiter keeps it the only one running.
   const { activeStrip, onVisibility } = useStripArbiter()
   const [downloadOpen, setDownloadOpen] = useState(false)

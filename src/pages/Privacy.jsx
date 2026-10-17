@@ -1,6 +1,8 @@
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import { COMPANY } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 const LAST_UPDATED = 'May 30, 2026'
 
@@ -99,6 +101,8 @@ const SECTIONS = [
 ]
 
 export default function Privacy() {
+  usePageMeta(PAGE_META.privacy)
+
   return (
     <>
       <PageHero

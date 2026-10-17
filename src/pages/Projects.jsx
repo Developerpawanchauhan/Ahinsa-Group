@@ -6,12 +6,15 @@ import Reveal from '../components/Reveal'
 // Top-level projects only — one built inside another (the Grand Square Mall,
 // inside Grand Green Valley) is reached from its parent's page.
 import { LISTED_PROJECTS as PROJECTS } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 // These are matched against a project's own `status`, so the labels have to be
 // the words used there — "New Launch" matched nothing and always came back empty.
 const STATUS_FILTERS = ['All', 'Ongoing', 'Upcoming']
 
 export default function Projects() {
+  usePageMeta(PAGE_META.projects)
   const [filter, setFilter] = useState('All')
 
   const filtered = useMemo(() => {

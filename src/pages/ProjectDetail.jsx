@@ -26,6 +26,8 @@ import {
   PROJECT_DETAILS, LISTED_PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS,
   mapEmbedFor, parentOf, subProjectsOf,
 } from '../data/site'
+import { projectMeta } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 const ICON_MAP = {
   ArrowRight, MapPin, Building2, Calendar, Ruler, Layers, ShieldCheck, Award,
@@ -84,6 +86,10 @@ export default function ProjectDetail() {
     setLightbox(null)
     setDownloadOpen(false)
   }, [slug])
+
+  // This project's own title and description (src/data/seo.js). Before the
+  // redirect below, like the hooks above; an unknown slug sets nothing.
+  usePageMeta(project ? projectMeta(slug, project) : null)
 
   if (!project) {
     return <Navigate to="/projects" replace />

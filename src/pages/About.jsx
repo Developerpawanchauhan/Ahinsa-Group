@@ -7,6 +7,8 @@ import CountUp from '../components/CountUp'
 import AutoSlideImage from '../components/AutoSlideImage'
 import OfficeCard from '../components/OfficeCard'
 import { COMPANY, STATS, MANAGEMENT, MILESTONES, OFFICES } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 // "Our Story" slideshow — the signature entrance gate of each township,
 // pulled from each project's own folder. Crossfades every 2s.
@@ -19,6 +21,7 @@ const STORY_IMAGES = [
 ]
 
 export default function About() {
+  usePageMeta(PAGE_META.about)
   const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in'];
 
   return (

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ahinsagroupagra.com/sitemap.xml
+Sitemap: https://ahinsagroup.in/sitemap.xml

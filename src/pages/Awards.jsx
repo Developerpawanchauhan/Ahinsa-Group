@@ -4,8 +4,11 @@ import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import { AWARDS } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 export default function Awards() {
+  usePageMeta(PAGE_META.awards)
   // Find the specific Zee Media award for the featured section
   const featuredAward = AWARDS.find(a => a.awardedBy.includes('Zee Media')) || AWARDS[0];
 

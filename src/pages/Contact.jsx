@@ -7,9 +7,12 @@ import Reveal from '../components/Reveal'
 import OfficeCard from '../components/OfficeCard'
 import SocialChannels from '../components/SocialChannels'
 import { COMPANY, WEB3FORMS_KEY, OFFICES } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 import { sendToGoogleSheet } from '../lib/googleSheet'
 
 export default function Contact() {
+  usePageMeta(PAGE_META.contact)
   const { hash } = useLocation()
 
   // Deep-link support: /contact#social scrolls to the social channels,

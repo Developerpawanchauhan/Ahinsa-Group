@@ -2238,6 +2238,8 @@ export const MANAGEMENT = [
     image: '/images/Team/rohit-jain-office.jpg',
     // Shown under the photo on the Management page.
     video: 'https://www.youtube.com/embed/PxkPw2srud4',
+    // His full profile — a "Read … Story" button on the Management page.
+    article: '/rohit-jain/',
     short:
       'Visionary leader steering Ahinsa Group toward architectural excellence and sustained growth.',
     bio: [

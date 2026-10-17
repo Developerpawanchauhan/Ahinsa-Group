@@ -1,13 +1,16 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { Quote, CheckCircle2, Mail } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
+import { ArrowRight, Quote, CheckCircle2, Mail } from 'lucide-react'
 import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import VideoTile from '../components/VideoTile'
 import { MANAGEMENT } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 export default function Management() {
+  usePageMeta(PAGE_META.management)
   const ownerEmails = ['rohitjain@ahinsagroup.in', 'rachitjain@ahinsagroup.in'];
   const { hash } = useLocation()
 
@@ -95,6 +98,11 @@ export default function Management() {
                         </li>
                       ))}
                     </ul>
+                  )}
+                  {m.article && (
+                    <Link to={m.article} className="btn-gold mt-8">
+                      Read {m.name.replace(/^Mr\.\s*/, '')}’s Story <ArrowRight className="w-4 h-4" />
+                    </Link>
                   )}
                 </div>
               </div>

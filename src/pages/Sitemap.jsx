@@ -3,6 +3,8 @@ import { Home, Info, Building2, Newspaper, Phone, FileText, Map, ChevronRight } 
 import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import { PROJECTS } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 const SECTIONS = [
   {
@@ -16,6 +18,7 @@ const SECTIONS = [
     links: [
       { to: '/about', label: 'About Us' },
       { to: '/about/management', label: 'Management' },
+      { to: '/rohit-jain/', label: 'Rohit Jain – Chairman' },
       // Team page hidden for now — uncomment to bring it back.
       // { to: '/about/team', label: 'Team' },
     ],
@@ -54,6 +57,7 @@ const SECTIONS = [
 ]
 
 export default function Sitemap() {
+  usePageMeta(PAGE_META.sitemap)
   const totalPages = SECTIONS.reduce((sum, s) => sum + s.links.length, 0)
 
   return (

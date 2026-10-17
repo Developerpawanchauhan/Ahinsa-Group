@@ -7,6 +7,8 @@ import Reveal from '../components/Reveal'
 import ImageLightbox from '../components/ImageLightbox'
 import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
 import { EVENTS } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 /* One event’s photos in a scrolling row, with its own full-screen viewer. */
 function EventPhotoStrip({ images, title, index, active, onVisibility }) {
@@ -35,6 +37,7 @@ function EventPhotoStrip({ images, title, index, active, onVisibility }) {
 }
 
 export default function Events() {
+  usePageMeta(PAGE_META.events)
   // Only one photo strip autoscrolls at a time: whichever is most on screen.
   const { activeStrip, onVisibility } = useStripArbiter()
 

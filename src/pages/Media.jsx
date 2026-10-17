@@ -4,8 +4,11 @@ import PageHero from '../components/PageHero'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import { GALLERY } from '../data/site'
+import { PAGE_META } from '../data/seo'
+import usePageMeta from '../hooks/usePageMeta'
 
 export default function Media() {
+  usePageMeta(PAGE_META.media)
 
   return (
     <>

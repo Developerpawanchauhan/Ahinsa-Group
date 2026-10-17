@@ -9,6 +9,7 @@ import WelcomePopup from './components/WelcomePopup'
 import Home from './pages/Home'
 import About from './pages/About'
 import Management from './pages/Management'
+import RohitJain from './pages/RohitJain'
 // Team page hidden for now — uncomment this, its route below, and the
 // "Team" entries in Navbar.jsx and Sitemap.jsx to bring it back.
 // import TeamMembers from './pages/TeamMembers'
@@ -53,6 +54,9 @@ export default function App() {
           {/* About + sub-pages */}
           <Route path="/about" element={<About />} />
           <Route path="/about/management" element={<Management />} />
+          {/* Linked as /rohit-jain/ — the build writes that folder its own
+              HTML with the article's meta (see STATIC_PAGES in data/seo.js). */}
+          <Route path="/rohit-jain" element={<RohitJain />} />
           {/* <Route path="/about/team" element={<TeamMembers />} /> */}
 
           {/* Projects + dynamic detail */}
