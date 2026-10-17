@@ -57,7 +57,9 @@ const NAV_LINKS = [
 ]
 
 function ThemeToggle({ className = '' }) {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme, lightOnly } = useTheme()
+  // A light-only page ignores the switch, so it isn't offered there.
+  if (lightOnly) return null
   return (
     <button
       onClick={toggleTheme}
@@ -85,7 +87,8 @@ function ThemeToggle({ className = '' }) {
 /**
  * Desktop nav link colour.
  *
- * `solid` = the frosted bar is showing (scrolled, or a mega menu is open).
+ * `solid` = the frosted bar is showing (scrolled, a mega menu is open, or a
+ * light-only page).
  * While it is NOT showing, the bar is transparent over the page hero, which
  * is a dark image on every page — so in light theme the links go cream
  * instead of ink, which was near-invisible there. Hover and the dark theme
@@ -392,9 +395,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const { lightOnly } = useTheme()
 
-  // The frosted bar is up whenever the page is scrolled or a mega menu is open.
-  const navSolid = scrolled || menuOpen
+  // The frosted bar is up whenever the page is scrolled or a mega menu is open
+  // — and from the top on a light-only page, whose hero is light, not the dark
+  // image the clear bar's cream links are made for.
+  const navSolid = scrolled || menuOpen || lightOnly
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30)
@@ -449,7 +455,7 @@ export default function Navbar() {
             dropdown's own backdrop blur. */}
         <div
           className={`absolute inset-0 transition-all duration-500 ${
-            scrolled || menuOpen
+            navSolid
               ? 'bg-cream/70 dark:bg-ink-900/70 backdrop-blur-lg border-b border-gold-500/15'
               : 'bg-transparent'
           }`}

@@ -1,8 +1,18 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-const ThemeContext = createContext({ theme: 'dark', toggleTheme: () => {} })
+const ThemeContext = createContext({ theme: 'dark', toggleTheme: () => {}, lightOnly: false })
 
 const THEME_KEY = 'ahinsa-theme'
+
+// Pages designed for the light theme only (the Rohit Jain article reads like a
+// printed profile). They show light whatever the visitor picked, hide the
+// theme switch, and leave the saved choice alone for every other page.
+const LIGHT_ONLY_PATHS = ['/rohit-jain']
+
+export function isLightOnly(pathname) {
+  return LIGHT_ONLY_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))
+}
 
 function getInitialTheme() {
   if (typeof window === 'undefined') return 'dark'
@@ -16,14 +26,15 @@ function getInitialTheme() {
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(getInitialTheme)
+  const lightOnly = isLightOnly(useLocation().pathname)
+
+  // A layout effect, so the class is right before the browser paints — moving
+  // to or from a light-only page would otherwise flash the other theme.
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark' && !lightOnly)
+  }, [theme, lightOnly])
 
   useEffect(() => {
-    const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
     try {
       localStorage.setItem(THEME_KEY, theme)
     } catch (_) {}
@@ -32,7 +43,7 @@ export function ThemeProvider({ children }) {
   const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, lightOnly }}>
       {children}
     </ThemeContext.Provider>
   )

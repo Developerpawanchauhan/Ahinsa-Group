@@ -10,6 +10,9 @@ import { AWARDS, COMPANY, DEVELOPMENTS, EVENTS, MANAGEMENT } from '../data/site'
 import { PAGE_META, ROHIT_JAIN_ARTICLE, pageUrl } from '../data/seo'
 import usePageMeta from '../hooks/usePageMeta'
 
+// This page is light-only (see LIGHT_ONLY_PATHS in hooks/useTheme.jsx), so it
+// is styled for the light theme alone — no `dark:` variants anywhere below.
+
 // The article's sections, in order: `label` in the contents list, `title` as
 // the heading on the page.
 const SECTIONS = [
@@ -164,7 +167,7 @@ const COMMUNITY_PHOTOS = VIHASANT && BHAJAN
     ]
   : []
 
-const LINK = 'text-gold-700 dark:text-gold-500 underline decoration-gold-500/40 underline-offset-4 hover:decoration-gold-500 transition'
+const LINK = 'text-gold-700 underline decoration-gold-500/40 underline-offset-4 hover:decoration-gold-600 transition'
 
 /** Which section the reader is in — the one crossing the upper part of the screen. */
 function useActiveSection(ids) {
@@ -177,7 +180,7 @@ function useActiveSection(ids) {
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
         if (hit) setActive(hit.target.id)
       },
-      { rootMargin: '-20% 0px -70% 0px' },
+      { rootMargin: '-25% 0px -65% 0px' },
     )
     ids.forEach((id) => {
       const el = document.getElementById(id)
@@ -223,25 +226,60 @@ function ReadingProgress() {
   )
 }
 
+/** Desktop contents: a numbered list in the sticky side column. */
 function Contents({ active }) {
   return (
-    <ol className="space-y-0.5 border-l border-soft">
+    <ol className="space-y-0.5 border-l border-gold-500/25">
       {SECTIONS.map((s, i) => (
         <li key={s.id}>
           <a
             href={`#${s.id}`}
             className={`-ml-px flex gap-3 border-l py-1.5 pl-4 text-sm transition ${
-              active === s.id
-                ? 'border-gold-500 text-gold-700 dark:text-gold-400'
-                : 'border-transparent text-fg-soft hover:text-fg'
+              active === s.id ? 'border-gold-600 text-gold-700 font-medium' : 'border-transparent text-ink-500 hover:text-ink-900'
             }`}
           >
-            <span className="tabular-nums text-xs leading-5 text-gold-600/80 dark:text-gold-500/70">{String(i + 1).padStart(2, '0')}</span>
+            <span className="tabular-nums text-xs leading-5 text-gold-600/80">{String(i + 1).padStart(2, '0')}</span>
             {s.label}
           </a>
         </li>
       ))}
     </ol>
+  )
+}
+
+/**
+ * Phone and tablet contents: a strip of section chips that sticks under the
+ * navbar while the article scrolls, and keeps the current section's chip in view.
+ */
+function ContentsStrip({ active }) {
+  const strip = useRef(null)
+  useEffect(() => {
+    const el = strip.current?.querySelector(`[data-section="${active}"]`)
+    // Scroll the strip sideways only — scrollIntoView would move the page too.
+    if (el) strip.current.scrollTo({ left: el.offsetLeft - 20, behavior: 'smooth' })
+  }, [active])
+  return (
+    <nav
+      aria-label="In this article"
+      className="lg:hidden sticky top-16 z-30 -mx-5 md:-mx-8 mb-10 bg-cream/90 backdrop-blur-md border-y border-gold-500/20"
+    >
+      <div ref={strip} className="flex gap-2 overflow-x-auto px-5 md:px-8 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {SECTIONS.map((s) => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            data-section={s.id}
+            className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-1.5 text-xs font-medium transition ${
+              active === s.id
+                ? 'border-gold-500 bg-gold-500 text-ink-900'
+                : 'border-gold-500/30 bg-white/70 text-ink-600'
+            }`}
+          >
+            {s.label}
+          </a>
+        ))}
+      </div>
+    </nav>
   )
 }
 
@@ -269,10 +307,10 @@ function Share() {
     }
   }
   const button =
-    'w-10 h-10 flex items-center justify-center border border-soft text-fg-soft hover:border-gold-500 hover:text-gold-700 dark:hover:text-gold-500 transition'
+    'w-10 h-10 flex items-center justify-center rounded-full border border-gold-500/30 bg-white text-ink-600 hover:border-gold-500 hover:text-gold-700 transition'
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-[0.3em] text-fg-faint">Share this article</p>
+      <p className="text-[11px] uppercase tracking-[0.3em] text-ink-500">Share this article</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {links.map(({ label, icon: Icon, href }) => (
           <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`Share on ${label}`} className={button}>
@@ -294,15 +332,16 @@ function Section({ id, children }) {
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className="scroll-mt-28 border-t border-soft pt-14 mt-14 md:pt-20 md:mt-20"
+      // Clears the navbar, plus the contents strip below lg.
+      className="scroll-mt-32 lg:scroll-mt-28 border-t border-gold-500/20 pt-12 mt-12 md:pt-20 md:mt-20"
     >
-      <p className="tabular-nums text-xs font-medium tracking-[0.35em] text-gold-700 dark:text-gold-500">
+      <p className="tabular-nums text-xs font-medium tracking-[0.35em] text-gold-700">
         {String(index + 1).padStart(2, '0')}
       </p>
-      <h2 id={`${id}-title`} className="heading-serif text-fg text-3xl md:text-[2.6rem] mt-3 max-w-3xl text-balance">
+      <h2 id={`${id}-title`} className="heading-serif text-ink-900 text-[1.75rem] leading-tight md:text-[2.6rem] mt-3 max-w-3xl text-balance">
         {SECTIONS[index].title}
       </h2>
-      <div className="mt-8 space-y-6 [&>p]:max-w-3xl [&>p]:text-fg-muted [&>p]:text-[17px] [&>p]:leading-[1.85] md:[&>p]:text-lg">
+      <div className="mt-6 md:mt-8 space-y-6 [&>p]:max-w-3xl [&>p]:text-ink-700 [&>p]:text-[17px] [&>p]:leading-[1.8] md:[&>p]:text-lg md:[&>p]:leading-[1.85]">
         {children}
       </div>
     </section>
@@ -311,34 +350,35 @@ function Section({ id, children }) {
 
 function PullQuote({ children, cite }) {
   return (
-    <figure className="relative !my-12 max-w-3xl border-l-2 border-gold-500 pl-8 md:pl-12">
-      <Quote aria-hidden="true" className="absolute -left-[17px] -top-1 w-8 h-8 p-1.5 bg-page text-gold-500" />
-      <blockquote className="font-display italic text-2xl md:text-3xl leading-snug text-fg">{children}</blockquote>
-      <figcaption className="mt-4 text-xs uppercase tracking-[0.3em] text-fg-faint">— {cite}</figcaption>
+    <figure className="relative !my-10 md:!my-12 max-w-3xl border-l-2 border-gold-500 pl-6 md:pl-12">
+      <Quote aria-hidden="true" className="absolute -left-[17px] -top-1 w-8 h-8 p-1.5 bg-cream text-gold-500" />
+      <blockquote className="font-display italic text-[1.4rem] md:text-3xl leading-snug text-ink-900">{children}</blockquote>
+      <figcaption className="mt-4 text-[11px] uppercase tracking-[0.3em] text-ink-500">— {cite}</figcaption>
     </figure>
   )
 }
 
+/** A project tile: a row with a thumbnail on phones, a card from sm up. */
 function ProjectCard({ project }) {
   return (
-    <Link to={`/projects/${project.slug}`} className="group block card-glass overflow-hidden h-full">
-      <div className="img-zoom aspect-[16/10] overflow-hidden">
-        <img
-          src={project.image}
-          alt={`${project.name}, ${project.location}`}
-          loading="lazy"
-          className="w-full h-full object-cover"
-        />
+    <Link
+      to={`/projects/${project.slug}`}
+      className="group flex sm:block h-full overflow-hidden bg-white border border-gold-500/20 shadow-sm hover:border-gold-500/60 hover:shadow-md transition"
+    >
+      <div className="img-zoom w-28 shrink-0 sm:w-auto aspect-square sm:aspect-[16/10] overflow-hidden">
+        <img src={project.image} alt={`${project.name}, ${project.location}`} loading="lazy" className="w-full h-full object-cover" />
       </div>
-      <div className="p-5">
-        <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.25em] text-gold-700 dark:text-gold-500">
+      <div className="p-4 sm:p-5 min-w-0">
+        <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-gold-700">
           <MapPin className="w-3 h-3 flex-shrink-0" />
-          {project.location}
+          <span className="truncate">{project.location}</span>
         </p>
-        <h4 className="font-serif text-xl text-fg mt-2 leading-snug group-hover:text-gold-700 dark:group-hover:text-gold-500 transition">
+        <h4 className="font-serif text-lg sm:text-xl text-ink-900 mt-1.5 sm:mt-2 leading-snug group-hover:text-gold-700 transition">
           {project.name}
         </h4>
-        <p className="text-fg-soft text-sm leading-relaxed mt-2">{PROJECT_NOTES[project.slug] || project.short}</p>
+        <p className="text-ink-600 text-[13px] sm:text-sm leading-relaxed mt-1.5 sm:mt-2 line-clamp-3 sm:line-clamp-none">
+          {PROJECT_NOTES[project.slug] || project.short}
+        </p>
       </div>
     </Link>
   )
@@ -360,456 +400,453 @@ export default function RohitJain() {
   }, [])
 
   return (
-    <>
+    <div className="bg-cream text-ink-800">
       <ReadingProgress />
 
-      {/* HERO — dark, like every page's hero, so the clear navbar reads over it. */}
-      <header className="relative overflow-hidden bg-ink-900 text-cream pt-36 pb-16 md:pt-48 md:pb-24">
-        <div aria-hidden="true" className="absolute -left-40 -top-40 w-[36rem] h-[36rem] rounded-full bg-gold-500/10 blur-3xl" />
+      {/* HERO — name, then the main photo as the page's centrepiece. On phones
+          the standfirst follows the photo, so the photo comes straight after the
+          name; from lg it sits under the standfirst, with the numbers card
+          overlapping its foot. */}
+      <header className="relative overflow-hidden bg-gradient-to-b from-[#F1EADA] via-[#F6F1E5] to-cream pt-28 md:pt-40 pb-12 md:pb-20">
+        <div aria-hidden="true" className="absolute left-1/2 -translate-x-1/2 -top-48 w-[52rem] h-[52rem] rounded-full bg-gold-300/20 blur-3xl" />
         <span
           aria-hidden="true"
-          className="hidden md:block absolute -right-6 bottom-0 font-display text-[24rem] leading-none text-gold-500/[0.05] select-none"
+          className="hidden md:block absolute -right-8 top-24 font-display text-[22rem] leading-none text-gold-500/[0.07] select-none"
         >
           RJ
         </span>
 
-        <div className="container-x relative grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-7 order-2 lg:order-1">
-            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-gold-400">
-              <Link to="/" className="hover:text-gold-300 transition">Home</Link>
+        <div className="container-x relative flex flex-col">
+          <div className="order-1 text-center max-w-4xl mx-auto">
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] md:text-[11px] uppercase tracking-[0.25em] text-gold-700">
+              <Link to="/" className="hover:text-gold-600 transition">Home</Link>
               <ChevronRight className="w-3 h-3" />
-              <Link to="/about" className="hover:text-gold-300 transition">About Us</Link>
+              <Link to="/about" className="hidden sm:inline hover:text-gold-600 transition">About Us</Link>
+              <ChevronRight className="hidden sm:block w-3 h-3" />
+              <Link to="/about/management" className="hover:text-gold-600 transition">Management</Link>
               <ChevronRight className="w-3 h-3" />
-              <Link to="/about/management" className="hover:text-gold-300 transition">Management</Link>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-cream/70">Rohit Jain</span>
+              <span className="text-ink-500">Rohit Jain</span>
             </nav>
 
-            <p className="eyebrow !text-gold-400 mt-10 before:!bg-gold-400/50 after:!bg-gold-400/50">Leadership Profile</p>
-            <h1 className="mt-6">
-              <span className="block heading-serif text-6xl md:text-8xl text-cream">Rohit Jain</span>
-              <span className="block mt-4 font-display italic text-2xl md:text-3xl text-gold-400">
+            <p className="eyebrow mt-7 md:mt-9 justify-center">Leadership Profile</p>
+            <h1 className="mt-4 md:mt-6">
+              <span className="block heading-serif text-[3.4rem] md:text-8xl text-ink-900 leading-none">Rohit Jain</span>
+              <span className="block mt-3 md:mt-5 font-display italic text-xl md:text-3xl text-gold-700">
                 Chairman, Ahinsa Group · Agra
               </span>
             </h1>
-            <p className="mt-8 text-lg md:text-xl text-ink-200 leading-relaxed max-w-2xl">
+          </div>
+
+          <div className="order-3 lg:order-2 text-center max-w-2xl mx-auto mt-8 lg:mt-8">
+            <p className="text-[17px] md:text-xl text-ink-600 leading-relaxed text-balance">
               An entrepreneur for more than two decades, Mr. Rohit Jain leads Ahinsa Group — the Agra developer
               behind The Grand Green Valley and the Green Valley townships — on a simple standard: build communities,
               inspire trust and leave a legacy.
             </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-ink-300">
-              <span>
-                By <span className="text-cream">Ahinsa Group</span>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-ink-500">
+              <span className="flex items-center gap-2">
+                <img src={avatar} alt="" width="28" height="28" className="w-7 h-7 rounded-full object-cover border border-gold-500/40" />
+                By <span className="text-ink-900 font-medium">Ahinsa Group</span>
               </span>
               <span className="flex items-center gap-2">
-                <CalendarDays className="w-4 h-4 text-gold-500" />
+                <CalendarDays className="w-4 h-4 text-gold-600" />
                 <time dateTime={published}>{publishedOn}</time>
               </span>
               {minutes && (
                 <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-gold-500" />
+                  <Clock className="w-4 h-4 text-gold-600" />
                   {minutes} min read
                 </span>
               )}
             </div>
-
-            <dl className="mt-10 pt-8 border-t border-gold-500/20 grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {HERO_STATS.map((s) => (
-                <div key={s.label}>
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd>
-                    <span className="block font-serif text-4xl md:text-5xl gold-text">{s.value}</span>
-                    <span className="block mt-2 text-[11px] uppercase tracking-[0.2em] text-ink-300">{s.label}</span>
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
 
-          <figure className="lg:col-span-5 order-1 lg:order-2 max-w-[18rem] sm:max-w-sm mx-auto w-full lg:max-w-none">
-            <div className="relative">
-              <div aria-hidden="true" className="absolute inset-0 border border-gold-500/40 translate-x-4 translate-y-4 md:translate-x-6 md:translate-y-6" />
+          {/* THE MAIN PHOTO. A tall portrait fills a phone screen edge to edge;
+              from md the wide office shot takes over. Both are the same sitting. */}
+          <figure className="order-2 lg:order-3 relative -mx-5 md:mx-auto md:w-full max-w-6xl mt-8 lg:mt-14">
+            <div aria-hidden="true" className="hidden md:block absolute inset-0 translate-x-5 translate-y-5 border border-gold-500/50" />
+            <picture className="block">
+              <source media="(min-width: 768px)" srcSet={images[0]} width="1600" height="900" />
               <img
                 src={portrait}
-                alt="Rohit Jain, Chairman of Ahinsa Group, at his office in Agra"
+                alt="Rohit Jain, Chairman of Ahinsa Group, at the Ahinsa Group office in Agra"
                 width="1200"
                 height="1500"
                 fetchpriority="high"
-                className="relative w-full aspect-[4/5] object-cover"
+                className="relative block w-full aspect-[4/5] md:aspect-video object-cover shadow-[0_40px_80px_-30px_rgba(58,45,10,0.55)]"
               />
-            </div>
-            <figcaption className="mt-10 text-[11px] uppercase tracking-[0.25em] text-ink-300">
-              Mr. Rohit Jain at the Ahinsa Group office, Agra
+            </picture>
+            <div aria-hidden="true" className="md:hidden absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-900/70 to-transparent" />
+            <figcaption className="absolute left-5 bottom-5 md:left-auto md:right-5 md:top-5 md:bottom-auto inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-ink-800 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
+              Mr. Rohit Jain · Ahinsa Group office, Agra
             </figcaption>
           </figure>
+
+          {/* Two by two on phones, one row from lg — with rules between the cells. */}
+          <dl className="order-4 relative z-10 mt-8 lg:-mt-14 mx-auto w-full lg:w-[82%] grid grid-cols-2 lg:grid-cols-4 bg-white border border-gold-500/25 shadow-[0_24px_60px_-30px_rgba(58,45,10,0.45)]">
+            {HERO_STATS.map((s, i) => (
+              <div
+                key={s.label}
+                className={`text-center p-5 md:p-7 border-gold-500/20 ${i % 2 === 0 ? 'border-r' : ''} ${
+                  i < 2 ? 'border-b lg:border-b-0' : ''
+                } ${i < HERO_STATS.length - 1 ? 'lg:border-r' : ''}`}
+              >
+                <dt className="sr-only">{s.label}</dt>
+                <dd>
+                  <span className="block font-serif text-4xl md:text-5xl gold-text">{s.value}</span>
+                  <span className="block mt-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-ink-500">{s.label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </header>
 
       {/* MOTTO */}
-      <section aria-label="Motto" className="bg-page-alt border-y border-soft">
-        <div className="container-x py-10 md:py-14 text-center">
-          <p className="font-display italic text-2xl md:text-4xl text-fg text-balance">
+      <section aria-label="Motto" className="bg-[#F0EBDC] border-y border-gold-500/20">
+        <div className="container-x py-9 md:py-14 text-center">
+          <p className="font-display italic text-[1.4rem] md:text-4xl text-ink-900 text-balance leading-snug">
             “Building Communities. Inspiring Trust. <span className="gold-text">Leaving a Legacy.</span>”
           </p>
-          <p className="mt-3 text-xs uppercase tracking-[0.3em] text-fg-faint">— Mr. Rohit Jain</p>
+          <p className="mt-3 text-[11px] uppercase tracking-[0.3em] text-ink-500">— Mr. Rohit Jain</p>
         </div>
       </section>
 
       {/* ARTICLE */}
-      <div className="bg-page">
-        <div className="container-x py-16 md:py-24 grid lg:grid-cols-12 gap-12 xl:gap-16">
-          <aside className="hidden lg:block lg:col-span-3">
-            <div className="sticky top-28 space-y-10">
-              <nav aria-label="In this article">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-fg-faint mb-5">In this article</p>
-                <Contents active={active} />
-              </nav>
-              <Share />
-            </div>
+      <div className="container-x pt-0 pb-16 lg:py-24 grid lg:grid-cols-12 gap-12 xl:gap-16">
+        <aside className="hidden lg:block lg:col-span-3">
+          <div className="sticky top-28 space-y-10">
+            <nav aria-label="In this article">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-ink-500 mb-5">In this article</p>
+              <Contents active={active} />
+            </nav>
+            <Share />
+          </div>
+        </aside>
+
+        <article ref={article} className="lg:col-span-9 min-w-0">
+          <ContentsStrip active={active} />
+
+          {/* Introduction */}
+          <div className="space-y-6 max-w-3xl text-ink-700 text-[17px] leading-[1.8] md:text-lg md:leading-[1.85]">
+            <p className="first-letter:float-left first-letter:font-serif first-letter:text-[4.2rem] md:first-letter:text-[4.6rem] first-letter:leading-[0.8] first-letter:mr-3 first-letter:mt-2 first-letter:text-gold-600">
+              <strong className="text-ink-900 font-semibold">Rohit Jain</strong> is the Chairman of Ahinsa Group, a real
+              estate and construction company based in Agra, Uttar Pradesh. Under his leadership the group has built a
+              portfolio of gated townships, villas, plots and commercial landmarks along Agra’s fastest-growing
+              corridors, and has carried the Ahinsa name to Gwalior and Firozabad. For the thousands of families who
+              have chosen an Ahinsa address, he is the face behind the promise — a chairman who lives in the city he
+              builds in, and who can be found when it matters.
+            </p>
+            <p>
+              He is also one of Agra’s most widely recognised business leaders. Between 2024 and 2026 alone, Rohit
+              Jain was honoured by Hindustan, Dainik Jagran, Zee Media, the Times of India group and the Incredible
+              India Foundation, and was recognised for real estate excellence at the Global Innovation & Leadership
+              Summit in London. Beyond business, he serves as President of BJS-UP, the Uttar Pradesh unit of
+              Bharatiya Jain Sanghatana.
+            </p>
+          </div>
+
+          <aside aria-label="Rohit Jain at a glance" className="mt-10 md:mt-12 bg-white border border-gold-500/25 shadow-sm p-5 md:p-8">
+            <p className="eyebrow">At a glance</p>
+            <dl className="mt-5 md:mt-6 grid grid-cols-2 gap-x-5 md:gap-x-10 gap-y-4 md:gap-y-5">
+              {FACTS.map(([term, value]) => (
+                <div key={term} className="border-b border-gold-500/15 pb-3">
+                  <dt className="text-[10px] md:text-[11px] uppercase tracking-[0.18em] text-ink-500">{term}</dt>
+                  <dd className="mt-1 text-sm md:text-base text-ink-900 font-medium leading-snug">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </aside>
 
-          <article ref={article} className="lg:col-span-9 min-w-0">
-            <details className="lg:hidden card-glass p-5 mb-10">
-              <summary className="cursor-pointer text-[11px] uppercase tracking-[0.3em] text-fg-faint">In this article</summary>
-              <div className="mt-5">
-                <Contents active={active} />
-              </div>
-            </details>
+          <Section id="entrepreneur-to-builder">
+            <p>
+              Long before Ahinsa Group put up its first township gate, Rohit Jain was building businesses in Agra. His
+              career as an entrepreneur spans more than twenty-five years, and the Ahinsa name was known in the city’s
+              trade long before it appeared on a project: Ahinsa Distributors, Agra was recognised by Reliance Retail
+              with a Best Performance Award, and in 2018 the CCLA Award Ceremony named him Indian Innovative
+              Entrepreneur of the Year.
+            </p>
+            <p>
+              In 2024 he took that name into real estate. The first township,{' '}
+              <Link to="/projects/green-valley-township" className={LINK}>Ahinsa Green Valley</Link> in Kuberpur, was
+              followed within months by{' '}
+              <Link to="/projects/grand-green-valley" className={LINK}>Ahinsa The Grand Green Valley</Link> on
+              Fatehabad Road — and by 2026 the portfolio had grown to more than six projects across three cities. It is
+              a fast start for a young real estate company, built on an old foundation: a name the city already trusted.
+            </p>
+          </Section>
 
-            {/* Introduction */}
-            <div className="space-y-6 max-w-3xl text-fg-muted text-[17px] md:text-lg leading-[1.85]">
-              <p className="first-letter:float-left first-letter:font-serif first-letter:text-[4.6rem] first-letter:leading-[0.8] first-letter:mr-3 first-letter:mt-2 first-letter:text-gold-600 dark:first-letter:text-gold-500">
-                <strong className="text-fg font-semibold">Rohit Jain</strong> is the Chairman of Ahinsa Group, a real
-                estate and construction company based in Agra, Uttar Pradesh. Under his leadership the group has built a
-                portfolio of gated townships, villas, plots and commercial landmarks along Agra’s fastest-growing
-                corridors, and has carried the Ahinsa name to Gwalior and Firozabad. For the thousands of families who
-                have chosen an Ahinsa address, he is the face behind the promise — a chairman who lives in the city he
-                builds in, and who can be found when it matters.
-              </p>
-              <p>
-                He is also one of Agra’s most widely recognised business leaders. Between 2024 and 2026 alone, Rohit
-                Jain was honoured by Hindustan, Dainik Jagran, Zee Media, the Times of India group and the Incredible
-                India Foundation, and was recognised for real estate excellence at the Global Innovation & Leadership
-                Summit in London. Beyond business, he serves as President of BJS-UP, the Uttar Pradesh unit of
-                Bharatiya Jain Sanghatana.
-              </p>
+          <Section id="the-name-ahinsa">
+            <p>
+              <em>Ahinsa</em> — non-violence — is the founding principle of Jain ethics: the idea that one’s conduct
+              should cause no harm to any living being. Jain teaching carries it well beyond physical injury. Deceit,
+              broken promises and exploitation are themselves understood as forms of harm.
+            </p>
+            <p>
+              Rohit Jain chose that word for a real estate company on purpose. In an industry not always known for
+              transparency, the name sets a standard the business has to answer to: honest dealing with buyers,
+              clarity in documentation and delivery on what was promised. He believes a developer’s greatest asset is
+              the trust families place in him.
+            </p>
+            <p>
+              It is also why Ahinsa townships are planned around their greens — open landscapes, parks and
+              tree-lined streets — reflecting a respect for the environment he championed long before “sustainable”
+              became industry vocabulary.
+            </p>
+          </Section>
+
+          <Section id="projects">
+            <p>
+              Under Rohit Jain, Ahinsa Group has focused on plotted townships along Agra’s growth corridors, where the
+              Yamuna Expressway, the Agra–Lucknow Expressway and the Inner Ring Road are drawing families out of the
+              crowded old city — and has since taken the Green Valley name beyond Agra.
+            </p>
+
+            <h3 className="font-serif text-xl md:text-2xl text-ink-900 !mt-10">In Agra</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5">
+              {AGRA_PROJECTS.map((p, i) => (
+                <Reveal key={p.slug} delay={(i % 3) * 0.06}>
+                  <ProjectCard project={p} />
+                </Reveal>
+              ))}
             </div>
 
-            {/* The article's lead photo — the one search results and link
-                previews use — so it is never held back by a scroll animation. */}
-            <figure className="mt-12">
-              <img
-                src={images[0]}
-                alt="Rohit Jain at the Ahinsa Group office in Agra, beneath the Ahinsa lotus emblem"
-                width="1600"
-                height="900"
-                className="w-full aspect-video object-cover"
-              />
-              <figcaption className="mt-3 text-sm text-fg-faint">
-                Rohit Jain, Chairman of Ahinsa Group, at the group’s office in Agra.
-              </figcaption>
-            </figure>
-
-            <aside aria-label="Rohit Jain at a glance" className="card-glass p-6 md:p-8 mt-12">
-              <p className="eyebrow">At a glance</p>
-              <dl className="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-5">
-                {FACTS.map(([term, value]) => (
-                  <div key={term} className="border-b border-faint pb-3">
-                    <dt className="text-[11px] uppercase tracking-[0.2em] text-fg-faint">{term}</dt>
-                    <dd className="mt-1 text-fg font-medium">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
-
-            <Section id="entrepreneur-to-builder">
-              <p>
-                Long before Ahinsa Group put up its first township gate, Rohit Jain was building businesses in Agra. His
-                career as an entrepreneur spans more than twenty-five years, and the Ahinsa name was known in the city’s
-                trade long before it appeared on a project: Ahinsa Distributors, Agra was recognised by Reliance Retail
-                with a Best Performance Award, and in 2018 the CCLA Award Ceremony named him Indian Innovative
-                Entrepreneur of the Year.
-              </p>
-              <p>
-                In 2024 he took that name into real estate. The first township,{' '}
-                <Link to="/projects/green-valley-township" className={LINK}>Ahinsa Green Valley</Link> in Kuberpur, was
-                followed within months by{' '}
-                <Link to="/projects/grand-green-valley" className={LINK}>Ahinsa The Grand Green Valley</Link> on
-                Fatehabad Road — and by 2026 the portfolio had grown to more than six projects across three cities. It is
-                a fast start for a young real estate company, built on an old foundation: a name the city already trusted.
-              </p>
-            </Section>
-
-            <Section id="the-name-ahinsa">
-              <p>
-                <em>Ahinsa</em> — non-violence — is the founding principle of Jain ethics: the idea that one’s conduct
-                should cause no harm to any living being. Jain teaching carries it well beyond physical injury. Deceit,
-                broken promises and exploitation are themselves understood as forms of harm.
-              </p>
-              <p>
-                Rohit Jain chose that word for a real estate company on purpose. In an industry not always known for
-                transparency, the name sets a standard the business has to answer to: honest dealing with buyers,
-                clarity in documentation and delivery on what was promised. He believes a developer’s greatest asset is
-                the trust families place in him.
-              </p>
-              <p>
-                It is also why Ahinsa townships are planned around their greens — open landscapes, parks and
-                tree-lined streets — reflecting a respect for the environment he championed long before “sustainable”
-                became industry vocabulary.
-              </p>
-            </Section>
-
-            <Section id="projects">
-              <p>
-                Under Rohit Jain, Ahinsa Group has focused on plotted townships along Agra’s growth corridors, where the
-                Yamuna Expressway, the Agra–Lucknow Expressway and the Inner Ring Road are drawing families out of the
-                crowded old city — and has since taken the Green Valley name beyond Agra.
-              </p>
-
-              <h3 className="font-serif text-2xl text-fg !mt-10">In Agra</h3>
-              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
-                {AGRA_PROJECTS.map((p, i) => (
-                  <Reveal key={p.slug} delay={(i % 3) * 0.06}>
-                    <ProjectCard project={p} />
-                  </Reveal>
-                ))}
-              </div>
-
-              <h3 className="font-serif text-2xl text-fg !mt-12">Beyond Agra</h3>
-              <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
-                {OTHER_PROJECTS.map((p, i) => (
-                  <Reveal key={p.slug} delay={(i % 3) * 0.06}>
-                    <ProjectCard project={p} />
-                  </Reveal>
-                ))}
-              </div>
-
-              <p className="!mt-10">
-                Across these projects the range covers residential and commercial plots, villas, farm houses,
-                commercial complexes and retail — with land acquisition, construction and design handled within the
-                group, so a buyer deals with one company from empty land to the handover of keys.{' '}
-                <Link to="/projects" className={LINK}>See all Ahinsa Group projects</Link>.
-              </p>
-            </Section>
-
-            <Section id="leadership-philosophy">
-              <p>
-                Ahinsa Group’s positioning under Rohit Jain rests on three commitments: quality of construction,
-                transparency in dealing, and timely execution.
-              </p>
-              <p>
-                The third is the sharpest. Delayed possession is the most common complaint in Indian real estate, and a
-                builder who leads with timelines makes himself measurable. A chairman who lives in the city is a
-                chairman who can be found when a deadline slips.
-              </p>
-
-              <PullQuote cite="Mr. Rohit Jain, Chairman, Ahinsa Group">
-                My vision has always been simple: build homes that families are proud of, in communities they want to
-                belong to — and always keep the customer’s trust at the centre of everything we do.
-              </PullQuote>
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                {VALUES.map((v, i) => (
-                  <Reveal key={v.title} delay={(i % 2) * 0.08}>
-                    <div className="h-full border border-soft p-6 md:p-7 hover:border-gold-500/60 transition-colors duration-300">
-                      <span className="w-11 h-11 border border-gold-500/40 flex items-center justify-center text-gold-700 dark:text-gold-500">
-                        <v.icon className="w-5 h-5" />
-                      </span>
-                      <h3 className="font-serif text-xl text-fg mt-5">{v.title}</h3>
-                      <p className="text-fg-soft text-sm leading-relaxed mt-3">{v.text}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </Section>
-
-            <Section id="awards">
-              <p>
-                Rohit Jain has received more than 18 national and international awards across entrepreneurship, real
-                estate excellence and community leadership. The most notable came in December 2025, when he was
-                recognised for real estate excellence at the Global Innovation & Leadership Summit in London — held at
-                the House of Lords, UK Parliament, alongside 30 distinguished Indian MSME leaders.
-              </p>
-              <p>
-                In 2026 he was honoured for excellence in real estate at the India–Sri Lanka Business Summit, received
-                the Braj Ratna Alankaran Samman from the Incredible India Foundation in the presence of the Governor of
-                Bihar, and was named among the 14th Leaders Agra Awards. The pattern is telling: his honours divide
-                almost evenly between business and civic recognition — Braj Ratna twice, Pride of Agra, the Agra Police
-                felicitation. For a builder, that balance says as much about what he has given the city as what he has
-                built in it.
-              </p>
-
-              <div className="space-y-10 !mt-10">
-                {AWARD_YEARS.map(({ year, awards }) => (
-                  <div key={year}>
-                    <div className="flex items-baseline gap-4">
-                      <span className="font-serif text-3xl gold-text">{year}</span>
-                      <span className="h-px flex-1 bg-gold-500/25" />
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-fg-faint whitespace-nowrap">
-                        {awards.length} {awards.length === 1 ? 'Honour' : 'Honours'}
-                      </span>
-                    </div>
-                    <ul className="mt-5 grid sm:grid-cols-2 gap-x-8 gap-y-5">
-                      {awards.map((a) => (
-                        <li key={a.title} className="flex items-start gap-4">
-                          <img
-                            src={a.image}
-                            alt={`${a.title}, ${a.awardedBy}`}
-                            loading="lazy"
-                            className="w-16 h-16 flex-shrink-0 object-cover border border-soft"
-                          />
-                          <div>
-                            <p className="text-fg font-medium leading-snug">{a.title}</p>
-                            <p className="text-fg-soft text-sm mt-1">{a.awardedBy}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              <p className="!mt-10">
-                Earlier recognitions include Indian Innovative Entrepreneur of the Year 2018 at the CCLA Award Ceremony
-                and a Best Performance Award from Reliance Retail.
-              </p>
-              <div>
-                <Link to="/media/awards" className="btn-outline-gold">
-                  See every award <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </Section>
-
-            <Section id="media">
-              <p>
-                Rohit Jain’s work at Ahinsa Group has been covered by national media houses and property platforms alike.
-              </p>
-              <ul className="max-w-3xl divide-y divide-gold-500/15 border-y border-soft">
-                {MEDIA.map((m) => (
-                  <li key={m.title} className="py-6">
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-gold-700 dark:text-gold-500">{m.outlet}</p>
-                    <h3 className="font-serif text-xl text-fg mt-2">{m.title}</h3>
-                    <p className="text-fg-soft leading-relaxed mt-2">{m.text}</p>
-                  </li>
-                ))}
-              </ul>
-            </Section>
-
-            <Section id="social-leadership">
-              <p>
-                Rohit Jain is President of BJS-UP, the Uttar Pradesh unit of Bharatiya Jain Sanghatana, and holds a
-                leadership role at VSPS Trust. Guided by the very name he chose for his enterprise, he believes business
-                and community are inseparable — that a township should improve life for every resident, not just the
-                investor.
-              </p>
-              <p>
-                That belief shows in the group’s own calendar. In May 2026, Ahinsa Group developed and offered Vihasant
-                Bhawan for the saint community at Ahinsa The Grand Green Valley. Its project sites host devotional
-                evenings — a Bhajan Sandhya in September 2025 and an evening with Kirti Kishori Ji that December — and
-                every Independence Day the tricolour is raised on all its projects, with a tiranga rally through the
-                city. <Link to="/media/events" className={LINK}>See the events</Link>.
-              </p>
-
-              {COMMUNITY_PHOTOS.length > 0 && (
-                <div className="grid sm:grid-cols-2 gap-5 !mt-10">
-                  {COMMUNITY_PHOTOS.map(([src, caption]) => (
-                    <Reveal key={src}>
-                      <figure>
-                        <div className="img-zoom aspect-[4/3] overflow-hidden">
-                          <img src={src} alt={caption} loading="lazy" className="w-full h-full object-cover" />
-                        </div>
-                        <figcaption className="mt-3 text-sm text-fg-faint">{caption}</figcaption>
-                      </figure>
-                    </Reveal>
-                  ))}
-                </div>
-              )}
-
-              <p className="!mt-10">
-                His civic honours reflect the same work: the Braj Ratna Award in 2024 for helping preserve the heritage
-                of the Braj region, Pride of Agra from Hindustan for contributions to society, and the Times of India
-                group’s Agra Police felicitation in 2025 as a supporter of community welfare.
-              </p>
-            </Section>
-
-            {chairman?.video && (
-              <Section id="video">
-                <p>Hear Rohit Jain on Ahinsa Group, its projects and the city it builds in.</p>
-                <Reveal>
-                  <VideoTile src={chairman.video} title="Rohit Jain, Chairman of Ahinsa Group, Agra" className="max-w-4xl" />
+            <h3 className="font-serif text-xl md:text-2xl text-ink-900 !mt-10 md:!mt-12">Beyond Agra</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5">
+              {OTHER_PROJECTS.map((p, i) => (
+                <Reveal key={p.slug} delay={(i % 3) * 0.06}>
+                  <ProjectCard project={p} />
                 </Reveal>
-              </Section>
+              ))}
+            </div>
+
+            <p className="!mt-10">
+              Across these projects the range covers residential and commercial plots, villas, farm houses,
+              commercial complexes and retail — with land acquisition, construction and design handled within the
+              group, so a buyer deals with one company from empty land to the handover of keys.{' '}
+              <Link to="/projects" className={LINK}>See all Ahinsa Group projects</Link>.
+            </p>
+          </Section>
+
+          <Section id="leadership-philosophy">
+            <p>
+              Ahinsa Group’s positioning under Rohit Jain rests on three commitments: quality of construction,
+              transparency in dealing, and timely execution.
+            </p>
+            <p>
+              The third is the sharpest. Delayed possession is the most common complaint in Indian real estate, and a
+              builder who leads with timelines makes himself measurable. A chairman who lives in the city is a
+              chairman who can be found when a deadline slips.
+            </p>
+
+            <PullQuote cite="Mr. Rohit Jain, Chairman, Ahinsa Group">
+              My vision has always been simple: build homes that families are proud of, in communities they want to
+              belong to — and always keep the customer’s trust at the centre of everything we do.
+            </PullQuote>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+              {VALUES.map((v, i) => (
+                <Reveal key={v.title} delay={(i % 2) * 0.08}>
+                  <div className="h-full flex sm:block gap-4 bg-white border border-gold-500/20 p-5 md:p-7 hover:border-gold-500/60 transition-colors duration-300">
+                    <span className="w-11 h-11 shrink-0 border border-gold-500/40 flex items-center justify-center text-gold-700">
+                      <v.icon className="w-5 h-5" />
+                    </span>
+                    <div>
+                      <h3 className="font-serif text-lg md:text-xl text-ink-900 sm:mt-5">{v.title}</h3>
+                      <p className="text-ink-600 text-sm leading-relaxed mt-1.5 sm:mt-3">{v.text}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </Section>
+
+          <Section id="awards">
+            <p>
+              Rohit Jain has received more than 18 national and international awards across entrepreneurship, real
+              estate excellence and community leadership. The most notable came in December 2025, when he was
+              recognised for real estate excellence at the Global Innovation & Leadership Summit in London — held at
+              the House of Lords, UK Parliament, alongside 30 distinguished Indian MSME leaders.
+            </p>
+            <p>
+              In 2026 he was honoured for excellence in real estate at the India–Sri Lanka Business Summit, received
+              the Braj Ratna Alankaran Samman from the Incredible India Foundation in the presence of the Governor of
+              Bihar, and was named among the 14th Leaders Agra Awards. The pattern is telling: his honours divide
+              almost evenly between business and civic recognition — Braj Ratna twice, Pride of Agra, the Agra Police
+              felicitation. For a builder, that balance says as much about what he has given the city as what he has
+              built in it.
+            </p>
+
+            <div className="space-y-8 md:space-y-10 !mt-10">
+              {AWARD_YEARS.map(({ year, awards }) => (
+                <div key={year}>
+                  <div className="flex items-baseline gap-4">
+                    <span className="font-serif text-3xl gold-text">{year}</span>
+                    <span className="h-px flex-1 bg-gold-500/30" />
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-ink-500 whitespace-nowrap">
+                      {awards.length} {awards.length === 1 ? 'Honour' : 'Honours'}
+                    </span>
+                  </div>
+                  <ul className="mt-4 md:mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 md:gap-y-5">
+                    {awards.map((a) => (
+                      <li key={a.title} className="flex items-start gap-4 bg-white sm:bg-transparent border border-gold-500/15 sm:border-0 p-3 sm:p-0">
+                        <img
+                          src={a.image}
+                          alt={`${a.title}, ${a.awardedBy}`}
+                          loading="lazy"
+                          className="w-14 h-14 md:w-16 md:h-16 flex-shrink-0 object-cover border border-gold-500/20"
+                        />
+                        <div className="min-w-0">
+                          <p className="text-ink-900 font-medium leading-snug">{a.title}</p>
+                          <p className="text-ink-500 text-sm mt-1">{a.awardedBy}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <p className="!mt-10">
+              Earlier recognitions include Indian Innovative Entrepreneur of the Year 2018 at the CCLA Award Ceremony
+              and a Best Performance Award from Reliance Retail.
+            </p>
+            <div>
+              <Link to="/media/awards" className="btn-outline-gold w-full sm:w-auto justify-center">
+                See every award <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </Section>
+
+          <Section id="media">
+            <p>
+              Rohit Jain’s work at Ahinsa Group has been covered by national media houses and property platforms alike.
+            </p>
+            <ul className="max-w-3xl divide-y divide-gold-500/20 border-y border-gold-500/20">
+              {MEDIA.map((m) => (
+                <li key={m.title} className="py-5 md:py-6">
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-gold-700">{m.outlet}</p>
+                  <h3 className="font-serif text-lg md:text-xl text-ink-900 mt-2">{m.title}</h3>
+                  <p className="text-ink-600 text-[15px] md:text-base leading-relaxed mt-2">{m.text}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+
+          <Section id="social-leadership">
+            <p>
+              Rohit Jain is President of BJS-UP, the Uttar Pradesh unit of Bharatiya Jain Sanghatana, and holds a
+              leadership role at VSPS Trust. Guided by the very name he chose for his enterprise, he believes business
+              and community are inseparable — that a township should improve life for every resident, not just the
+              investor.
+            </p>
+            <p>
+              That belief shows in the group’s own calendar. In May 2026, Ahinsa Group developed and offered Vihasant
+              Bhawan for the saint community at Ahinsa The Grand Green Valley. Its project sites host devotional
+              evenings — a Bhajan Sandhya in September 2025 and an evening with Kirti Kishori Ji that December — and
+              every Independence Day the tricolour is raised on all its projects, with a tiranga rally through the
+              city. <Link to="/media/events" className={LINK}>See the events</Link>.
+            </p>
+
+            {COMMUNITY_PHOTOS.length > 0 && (
+              <div className="grid grid-cols-2 gap-3 md:gap-5 !mt-10">
+                {COMMUNITY_PHOTOS.map(([src, caption]) => (
+                  <Reveal key={src}>
+                    <figure>
+                      <div className="img-zoom aspect-[4/5] sm:aspect-[4/3] overflow-hidden">
+                        <img src={src} alt={caption} loading="lazy" className="w-full h-full object-cover" />
+                      </div>
+                      <figcaption className="mt-2 md:mt-3 text-xs md:text-sm text-ink-500 leading-snug">{caption}</figcaption>
+                    </figure>
+                  </Reveal>
+                ))}
+              </div>
             )}
 
-            <Section id="chairmans-message">
-              {/* Dark in both themes; a shade lifted in dark mode so it doesn't vanish into the page. */}
-              <figure className="relative overflow-hidden bg-ink-900 dark:bg-ink-800 border border-gold-500/20 text-cream p-8 md:p-14">
-                <span aria-hidden="true" className="absolute -right-4 -bottom-16 font-display text-[14rem] leading-none text-gold-500/[0.06] select-none">
-                  ”
+            <p className="!mt-10">
+              His civic honours reflect the same work: the Braj Ratna Award in 2024 for helping preserve the heritage
+              of the Braj region, Pride of Agra from Hindustan for contributions to society, and the Times of India
+              group’s Agra Police felicitation in 2025 as a supporter of community welfare.
+            </p>
+          </Section>
+
+          {chairman?.video && (
+            <Section id="video">
+              <p>Hear Rohit Jain on Ahinsa Group, its projects and the city it builds in.</p>
+              <Reveal>
+                <VideoTile src={chairman.video} title="Rohit Jain, Chairman of Ahinsa Group, Agra" className="max-w-4xl" />
+              </Reveal>
+            </Section>
+          )}
+
+          <Section id="chairmans-message">
+            <figure className="relative overflow-hidden bg-white border border-gold-500/30 shadow-[0_24px_60px_-35px_rgba(58,45,10,0.5)] p-6 md:p-14">
+              <div aria-hidden="true" className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-700" />
+              <span aria-hidden="true" className="absolute -right-4 -bottom-16 font-display text-[12rem] md:text-[14rem] leading-none text-gold-500/10 select-none">
+                ”
+              </span>
+              <Quote aria-hidden="true" className="w-9 h-9 md:w-10 md:h-10 text-gold-500" />
+              <blockquote className="relative mt-5 md:mt-6 space-y-5 md:space-y-6 font-display italic text-lg md:text-[1.75rem] leading-snug text-ink-900">
+                <p>
+                  Ahinsa Group was not built on transactions. It was built on relationships — with the families who
+                  trusted us with their life savings, with the teams who gave their best to every brick and beam, and
+                  with the city of Agra, which has been the soil from which everything we have built has grown.
+                </p>
+                <p>
+                  My commitment remains unchanged: to build with integrity, to deliver with honour, and to leave
+                  behind communities that make Agra proud.
+                </p>
+              </blockquote>
+              <figcaption className="relative mt-8 md:mt-10 flex items-center gap-4">
+                <img src={avatar} alt="" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-gold-500/50" />
+                <span>
+                  <span className="block font-serif text-lg text-ink-900">Mr. Rohit Jain</span>
+                  <span className="block text-[11px] uppercase tracking-[0.25em] text-gold-700 mt-1">Chairman, Ahinsa Group</span>
                 </span>
-                <Quote aria-hidden="true" className="w-10 h-10 text-gold-500/60" />
-                <blockquote className="relative mt-6 space-y-6 font-display italic text-xl md:text-[1.75rem] leading-snug text-cream">
-                  <p>
-                    Ahinsa Group was not built on transactions. It was built on relationships — with the families who
-                    trusted us with their life savings, with the teams who gave their best to every brick and beam, and
-                    with the city of Agra, which has been the soil from which everything we have built has grown.
-                  </p>
-                  <p>
-                    My commitment remains unchanged: to build with integrity, to deliver with honour, and to leave
-                    behind communities that make Agra proud.
-                  </p>
-                </blockquote>
-                <figcaption className="relative mt-10 flex items-center gap-4">
-                  <img src={avatar} alt="" width="56" height="56" className="w-14 h-14 rounded-full object-cover border border-gold-500/40" />
-                  <span>
-                    <span className="block font-serif text-lg text-cream">Mr. Rohit Jain</span>
-                    <span className="block text-[11px] uppercase tracking-[0.25em] text-gold-400 mt-1">Chairman, Ahinsa Group</span>
-                  </span>
-                </figcaption>
-              </figure>
-            </Section>
+              </figcaption>
+            </figure>
+          </Section>
 
-            <Section id="faq">
-              <div className="max-w-3xl divide-y divide-gold-500/15 border-y border-soft">
-                {FAQS.map(([question, answer], i) => (
-                  <details key={question} open={i === 0} className="group py-5">
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-6 [&::-webkit-details-marker]:hidden">
-                      <h3 className="font-serif text-lg md:text-xl text-fg">{question}</h3>
-                      <ChevronDown className="w-5 h-5 mt-1 flex-shrink-0 text-gold-600 transition-transform duration-300 group-open:rotate-180" />
-                    </summary>
-                    <p className="mt-4 text-fg-muted leading-relaxed">{answer}</p>
-                  </details>
-                ))}
-              </div>
-            </Section>
-
-            <div className="lg:hidden border-t border-soft pt-10 mt-14">
-              <Share />
+          <Section id="faq">
+            <div className="max-w-3xl divide-y divide-gold-500/20 border-y border-gold-500/20">
+              {FAQS.map(([question, answer], i) => (
+                <details key={question} open={i === 0} className="group py-4 md:py-5">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-5 [&::-webkit-details-marker]:hidden">
+                    <h3 className="font-serif text-[17px] md:text-xl text-ink-900 leading-snug">{question}</h3>
+                    <ChevronDown className="w-5 h-5 mt-0.5 flex-shrink-0 text-gold-600 transition-transform duration-300 group-open:rotate-180" />
+                  </summary>
+                  <p className="mt-3 md:mt-4 text-ink-700 text-[15px] md:text-base leading-relaxed">{answer}</p>
+                </details>
+              ))}
             </div>
-          </article>
-        </div>
+          </Section>
+
+          <div className="lg:hidden border-t border-gold-500/20 pt-10 mt-12">
+            <Share />
+          </div>
+        </article>
       </div>
 
       {/* CLOSE */}
-      <section className="bg-page-alt border-t border-soft">
-        <div className="container-x py-20 text-center max-w-3xl mx-auto">
+      <section className="bg-[#F0EBDC] border-t border-gold-500/20">
+        <div className="container-x py-16 md:py-20 text-center max-w-3xl mx-auto">
           <Reveal>
-            <h2 className="heading-serif text-fg text-4xl md:text-5xl text-balance">
+            <h2 className="heading-serif text-ink-900 text-3xl md:text-5xl text-balance">
               Meet the people behind <span className="gold-text">every Ahinsa address</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
-              <Link to="/about/management" className="btn-gold">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-3 sm:gap-4 mt-8 md:mt-10">
+              <Link to="/about/management" className="btn-gold justify-center">
                 Meet the Management <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/projects" className="btn-outline-gold">Explore Our Projects</Link>
-              <Link to="/contact" className="btn-outline-gold">Contact Us</Link>
+              <Link to="/projects" className="btn-outline-gold justify-center">Explore Our Projects</Link>
+              <Link to="/contact" className="btn-outline-gold justify-center">Contact Us</Link>
             </div>
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   )
 }

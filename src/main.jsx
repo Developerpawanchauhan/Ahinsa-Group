@@ -2,11 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
-import { ThemeProvider } from './hooks/useTheme.jsx'
+import { ThemeProvider, isLightOnly } from './hooks/useTheme.jsx'
 import './index.css'
 
 // Apply theme class as early as possible to avoid flash of wrong theme
 ;(function applyInitialTheme() {
+  if (isLightOnly(window.location.pathname)) return
   try {
     const saved = localStorage.getItem('ahinsa-theme')
     const theme = saved === 'light' || saved === 'dark' ? saved : 'dark'
