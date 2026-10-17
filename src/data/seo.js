@@ -20,7 +20,7 @@ const DEFAULT_IMAGE = '/logo.png'
 // Google asks for in an article result — 16:9, 4:3 and 1:1, each 1200px+ wide.
 export const ROHIT_JAIN_ARTICLE = {
   path: '/rohit-jain/',
-  headline: 'Rohit Jain – Chairman of Ahinsa Group, Agra: Entrepreneur, Builder and Social Leader',
+  headline: 'Rohit Jain - Chairman of Ahinsa Group, Agra: Entrepreneur, Builder and Social Leader',
   published: '2026-10-17T10:00:00+05:30',
   modified: '2026-10-17T10:00:00+05:30',
   images: [
@@ -76,7 +76,7 @@ function rohitJainJsonLd() {
           { '@type': 'Organization', name: 'Bharatiya Jain Sanghatana, Uttar Pradesh (BJS-UP)' },
           { '@type': 'Organization', name: 'VSPS Trust' },
         ],
-        award: AWARDS.map((w) => `${w.title} — ${w.awardedBy} (${w.year})`),
+        award: AWARDS.map((w) => `${w.title} - ${w.awardedBy} (${w.year})`),
         knowsAbout: ['Real estate development', 'Township planning', 'Entrepreneurship', 'Community service'],
       },
       {
@@ -171,7 +171,7 @@ export const PAGE_META = {
   },
   rohitJain: {
     path: ROHIT_JAIN_ARTICLE.path,
-    title: 'Rohit Jain – Chairman, Ahinsa Group Agra',
+    title: 'Rohit Jain - Chairman, Ahinsa Group Agra',
     description: ROHIT_JAIN_DESCRIPTION,
     type: 'article',
     image: ROHIT_JAIN_ARTICLE.images[0],
