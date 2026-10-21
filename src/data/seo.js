@@ -183,7 +183,7 @@ export const PAGE_META = {
     path: '/portfolio/',
     title: 'Portfolio - Website & Social Profiles',
     description:
-      'Ahinsa Group in one place: visit our website, follow us on Instagram, Facebook, YouTube and LinkedIn, or chat with us on WhatsApp.',
+      'Ahinsa Group in one place: our website, Instagram, Facebook, YouTube, LinkedIn and WhatsApp, and directions to our head office in Agra.',
     robots: 'noindex, nofollow',
   },
   sitemap: {

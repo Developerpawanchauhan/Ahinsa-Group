@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight, Facebook, Globe, Instagram, Linkedin, MapPin, Youtube } from 'lucide-react'
+import { ArrowUpRight, Facebook, Globe, Instagram, Linkedin, MapPin, Navigation, Youtube } from 'lucide-react'
 import { WHATSAPP_URL, WhatsAppIcon } from '../components/WhatsAppButton'
-import { COMPANY } from '../data/site'
+import { COMPANY, OFFICES } from '../data/site'
 import { PAGE_META } from '../data/seo'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -150,6 +150,52 @@ function LogoMark({ still }) {
   )
 }
 
+/** A small gold heading between groups of links: "Follow us", "Visit us". */
+function Divider({ item, children }) {
+  return (
+    <motion.li
+      variants={item}
+      className="flex items-center gap-3 pb-1 pt-5 text-[10px] uppercase tracking-[0.35em] text-gold-700"
+    >
+      <span className="h-px flex-1 bg-gold-500/35" />
+      {children}
+      <span className="h-px flex-1 bg-gold-500/35" />
+    </motion.li>
+  )
+}
+
+/** The head office's address, opening its Google Maps listing for directions. */
+function OfficeLink({ office, item }) {
+  return (
+    <motion.li variants={item}>
+      <motion.a
+        href={office.mapUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Head office: ${office.address}. Get directions`}
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.97 }}
+        className="group flex items-center gap-4 rounded-2xl border border-gold-500/30 bg-white/85 px-4 py-4 shadow-[0_10px_30px_-18px_rgba(135,104,24,0.45)] backdrop-blur-md transition-colors duration-300 hover:border-gold-500/60 hover:bg-white"
+      >
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-gold-400 to-gold-700 text-white shadow-lg">
+          <MapPin className="h-5 w-5" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block font-medium text-ink-900">Head Office, Agra</span>
+          <span className="mt-0.5 block text-xs leading-snug text-ink-500">{office.address}</span>
+          <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-700">
+            <Navigation className="h-3 w-3" />
+            Get directions
+          </span>
+        </span>
+        <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      </motion.a>
+    </motion.li>
+  )
+}
+
+const HEAD_OFFICE = OFFICES.find((o) => o.isHeadOffice)
+
 function SocialLink({ social, item }) {
   const { name, handle, href, icon: Icon, chip } = social
   return (
@@ -270,18 +316,17 @@ export default function Portfolio() {
             </motion.div>
           </motion.li>
 
-          <motion.li
-            variants={item}
-            className="flex items-center gap-3 pb-1 pt-5 text-[10px] uppercase tracking-[0.35em] text-gold-700"
-          >
-            <span className="h-px flex-1 bg-gold-500/35" />
-            Follow us
-            <span className="h-px flex-1 bg-gold-500/35" />
-          </motion.li>
-
+          <Divider item={item}>Follow us</Divider>
           {SOCIALS.map((social) => (
             <SocialLink key={social.name} social={social} item={item} />
           ))}
+
+          {HEAD_OFFICE?.mapUrl && (
+            <>
+              <Divider item={item}>Visit us</Divider>
+              <OfficeLink office={HEAD_OFFICE} item={item} />
+            </>
+          )}
         </motion.ul>
 
         <motion.p
