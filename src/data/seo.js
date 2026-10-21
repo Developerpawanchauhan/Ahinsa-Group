@@ -177,6 +177,15 @@ export const PAGE_META = {
     image: ROHIT_JAIN_ARTICLE.images[0],
     jsonLd: rohitJainJsonLd(),
   },
+  // The link-in-bio page shared on social profiles. Kept out of search: noindex
+  // here, and left out of sitemap.xml, robots.txt and the Sitemap page.
+  portfolio: {
+    path: '/portfolio/',
+    title: 'Portfolio - Website & Social Profiles',
+    description:
+      'Ahinsa Group in one place: visit our website, follow us on Instagram, Facebook, YouTube and LinkedIn, or chat with us on WhatsApp.',
+    robots: 'noindex, nofollow',
+  },
   sitemap: {
     path: '/sitemap',
     title: 'Sitemap',
@@ -271,6 +280,8 @@ export function metaTags(meta) {
   const image = SITE_URL + (meta.image || DEFAULT_IMAGE)
   return [
     ['name', 'description', meta.description],
+    // Set on every page, so leaving a noindex page doesn't carry noindex along.
+    ['name', 'robots', meta.robots || 'index, follow, max-image-preview:large'],
     ['property', 'og:site_name', 'Ahinsa Group'],
     ['property', 'og:type', meta.type || 'website'],
     ['property', 'og:title', title],
@@ -288,4 +299,6 @@ export function metaTags(meta) {
 // with their title, tags and structured data already in it — for crawlers and
 // link previews (WhatsApp, Facebook) that never run the site's JavaScript. Each
 // path must end in "/": Apache serves the page from that folder's index.html.
-export const STATIC_PAGES = [PAGE_META.rohitJain]
+// The portfolio is here so its noindex is in the HTML itself, not only added by
+// JavaScript — and so a shared link previews with its own title.
+export const STATIC_PAGES = [PAGE_META.rohitJain, PAGE_META.portfolio]

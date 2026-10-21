@@ -15,7 +15,7 @@ function setMeta(attr, key, content) {
 /**
  * Gives the current page its own title, description, share-preview tags,
  * canonical URL and — when it has some — structured data. `meta` is an entry
- * from src/data/seo.js: { path, title, description, image?, type?, jsonLd? }.
+ * from src/data/seo.js: { path, title, description, image?, type?, robots?, jsonLd? }.
  * " | AHINSA GROUP" is added to the title there, so every page ends with it.
  * Pass null to leave the head alone (e.g. while redirecting).
  */
@@ -51,7 +51,7 @@ export function usePageMeta(meta) {
     jsonLd.textContent = JSON.stringify(meta.jsonLd)
     return () => jsonLd.remove()
     // The fields, not the object: a project page builds a new one each render.
-  }, [meta?.path, meta?.title, meta?.description, meta?.image, meta?.type, meta?.jsonLd])
+  }, [meta?.path, meta?.title, meta?.description, meta?.image, meta?.type, meta?.robots, meta?.jsonLd])
 }
 
 export default usePageMeta

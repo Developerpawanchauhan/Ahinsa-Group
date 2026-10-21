@@ -30,6 +30,13 @@ import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 import Sitemap from './pages/Sitemap'
+// The link-in-bio page for social profiles. Not linked from the site, and
+// noindex (see PAGE_META.portfolio in data/seo.js).
+import Portfolio from './pages/Portfolio'
+
+// Pages that are a whole screen of their own, without the site's navbar,
+// footer, floating buttons or welcome popup.
+const STANDALONE_PATHS = ['/portfolio', '/portfolio/']
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -43,10 +50,12 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const standalone = STANDALONE_PATHS.includes(useLocation().pathname)
+
   return (
     <>
       <ScrollToTop />
-      <Navbar />
+      {!standalone && <Navbar />}
       <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -79,15 +88,22 @@ export default function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/sitemap" element={<Sitemap />} />
 
+          {/* Linked as /portfolio/ — its own HTML from the build, with noindex. */}
+          <Route path="/portfolio" element={<Portfolio />} />
+
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
-      <Footer />
-      {/* Both float bottom-right; the chat launcher sits above the WhatsApp one. */}
-      <WhatsAppButton />
-      <ChatWidget />
-      {/* Opens 10s into the first page view of a session. */}
-      <WelcomePopup />
+      {!standalone && (
+        <>
+          <Footer />
+          {/* Both float bottom-right; the chat launcher sits above the WhatsApp one. */}
+          <WhatsAppButton />
+          <ChatWidget />
+          {/* Opens 10s into the first page view of a session. */}
+          <WelcomePopup />
+        </>
+      )}
     </>
   )
 }
