@@ -9,8 +9,9 @@ import usePageMeta from '../hooks/usePageMeta'
 
 // The link-in-bio page shared on social profiles (/portfolio). It stands on
 // its own — App.jsx leaves the site's navbar, footer and floating buttons off
-// it — and is dark and gold whichever theme the visitor has picked. Built for
-// a phone first; on a desktop it is the same column, centred.
+// it — and is light-only (LIGHT_ONLY_PATHS in hooks/useTheme.jsx): cream and
+// gold whichever theme the visitor has picked. Built for a phone first; on a
+// desktop it is the same column, centred.
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -74,14 +75,15 @@ const FADE = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duratio
 function Backdrop({ still }) {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,162,39,0.22),transparent_60%)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F1E9D6] via-[#F7F2E7] to-[#FBF8F1]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,162,39,0.20),transparent_60%)]" />
       <motion.div
-        className="absolute -left-36 top-1/4 h-80 w-80 rounded-full bg-gold-500/20 blur-[90px]"
+        className="absolute -left-36 top-1/4 h-80 w-80 rounded-full bg-gold-300/35 blur-[90px]"
         animate={still ? undefined : { x: [0, 70, 0], y: [0, -40, 0], scale: [1, 1.15, 1] }}
         transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute -right-36 bottom-6 h-96 w-96 rounded-full bg-gold-700/25 blur-[100px]"
+        className="absolute -right-36 bottom-6 h-96 w-96 rounded-full bg-gold-200/50 blur-[100px]"
         animate={still ? undefined : { x: [0, -60, 0], y: [0, 30, 0], scale: [1.1, 1, 1.1] }}
         transition={{ duration: 19, repeat: Infinity, ease: 'easeInOut' }}
       />
@@ -89,17 +91,16 @@ function Backdrop({ still }) {
         SPECKS.map(([left, size, duration, delay], i) => (
           <motion.span
             key={i}
-            className="absolute bottom-0 rounded-full bg-gold-300 shadow-[0_0_6px_rgba(228,198,86,0.9)]"
+            className="absolute bottom-0 rounded-full bg-gold-500 shadow-[0_0_6px_rgba(201,162,39,0.7)]"
             style={{ left: `${left}%`, width: size, height: size }}
             initial={{ y: 0, opacity: 0 }}
-            animate={{ y: '-105vh', opacity: [0, 0.9, 0.9, 0] }}
+            animate={{ y: '-105vh', opacity: [0, 0.7, 0.7, 0] }}
             transition={{
               y: { duration, delay, repeat: Infinity, ease: 'linear' },
               opacity: { duration, delay, repeat: Infinity, times: [0, 0.1, 0.8, 1] },
             }}
           />
         ))}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(0,0,0,0.6))]" />
     </div>
   )
 }
@@ -115,16 +116,20 @@ function LogoMark({ still }) {
     >
       <motion.span
         aria-hidden="true"
-        className="absolute inset-3 rounded-full bg-gold-500/25 blur-2xl"
+        className="absolute inset-3 rounded-full bg-gold-300/45 blur-2xl"
         animate={still ? undefined : { opacity: [0.45, 0.9, 0.45], scale: [0.92, 1.05, 0.92] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <span aria-hidden="true" className="absolute inset-0 rounded-full border border-gold-500/20" />
+      <span aria-hidden="true" className="absolute inset-0 rounded-full border border-gold-500/30" />
+      <span
+        aria-hidden="true"
+        className="absolute inset-[10px] rounded-full bg-white/85 shadow-[0_24px_50px_-24px_rgba(135,104,24,0.55)]"
+      />
       <motion.span
         aria-hidden="true"
         className="absolute inset-0 rounded-full"
         style={{
-          background: 'conic-gradient(from 0deg, transparent 0deg, rgba(228,198,86,0.95) 70deg, transparent 140deg)',
+          background: 'conic-gradient(from 0deg, transparent 0deg, rgba(201,162,39,0.95) 70deg, transparent 140deg)',
           WebkitMask: RING_MASK,
           mask: RING_MASK,
         }}
@@ -156,16 +161,16 @@ function SocialLink({ social, item }) {
         aria-label={`${name}: ${handle}`}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.97 }}
-        className="group flex h-16 items-center gap-4 rounded-2xl border border-gold-500/20 bg-white/[0.04] px-4 backdrop-blur-md transition-colors duration-300 hover:border-gold-500/50 hover:bg-white/[0.07]"
+        className="group flex h-16 items-center gap-4 rounded-2xl border border-gold-500/20 bg-white/80 px-4 shadow-[0_10px_30px_-18px_rgba(135,104,24,0.45)] backdrop-blur-md transition-colors duration-300 hover:border-gold-500/50 hover:bg-white"
       >
         <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl text-white shadow-lg ${chip}`}>
           <Icon className="h-5 w-5" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block font-medium text-cream">{name}</span>
-          <span className="block truncate text-xs text-ink-300">{handle}</span>
+          <span className="block font-medium text-ink-900">{name}</span>
+          <span className="block truncate text-xs text-ink-500">{handle}</span>
         </span>
-        <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-400 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </motion.a>
     </motion.li>
   )
@@ -176,24 +181,25 @@ export default function Portfolio() {
   const still = useReducedMotion()
   const item = still ? FADE : RISE
 
-  // The page is dark in either theme; match the body so an iPhone's overscroll
-  // bounce shows dark too, not the light theme's cream.
+  // Tint the phone's browser bar cream to match while here (the site's default
+  // is the dark theme's ink).
   useEffect(() => {
-    const previous = document.body.style.backgroundColor
-    document.body.style.backgroundColor = '#0B0B08'
+    const tag = document.querySelector('meta[name="theme-color"]')
+    const previous = tag?.getAttribute('content')
+    tag?.setAttribute('content', '#F1E9D6')
     return () => {
-      document.body.style.backgroundColor = previous
+      if (tag && previous) tag.setAttribute('content', previous)
     }
   }, [])
 
   return (
-    <div className="relative min-h-[100svh] overflow-hidden bg-ink-900 text-cream">
+    <div className="relative min-h-[100svh] overflow-hidden bg-cream text-ink-800">
       <Backdrop still={still} />
 
       <div className="relative mx-auto flex min-h-[100svh] w-full max-w-[26rem] flex-col items-center px-5 pt-[max(2.75rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
         <LogoMark still={still} />
 
-        <h1 className="mt-6 text-center font-serif text-[2.1rem] leading-none text-cream">
+        <h1 className="mt-6 text-center font-serif text-[2.1rem] leading-none text-ink-900">
           {['Ahinsa', 'Group'].map((word, i) => (
             <span key={word} className="inline-block overflow-hidden pb-1 align-bottom">
               <motion.span
@@ -218,7 +224,7 @@ export default function Portfolio() {
         />
 
         <motion.p
-          className="mt-4 text-center font-display text-lg italic text-gold-400"
+          className="mt-4 text-center font-display text-lg italic text-gold-700"
           initial={{ opacity: 0, y: still ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
@@ -226,12 +232,12 @@ export default function Portfolio() {
           {COMPANY.tagline}
         </motion.p>
         <motion.p
-          className="mt-2 flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] text-ink-300"
+          className="mt-2 flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] text-ink-500"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.7, delay: 0.65 }}
         >
-          <MapPin className="h-3.5 w-3.5 text-gold-500" />
+          <MapPin className="h-3.5 w-3.5 text-gold-600" />
           Agra · Gwalior · Firozabad
         </motion.p>
 
@@ -240,7 +246,7 @@ export default function Portfolio() {
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link
                 to="/"
-                className="group relative flex h-[4.25rem] items-center gap-4 overflow-hidden rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 px-4 text-ink-900 shadow-[0_20px_45px_-20px_rgba(201,162,39,0.85)] ring-1 ring-gold-300/60"
+                className="group relative flex h-[4.25rem] items-center gap-4 overflow-hidden rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 px-4 text-ink-900 shadow-[0_20px_45px_-20px_rgba(168,133,29,0.7)] ring-1 ring-gold-300/70"
               >
                 {/* A band of light that sweeps across every few seconds. */}
                 {!still && (
@@ -266,11 +272,11 @@ export default function Portfolio() {
 
           <motion.li
             variants={item}
-            className="flex items-center gap-3 pb-1 pt-5 text-[10px] uppercase tracking-[0.35em] text-gold-400/80"
+            className="flex items-center gap-3 pb-1 pt-5 text-[10px] uppercase tracking-[0.35em] text-gold-700"
           >
-            <span className="h-px flex-1 bg-gold-500/25" />
+            <span className="h-px flex-1 bg-gold-500/35" />
             Follow us
-            <span className="h-px flex-1 bg-gold-500/25" />
+            <span className="h-px flex-1 bg-gold-500/35" />
           </motion.li>
 
           {SOCIALS.map((social) => (
@@ -279,7 +285,7 @@ export default function Portfolio() {
         </motion.ul>
 
         <motion.p
-          className="mt-auto pt-12 text-center text-[11px] tracking-wide text-ink-400"
+          className="mt-auto pt-12 text-center text-[11px] tracking-wide text-ink-500"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.3 }}
