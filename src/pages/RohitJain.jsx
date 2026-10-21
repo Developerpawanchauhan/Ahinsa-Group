@@ -438,10 +438,6 @@ export default function RohitJain() {
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-sm text-ink-500">
               <span className="flex items-center gap-2">
-                <img src={avatar} alt="" width="28" height="28" className="w-7 h-7 rounded-full object-cover border border-gold-500/40" />
-                By <span className="text-ink-900 font-medium">Ahinsa Group</span>
-              </span>
-              <span className="flex items-center gap-2">
                 <CalendarDays className="w-4 h-4 text-gold-600" />
                 <time dateTime={published}>{publishedOn}</time>
               </span>
@@ -615,17 +611,16 @@ export default function RohitJain() {
               belong to - and always keep the customer’s trust at the centre of everything we do.
             </PullQuote>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+            {/* Two by two at every width; tighter on phones so two columns fit. */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-5">
               {VALUES.map((v, i) => (
                 <Reveal key={v.title} delay={(i % 2) * 0.08}>
-                  <div className="h-full flex sm:block gap-4 bg-white border border-gold-500/20 p-5 md:p-7 hover:border-gold-500/60 transition-colors duration-300">
-                    <span className="w-11 h-11 shrink-0 border border-gold-500/40 flex items-center justify-center text-gold-700">
-                      <v.icon className="w-5 h-5" />
+                  <div className="h-full bg-white border border-gold-500/20 p-4 sm:p-5 md:p-7 hover:border-gold-500/60 transition-colors duration-300">
+                    <span className="w-9 h-9 sm:w-11 sm:h-11 border border-gold-500/40 flex items-center justify-center text-gold-700">
+                      <v.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                     </span>
-                    <div>
-                      <h3 className="font-serif text-lg md:text-xl text-ink-900 sm:mt-5">{v.title}</h3>
-                      <p className="text-ink-600 text-sm leading-relaxed mt-1.5 sm:mt-3">{v.text}</p>
-                    </div>
+                    <h3 className="font-serif text-base sm:text-lg md:text-xl text-ink-900 leading-snug mt-3 sm:mt-5">{v.title}</h3>
+                    <p className="text-ink-600 text-[13px] sm:text-sm leading-relaxed mt-1.5 sm:mt-3">{v.text}</p>
                   </div>
                 </Reveal>
               ))}
