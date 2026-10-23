@@ -432,9 +432,10 @@ export default function RohitJain() {
 
           <div className="order-3 lg:col-start-1 lg:col-span-7 lg:row-start-3 text-center lg:text-left max-w-2xl mx-auto lg:mx-0 mt-8">
             <p className="text-[17px] md:text-xl text-ink-600 leading-relaxed text-balance">
-              An entrepreneur for more than two decades, Mr. Rohit Jain leads Ahinsa Group - the Agra developer
-              behind The Grand Green Valley and the Green Valley townships - on a simple standard: build communities,
-              inspire trust and leave a legacy.
+              Mr. Rohit Jain is the Chairman of Ahinsa Group, one of Agra’s most respected real estate development
+              companies. A visionary entrepreneur with over two decades of experience, he has transformed the way
+              communities are built and experienced across Uttar Pradesh - guided always by the principle of Ahinsa:
+              integrity, transparency, and lasting value.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-sm text-ink-500">
               <span className="flex items-center gap-2">
@@ -465,7 +466,7 @@ export default function RohitJain() {
             <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-900/60 to-transparent" />
             <figcaption className="absolute left-5 bottom-5 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-4 py-2 text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-ink-800 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
-              Mr. Rohit Jain · Ahinsa Group office, Agra
+              Mr. Rohit Jain - Chairman - Ahinsa Group
             </figcaption>
           </figure>
 
