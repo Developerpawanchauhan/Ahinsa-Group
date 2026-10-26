@@ -9,7 +9,7 @@ const ARROW =
 
 /**
  * A row scrolled sideways by its arrow buttons (and by swipe), for things a
- * visitor plays or reads in place: videos, Instagram embeds.
+ * visitor plays or reads in place, such as videos.
  *
  * Unlike PhotoStrip it never repeats an item, never loops and never scrolls by
  * itself. Those suit photos, whose copies look the same. They do not suit

@@ -279,15 +279,6 @@ export const PROJECT_DETAILS = {
     tagline: 'Where everyday living meets resort-style luxury.',
     location: 'Fatehabad Road, Kundol, Agra',
     fullAddress: 'Fatehabad Road, Agra',
-    // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
-    instagram: {
-      handle: 'ahinsagroupagra',
-      posts: [
-        'https://www.instagram.com/p/DZ9jGzszijS/',
-        'https://www.instagram.com/p/DQ3dJ8qE_Tc/',
-        'https://www.instagram.com/p/DUFXmFzE2ks/',
-      ],
-    },
     type: 'Luxury Township',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots · Grand Villas',
@@ -644,7 +635,6 @@ export const PROJECT_DETAILS = {
     tagline: 'An upcoming township on Shivpuri Road, Gwalior.',
     location: 'Gwalior, Madhya Pradesh',
     fullAddress: 'Shivapuri Road, Shitla Chauraha, Gwalior, Madhya Pradesh',
-    instagram: null, // no Instagram section on this page
     type: 'Luxury Township',
     status: 'Upcoming',
     configurations: 'Residential & Commercial Plots · Grand Villas',
@@ -724,7 +714,6 @@ export const PROJECT_DETAILS = {
     tagline: 'Where Pride Meets Peace.',
     location: 'NH2 National Highway, Etmadpur, Agra',
     fullAddress: 'NH2 National Highway, Etmadpur, Agra',
-    instagram: null,
     type: 'Residential Community',
     status: 'Ongoing',
     configurations: '',
@@ -814,17 +803,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A modern address for those who lead with confidence.',
     location: 'Mudi Crossing, Agra',
     fullAddress: 'Mudi Crossing, Agra',
-    // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
-    instagram: {
-      handle: 'ahinsagroupagra',
-      posts: [
-        'https://www.instagram.com/p/DNx-j7F5vdm/',
-        'https://www.instagram.com/p/DVIcvAQk96E/',
-        'https://www.instagram.com/p/DV3Kktqk6wQ/',
-        'https://www.instagram.com/p/DObjEdxEw90/',
-        'https://www.instagram.com/p/DYwanblk25d/',
-      ],
-    },
     type: 'Luxury Township',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots · Farm House',
@@ -835,8 +813,7 @@ export const PROJECT_DETAILS = {
     mapEmbed: 'https://www.google.com/maps?q=27.2736831,78.0959693&output=embed',
     mapPlace: 'Ahinsa Green Valley Empire, Mudi Crossing, Agra',
     videoEmbed: 'https://www.youtube.com/embed/cMfuRv97hRI',
-    // Played inside "A closer look". YouTube and Instagram links both work —
-    // each is shown with its own player.
+    // Played inside "A closer look", each in its own player. YouTube links only.
     galleryVideos: [
       'https://www.youtube.com/embed/j6qEkYoPBeE',
       'https://www.youtube.com/embed/DW8b84zmq08',
@@ -1068,20 +1045,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A flagship gated community where Agra learnt to live larger.',
     location: 'Kuberpur, Agra',
     fullAddress: 'Kuberpur, Agra',
-    // Project-specific Instagram posts (overrides the site-wide INSTAGRAM default).
-    // The middle card needs carousel slide 3, which an embed can't open at, so
-    // it stays a local image linking to that slide.
-    instagram: {
-      handle: 'ahinsagroupagra',
-      posts: [
-        'https://www.instagram.com/p/DaavDLETukL/',
-        {
-          image: '/images/instagram/DUYD-4rEwTL-3.webp',
-          url: 'https://www.instagram.com/p/DUYD-4rEwTL/?img_index=3',
-        },
-        'https://www.instagram.com/p/DSKBRbVkyrV/',
-      ],
-    },
     type: 'Luxury Township',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots',
@@ -1290,7 +1253,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A premium business address engineered for the next decade.',
     location: 'Kuberpur, Agra',
     fullAddress: 'Kuberpur, Agra',
-    instagram: null, // no Instagram section on this page
     type: 'Residential Plots',
     status: 'Ongoing',
     configurations: 'Residential & Commercial Plots',
@@ -1362,7 +1324,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Ram Bagh, Agra',
     fullAddress: 'Ram Bagh, Agra',
-    instagram: null, // no Instagram section on this page
     type: 'Head Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -1441,7 +1402,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Agra',
     fullAddress: '11/49B, Ahinsa Complex, Gulab Nagar, Rambagh, Agra 282006',
-    instagram: null, // no Instagram section on this page
     type: 'Head Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -1532,7 +1492,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Gwalior',
     fullAddress: 'Athena Tower, City Centre, Behind S.P. Office, Tulsi Vihar Colony, Gwalior, Madhya Pradesh',
-    instagram: null, // no Instagram section on this page
     type: 'Corporate Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -1620,7 +1579,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A landmark mixed-use complex at the heart of the city.',
     location: 'Firozabad',
     fullAddress: 'Arya Nagar, Near Hotel Monark, Bypass Road, Firozabad',
-    instagram: null, // no Instagram section on this page
     type: 'Corporate Office',
     status: 'Completed',
     configurations: 'Retail Office Services',
@@ -1701,7 +1659,6 @@ export const PROJECT_DETAILS = {
     tagline: 'Retail, dining and entertainment under one roof.',
     location: 'Fatehabad Road, Agra',
     fullAddress: 'Ahinsa The Grand Green Valley, Fatehabad Road, Agra',
-    instagram: null,
     type: 'Retail & Entertainment',
     status: 'Completed',
     configurations: 'Anchor Retail · Multiplex · Food Court',
@@ -1777,14 +1734,6 @@ export const PROJECT_DETAILS = {
     tagline: 'A linear high street on MG Road, anchored by a five-level mall.',
     location: 'MG Road, Firozabad',
     fullAddress: 'MG Road, Firozabad',
-    instagram: {
-      handle: 'ahinsagroupagra',
-      posts: [
-        'https://www.instagram.com/p/DcGnWVqz4MJ/',
-        'https://www.instagram.com/p/DdHOhEjz-HG/',
-        'https://www.instagram.com/p/Dcx-judzA-k/',
-      ],
-    },
     type: 'Hi-Street Luxury Mall',
     status: 'Ongoing',
     configurations: 'Masterplan, architecture and landscape by ACPL \u2014 India \u00b7 Dubai',
@@ -2078,17 +2027,6 @@ export const FEATURES = [
   },
 ]
 
-// Official Instagram embeds shown on every project page after the brochure
-// section (image posts only, in this exact order). A project can override
-// this by defining its own `instagram: { handle, posts }` in PROJECT_DETAILS.
-export const INSTAGRAM = {
-  handle: 'ahinsagroupagra',
-  posts: [
-    'https://www.instagram.com/p/DYO4MgAzapX/',
-    'https://www.instagram.com/p/DZ1MgM_Eywx/',
-    'https://www.instagram.com/p/DYrQZ6tE-zE/',
-  ],
-}
 
 // Real Google Business Profile reviews, transcribed verbatim. Cards render a
 // gold monogram avatar unless an `image` field is provided (paste the

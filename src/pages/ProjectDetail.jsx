@@ -16,14 +16,13 @@ import BrochureGallery, { BROCHURE_PROJECTS } from '../components/BrochureGaller
 import BrochureDownloadModal from '../components/BrochureDownloadModal'
 import AutoSlideImage from '../components/AutoSlideImage'
 import HeroVideo from '../components/HeroVideo'
-import InstagramFeed from '../components/InstagramFeed'
 import ImageLightbox from '../components/ImageLightbox'
 import VideoTile from '../components/VideoTile'
 import PhotoStrip, { PhotoStripStyles, useStripArbiter } from '../components/PhotoStrip'
 import ScrollRow from '../components/ScrollRow'
 import { sendToGoogleSheet } from '../lib/googleSheet'
 import {
-  PROJECT_DETAILS, LISTED_PROJECTS, COMPANY, WEB3FORMS_KEY, INSTAGRAM, OFFICE_SLUGS,
+  PROJECT_DETAILS, LISTED_PROJECTS, COMPANY, WEB3FORMS_KEY, OFFICE_SLUGS,
   mapEmbedFor, parentOf, subProjectsOf,
 } from '../data/site'
 import { projectMeta } from '../data/seo'
@@ -116,10 +115,6 @@ export default function ProjectDetail() {
     project.overviewImages?.length ? project.overviewImages : [project.overviewImage]
   ).filter((src, i, arr) => src && arr.indexOf(src) === i)
 
-  // Instagram feed: the project's own posts when it defines them, the site-wide
-  // feed when it says nothing, and none at all when it sets `instagram: null`.
-  const feed = 'instagram' in project ? project.instagram : INSTAGRAM
-
   // Gallery. Projects that define `galleryGroups` render one continuous
   // gallery split into titled blocks (Main Entrance, Parks, …); the rest
   // fall back to a single flat grid of `gallery`.
@@ -141,10 +136,8 @@ export default function ProjectDetail() {
             ? 'sm:grid-cols-3'
             : 'sm:grid-cols-3 lg:grid-cols-6'
 
-  // Gallery videos are YouTube only. Instagram reels belong to the "Moments
-  // from Instagram" section further down, under the project's `instagram`
-  // posts — one put in `galleryVideos` by mistake is ignored rather than
-  // rendered as a broken tile here.
+  // Gallery videos are YouTube only. An Instagram link put in `galleryVideos`
+  // by mistake is ignored rather than rendered as a broken tile.
   //
   // An entry is a URL, or `{ src, title, accent }` to give the video a heading
   // of its own — `accent` is the part set in gold. Both read as { src, ... }.
@@ -885,11 +878,6 @@ export default function ProjectDetail() {
           lockBrochure
         />
       )}
-
-      {/* INSTAGRAM — site-wide feed by default; a project can override it with
-          its own `instagram` field, or set `instagram: null` to hide the
-          section entirely (see `feed` above). */}
-      {feed && <InstagramFeed handle={feed.handle} posts={feed.posts} />}
 
       {/* LOCATION ADVANTAGES — a project sets `showLocation: false` when it has
           no site map or distances worth standing behind yet. */}
