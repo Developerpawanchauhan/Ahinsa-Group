@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, CalendarDays, Check, ChevronDown, ChevronRight, Clock, Facebook, Gem, Leaf,
-  Link2, Linkedin, MapPin, MessageCircle, Quote, ShieldCheck, Twitter, Users,
+  ArrowRight, CalendarDays, Check, ChevronDown, ChevronRight, Clock, Facebook,
+  Link2, Linkedin, MapPin, MessageCircle, Quote, Twitter,
 } from 'lucide-react'
 import Reveal from '../components/Reveal'
 import VideoTile from '../components/VideoTile'
@@ -62,33 +62,17 @@ const PROJECT_NOTES = {
 const AGRA_PROJECTS = DEVELOPMENTS.filter((p) => p.location.includes('Agra'))
 const OTHER_PROJECTS = DEVELOPMENTS.filter((p) => !p.location.includes('Agra'))
 
-const VALUES = [
-  {
-    icon: ShieldCheck,
-    title: 'Integrity First',
-    text: 'Every decision is grounded in transparency - from land acquisition to final possession.',
-  },
-  {
-    icon: Users,
-    title: 'Customer-Centric Culture',
-    text: 'Families and investors are partners in building a better Agra. Every project is designed around how people live, not how buildings look on paper.',
-  },
-  {
-    icon: Leaf,
-    title: 'Sustainable Development',
-    text: 'Eco-friendly, green community design - championed long before it became industry vocabulary.',
-  },
-  {
-    icon: Gem,
-    title: 'Uncompromising Quality',
-    text: 'From structural engineering to landscape aesthetics, quality is non-negotiable.',
-  },
-]
-
 // Newest year first; each year's honours as the awards page lists them.
 const AWARD_YEARS = [...new Set(AWARDS.map((a) => a.year))]
   .sort((a, b) => b - a)
   .map((year) => ({ year, awards: AWARDS.filter((a) => a.year === year) }))
+
+// The interview at the top of "In the Media" (youtu.be/2LQp9iueJto, Ahinsa
+// Group's channel): the London award, Zee Media Global Summit 2025.
+const MEDIA_VIDEO = {
+  src: 'https://www.youtube.com/embed/2LQp9iueJto',
+  caption: 'Rohit Jain of Ahinsa Group, awarded in London at the Zee Media Global Innovation & Leadership Summit 2025.',
+}
 
 const MEDIA = [
   {
@@ -118,6 +102,9 @@ const MEDIA = [
   },
 ]
 
+const LINK = 'text-gold-700 underline decoration-gold-500/40 underline-offset-4 hover:decoration-gold-600 transition'
+
+// [question, answer]. An answer is plain text, or JSX when it carries a link.
 const FAQS = [
   [
     'Who is Rohit Jain?',
@@ -125,7 +112,7 @@ const FAQS = [
   ],
   [
     'What is Rohit Jain of Ahinsa Group known for in Agra?',
-    'For the Ahinsa Green Valley townships and Ahinsa The Grand Green Valley on Fatehabad Road, and for civic and cultural work that has earned him the Pride of Agra and Braj Ratna honours.',
+    'In Agra, Rohit Jain is known as a builder people trust. Under his leadership Ahinsa Group has developed planned, gated townships such as Ahinsa The Grand Green Valley on Fatehabad Road and the Ahinsa Green Valley townships, built on quality construction, transparent dealing and timely execution. He is just as well known for keeping tradition at the heart of the business: every grand opening begins with a traditional poojan - the Rich Villas at Ahinsa Green Valley Empire, for example, were launched with the blessings of Guru Vijay Kaushal Ji - and the group hosts devotional evenings such as Bhajan Sandhya for its residents. His civic and cultural work has earned him the Pride of Agra and Braj Ratna honours.',
   ],
   [
     'Which projects has Rohit Jain built with Ahinsa Group?',
@@ -133,7 +120,14 @@ const FAQS = [
   ],
   [
     'What awards has Rohit Jain received?',
-    'More than 18, including the Real Estate Excellence Award at the Global Innovation & Leadership Summit in London (Zee Media, 2025), Excellence in Real Estate at the India-Sri Lanka Business Summit (2026), the Braj Ratna Award and Braj Ratna Alankaran Samman from the Incredible India Foundation, Pride of Agra from Hindustan and the Legend Award 2025 at MSME Power Talk.',
+    <>
+      Rohit Jain has received many national and international awards, including the Real Estate Excellence Award
+      at the Global Innovation & Leadership Summit in London (Zee Media, 2025), Excellence in Real Estate at the
+      India-Sri Lanka Business Summit (2026), the Braj Ratna Award and Braj Ratna Alankaran Samman from the
+      Incredible India Foundation, Pride of Agra from Hindustan and the Legend Award 2025 at MSME Power Talk.
+      See every one of them, with photos, on our{' '}
+      <Link to="/media/awards" className={LINK}>Awards &amp; Recognition page</Link>.
+    </>,
   ],
   [
     'Which social organisations is Rohit Jain associated with?',
@@ -161,8 +155,6 @@ const COMMUNITY_PHOTOS = VIHASANT && BHAJAN
 
 // The award photo in "From Entrepreneur to Builder": London, Zee Media.
 const FEATURED_AWARD = AWARDS.find((a) => a.title === 'Real Estate Excellence Award')
-
-const LINK = 'text-gold-700 underline decoration-gold-500/40 underline-offset-4 hover:decoration-gold-600 transition'
 
 // The article uses a plain hyphen, never a long dash - including in text it
 // borrows from the site data.
@@ -611,26 +603,11 @@ export default function RohitJain() {
               My vision has always been simple: build homes that families are proud of, in communities they want to
               belong to - and always keep the customer’s trust at the centre of everything we do.
             </PullQuote>
-
-            {/* Two by two at every width; tighter on phones so two columns fit. */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-5">
-              {VALUES.map((v, i) => (
-                <Reveal key={v.title} delay={(i % 2) * 0.08}>
-                  <div className="h-full bg-white border border-gold-500/20 p-4 sm:p-5 md:p-7 hover:border-gold-500/60 transition-colors duration-300">
-                    <span className="w-9 h-9 sm:w-11 sm:h-11 border border-gold-500/40 flex items-center justify-center text-gold-700">
-                      <v.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </span>
-                    <h3 className="font-serif text-base sm:text-lg md:text-xl text-ink-900 leading-snug mt-3 sm:mt-5">{v.title}</h3>
-                    <p className="text-ink-600 text-[13px] sm:text-sm leading-relaxed mt-1.5 sm:mt-3">{v.text}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
           </Section>
 
           <Section id="awards">
             <p>
-              Rohit Jain has received more than 18 national and international awards across entrepreneurship, real
+              Rohit Jain has received many national and international awards across entrepreneurship, real
               estate excellence and community leadership. The most notable came in December 2025, when he was
               recognised for real estate excellence at the Global Innovation & Leadership Summit in London - held at
               the House of Lords, UK Parliament, alongside 30 distinguished Indian MSME leaders.
@@ -689,6 +666,12 @@ export default function RohitJain() {
             <p>
               Rohit Jain’s work at Ahinsa Group has been covered by national media houses and property platforms alike.
             </p>
+            <Reveal>
+              <figure className="max-w-3xl">
+                <VideoTile src={MEDIA_VIDEO.src} title={MEDIA_VIDEO.caption} />
+                <figcaption className="mt-3 text-sm text-ink-500 leading-snug">{MEDIA_VIDEO.caption}</figcaption>
+              </figure>
+            </Reveal>
             <ul className="max-w-3xl divide-y divide-gold-500/20 border-y border-gold-500/20">
               {MEDIA.map((m) => (
                 <li key={m.title} className="py-5 md:py-6">
