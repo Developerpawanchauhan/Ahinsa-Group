@@ -2492,6 +2492,15 @@ export const AWARDS = [
     image: '/images/awards/2026/viksit-uttarpradesh.jpg',
     description: 'Honoured by Deputy Chief Minister Shri Brajesh Pathak ji at the Viksit Uttar Pradesh Conclave 2026 in Lucknow.',
   },
+  {
+    year: '2026',
+    date: '23 October 2026',
+    title: 'International Eminence Excellence Award 2026',
+    awardedBy: 'IN2Future (International Eminence Excellence Awards & Summit, Dubai)',
+    category: 'Entrepreneurship & Real Estate Excellence',
+    image: '/images/awards/2026/ieea-dubai-excellence-award.jpg',
+    description: 'Honoured with the Excellence Award at the International Eminence Excellence Awards & Summit (IEEA) 2026 in Dubai, presented by IN2Future at the Seven Seas Hotel, Al Qusais.',
+  },
 ]
 
 // =============================================================

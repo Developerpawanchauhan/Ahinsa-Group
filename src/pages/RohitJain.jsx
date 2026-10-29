@@ -62,10 +62,11 @@ const PROJECT_NOTES = {
 const AGRA_PROJECTS = DEVELOPMENTS.filter((p) => p.location.includes('Agra'))
 const OTHER_PROJECTS = DEVELOPMENTS.filter((p) => !p.location.includes('Agra'))
 
-// Newest year first; each year's honours as the awards page lists them.
+// Newest year first, and newest first within each year, as the awards page
+// lists them. AWARDS runs oldest to newest, so a year's list is reversed.
 const AWARD_YEARS = [...new Set(AWARDS.map((a) => a.year))]
   .sort((a, b) => b - a)
-  .map((year) => ({ year, awards: AWARDS.filter((a) => a.year === year) }))
+  .map((year) => ({ year, awards: AWARDS.filter((a) => a.year === year).reverse() }))
 
 // The interview at the top of "In the Media" (youtu.be/2LQp9iueJto, Ahinsa
 // Group's channel): the London award, Zee Media Global Summit 2025.
@@ -615,7 +616,9 @@ export default function RohitJain() {
             <p>
               In 2026 he was honoured for excellence in real estate at the India-Sri Lanka Business Summit, received
               the Braj Ratna Alankaran Samman from the Incredible India Foundation in the presence of the Governor of
-              Bihar, and was named among the 14th Leaders Agra Awards. The pattern is telling: his honours divide
+              Bihar, and was named among the 14th Leaders Agra Awards. Most recently, in October 2026, he received the
+              Excellence Award at the International Eminence Excellence Awards & Summit in Dubai, presented by
+              IN2Future. The pattern is telling: his honours divide
               almost evenly between business and civic recognition - Braj Ratna twice, Pride of Agra, the Agra Police
               felicitation. For a builder, that balance says as much about what he has given the city as what he has
               built in it.
