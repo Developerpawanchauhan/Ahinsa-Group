@@ -9,8 +9,8 @@ import usePageMeta from '../hooks/usePageMeta'
 
 export default function Awards() {
   usePageMeta(PAGE_META.awards)
-  // Find the specific Zee Media award for the featured section
-  const featuredAward = AWARDS.find(a => a.awardedBy.includes('Zee Media')) || AWARDS[0];
+  // The featured section: the IEEA Dubai award, October 2026.
+  const featuredAward = AWARDS.find(a => a.title === 'International Eminence Excellence Award 2026') || AWARDS[0];
 
   const byYear = AWARDS.reduce((acc, a) => {
     acc[a.year] = acc[a.year] || []
