@@ -30,7 +30,8 @@ export const ROHIT_JAIN_ARTICLE = {
   ],
   // 4:5. Also the article's lead photo, beside the title.
   portrait: '/images/Team/rohit-jain-office.jpg',
-  avatar: '/images/rohit-jain/rohit-jain-avatar.jpg',
+  // 4:5, beside the Chairman's Message.
+  messagePhoto: '/images/rohit-jain/rohit-jain-chairman-message.jpg',
 }
 
 const ROHIT_JAIN_DESCRIPTION =

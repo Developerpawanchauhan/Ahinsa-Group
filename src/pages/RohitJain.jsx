@@ -22,7 +22,7 @@ const SECTIONS = [
   { id: 'awards', label: 'Awards & Recognition', title: 'Rohit Jain: Awards and Recognition' },
   { id: 'media', label: 'In the Media', title: 'Rohit Jain in the Media' },
   { id: 'social-leadership', label: 'Social Leadership', title: 'Social Leadership and Community Work in Agra' },
-  { id: 'video', label: 'Watch', title: 'Watch: Rohit Jain of Ahinsa Group' },
+  { id: 'video', label: 'Journey Video', title: 'Watch: Rohit Jain of Ahinsa Group' },
   { id: 'chairmans-message', label: 'Chairman’s Message', title: 'Chairman’s Message' },
   { id: 'faq', label: 'FAQs', title: 'Frequently Asked Questions About Rohit Jain' },
 ]
@@ -113,7 +113,7 @@ const FAQS = [
   ],
   [
     'What is Rohit Jain of Ahinsa Group known for in Agra?',
-    'In Agra, Rohit Jain is known as a builder people trust. Under his leadership Ahinsa Group has developed planned, gated townships such as Ahinsa The Grand Green Valley on Fatehabad Road and the Ahinsa Green Valley townships, built on quality construction, transparent dealing and timely execution. He is just as well known for keeping tradition at the heart of the business: every grand opening begins with a traditional poojan - the Rich Villas at Ahinsa Green Valley Empire, for example, were launched with the blessings of Guru Vijay Kaushal Ji - and the group hosts devotional evenings such as Bhajan Sandhya for its residents. His civic and cultural work has earned him the Pride of Agra and Braj Ratna honours.',
+    'In Agra, Rohit Jain is known as a builder people trust. Under his leadership Ahinsa Group has developed planned, gated townships such as Ahinsa The Grand Green Valley on Fatehabad Road and the Ahinsa Green Valley townships, built on quality construction, transparent dealing and timely execution.',
   ],
   [
     'Which projects has Rohit Jain built with Ahinsa Group?',
@@ -382,7 +382,7 @@ export default function RohitJain() {
   const article = useRef(null)
   const [minutes, setMinutes] = useState(null)
   const chairman = MANAGEMENT.find((m) => m.slug === 'rohit-jain')
-  const { published, portrait, avatar } = ROHIT_JAIN_ARTICLE
+  const { published, portrait, messagePhoto } = ROHIT_JAIN_ARTICLE
   const publishedOn = new Date(published).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 
   // Reading time from the article's own text, so it stays right as it is edited.
@@ -733,30 +733,41 @@ export default function RohitJain() {
           )}
 
           <Section id="chairmans-message">
-            <figure className="relative overflow-hidden bg-white border border-gold-500/30 shadow-[0_24px_60px_-35px_rgba(58,45,10,0.5)] p-6 md:p-14">
-              <div aria-hidden="true" className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-gold-300 via-gold-500 to-gold-700" />
-              <span aria-hidden="true" className="absolute -right-4 -bottom-16 font-display text-[12rem] md:text-[14rem] leading-none text-gold-500/10 select-none">
-                ”
-              </span>
-              <Quote aria-hidden="true" className="w-9 h-9 md:w-10 md:h-10 text-gold-500" />
-              <blockquote className="relative mt-5 md:mt-6 space-y-5 md:space-y-6 font-display italic text-lg md:text-[1.75rem] leading-snug text-ink-900">
-                <p>
-                  Ahinsa Group was not built on transactions. It was built on relationships - with the families who
-                  trusted us with their life savings, with the teams who gave their best to every brick and beam, and
-                  with the city of Agra, which has been the soil from which everything we have built has grown.
-                </p>
-                <p>
-                  My commitment remains unchanged: to build with integrity, to deliver with honour, and to leave
-                  behind communities that make Agra proud.
-                </p>
-              </blockquote>
-              <figcaption className="relative mt-8 md:mt-10 flex items-center gap-4">
-                <img src={avatar} alt="" width="56" height="56" className="w-14 h-14 rounded-full object-cover border-2 border-gold-500/50" />
-                <span>
+            {/* His photo beside the message from md, above it on a phone. From md
+                the photo fills its column at whatever height the message sets. */}
+            <figure className="relative overflow-hidden bg-white border border-gold-500/30 shadow-[0_24px_60px_-35px_rgba(58,45,10,0.5)] md:grid md:grid-cols-12">
+              <div className="relative md:col-span-5 md:min-h-[26rem]">
+                <img
+                  src={messagePhoto}
+                  alt="Mr. Rohit Jain, Chairman of Ahinsa Group, at his office in Agra"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  className="block w-full aspect-[4/3] md:aspect-auto md:absolute md:inset-0 md:h-full object-cover object-[50%_30%]"
+                />
+                <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1 md:inset-x-auto md:inset-y-0 md:right-0 md:h-auto md:w-1 bg-gradient-to-r md:bg-gradient-to-b from-gold-300 via-gold-500 to-gold-700" />
+              </div>
+              <div className="relative md:col-span-7 p-6 md:p-10 lg:p-12">
+                <span aria-hidden="true" className="absolute -right-4 -bottom-16 font-display text-[12rem] md:text-[14rem] leading-none text-gold-500/10 select-none">
+                  ”
+                </span>
+                <Quote aria-hidden="true" className="w-9 h-9 md:w-10 md:h-10 text-gold-500" />
+                <blockquote className="relative mt-5 md:mt-6 space-y-5 md:space-y-6 font-display italic text-lg md:text-2xl lg:text-[1.6rem] leading-snug text-ink-900">
+                  <p>
+                    Ahinsa Group was not built on transactions. It was built on relationships - with the families who
+                    trusted us with their life savings, with the teams who gave their best to every brick and beam, and
+                    with the city of Agra, which has been the soil from which everything we have built has grown.
+                  </p>
+                  <p>
+                    My commitment remains unchanged: to build with integrity, to deliver with honour, and to leave
+                    behind communities that make Agra proud.
+                  </p>
+                </blockquote>
+                <figcaption className="relative mt-8 md:mt-10">
                   <span className="block font-serif text-lg text-ink-900">Mr. Rohit Jain</span>
                   <span className="block text-[11px] uppercase tracking-[0.25em] text-gold-700 mt-1">Chairman, Ahinsa Group</span>
-                </span>
-              </figcaption>
+                </figcaption>
+              </div>
             </figure>
           </Section>
 
