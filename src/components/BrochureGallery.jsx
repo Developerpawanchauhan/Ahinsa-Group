@@ -39,14 +39,6 @@ export const BROCHURE_PROJECTS = [
     images: range(36),
   },
   {
-    id: 'firozabad',
-    slug: 'ahinsa-mall-firozabad',
-    label: 'Ahinsa City Centre',
-    folder: 'firozabad',
-    // Rendered from the "Ahinsa City Centre.pdf" in this folder — 28 pages.
-    images: pages(28),
-  },
-  {
     id: 'pride',
     slug: 'green-valley-residency',
     label: 'THE PRIDE - Ahinsa Green Valley Residency',

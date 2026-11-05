@@ -34,7 +34,7 @@ const FACTS = [
   ['Based in', 'Agra, Uttar Pradesh'],
   ['In business', 'More than 25 years'],
   ['In real estate since', '2024'],
-  ['Projects', '6+ across Agra, Gwalior and Firozabad'],
+  ['Projects', '6+ across Agra and Gwalior'],
   ['Awards', '18+ national and international'],
   ['Social roles', 'President, BJS-UP · VSPS Trust'],
 ]
@@ -56,8 +56,6 @@ const PROJECT_NOTES = {
     'A fully occupied mixed-use landmark at Ram Bagh, and home to the group’s head office.',
   'green-valley-lake-city':
     'The group’s first township in Madhya Pradesh, on Shivpuri Road, Gwalior.',
-  'ahinsa-mall-firozabad':
-    'A hi-street luxury mall on MG Road in Firozabad, India’s glass city.',
 }
 const AGRA_PROJECTS = DEVELOPMENTS.filter((p) => p.location.includes('Agra'))
 const OTHER_PROJECTS = DEVELOPMENTS.filter((p) => !p.location.includes('Agra'))
@@ -109,7 +107,7 @@ const LINK = 'text-gold-700 underline decoration-gold-500/40 underline-offset-4 
 const FAQS = [
   [
     'Who is Rohit Jain?',
-    'Rohit Jain is the Chairman of Ahinsa Group, a real estate developer based in Agra, Uttar Pradesh. An entrepreneur for more than two decades, he leads the group’s townships, villas and commercial projects in Agra, Gwalior and Firozabad.',
+    'Rohit Jain is the Chairman of Ahinsa Group, a real estate developer based in Agra, Uttar Pradesh. An entrepreneur for more than two decades, he leads the group’s townships, villas and commercial projects in Agra and Gwalior.',
   ],
   [
     'What is Rohit Jain of Ahinsa Group known for in Agra?',
@@ -117,7 +115,7 @@ const FAQS = [
   ],
   [
     'Which projects has Rohit Jain built with Ahinsa Group?',
-    'In Agra: Ahinsa The Grand Green Valley, Ahinsa Green Valley Township, Ahinsa Green Valley Empire, Ahinsa Green Valley Orchid, THE PRIDE - Ahinsa Green Valley Residency and Ahinsa Complex. Beyond Agra: Ahinsa Green Valley Lake City in Gwalior and Ahinsa City Centre in Firozabad.',
+    'In Agra: Ahinsa The Grand Green Valley, Ahinsa Green Valley Township, Ahinsa Green Valley Empire, Ahinsa Green Valley Orchid, THE PRIDE - Ahinsa Green Valley Residency and Ahinsa Complex. Beyond Agra: Ahinsa Green Valley Lake City in Gwalior.',
   ],
   [
     'What awards has Rohit Jain received?',
@@ -497,7 +495,7 @@ export default function RohitJain() {
               <strong className="text-ink-900 font-semibold">Rohit Jain</strong> is the Chairman of Ahinsa Group, a real
               estate and construction company based in Agra, Uttar Pradesh. Under his leadership the group has built a
               portfolio of gated townships, villas, plots and commercial landmarks along Agra’s fastest-growing
-              corridors, and has carried the Ahinsa name to Gwalior and Firozabad. For the thousands of families who
+              corridors, and has carried the Ahinsa name to Gwalior. For the thousands of families who
               have chosen an Ahinsa address, he is the face behind the promise - a leader personally committed to
               quality, transparency and on-time delivery.
             </p>
@@ -534,7 +532,7 @@ export default function RohitJain() {
               <Link to="/projects/green-valley-township" className={LINK}>Ahinsa Green Valley</Link> in Kuberpur, was
               followed within months by{' '}
               <Link to="/projects/grand-green-valley" className={LINK}>Ahinsa The Grand Green Valley</Link> on
-              Fatehabad Road - and by 2026 the portfolio had grown to more than six projects across three cities. Each
+              Fatehabad Road - and by 2026 the portfolio had grown to more than six projects across Agra and Gwalior. Each
               one carries forward the promise the Ahinsa name has stood for in Agra for more than two decades:
               quality, transparency and trust.
             </p>

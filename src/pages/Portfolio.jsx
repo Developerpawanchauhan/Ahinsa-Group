@@ -284,7 +284,7 @@ export default function Portfolio() {
           transition={{ duration: 0.7, delay: 0.65 }}
         >
           <MapPin className="h-3.5 w-3.5 text-gold-600" />
-          Agra · Gwalior · Firozabad
+          Agra · Gwalior
         </motion.p>
 
         <motion.ul variants={LIST} initial="hidden" animate="show" className="mt-8 w-full space-y-3">

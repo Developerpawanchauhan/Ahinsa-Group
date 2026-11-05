@@ -162,16 +162,6 @@ export const PROJECTS = [
       'A landmark commercial complex blending retail, offices and services under one address.',
   },
   {
-    slug: 'ahinsa-office-firozabad',
-    name: 'Ahinsa Office, Firozabad',
-    location: 'Firozabad',
-    type: 'Corporate Office',
-    status: 'Completed',
-    image: '/images/projects/ahinsa-office-firozabad/img1.png',
-    short:
-      'A landmark commercial complex blending retail, offices and services under one address.',
-  },
-  {
     slug: 'green-valley-lake-city',
     name: 'Ahinsa Green Valley Lake City',
     location: 'Gwalior, Madhya Pradesh',
@@ -190,16 +180,6 @@ export const PROJECTS = [
     image: '/images/projects/green-valley-residency/the-pride.jpg',
     short:
       'A gated residential community in the Ahinsa Green Valley family — where pride meets peace.',
-  },
-  {
-    slug: 'ahinsa-mall-firozabad',
-    name: 'Ahinsa City Centre',
-    location: 'MG Road, Firozabad',
-    type: 'Hi-Street Luxury Mall',
-    status: 'Ongoing',
-    image: '/images/projects/ahinsa-mall-firozabad/card.png',
-    short:
-      'The next-generation shopping and entertainment destination for Firozabad and surrounding districts.',
   },
 
 ]
@@ -1574,86 +1554,6 @@ export const PROJECT_DETAILS = {
     ],
   },
 
-  'ahinsa-office-firozabad': {
-    name: 'Ahinsa Office, Firozabad',
-    tagline: 'A landmark mixed-use complex at the heart of the city.',
-    location: 'Firozabad',
-    fullAddress: 'Arya Nagar, Near Hotel Monark, Bypass Road, Firozabad',
-    type: 'Corporate Office',
-    status: 'Completed',
-    configurations: 'Retail Office Services',
-    unitArea: '',
-    totalArea: 'Established commercial address',
-    possession: 'Ready',
-    priceRange: 'On Request',
-    mapEmbed: 'https://www.google.com/maps?q=Firozabad,+Uttar+Pradesh&output=embed',
-    mapPlace: 'Ahinsa Office, Arya Nagar, Bypass Road, Firozabad',
-    videoEmbed: 'https://www.youtube.com/embed/0EKdYGEvrMk',
-    // The hero video again, in "A closer look", where it can be watched
-    // with its sound and controls.
-    galleryVideos: [
-      {
-        src: 'https://www.youtube.com/embed/0EKdYGEvrMk',
-        title: 'Ahinsa Office, Firozabad',
-        accent: 'Launching & Poojan',
-      },
-    ],
-    // Wide facade shot — the hero crops to 80vh, so the landscape frame works
-    // better here than the portrait `uper.png`.
-    hero: '/images/projects/ahinsa-office-firozabad/img1.png',
-    overviewImage: '/images/projects/ahinsa-office-firozabad/img2.png',
-    gallery: [
-      '/images/projects/ahinsa-office-firozabad/img1.png',
-      '/images/projects/ahinsa-office-firozabad/uper.png',
-      '/images/projects/ahinsa-office-firozabad/img2.png',
-      '/images/projects/ahinsa-office-firozabad/img3.png',
-      '/images/projects/ahinsa-office-firozabad/img4.png',
-    ],
-    overview: [
-      'Ahinsa Office, Firozabad is a ready, fully active address in the heart of the district — retail at street level, our team in the office suites above. It opened in August 2026.',
-      'We opened it because Ahinsa City Centre is being built here. Firozabad has the population, the trade and the appetite for a modern retail destination, and a project of that size needs people on the ground — not visits from another city every few weeks.',
-      'For brands and investors looking at Ahinsa City Centre, this is the desk to come to: floor plates and unit sizes, the leasing and allotment process, site visits, and every question in between, answered by people who are here every day.',
-      'It also brings the group closer to families across the district who have been buying with us for years. Walk in whenever it suits you — no appointment needed.',
-    ],
-    highlights: [
-      { icon: 'MapPin', title: 'Central Location', text: 'High-visibility, high-footfall site with easy approach.' },
-      { icon: 'Store', title: 'Retail + Office Mix', text: 'Ground-floor retail with upper-level office and service tenants.' },
-      { icon: 'Award', title: 'Established Address', text: 'A known and trusted commercial landmark in the city.' },
-    ],
-    // Offices skip the "Lifestyle, delivered" amenities section — that copy
-    // is written for homes. Add entries here to bring the section back.
-    amenities: [],
-    specifications: [
-      {
-        category: 'Building',
-        items: [
-          'RCC framed structure',
-          'Designed for mixed retail and office occupancy',
-          'Multiple staircases and emergency exits',
-        ],
-      },
-      {
-        category: 'Common Areas',
-        items: [
-          'Vitrified-tile flooring in lobbies and corridors',
-          'Multiple lift wells and adequate stairwells',
-          'Designated public restrooms on shared floors',
-        ],
-      },
-      {
-        category: 'Services',
-        items: [
-          'DG backup for common services',
-          'Centralized water tank and supply',
-          'Fire detection & protection systems',
-        ],
-      },
-    ],
-    floorPlans: [],
-    // ⚠️ Gwalior landmarks removed — fill in real Firozabad distances.
-    locationAdvantages: [],
-  },
-
   'grand-square-mall': {
     name: 'Ahinsa The Grand Square Mall',
     tagline: 'Retail, dining and entertainment under one roof.',
@@ -1729,177 +1629,6 @@ export const PROJECT_DETAILS = {
     floorPlans: [],
     locationAdvantages: [], // TODO: key distances
   },
-  'ahinsa-mall-firozabad': {
-    name: 'Ahinsa City Centre',
-    tagline: 'A linear high street on MG Road, anchored by a five-level mall.',
-    location: 'MG Road, Firozabad',
-    fullAddress: 'MG Road, Firozabad',
-    type: 'Hi-Street Luxury Mall',
-    status: 'Ongoing',
-    configurations: 'Masterplan, architecture and landscape by ACPL \u2014 India \u00b7 Dubai',
-    unitArea: '',
-    totalArea: '2 acres (approx. 8,104.67 sq. m.)',
-    possession: 'On Request',
-    priceRange: 'On Request',
-    mapEmbed: 'https://www.google.com/maps?q=27.1465789,78.388868&output=embed',
-    mapPlace: 'Ahinsa City Centre Mall, MG Road, Firozabad',
-    videoEmbed: 'https://www.youtube.com/embed/UCSItlT-rfk',
-    hero: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
-    overviewImage:
-      '/images/projects/ahinsa-mall-firozabad/ongoing.jpg',
-    // The renders only. The overview slideshow runs on this list; the
-    // gallery below still carries the photographs of the site.
-    overviewImages: [
-      '/images/projects/ahinsa-mall-firozabad/ongoing.jpg',
-      '/images/projects/ahinsa-mall-firozabad/mall.jpg',
-      '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',
-      '/images/projects/ahinsa-mall-firozabad/inside.jpg',
-      '/images/projects/ahinsa-mall-firozabad/inside2.jpg',
-      '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
-      '/images/projects/ahinsa-mall-firozabad/laung.jpg',
-    ],
-    // Still, three to a row — no scrolling strip on the mall pages.
-    galleryLayout: 'grid',
-    gallery: [
-      '/images/projects/ahinsa-mall-firozabad/mall.jpg',
-      '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',
-      '/images/projects/ahinsa-mall-firozabad/inside.jpg',
-      '/images/projects/ahinsa-mall-firozabad/inside2.jpg',
-      '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
-      '/images/projects/ahinsa-mall-firozabad/laung.jpg',
-    ],
-    // Played inside "A closer look", in their own row after the photos.
-    galleryVideos: [
-      'https://www.youtube.com/embed/UCSItlT-rfk',
-      'https://www.youtube.com/embed/os12Tu9NaUM',
-    ],
-    overview: [
-      'The site is two acres on MG Road, minutes from the railway station and the city bus depot, on the corridor that carries Firozabad\u2019s daily trade and commuter traffic.',
-      'The masterplan runs shopfronts along the length of the site so every unit gets its own frontage, then steps up into a taller anchor block holding the atrium, the food court and a rooftop terrace \u2014 five levels in all, from lower ground to third floor.',
-      'Masterplan, architecture and landscape are by ACPL \u2014 India \u00b7 Dubai \u2014 with the unit grid laid out to vastu principles throughout.',
-    ],
-    highlights: [
-      { icon: 'MapPin', title: 'Prime Location', text: 'On MG Road \u2014 0.3 km from Firozabad railway station and 1.2 km from the city bus depot.' },
-      { icon: 'Layers', title: 'Five Retail Levels', text: 'Lower ground to third floor, holding 212 shop, showroom and restaurant units.' },
-      { icon: 'Compass', title: 'Designed by ACPL', text: 'Masterplan, architecture and landscape by ACPL \u2014 India \u00b7 Dubai.' },
-      { icon: 'Target', title: 'Secure Investment', text: 'A rare organised-retail asset in one of Firozabad\u2019s fastest-growing corridors.' },
-    ],
-    // Brochure page 5, kept as its own spread: statement left, renders right.
-    feature: {
-      eyebrow: 'The Future of Firozabad',
-      title: 'A symbol of pride.',
-      text:
-        'Firozabad has the population, the trade and the appetite for a modern retail destination \u2014 but not yet the address to match it. Ahinsa City Centre Mall is designed to be that address: a single high-street commercial hub where shopping, dining and leisure sit together under one roof.',
-      images: [
-        '/images/projects/ahinsa-mall-firozabad/inside.jpg',
-      ],
-    },
-    // Brochure page 6, 'MG Road, Firozabad'. The map is that page's own
-    // annotated satellite image, cropped out of it.
-    site: {
-      eyebrow: 'Site Location',
-      title: 'MG Road, Firozabad',
-      text:
-        'The site sits on MG Road, minutes from the railway station and the city bus depot, on the corridor that carries Firozabad\u2019s daily trade and commuter traffic.',
-      map: '/images/projects/ahinsa-mall-firozabad/site-map.jpg',
-      mapNote: 'Map is indicative and not to scale. Distances are approximate.',
-      facts: [
-        { icon: 'Ruler', label: 'Plot Area', text: '2 acres (approx. 8,104.67 sq. m.)' },
-        { icon: 'Compass', label: 'Vastu Compliant', text: 'Planned to vastu principles throughout' },
-        { icon: 'Store', label: 'High-Street Commercial', text: 'Shopfronts addressing the road directly' },
-        { icon: 'Users', label: 'Experiential Zones', text: 'Plazas, atrium and water features' },
-      ],
-    },
-    // Brochure page 8, 'A place that keeps people': the three ideas behind
-    // the design, the centrepiece, and what each idea looks like built.
-    vision: {
-      eyebrow: 'Vision & Concept',
-      title: 'A place that keeps people',
-      pillars: [
-        { icon: 'Building2', label: 'Modern' },
-        { icon: 'Leaf', label: 'Sustainable' },
-        { icon: 'Users', label: 'Experience' },
-      ],
-      image: '/images/projects/ahinsa-mall-firozabad/mall.jpg',
-      text:
-        'A development that communicates life and vitality \u2014 adaptable, natural and flexible. A nature-inspired space that evolves with the people who use it.',
-      cards: [
-        {
-          label: 'Built Form',
-          image: '/images/projects/ahinsa-mall-firozabad/mall-out.jpg',
-          text: 'A fluidic connection between all the spaces, for a seamless experience at site level.',
-        },
-        {
-          label: 'Identity',
-          image: '/images/projects/ahinsa-mall-firozabad/inside2.jpg',
-          text: 'A binding element across the built form that gives the project a single, unmistakable identity.',
-        },
-        {
-          label: 'Facade',
-          image: '/images/projects/ahinsa-mall-firozabad/mall-eve.jpg',
-          text: 'A more responsive facade that draws planting and daylight into the elevation.',
-        },
-      ],
-    },
-    // From the brochure: what the mall offers, then the services it runs on.
-    amenities: [
-      { icon: 'Store', name: 'Premium Retail Spaces' },
-      { icon: 'Sparkles', name: 'Experiential Zones' },
-      { icon: 'Building2', name: 'Modern Infrastructure' },
-      { icon: 'Compass', name: 'Vastu Compliant' },
-      { icon: 'Wifi', name: 'High-Speed WiFi' },
-      { icon: 'ArrowUpDown', name: 'Lifts & Escalators' },
-      { icon: 'SquareParking', name: 'Ample Parking' },
-      { icon: 'Cctv', name: 'CCTV Surveillance' },
-      { icon: 'FireExtinguisher', name: 'Fire Safety Systems' },
-      { icon: 'Snowflake', name: 'Water & Climate Control' },
-    ],
-    specifications: [
-      {
-        category: 'Architecture',
-        items: [
-          'Iconic facade with bold lighting',
-          'Central atrium with skylight',
-          'Wide internal circulation aisles',
-        ],
-      },
-      {
-        category: 'Retail Units',
-        items: [
-          'Bare-shell delivery for tenant fit-outs',
-          'Provision for anchor, hi-street and kiosk formats',
-          'Glazed shopfronts on prime frontages',
-        ],
-      },
-      {
-        category: 'Services',
-        items: [
-          'Centralized HVAC across all common areas',
-          '100% power backup for shops and common services',
-          'Fire detection, sprinklers and emergency systems as per code',
-        ],
-      },
-    ],
-    // Plan drawings and unit counts from the brochure. `image` points at the
-    // rendered brochure page, so the plan shown is always the current one.
-    floorPlansNote:
-      'Five retail levels, 212 units in all \u2014 shops and showrooms below, restaurants and the food court on top.',
-    floorPlans: [
-      { config: 'Lower Ground Floor', area: '50 units \u00b7 21,437 sq ft', image: '/images/brochure/firozabad/page-17.jpg' },
-      { config: 'Ground Floor', area: '50 units \u00b7 24,487 sq ft', image: '/images/brochure/firozabad/page-16.jpg' },
-      { config: 'First Floor', area: '45 units \u00b7 19,951 sq ft', image: '/images/brochure/firozabad/page-18.jpg' },
-      { config: 'Second Floor', area: '45 units \u00b7 19,948 sq ft', image: '/images/brochure/firozabad/page-19.jpg' },
-      { config: 'Third Floor \u2014 Food Court & Restaurants', area: '22 units \u00b7 10,563 sq ft', image: '/images/brochure/firozabad/page-20.jpg' },
-    ],
-    locationAdvantages: [
-      { place: 'Firozabad Railway Station', distance: '~ 0.3 km', type: 'Transit' },
-      { place: 'City Bus Depot', distance: '~ 1.2 km', type: 'Transit' },
-      { place: 'Firozabad City Centre', distance: '~ 2 km', type: 'Commercial' },
-      { place: 'District Hospital Firozabad', distance: '~ 2 km', type: 'Healthcare' },
-      { place: 'NH-19 Agra–Kanpur Highway', distance: '~ 3 km', type: 'Highway' },
-      { place: 'Shikohabad Town', distance: '~ 20 km', type: 'Civic' },
-    ],
-  },
 }
 
 // =============================================================
@@ -1913,7 +1642,6 @@ export const PROJECT_DETAILS = {
 export const OFFICE_SLUGS = [
   'corporate-office',
   'corporate-office-gwalior',
-  'ahinsa-office-firozabad',
 ]
 
 /** The one office that leads the others — highlighted wherever they are listed. */
@@ -2085,15 +1813,6 @@ export const TESTIMONIALS = [
 
 export const MEDIA_NEWS = [
   {
-    date: 'May 18, 2026',
-    category: 'Press Release',
-    title: 'Ahinsa Group announces flagship retail destination in Firozabad',
-    excerpt:
-      'Ahinsa City Centre is poised to redefine retail and entertainment for the region, with a multi-format programme spanning anchor stores, hi-street, multiplex and family entertainment.',
-    image:
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=85&auto=format&fit=crop',
-  },
-  {
     date: 'April 02, 2026',
     category: 'In the News',
     title: 'Agra emerges as a premium real estate destination',
@@ -2161,7 +1880,6 @@ export const MILESTONES = [
   { month: 'Nov', year: '2025', title: 'Ahinsa Green Valley Orchid', text: 'Introduced Green Valley Orchid at Kuberpur, Agra \u2014 a thoughtfully designed residential destination offering premium plots in a nature-integrated setting with excellent connectivity.' },
   { month: 'Jan', year: '2026', title: 'Ahinsa The Grand Green Valley \u2014 Inauguration', text: 'Inaugurated Ahinsa The Grand Green Valley on Fatehabad Road, Agra \u2014 the township\u2019s completed infrastructure, entrance gate and landscaped commons formally opened to residents.' },
   { month: 'Jul', year: '2026', title: 'Ahinsa Office, Gwalior \u2014 Inauguration', text: 'Inaugurated the Ahinsa Office in Gwalior, Madhya Pradesh \u2014 marking the group\u2019s expansion beyond Uttar Pradesh with a centrally located mixed-use landmark pairing street-facing retail with upper-floor office suites.' },
-  { month: 'Aug', year: '2026', title: 'Ahinsa Corporate Office, Firozabad \u2014 Inauguration', text: 'Inaugurated the Ahinsa Office in Firozabad, Uttar Pradesh \u2014 a ready, fully active address bringing the group closer to buyers across the district, with street-facing retail below and office suites above.' },
 ]
 
 
@@ -2509,33 +2227,8 @@ export const AWARDS = [
 export const EVENTS = [
   {
     date: 'August 15, 2026',
-    title: 'Ahinsa City Centre Mall, Firozabad — Grand Pre-Launch',
-    location: 'Firozabad, Uttar Pradesh',
-    type: 'Pre-Launch',
-    images: [
-      '/images/Events/2026-08-15/1.JPG',
-      '/images/Events/2026-08-15/3.JPG',
-      '/images/Events/2026-08-15/4.JPG',
-      '/images/Events/2026-08-15/7.JPG',
-      '/images/Events/2026-08-15/11.JPG',
-      '/images/Events/2026-08-15/14.JPG',
-      '/images/Events/2026-08-15/15.JPG',
-      '/images/Events/2026-08-15/17.JPG',
-      '/images/Events/2026-08-15/21.JPG',
-      '/images/Events/2026-08-15/24.JPG',
-      '/images/Events/2026-08-15/25.JPG',
-      '/images/Events/2026-08-15/26.JPG',
-      '/images/Events/2026-08-15/29.JPG',
-      '/images/Events/2026-08-15/32.JPG',
-      '/images/Events/2026-08-15/33.JPG',
-    ],
-    excerpt:
-      'Grand pre-launch of Ahinsa City Centre Mall in Firozabad — the region’s next shopping and entertainment destination.',
-  },
-  {
-    date: 'August 15, 2026',
     title: 'Flag Hoisting — On All Our Projects',
-    location: 'Agra & Firozabad',
+    location: 'Agra',
     type: 'Independence Day',
     images: [
       '/images/Events/2026-08-15 - Independence-day/1.jpg',
@@ -2551,21 +2244,6 @@ export const EVENTS = [
     ],
     excerpt:
       'Independence Day celebrated across our project sites — flag hoisting, a guard of honour and a tiranga rally through the city, with our teams and families joining in.',
-  },
-  {
-    date: 'August 3, 2026',
-    title: 'Ahinsa Office, Firozabad — Inauguration',
-    location: 'Firozabad, Uttar Pradesh',
-    type: 'Inauguration',
-    images: [
-      '/images/Events/2026-08-03/img1.jpg',
-      '/images/Events/2026-08-03/img3.JPG',
-      '/images/Events/2026-08-03/img4.JPG',
-      '/images/Events/2026-08-03/img6.jpg',
-      '/images/Events/2026-08-03/img8.jpg',
-    ],
-    excerpt:
-      'Inauguration of the Ahinsa Office in Firozabad — a new address for the group in western Uttar Pradesh.',
   },
   {
     date: 'July 8, 2026',

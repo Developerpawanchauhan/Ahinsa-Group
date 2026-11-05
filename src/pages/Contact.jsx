@@ -247,7 +247,7 @@ export default function Contact() {
             subtitle="Walk in at any of our offices across Agra and Gwalior — no appointment needed."
           />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-12">
+          <div className="grid sm:grid-cols-2 gap-7 mt-12 max-w-4xl mx-auto">
             {OFFICES.map((o, i) => (
               <Reveal key={o.slug} delay={i * 0.08}>
                 <OfficeCard office={o} />

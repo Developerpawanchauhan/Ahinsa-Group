@@ -124,23 +124,6 @@ const PROJECTS = [
       'parking, high-speed internet and 24x7 gated security.',
     connectivity: null,
   },
-  {
-    // Shops and showrooms, not plots — `kind` switches the size and price
-    // replies to commercial wording. Details are from the project brochure.
-    id: 'citycentre',
-    slug: 'ahinsa-mall-firozabad',
-    kind: 'commercial',
-    label: 'Ahinsa City Centre Mall',
-    short: 'City Centre Mall',
-    city: 'Firozabad',
-    address: 'MG Road, Firozabad',
-    config: 'Shops, showrooms and commercial spaces across five retail levels',
-    sizes: '180 – 5,000+ sq. ft.',
-    amenities:
-      'High-speed WiFi, lifts & escalators, common washrooms, basement parking,\n' +
-      '100% power backup, CCTV surveillance, fire safety systems and climate-controlled common areas.',
-    connectivity: 'Minutes from the railway station, with maximum visibility and easy connectivity.',
-  },
 ]
 
 /* ------------------------------------------------------------------ *

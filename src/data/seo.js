@@ -115,7 +115,7 @@ export const PAGE_META = {
     path: '/',
     title: 'Luxury Townships, Villas & Plots in Agra',
     description:
-      'Ahinsa Group builds luxury townships, villas and residential & commercial plots in Agra, Gwalior and Firozabad. Explore our projects and book a site visit.',
+      'Ahinsa Group builds luxury townships, villas and residential & commercial plots in Agra and Gwalior. Explore our projects and book a site visit.',
   },
   about: {
     path: '/about',
@@ -133,7 +133,7 @@ export const PAGE_META = {
     path: '/projects',
     title: 'Our Projects – Townships & Plots in Agra',
     description:
-      'Explore our projects: The Grand Green Valley, Green Valley Empire, Township, Orchid and The Pride in Agra, Lake City in Gwalior and City Centre in Firozabad.',
+      'Explore our projects: The Grand Green Valley, Green Valley Empire, Township, Orchid and The Pride in Agra, and Lake City in Gwalior.',
   },
   contact: {
     path: '/contact',
@@ -150,7 +150,7 @@ export const PAGE_META = {
     path: '/media/events',
     title: 'Events – Project Launches & Celebrations',
     description:
-      'Photos from Ahinsa Group events: project launches, office openings in Gwalior and Firozabad, Independence Day flag hoisting and devotional evenings in Agra.',
+      'Photos from Ahinsa Group events: project launches, our Gwalior office opening, Independence Day flag hoisting and devotional evenings in Agra.',
   },
   media: {
     path: '/media',
@@ -191,7 +191,7 @@ export const PAGE_META = {
     path: '/sitemap',
     title: 'Sitemap',
     description:
-      'Every page of the Ahinsa Group website in one place: about us, management, our projects in Agra, Gwalior and Firozabad, media, awards, events and contact.',
+      'Every page of the Ahinsa Group website in one place: about us, management, our projects in Agra and Gwalior, media, awards, events and contact.',
   },
 }
 
@@ -234,11 +234,6 @@ const PROJECT_META = {
     description:
       'Ahinsa The Grand Square Mall on Fatehabad Road, Agra: four levels of shopping, dining and entertainment inside The Grand Green Valley, with ample parking.',
   },
-  'ahinsa-mall-firozabad': {
-    title: 'Ahinsa City Centre – Hi-Street Mall, Firozabad',
-    description:
-      'Ahinsa City Centre, a hi-street luxury mall on MG Road, Firozabad: five retail levels on a 2-acre site near the railway station, designed by ACPL.',
-  },
   'ahinsa-complex': {
     title: 'Ahinsa Complex – Retail & Offices, Agra',
     description:
@@ -253,11 +248,6 @@ const PROJECT_META = {
     title: 'Ahinsa Office, Gwalior – Athena Tower',
     description:
       'The Ahinsa Group office in Gwalior, at Athena Tower in the heart of the city since July 2026 — meet our team about Green Valley Lake City and book a site visit.',
-  },
-  'ahinsa-office-firozabad': {
-    title: 'Ahinsa Office, Firozabad',
-    description:
-      'The Ahinsa Group office in Firozabad, open since August 2026 in the heart of the district — meet our team for project details, brochures and site visits.',
   },
 }
 
