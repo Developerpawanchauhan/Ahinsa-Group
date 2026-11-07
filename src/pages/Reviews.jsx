@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, MapPin } from 'lucide-react'
 import LinkPage, { Divider } from '../components/LinkPage'
+import { DEVELOPMENTS } from '../data/site'
 import { PAGE_META } from '../data/seo'
 import usePageMeta from '../hooks/usePageMeta'
 
@@ -8,14 +9,18 @@ import usePageMeta from '../hooks/usePageMeta'
 // portfolio page. Not linked from the site, and noindex (PAGE_META.reviews).
 
 // The g.page/…/review links open straight on "write a review"; the
-// share.google links open the profile.
+// share.google links open the profile. Each card's photo and location come
+// from the project's own data (`slug`), the same as its card on the site.
 const GOOGLE_PROFILES = [
-  { name: 'Ahinsa The Grand Green Valley', href: 'https://g.page/r/CeIEu1N9yLKQEAE/review', review: true },
-  { name: 'Ahinsa Green Valley', href: 'https://share.google/XIEeBVpbPLI7XDNPm' },
-  { name: 'Ahinsa Green Valley Empire', href: 'https://share.google/nKeoBR40d4TuBpgMv' },
-  { name: 'Ahinsa Green Valley Orchid', href: 'https://g.page/r/CVzO-RKs920yEAI/review', review: true },
-  { name: 'The Pride - Ahinsa Green Valley Residency', href: 'https://share.google/xm8e6J9PLZ7slGryi' },
-]
+  { slug: 'grand-green-valley', name: 'Ahinsa The Grand Green Valley', href: 'https://g.page/r/CeIEu1N9yLKQEAE/review', review: true },
+  { slug: 'green-valley-township', name: 'Ahinsa Green Valley', href: 'https://share.google/XIEeBVpbPLI7XDNPm' },
+  { slug: 'green-valley-empire', name: 'Ahinsa Green Valley Empire', href: 'https://share.google/nKeoBR40d4TuBpgMv' },
+  { slug: 'green-valley-orchid', name: 'Ahinsa Green Valley Orchid', href: 'https://g.page/r/CVzO-RKs920yEAI/review', review: true },
+  { slug: 'green-valley-residency', name: 'The Pride - Ahinsa Green Valley Residency', href: 'https://share.google/xm8e6J9PLZ7slGryi' },
+].map((profile) => {
+  const project = DEVELOPMENTS.find((p) => p.slug === profile.slug)
+  return { ...profile, image: project?.image, location: project?.location }
+})
 
 /** Google's four-colour "G". */
 function GoogleIcon({ className = 'h-5 w-5' }) {
@@ -29,28 +34,51 @@ function GoogleIcon({ className = 'h-5 w-5' }) {
   )
 }
 
-/** A project's Google Business Profile. Names can run to two lines, so the row grows with them. */
-function GoogleLink({ profile, item }) {
-  const action = profile.review ? 'Write a review on Google' : 'View on Google'
+/** A project's Google Business Profile as a card: its photo, then its name and the Google action. */
+function GoogleCard({ profile, item, index }) {
+  const action = profile.review ? 'Write a review' : 'View on Google'
   return (
     <motion.li variants={item}>
       <motion.a
         href={profile.href}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`${profile.name}: ${action}`}
-        whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.97 }}
-        className="group flex min-h-16 items-center gap-4 rounded-2xl border border-gold-500/20 bg-white/80 px-4 py-3 shadow-[0_10px_30px_-18px_rgba(135,104,24,0.45)] backdrop-blur-md transition-colors duration-300 hover:border-gold-500/50 hover:bg-white"
+        aria-label={`${profile.name}: ${profile.review ? 'Write a review on Google' : 'View on Google'}`}
+        whileHover={{ y: -3 }}
+        whileTap={{ scale: 0.98 }}
+        className="group block overflow-hidden rounded-2xl border border-gold-500/20 bg-white/85 shadow-[0_14px_36px_-20px_rgba(135,104,24,0.55)] backdrop-blur-md transition-colors duration-300 hover:border-gold-500/50 hover:bg-white"
       >
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-ink-100 bg-white shadow-sm">
-          <GoogleIcon />
-        </span>
-        <span className="min-w-0 flex-1">
+        {profile.image && (
+          <div className="relative aspect-[16/9] overflow-hidden">
+            <img
+              src={profile.image}
+              alt={profile.name}
+              loading={index < 2 ? 'eager' : 'lazy'}
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink-900/55 to-transparent" />
+            {profile.location && (
+              <span className="absolute bottom-3 left-3 inline-flex max-w-[85%] items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.15em] text-ink-800 shadow-sm backdrop-blur">
+                <MapPin className="h-3 w-3 shrink-0 text-gold-600" />
+                <span className="truncate">{profile.location}</span>
+              </span>
+            )}
+          </div>
+        )}
+        {/* The name gets the full width; the Google mark and action sit under it. */}
+        <div className="p-4">
           <span className="block font-medium leading-snug text-ink-900">{profile.name}</span>
-          <span className="mt-0.5 block text-xs text-ink-500">{action}</span>
-        </span>
-        <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <span className="mt-3 flex items-center justify-between gap-3">
+            <span className="flex items-center gap-2 text-xs text-ink-500">
+              <GoogleIcon className="h-4 w-4" />
+              Google Business Profile
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-gold-500 px-3 py-1.5 text-[11px] font-semibold text-ink-900 transition-colors duration-300 group-hover:bg-gold-400">
+              {action}
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </span>
+          </span>
+        </div>
       </motion.a>
     </motion.li>
   )
@@ -64,8 +92,8 @@ export default function Reviews() {
       {({ item }) => (
         <>
           <Divider item={item}>Our projects on Google</Divider>
-          {GOOGLE_PROFILES.map((profile) => (
-            <GoogleLink key={profile.href} profile={profile} item={item} />
+          {GOOGLE_PROFILES.map((profile, i) => (
+            <GoogleCard key={profile.href} profile={profile} item={item} index={i} />
           ))}
         </>
       )}
