@@ -187,6 +187,15 @@ export const PAGE_META = {
       'Ahinsa Group in one place: our website, Instagram, Facebook, YouTube, LinkedIn and WhatsApp, and directions to our head office in Agra.',
     robots: 'noindex, nofollow',
   },
+  // Our projects' Google Business Profiles, on the same frame as the portfolio.
+  // Kept out of search the same way.
+  reviews: {
+    path: '/reviews/',
+    title: 'Our Projects on Google - Reviews',
+    description:
+      'Find Ahinsa Group projects on Google: The Grand Green Valley, Green Valley, Green Valley Empire, Green Valley Orchid and The Pride. Leave us a review.',
+    robots: 'noindex, nofollow',
+  },
   sitemap: {
     path: '/sitemap',
     title: 'Sitemap',
@@ -290,6 +299,6 @@ export function metaTags(meta) {
 // with their title, tags and structured data already in it — for crawlers and
 // link previews (WhatsApp, Facebook) that never run the site's JavaScript. Each
 // path must end in "/": Apache serves the page from that folder's index.html.
-// The portfolio is here so its noindex is in the HTML itself, not only added by
-// JavaScript — and so a shared link previews with its own title.
-export const STATIC_PAGES = [PAGE_META.rohitJain, PAGE_META.portfolio]
+// The link pages are here so their noindex is in the HTML itself, not only
+// added by JavaScript — and so a shared link previews with its own title.
+export const STATIC_PAGES = [PAGE_META.rohitJain, PAGE_META.portfolio, PAGE_META.reviews]

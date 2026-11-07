@@ -138,15 +138,14 @@ const FAQS = [
   ],
 ]
 
-// Two event photos for the community section. Vihasant Bhawan's is the one
-// taken at the building's entrance - its first photo is of the site model.
+// Two event photos for the community section: the first of each event.
 const VIHASANT = EVENTS.find((e) => e.title.includes('Vihasant'))
 const BHAJAN = EVENTS.find((e) => e.title === 'Bhajan Sandhya')
 const COMMUNITY_PHOTOS = VIHASANT && BHAJAN
   ? [
       [
-        VIHASANT.images.find((src) => src.includes('Bhawan4')) || VIHASANT.images[0],
-        'Vihasant Bhawan at Ahinsa The Grand Green Valley, offered to the saint community in May 2026.',
+        VIHASANT.images[0],
+        'Welcoming the saint community to Ahinsa The Grand Green Valley, where Vihasant Bhawan was offered in May 2026.',
       ],
       [BHAJAN.images[0], 'Bhajan Sandhya, an evening of devotional music with residents and guests, September 2025.'],
     ]

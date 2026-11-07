@@ -1501,7 +1501,6 @@ export const PROJECT_DETAILS = {
       '/images/projects/corporate-office-gwalior/img2.jpeg',
       '/images/projects/corporate-office-gwalior/img3.jpeg',
       '/images/Events/2026-07-08 - gwalior-office/img5.JPG',
-      '/images/Events/2026-07-08 - gwalior-office/img6.JPG',
       '/images/Events/2026-07-08 - gwalior-office/img8.JPG',
     ],
     overview: [
@@ -2251,14 +2250,10 @@ export const EVENTS = [
     location: 'Gwalior, Madhya Pradesh',
     type: 'Inauguration',
     images: [
-      '/images/Events/2026-07-08 - gwalior-office/img1.JPG',
-      '/images/Events/2026-07-08 - gwalior-office/img2.JPG',
       '/images/Events/2026-07-08 - gwalior-office/img4.JPG',
       '/images/Events/2026-07-08 - gwalior-office/img5.JPG',
-      '/images/Events/2026-07-08 - gwalior-office/img6.JPG',
       '/images/Events/2026-07-08 - gwalior-office/img7.JPG',
       '/images/Events/2026-07-08 - gwalior-office/img8.JPG',
-      '/images/Events/2026-07-08 - gwalior-office/img11.JPG',
     ],
     excerpt:
       'Inauguration of the Ahinsa Office in Gwalior — the group’s first address beyond Uttar Pradesh.',
@@ -2271,8 +2266,6 @@ export const EVENTS = [
     images: [
       '/images/Events/2026-05-14 - vihasant-bhawan/05-05-2026-Vihasant-Bhawan1.jpg',
       '/images/Events/2026-05-14 - vihasant-bhawan/05-05-2026-Vihasant-Bhawan2.jpg',
-      '/images/Events/2026-05-14 - vihasant-bhawan/05-05-2026-Vihasant-Bhawan3.jpg',
-      '/images/Events/2026-05-14 - vihasant-bhawan/05-05-2026-Vihasant-Bhawan4.jpg',
     ],
     excerpt:
       'Vihasant Bhawan, developed and offered for the saint community at Ahinsa The Grand Green Valley.',
@@ -2293,8 +2286,6 @@ export const EVENTS = [
       '/images/Events/2026-03-13 - rich-villa/img9.jpeg',
       '/images/Events/2026-03-13 - rich-villa/img10.jpeg',
       '/images/Events/2026-03-13 - rich-villa/img11.jpeg',
-      '/images/Events/2026-03-13 - rich-villa/img12.jpeg',
-      '/images/Events/2026-03-13 - rich-villa/img13.jpeg',
     ],
     excerpt:
       'The Rich Villas at Ahinsa Green Valley Empire were launched with the blessings of Guru Vijay Kaushal Ji.',
@@ -2414,16 +2405,10 @@ export const EVENTS = [
     type: 'Project Launch',
     images: [
       '/images/Events/2025-01-26 - grand-valley-launch/img1.JPG',
-      '/images/Events/2025-01-26 - grand-valley-launch/img3.jpg',
-      '/images/Events/2025-01-26 - grand-valley-launch/img5.JPG',
       '/images/Events/2025-01-26 - grand-valley-launch/img6.JPG',
       '/images/Events/2025-01-26 - grand-valley-launch/img7.JPG',
       '/images/Events/2025-01-26 - grand-valley-launch/img8.JPG',
-      '/images/Events/2025-01-26 - grand-valley-launch/img9.JPG',
-      '/images/Events/2025-01-26 - grand-valley-launch/img10.JPG',
       '/images/Events/2025-01-26 - grand-valley-launch/img11.jpg',
-      '/images/Events/2025-01-26 - grand-valley-launch/img13.JPG',
-      '/images/Events/2025-01-26 - grand-valley-launch/img14.JPG',
     ],
     excerpt:
       'Ahinsa The Grand Green Valley brings serene green living and modern luxury together, offering a peaceful, nature-inspired lifestyle for you.',

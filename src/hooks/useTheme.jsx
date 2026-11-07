@@ -6,10 +6,10 @@ const ThemeContext = createContext({ theme: 'dark', toggleTheme: () => {}, light
 const THEME_KEY = 'ahinsa-theme'
 
 // Pages designed for the light theme only (the Rohit Jain article reads like a
-// printed profile; the portfolio is the link page for social bios). They show
-// light whatever the visitor picked, hide the theme switch, and leave the
-// saved choice alone for every other page.
-const LIGHT_ONLY_PATHS = ['/rohit-jain', '/portfolio']
+// printed profile; the portfolio and reviews are link pages for social bios).
+// They show light whatever the visitor picked, hide the theme switch, and
+// leave the saved choice alone for every other page.
+const LIGHT_ONLY_PATHS = ['/rohit-jain', '/portfolio', '/reviews']
 
 export function isLightOnly(pathname) {
   return LIGHT_ONLY_PATHS.some((p) => pathname === p || pathname.startsWith(`${p}/`))

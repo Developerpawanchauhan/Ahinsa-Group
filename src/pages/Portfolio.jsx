@@ -1,19 +1,15 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowUpRight, Facebook, Globe, Instagram, Linkedin, MapPin, Navigation, Youtube } from 'lucide-react'
+import LinkPage, { Divider } from '../components/LinkPage'
 import { WHATSAPP_URL, WhatsAppIcon } from '../components/WhatsAppButton'
 import { COMPANY, OFFICES } from '../data/site'
 import { PAGE_META } from '../data/seo'
 import usePageMeta from '../hooks/usePageMeta'
 
-// The link-in-bio page shared on social profiles (/portfolio). It stands on
-// its own — App.jsx leaves the site's navbar, footer and floating buttons off
-// it — and is light-only (LIGHT_ONLY_PATHS in hooks/useTheme.jsx): cream and
-// gold whichever theme the visitor has picked. Built for a phone first; on a
-// desktop it is the same column, centred.
-
-const EASE = [0.22, 1, 0.36, 1]
+// The link-in-bio page shared on social profiles (/portfolio): the website,
+// our social profiles and the head office. Its frame is LinkPage, shared with
+// the Google reviews page (/reviews).
 
 // The profiles the navbar and footer link to, plus WhatsApp.
 const SOCIALS = [
@@ -54,125 +50,7 @@ const SOCIALS = [
   },
 ]
 
-// Each project's Google Business Profile. The g.page/…/review links open
-// straight on "write a review"; the share.google links open the profile.
-const GOOGLE_PROFILES = [
-  { name: 'Ahinsa The Grand Green Valley', href: 'https://g.page/r/CeIEu1N9yLKQEAE/review', review: true },
-  { name: 'Ahinsa Green Valley', href: 'https://share.google/XIEeBVpbPLI7XDNPm' },
-  { name: 'Ahinsa Green Valley Empire', href: 'https://share.google/nKeoBR40d4TuBpgMv' },
-  { name: 'Ahinsa Green Valley Orchid', href: 'https://g.page/r/CVzO-RKs920yEAI/review', review: true },
-  { name: 'The Pride - Ahinsa Green Valley Residency', href: 'https://share.google/xm8e6J9PLZ7slGryi' },
-]
-
-// Gold specks drifting up the screen: [left %, size px, seconds to rise, delay].
-const SPECKS = [
-  [6, 3, 15, 0], [16, 2, 19, 3], [25, 4, 17, 7], [34, 2, 21, 1], [44, 3, 16, 5], [53, 2, 20, 9],
-  [62, 4, 18, 2], [71, 2, 22, 6], [80, 3, 17, 4], [90, 2, 19, 8], [12, 2, 23, 11], [57, 3, 21, 12],
-]
-
-// Shows only the outer 2px of a filled circle — the logo's turning gold ring.
-const RING_MASK = 'radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px))'
-
-// The links arrive one after another once the logo has landed.
-const LIST = { hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.65 } } }
-const RISE = {
-  hidden: { opacity: 0, y: 26, scale: 0.97 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.75, ease: EASE } },
-}
-const FADE = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.4 } } }
-
-/** Slow gold light and rising specks behind everything. Still when `still`. */
-function Backdrop({ still }) {
-  return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#F1E9D6] via-[#F7F2E7] to-[#FBF8F1]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,162,39,0.20),transparent_60%)]" />
-      <motion.div
-        className="absolute -left-36 top-1/4 h-80 w-80 rounded-full bg-gold-300/35 blur-[90px]"
-        animate={still ? undefined : { x: [0, 70, 0], y: [0, -40, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute -right-36 bottom-6 h-96 w-96 rounded-full bg-gold-200/50 blur-[100px]"
-        animate={still ? undefined : { x: [0, -60, 0], y: [0, 30, 0], scale: [1.1, 1, 1.1] }}
-        transition={{ duration: 19, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      {!still &&
-        SPECKS.map(([left, size, duration, delay], i) => (
-          <motion.span
-            key={i}
-            className="absolute bottom-0 rounded-full bg-gold-500 shadow-[0_0_6px_rgba(201,162,39,0.7)]"
-            style={{ left: `${left}%`, width: size, height: size }}
-            initial={{ y: 0, opacity: 0 }}
-            animate={{ y: '-105vh', opacity: [0, 0.7, 0.7, 0] }}
-            transition={{
-              y: { duration, delay, repeat: Infinity, ease: 'linear' },
-              opacity: { duration, delay, repeat: Infinity, times: [0, 0.1, 0.8, 1] },
-            }}
-          />
-        ))}
-    </div>
-  )
-}
-
-/** The logo, landing out of a blur, inside a glowing circle with a turning gold arc. */
-function LogoMark({ still }) {
-  return (
-    <motion.div
-      className="relative grid h-40 w-40 place-items-center sm:h-52 sm:w-52"
-      initial={still ? { opacity: 0 } : { opacity: 0, scale: 0.6, filter: 'blur(14px)' }}
-      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-      transition={{ duration: still ? 0.4 : 0.9, ease: EASE }}
-    >
-      <motion.span
-        aria-hidden="true"
-        className="absolute inset-3 rounded-full bg-gold-300/45 blur-2xl"
-        animate={still ? undefined : { opacity: [0.45, 0.9, 0.45], scale: [0.92, 1.05, 0.92] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <span aria-hidden="true" className="absolute inset-0 rounded-full border border-gold-500/30" />
-      <span
-        aria-hidden="true"
-        className="absolute inset-[10px] rounded-full bg-white/85 shadow-[0_24px_50px_-24px_rgba(135,104,24,0.55)]"
-      />
-      <motion.span
-        aria-hidden="true"
-        className="absolute inset-0 rounded-full"
-        style={{
-          background: 'conic-gradient(from 0deg, transparent 0deg, rgba(201,162,39,0.95) 70deg, transparent 140deg)',
-          WebkitMask: RING_MASK,
-          mask: RING_MASK,
-        }}
-        animate={still ? undefined : { rotate: 360 }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.img
-        src="/logo.png"
-        alt="Ahinsa Group"
-        width="500"
-        height="500"
-        draggable="false"
-        className="relative w-[88%] select-none"
-        animate={still ? undefined : { y: [0, -5, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-      />
-    </motion.div>
-  )
-}
-
-/** A small gold heading between groups of links: "Follow us", "Visit us"… */
-function Divider({ item, children }) {
-  return (
-    <motion.li
-      variants={item}
-      className="flex items-center gap-3 pb-1 pt-5 text-[10px] uppercase tracking-[0.35em] text-gold-700"
-    >
-      <span className="h-px flex-1 bg-gold-500/35" />
-      {children}
-      <span className="h-px flex-1 bg-gold-500/35" />
-    </motion.li>
-  )
-}
+const HEAD_OFFICE = OFFICES.find((o) => o.isHeadOffice)
 
 /** The head office's address, opening its Google Maps listing for directions. */
 function OfficeLink({ office, item }) {
@@ -197,47 +75,6 @@ function OfficeLink({ office, item }) {
             <Navigation className="h-3 w-3" />
             Get directions
           </span>
-        </span>
-        <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </motion.a>
-    </motion.li>
-  )
-}
-
-const HEAD_OFFICE = OFFICES.find((o) => o.isHeadOffice)
-
-/** Google's four-colour "G". */
-function GoogleIcon({ className = 'h-5 w-5' }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
-      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
-      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
-      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
-      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
-    </svg>
-  )
-}
-
-/** A project's Google Business Profile. Names can run to two lines, so the row grows with them. */
-function GoogleLink({ profile, item }) {
-  const action = profile.review ? 'Write a review on Google' : 'View on Google'
-  return (
-    <motion.li variants={item}>
-      <motion.a
-        href={profile.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`${profile.name}: ${action}`}
-        whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.97 }}
-        className="group flex min-h-16 items-center gap-4 rounded-2xl border border-gold-500/20 bg-white/80 px-4 py-3 shadow-[0_10px_30px_-18px_rgba(135,104,24,0.45)] backdrop-blur-md transition-colors duration-300 hover:border-gold-500/50 hover:bg-white"
-      >
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-ink-100 bg-white shadow-sm">
-          <GoogleIcon />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block font-medium leading-snug text-ink-900">{profile.name}</span>
-          <span className="mt-0.5 block text-xs text-ink-500">{action}</span>
         </span>
         <ArrowUpRight className="h-5 w-5 shrink-0 text-gold-600 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </motion.a>
@@ -273,70 +110,11 @@ function SocialLink({ social, item }) {
 
 export default function Portfolio() {
   usePageMeta(PAGE_META.portfolio)
-  const still = useReducedMotion()
-  const item = still ? FADE : RISE
-
-  // Tint the phone's browser bar cream to match while here (the site's default
-  // is the dark theme's ink).
-  useEffect(() => {
-    const tag = document.querySelector('meta[name="theme-color"]')
-    const previous = tag?.getAttribute('content')
-    tag?.setAttribute('content', '#F1E9D6')
-    return () => {
-      if (tag && previous) tag.setAttribute('content', previous)
-    }
-  }, [])
 
   return (
-    <div className="relative min-h-[100svh] overflow-hidden bg-cream text-ink-800">
-      <Backdrop still={still} />
-
-      <div className="relative mx-auto flex min-h-[100svh] w-full max-w-[26rem] flex-col items-center px-5 pt-[max(2.75rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]">
-        <LogoMark still={still} />
-
-        <h1 className="mt-6 text-center font-serif text-[2.1rem] leading-none text-ink-900">
-          {['Ahinsa', 'Group'].map((word, i) => (
-            <span key={word} className="inline-block overflow-hidden pb-1 align-bottom">
-              <motion.span
-                className="inline-block"
-                initial={still ? { opacity: 0 } : { y: '110%' }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.3 + i * 0.1, ease: EASE }}
-              >
-                {word}
-                {i === 0 && ' '}
-              </motion.span>
-            </span>
-          ))}
-        </h1>
-
-        <motion.span
-          aria-hidden="true"
-          className="mt-4 h-px w-16 origin-center bg-gradient-to-r from-transparent via-gold-500 to-transparent"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-        />
-
-        <motion.p
-          className="mt-4 text-center font-display text-lg italic text-gold-700"
-          initial={{ opacity: 0, y: still ? 0 : 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
-        >
-          {COMPANY.tagline}
-        </motion.p>
-        <motion.p
-          className="mt-2 flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] text-ink-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.65 }}
-        >
-          <MapPin className="h-3.5 w-3.5 text-gold-600" />
-          Agra · Gwalior
-        </motion.p>
-
-        <motion.ul variants={LIST} initial="hidden" animate="show" className="mt-8 w-full space-y-3">
+    <LinkPage>
+      {({ item, still }) => (
+        <>
           <motion.li variants={item}>
             <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link
@@ -370,28 +148,14 @@ export default function Portfolio() {
             <SocialLink key={social.name} social={social} item={item} />
           ))}
 
-          <Divider item={item}>Our projects on Google</Divider>
-          {GOOGLE_PROFILES.map((profile) => (
-            <GoogleLink key={profile.href} profile={profile} item={item} />
-          ))}
-
           {HEAD_OFFICE?.mapUrl && (
             <>
               <Divider item={item}>Visit us</Divider>
               <OfficeLink office={HEAD_OFFICE} item={item} />
             </>
           )}
-        </motion.ul>
-
-        <motion.p
-          className="mt-auto pt-12 text-center text-[11px] tracking-wide text-ink-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.3 }}
-        >
-          © {new Date().getFullYear()} Ahinsa Group · Agra
-        </motion.p>
-      </div>
-    </div>
+        </>
+      )}
+    </LinkPage>
   )
 }

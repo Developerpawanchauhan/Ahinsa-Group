@@ -30,13 +30,14 @@ import Contact from './pages/Contact'
 import Privacy from './pages/Privacy'
 import Terms from './pages/Terms'
 import Sitemap from './pages/Sitemap'
-// The link-in-bio page for social profiles. Not linked from the site, and
-// noindex (see PAGE_META.portfolio in data/seo.js).
+// The link pages: Portfolio for social bios, Reviews for our Google Business
+// Profiles. Not linked from the site, and noindex (PAGE_META in data/seo.js).
 import Portfolio from './pages/Portfolio'
+import Reviews from './pages/Reviews'
 
 // Pages that are a whole screen of their own, without the site's navbar,
 // footer, floating buttons or welcome popup.
-const STANDALONE_PATHS = ['/portfolio', '/portfolio/']
+const STANDALONE_PATHS = ['/portfolio', '/portfolio/', '/reviews', '/reviews/']
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -90,6 +91,7 @@ export default function App() {
 
           {/* Linked as /portfolio/ — its own HTML from the build, with noindex. */}
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/reviews" element={<Reviews />} />
 
           <Route path="*" element={<Home />} />
         </Routes>
